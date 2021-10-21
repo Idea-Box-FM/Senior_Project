@@ -38,26 +38,26 @@ public class FileManager : MonoBehaviour
         string fileName;
     }
 
-    IEnumerator Download(string id, System.Action<FileData> callback = null)
-    {
-        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/plummies/" + id))
-        {
-            yield return request.SendWebRequest();
-            if (request.isNetworkError || request.isHttpError)
-            {
-                Debug.Log(request.error);
-                if (callback != null)
-                {
-                    callback.Invoke(null);
-                }
-            }
-            else
-            {
-                if (callback != null)
-                {
-                    callback.Invoke(FileData.Parse(request.downloadHandler.text));
-                }
-            }
-        }
-    }
+    //IEnumerator Download(string id, System.Action<FileData> callback = null)
+    //{
+    //    using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/plummies/" + id))
+    //    {
+    //        yield return request.SendWebRequest();
+    //        if (request.isNetworkError || request.isHttpError)
+    //        {
+    //            Debug.Log(request.error);
+    //            if (callback != null)
+    //            {
+    //                callback.Invoke(null);
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (callback != null)
+    //            {
+    //                //callback.Invoke(FileData.Parse(request.downloadHandler.text));
+    //            }
+    //        }
+    //    }
+    //}
 }
