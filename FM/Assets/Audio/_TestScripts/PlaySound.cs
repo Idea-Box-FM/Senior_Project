@@ -7,11 +7,17 @@ using UnityEngine;
 
 public class PlaySound : MonoBehaviour
 {
+    [Tooltip("Requires Audio Source Component, can be empty")]
     public AudioSource src;//can have no audio clip
-    public List<AudioClip> soundClips = new List<AudioClip>();
-    public List<AudioClip> soundQueue = new List<AudioClip>();
+    [Header("Sound Selection")]
+    public List<AudioClip> soundClips = new List<AudioClip>();//the selection of sounds that the object is able to play
     public int selectedClip = 0;
+    [Tooltip("Play sound regardless of last played sound's state?")]
+    public bool playOver;
+    [Tooltip("Play the selected sound?")]
     public bool play;
+    [Tooltip("Object Based Sound Queue")]
+    public List<AudioClip> soundQueue = new List<AudioClip>();//a list of sounds for this object to play
 
     // Start is called before the first frame update
     void Start()
@@ -25,26 +31,29 @@ public class PlaySound : MonoBehaviour
     {
         if (play)
         {
-            src.clip = soundClips[selectedClip];//store last played sound clip
-            play = false;
+            AddToQueue(soundClips[selectedClip], playOver);
+            //soundQueue = soundQueue.Distinct().ToList();//remove dupes
         }
-        if (src.isPlaying == false)
-            if (soundQueue.Count > 0)//if more than 1 entry
-            {
-                src.PlayOneShot(soundQueue[soundQueue.Count-1]);//play it
-                soundQueue.Remove(soundQueue[soundQueue.Count-1]);//remove it
+
+        if (soundQueue.Count > 0)//if more than 1 entry
+        {
+            if (src.isPlaying == false) { 
+                src.PlayOneShot(soundQueue[soundQueue.Count - 1]);//play it
+                soundQueue.Remove(soundQueue[soundQueue.Count - 1]);//remove it
+                play = false;
             }
+        }
     }
-    public void Play(int clipID)
+    public void Play(AudioClip soundClip)//play individual regardless of last sound state
     {
-        this.selectedClip = clipID;
-        soundQueue.Add(soundClips[clipID]);
-        soundQueue = soundQueue.Distinct().ToList();//remove dupes
-        play = true;
+        src.PlayOneShot(soundClip);
+        play = false;
     }
-    public void Play(string clipName)//less efficent
+    public void AddToQueue(AudioClip soundClip, bool playOverOthers)//add entries (use externally)
     {
-        soundClips.Find(i => i.name == clipName);//search for entry in list (Note: bigger list = slower)
-        play = true;
+        if (playOverOthers == false)
+            soundQueue.Add(soundClip);
+        if (playOverOthers == true)
+            Play(soundClip);
     }
 }
