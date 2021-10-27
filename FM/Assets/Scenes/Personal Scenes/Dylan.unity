@@ -495,8 +495,9 @@ MonoBehaviour:
   src: {fileID: 712397550}
   soundClips:
   - {fileID: 8300000, guid: 4127d6cca73e83343bca997dc650c4de, type: 3}
+  - {fileID: 8300000, guid: f04a8ea6d9dff6842a9a56130a5842d4, type: 3}
   selectedClip: 0
-  playOver: 1
+  playOver: 0
   play: 0
   soundQueue: []
 --- !u!4 &712397552

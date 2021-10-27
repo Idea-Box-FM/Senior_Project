@@ -38,8 +38,8 @@ public class PlaySound : MonoBehaviour
         if (soundQueue.Count > 0)//if more than 1 entry
         {
             if (src.isPlaying == false) { 
-                src.PlayOneShot(soundQueue[soundQueue.Count - 1]);//play it
-                soundQueue.Remove(soundQueue[soundQueue.Count - 1]);//remove it
+                src.PlayOneShot(soundQueue[0]);//play it
+                soundQueue.Remove(soundQueue[0]);//remove it
                 play = false;
             }
         }
