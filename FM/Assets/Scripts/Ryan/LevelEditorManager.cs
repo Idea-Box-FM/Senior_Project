@@ -10,6 +10,8 @@ public class LevelEditorManager : MonoBehaviour
     public GameObject[] itemExample;
     public int currentButtonPressed;
     public Camera mainCamera;
+    public LayerMask deleteMask;
+    public LayerMask mask;
 
     private void Update()
     {
@@ -19,10 +21,21 @@ public class LevelEditorManager : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
             {
                 Instantiate(itemPrefabs[currentButtonPressed], new Vector3(hit.point.x, hit.point.y + itemPrefabs[currentButtonPressed].transform.position.y, hit.point.z), Quaternion.identity);
                 Destroy(GameObject.FindGameObjectWithTag("GoodPrefab"));
+            }
+        }
+
+        if(Mouse.current.middleButton.wasPressedThisFrame)
+        {
+            Ray deleteRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit deleteHit;
+
+            if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
+            {
+                Destroy(deleteHit.transform.gameObject);
             }
         }
     }
