@@ -4,8 +4,8 @@ using System.Linq;
 using UnityEngine;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
-
-public class PlaySound : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class PlaySoundEffect : MonoBehaviour
 {
     [Tooltip("Requires Audio Source Component, can be empty")]
     public AudioSource src;//can have no audio clip
@@ -29,7 +29,7 @@ public class PlaySound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (play)
+        if (play == true)
         {
             AddToQueue(soundClips[selectedClip], playOver);
             //soundQueue = soundQueue.Distinct().ToList();//remove dupes
