@@ -24,6 +24,19 @@ public class FollowScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
             transform.position = new Vector3(hit.point.x, hit.point.y + editor.itemExample[editor.currentButtonPressed].transform.position.y, hit.point.z);
+
+            if (Keyboard.current.leftBracketKey.isPressed)
+            {
+                Vector3 newRotation = new Vector3(0, -90, 0);
+                transform.eulerAngles = newRotation;
+            }
+            if (Keyboard.current.rightBracketKey.isPressed)
+            {
+                Vector3 newRotation = new Vector3(0, 90, 0);
+                transform.eulerAngles = newRotation;
+            }
         }
+
+        
     }
 }
