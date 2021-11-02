@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
@@ -16,8 +17,11 @@ public class PlaySoundEffect : MonoBehaviour
     public bool playOver;
     [Tooltip("Play the selected sound?")]
     public bool play;
+    
     [Tooltip("Object Based Sound Queue")]
-    public List<AudioClip> soundQueue = new List<AudioClip>();//a list of sounds for this object to play
+    public List<AudioClip> soundEffectQueueDisplay = new List<AudioClip>();//a list of sounds for this object to play
+    [Tooltip("Object Based Sound Queue")]
+    public static List<AudioClip> soundEffectQueue = new List<AudioClip>();//a list of sounds for this object to play
 
     // Start is called before the first frame update
     void Start()
@@ -29,17 +33,18 @@ public class PlaySoundEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        soundEffectQueueDisplay = soundEffectQueue;
         if (play == true)
         {
             AddToQueue(soundClips[selectedClip], playOver);
             //soundQueue = soundQueue.Distinct().ToList();//remove dupes
         }
 
-        if (soundQueue.Count > 0)//if more than 1 entry
+        if (soundEffectQueue.Count > 0)//if more than 1 entry
         {
             if (src.isPlaying == false) { 
-                src.PlayOneShot(soundQueue[0]);//play it
-                soundQueue.Remove(soundQueue[0]);//remove it
+                src.PlayOneShot(soundEffectQueue[0]);//play it
+                soundEffectQueue.Remove(soundEffectQueue[0]);//remove it
                 play = false;
             }
         }
@@ -52,7 +57,7 @@ public class PlaySoundEffect : MonoBehaviour
     public void AddToQueue(AudioClip soundClip, bool playOverOthers)//add entries (use externally)
     {
         if (playOverOthers == false)
-            soundQueue.Add(soundClip);
+            soundEffectQueue.Add(soundClip);
         if (playOverOthers == true)
             Play(soundClip);
     }
