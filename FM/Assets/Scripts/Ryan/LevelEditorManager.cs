@@ -23,7 +23,8 @@ public class LevelEditorManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
             {
-                Instantiate(itemPrefabs[currentButtonPressed], new Vector3(hit.point.x, hit.point.y + itemPrefabs[currentButtonPressed].transform.position.y, hit.point.z), Quaternion.identity);
+                Instantiate(itemPrefabs[currentButtonPressed], new Vector3(hit.point.x, hit.point.y + itemPrefabs[currentButtonPressed].transform.position.y, hit.point.z),
+                    Quaternion.identity);
                 Destroy(GameObject.FindGameObjectWithTag("GoodPrefab"));
             }
         }
