@@ -6,18 +6,26 @@ using UnityEngine;
  * Programmer: Patrick Naatz
  * Intention: Make a manager that saves the state of the editor
  * TODO make it so the player picks which file to save to
+ * 
+ * Edited By: Patrick Naatz
+ *  Proper file saving 11/1/21
+ *  Added Comments 11/2/21
  */ 
 
 [RequireComponent(typeof(FMPrefabList))]
 public class EditingManager : MonoBehaviour
 {
+    #region fields
+    FileManager fileManager;
     FMPrefabList prefabList;
     XML xml;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
+        fileManager = FileManager.fileManager;
     }
 
     /// <summary>
@@ -42,7 +50,7 @@ public class EditingManager : MonoBehaviour
             }
         }
 
-        xml.ExportXML("levelX.XML");
+        xml.ExportXML(fileManager.currentFile);
     }
 
     /// <summary>
