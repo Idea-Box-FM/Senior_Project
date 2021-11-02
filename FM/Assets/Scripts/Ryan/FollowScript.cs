@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 public class FollowScript : MonoBehaviour
 {
-    //call for the editor manager itself
+    //Ryan Consentino
+
+    //reference to the editor manager itself
     private LevelEditorManager editor;
     //reference to the camera
     private Camera mainCamera;
