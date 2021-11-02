@@ -7,6 +7,10 @@ using UnityEngine;
  * Programmer: Patrick Naatz
  * Intention: Make a script capable of loadining in the data from the saved XML file
  * TODO: Make it so the player chooses which simulation to load
+ * 
+ * Edited by: Pat Naatz
+ *  proper file loading 11/1/21
+ *  Add comments 11/2/21
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -15,12 +19,11 @@ public class LoadingManager : MonoBehaviour
     FMPrefabList prefabList;
     FileManager fileManager;
 
-
     // Start is called before the first frame update
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
-        fileManager = GetComponent<FileManager>();
+        fileManager = FileManager.fileManager;
 
         XML xml = XML.readfromfile(fileManager.currentFile);
 
