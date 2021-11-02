@@ -194,6 +194,8 @@ public class XML
 			return;
 		}
 
+		string dir = Directory.GetCurrentDirectory() + "\\Simulations\\";
+		fileName = dir + fileName;
 
 		StreamWriter file = new StreamWriter(fileName);
 		ReadToFile(file, 0);
@@ -261,12 +263,14 @@ public class XML
 
 		return line;
 	}
-    #endregion
-    #endregion
+	#endregion
+	#endregion
 
-    #region Importing
+	#region Importing
 	public static XML readfromfile(string fileName)
 	{
+		string dir = Directory.GetCurrentDirectory() + "\\Simulations\\";
+		fileName = dir + fileName;
 		Stack<XML> stck = new Stack<XML>();
 		XML top = null;
 		string line;

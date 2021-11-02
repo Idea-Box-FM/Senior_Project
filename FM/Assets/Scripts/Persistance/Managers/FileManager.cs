@@ -6,14 +6,15 @@ using UnityEngine.Networking;
 
 public class FileManager : MonoBehaviour
 {
-    [SerializeField] string path;
-    string[] fileNames;
+    string path = "";
+    public string[] fileNames;
 
-    string currentFile;
+    public string currentFile;
 
     // Start is called before the first frame update
     void Start()
     {
+        path = Directory.GetCurrentDirectory() + "\\Simulations";
         DirectoryInfo info = new DirectoryInfo(path);
         FileInfo[] fileInfo = info.GetFiles();
 
@@ -25,6 +26,10 @@ public class FileManager : MonoBehaviour
         this.fileNames = fileNames.ToArray();
 
         currentFile = PlayerPrefs.GetString("Last Simulation", "");
+        if(currentFile == "")
+        {
+            currentFile = fileNames[0];
+        }
     }
 
     void AddFile()
@@ -55,7 +60,7 @@ public class FileManager : MonoBehaviour
     //        {
     //            if (callback != null)
     //            {
-    //                //callback.Invoke(FileData.Parse(request.downloadHandler.text));
+    //                callback.Invoke(FileData.Parse(request.downloadHandler.text));
     //            }
     //        }
     //    }

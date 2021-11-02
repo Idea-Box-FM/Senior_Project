@@ -13,12 +13,16 @@ using UnityEngine;
 public class LoadingManager : MonoBehaviour
 {
     FMPrefabList prefabList;
+    FileManager fileManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
-        XML xml = XML.readfromfile("LevelX.XML");
+        fileManager = GetComponent<FileManager>();
+
+        XML xml = XML.readfromfile(fileManager.currentFile);
 
         LoadFromXML(xml);
     }

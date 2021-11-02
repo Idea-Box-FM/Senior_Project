@@ -15,9 +15,9 @@ public class TestingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            editor.Save();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    editor.Save();
+        //}
     }
 }

@@ -11,6 +11,7 @@ using UnityEngine;
 [RequireComponent(typeof(FMPrefabList))]
 public class EditingManager : MonoBehaviour
 {
+    FileManager fileManager;
     FMPrefabList prefabList;
     XML xml;
 
@@ -18,6 +19,7 @@ public class EditingManager : MonoBehaviour
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
+        fileManager = GetComponent<FileManager>();
     }
 
     /// <summary>
