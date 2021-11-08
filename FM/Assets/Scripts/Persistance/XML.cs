@@ -9,6 +9,9 @@ using System.Linq;
  * Intention: Made this in c++ to explort and inport xml
  * files into programs, it has been revamped slightly for c#
  * 
+ * Adjusted to enter the correct folder (Simulations)
+ * this is done through hard coding because I do not believe we want the folder selecte dot be able to change
+ * 
  */
 public class XML
 {
@@ -194,6 +197,8 @@ public class XML
 			return;
 		}
 
+		string dir = Directory.GetCurrentDirectory() + "\\Simulations\\";
+		fileName = dir + fileName;
 
 		StreamWriter file = new StreamWriter(fileName);
 		ReadToFile(file, 0);
@@ -261,12 +266,14 @@ public class XML
 
 		return line;
 	}
-    #endregion
-    #endregion
+	#endregion
+	#endregion
 
-    #region Importing
+	#region Importing
 	public static XML readfromfile(string fileName)
 	{
+		string dir = Directory.GetCurrentDirectory() + "\\Simulations\\";
+		fileName = dir + fileName;
 		Stack<XML> stck = new Stack<XML>();
 		XML top = null;
 		string line;
