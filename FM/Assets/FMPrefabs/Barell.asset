@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Barell
   m_EditorClassIdentifier: 
   prefab: {fileID: 1688194298496617983, guid: 3a40a29ac70d3e049beea22a3440000a, type: 3}
+  examplePrefab: {fileID: 1688194298496617983, guid: 0e14666c1a4a01049973b45a222fc7db, type: 3}
   parent: {fileID: 0}
