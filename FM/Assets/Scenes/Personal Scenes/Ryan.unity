@@ -228,6 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353158409}
   - component: {fileID: 353158410}
+  - component: {fileID: 353158408}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -235,6 +236,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &353158408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353158407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00f88b8a7590ac428862df311bb8b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 11400000, guid: 833c213f8d0d0d8499526590aab80208, type: 2}
+  - {fileID: 11400000, guid: d58f42ea01a695544a86cdbeade704a2, type: 2}
 --- !u!4 &353158409
 Transform:
   m_ObjectHideFlags: 0
@@ -264,12 +280,12 @@ MonoBehaviour:
   itemButtons:
   - {fileID: 897707025}
   - {fileID: 1399926745}
-  itemPrefabs:
-  - {fileID: 1688194298496617983, guid: b2ae29607dd3e384385f0f5125a244d9, type: 3}
-  - {fileID: 149420956798490994, guid: a12355a826856014199c46a7482a5f3e, type: 3}
   itemExample:
   - {fileID: 1688194298496617983, guid: 0e14666c1a4a01049973b45a222fc7db, type: 3}
   - {fileID: 149420956798490994, guid: 5d73e7b7df91d6445ac0c9652dfa858d, type: 3}
+  badItemExample:
+  - {fileID: 1688194298496617983, guid: 00eb9a6971a58eb49af93000bcc27d16, type: 3}
+  - {fileID: 149420956798490994, guid: 6f071829be2734e46a26df34418c6701, type: 3}
   currentButtonPressed: 0
   mainCamera: {fileID: 1687258584}
   deleteMask:
@@ -290,9 +306,11 @@ GameObject:
   - component: {fileID: 386889672}
   - component: {fileID: 386889671}
   - component: {fileID: 386889670}
-  m_Layer: 0
+  - component: {fileID: 386889674}
+  - component: {fileID: 386889675}
+  m_Layer: 10
   m_Name: SouthWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,7 +323,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386889669}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -373,6 +391,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &386889674
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386889669}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &386889675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386889669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,9 +479,11 @@ GameObject:
   - component: {fileID: 665721362}
   - component: {fileID: 665721361}
   - component: {fileID: 665721360}
-  m_Layer: 0
+  - component: {fileID: 665721364}
+  - component: {fileID: 665721365}
+  m_Layer: 10
   m_Name: NorthWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,7 +496,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665721359}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -516,6 +564,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &665721364
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665721359}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &665721365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665721359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &668773078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,9 +1273,9 @@ GameObject:
   - component: {fileID: 1444454088}
   - component: {fileID: 1444454087}
   - component: {fileID: 1444454086}
-  m_Layer: 0
-  m_Name: Roof
-  m_TagString: Untagged
+  m_Layer: 11
+  m_Name: Ceiling
+  m_TagString: Ceiling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1690,9 +1766,11 @@ GameObject:
   - component: {fileID: 1697113420}
   - component: {fileID: 1697113419}
   - component: {fileID: 1697113418}
-  m_Layer: 0
+  - component: {fileID: 1697113422}
+  - component: {fileID: 1697113423}
+  m_Layer: 10
   m_Name: WestWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1705,7 +1783,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697113417}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1773,6 +1851,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &1697113422
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697113417}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &1697113423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697113417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1709814088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,9 +1965,11 @@ GameObject:
   - component: {fileID: 1846884615}
   - component: {fileID: 1846884614}
   - component: {fileID: 1846884613}
-  m_Layer: 0
+  - component: {fileID: 1846884617}
+  - component: {fileID: 1846884618}
+  m_Layer: 10
   m_Name: EastWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1874,7 +1982,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846884612}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1942,6 +2050,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &1846884617
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846884612}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &1846884618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846884612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
