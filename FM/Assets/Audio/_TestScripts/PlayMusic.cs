@@ -14,7 +14,8 @@ public class PlayMusic : MonoBehaviour
     public List<AudioClip> musicClips = new List<AudioClip>();//the selection of sounds that the object is able to play
     public int selectedClip = 0;
     [Tooltip("Playing the selected sound?")]
-    public bool playing;
+    public bool playing = false;
+    public bool fadedOut = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,10 @@ public class PlayMusic : MonoBehaviour
         }
         if (playing == false)
         {
-            //StartCoroutine(StartAudioFade());
+            StartCoroutine(StartAudioFade());
+        }
+        if (fadedOut)
+        {
             src.Stop();
         }
     }
@@ -50,6 +54,7 @@ public class PlayMusic : MonoBehaviour
             src.volume = Mathf.Lerp(start, 0, currentTime / src.clip.length);
             yield return null;
         }
+        fadedOut = true;
         Debug.Log("E");
         yield break;
     }
