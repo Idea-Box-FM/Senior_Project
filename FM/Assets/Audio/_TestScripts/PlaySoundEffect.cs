@@ -49,12 +49,21 @@ public class PlaySoundEffect : MonoBehaviour
             }
         }
     }
-    public void Play(AudioClip soundClip)//play individual regardless of last sound state
+    /// <summary>
+    /// play individual regardless of last sound state
+    /// </summary>
+    /// <param name="soundClip">The specific sound clip to play, does not need to be within the instance</param>
+    public void Play(AudioClip soundClip)
     {
         src.PlayOneShot(soundClip);
         play = false;
     }
-    public void AddToQueue(AudioClip soundClip, bool playOverOthers)//add entries (use externally)
+    /// <summary>
+    /// Add entry to queue to play (use externally)
+    /// </summary>
+    /// <param name="soundClip">The specific sound clip to play, does not need to be within the instance</param>
+    /// <param name="playOverOthers">Play over other sound effects?</param>
+    public void AddToQueue(AudioClip soundClip, bool playOverOthers)//
     {
         if (playOverOthers == false)
             soundEffectQueue.Add(soundClip);
