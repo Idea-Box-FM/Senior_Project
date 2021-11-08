@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1688194298496617971}
   - component: {fileID: 1688194298496617980}
   - component: {fileID: 1688194298496617981}
-  - component: {fileID: 1688194298496617982}
   - component: {fileID: -7753246957971870493}
+  - component: {fileID: -4262211667277678471}
   m_Layer: 6
   m_Name: GoodBarrel
   m_TagString: GoodPrefab
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688194298496617983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.384, y: 0.65, z: -2.235}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 0.8, y: 0.65, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1688194298496617982
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688194298496617983}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &-7753246957971870493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +98,17 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 384
+--- !u!64 &-4262211667277678471
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688194298496617983}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}

@@ -35,21 +35,6 @@ public class FollowScript : MonoBehaviour
         {
             //move prefab position to where the raycast is hitting on the x, y and z. For the y, add the prefabs y transform so that it is appropriately above the ground
             transform.position = new Vector3(hit.point.x, hit.point.y + editor.itemExample[editor.currentButtonPressed].transform.position.y, hit.point.z);
-
-            //Working on rotation, not fully functional
-
-            //if (Keyboard.current.leftBracketKey.isPressed)
-            //{
-            //    Vector3 newRotation = new Vector3(0, -90, 0);
-            //    transform.eulerAngles = newRotation;
-            //}
-            //if (Keyboard.current.rightBracketKey.isPressed)
-            //{
-            //    Vector3 newRotation = new Vector3(0, 90, 0);
-            //    transform.eulerAngles = newRotation;
-            //}
         }
-
-        
     }
 }
