@@ -15,12 +15,29 @@ public class MainMenuUIScript : MonoBehaviour
     public InputField username;
     public InputField password;
 
+    [Header("Scroll List")]
+    public GameObject gameManager;
+    string[] nameList;
+    public Text listText;
+
+
     // Start is called before the first frame update
     void Start()
     {
         newButton.interactable = false;
         uploadButton.interactable = false;
         loginButton.interactable = false;
+
+        nameList = gameManager.gameObject.GetComponent<FileManager>().fileNames;
+
+        for(int i = 0; i < nameList.Length; i++)
+        {
+            string tempText = nameList[i];
+            Instantiate<Text>(listText);
+            listText.text = tempText;
+            
+        }
+        
     }
 
     // Update is called once per frame
