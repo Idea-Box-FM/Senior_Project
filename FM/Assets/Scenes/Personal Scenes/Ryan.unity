@@ -228,6 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353158409}
   - component: {fileID: 353158410}
+  - component: {fileID: 353158408}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -235,6 +236,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &353158408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353158407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00f88b8a7590ac428862df311bb8b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 11400000, guid: 833c213f8d0d0d8499526590aab80208, type: 2}
+  - {fileID: 11400000, guid: d58f42ea01a695544a86cdbeade704a2, type: 2}
 --- !u!4 &353158409
 Transform:
   m_ObjectHideFlags: 0
@@ -264,9 +280,6 @@ MonoBehaviour:
   itemButtons:
   - {fileID: 897707025}
   - {fileID: 1399926745}
-  itemPrefabs:
-  - {fileID: 1688194298496617983, guid: b2ae29607dd3e384385f0f5125a244d9, type: 3}
-  - {fileID: 149420956798490994, guid: a12355a826856014199c46a7482a5f3e, type: 3}
   itemExample:
   - {fileID: 1688194298496617983, guid: 0e14666c1a4a01049973b45a222fc7db, type: 3}
   - {fileID: 149420956798490994, guid: 5d73e7b7df91d6445ac0c9652dfa858d, type: 3}

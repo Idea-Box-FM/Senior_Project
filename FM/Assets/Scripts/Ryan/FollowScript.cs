@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ * Editor: Patrick Naatz
+ *  fixed variable names that no longer existed in LevelEditingManager 11/8/2021
+ */  
+
 public class FollowScript : MonoBehaviour
 {
     //Ryan Consentino
@@ -34,7 +39,7 @@ public class FollowScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
             //move prefab position to where the raycast is hitting on the x, y and z. For the y, add the prefabs y transform so that it is appropriately above the ground
-            transform.position = new Vector3(hit.point.x, hit.point.y + editor.itemExample[editor.currentButtonPressed].transform.position.y, hit.point.z);
+            transform.position = new Vector3(hit.point.x, hit.point.y + editor.CurrentPrefab.examplePrefab.transform.position.y, hit.point.z);
 
             //Working on rotation, not fully functional
 
