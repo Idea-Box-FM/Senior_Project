@@ -76,8 +76,7 @@ public class ReadmeEditor : Editor {
 		GUILayout.EndHorizontal();
 	}
 	
-	public override void OnInspectorGUI()
-	{
+	public override void OnInspectorGUI()	{
 		var readme = (Readme)target;
 		Init();
 		
@@ -116,8 +115,8 @@ public class ReadmeEditor : Editor {
 	
 	GUIStyle BodyStyle { get { return m_BodyStyle; } }
 	[SerializeField] GUIStyle m_BodyStyle;
-	
-	void Init()
+
+    void Init()
 	{
 		if (m_Initialized)
 			return;
