@@ -53,6 +53,7 @@ public class LevelEditorManager : MonoBehaviour
     //layer mask for the raycast to place items
     public LayerMask mask;
 
+
     XML xml;
     FileManager fileManager;
     #endregion
@@ -66,7 +67,9 @@ public class LevelEditorManager : MonoBehaviour
     private void Update()
     {
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
+
         if(Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
+
         {
             //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
             CurrentButton.isClicked = false;
@@ -86,7 +89,7 @@ public class LevelEditorManager : MonoBehaviour
         }
 
         //if the middle mouse button is clicked, ray cast out
-        if(Mouse.current.middleButton.wasPressedThisFrame)
+        if (Mouse.current.middleButton.wasPressedThisFrame)
         {
             //raycast from main camera to mouse position
             Ray deleteRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
