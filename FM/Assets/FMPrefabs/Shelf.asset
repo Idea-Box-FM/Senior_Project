@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
-  m_Name: Stud
+  m_Name: Shelf
   m_EditorClassIdentifier: 
-  name: Stud
-  prefab: {fileID: 8777387364593133409, guid: b37f9e0ba10153044baee71bc51b2470, type: 3}
+  prefab: {fileID: 149420956798490994, guid: 5d73e7b7df91d6445ac0c9652dfa858d, type: 3}
   parent: {fileID: 0}

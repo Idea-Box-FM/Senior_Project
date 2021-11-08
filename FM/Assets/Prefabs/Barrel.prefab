@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1688194298496617980}
   - component: {fileID: 1688194298496617981}
   - component: {fileID: 1688194298496617982}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688194298496617983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.384, y: 0.65, z: -2.235}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 0.8, y: 0.65, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
