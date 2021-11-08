@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
  * Intention: Make a manager that saves the state of the editor
  * 
  * Editor: Patrick Naatz
+ *   Proper file saving 11/1/21
+ *   Added Comments 11/2/21
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
  *   Added properties to simplify readablility 11/8/2021
  */
@@ -35,6 +37,7 @@ public class LevelEditorManager : MonoBehaviour
     }
     #endregion
 
+    #region Fields
     //array of prefabs
     FMPrefabList prefabList;
 
@@ -51,10 +54,13 @@ public class LevelEditorManager : MonoBehaviour
     public LayerMask mask;
 
     XML xml;
+    FileManager fileManager;
+    #endregion
 
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
+        fileManager = FileManager.fileManager;
     }
 
     private void Update()
@@ -127,7 +133,7 @@ public class LevelEditorManager : MonoBehaviour
             }
         }
 
-        xml.ExportXML("levelX.XML");
+        xml.ExportXML(fileManager.currentFile);
     }
 
     /// <summary>
