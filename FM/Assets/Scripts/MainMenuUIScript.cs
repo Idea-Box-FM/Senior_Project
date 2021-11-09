@@ -87,6 +87,6 @@ public class MainMenuUIScript : MonoBehaviour
     void ItemClicked (int itemIndex)
     {
         Debug.Log("Button " + itemIndex + " was clicked");
-        FileManager.fileManager.currentFile = nameList[itemIndex];
+        FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
 }
