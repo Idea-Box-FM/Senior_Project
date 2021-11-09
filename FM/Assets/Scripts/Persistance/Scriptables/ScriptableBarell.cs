@@ -17,10 +17,10 @@ public class ScriptableBarell : FMPrefab
 
         Barell barell = gameObject.GetComponent<Barell>();
         Barell.SDS sds = barell.sds;
-        xml.AddAttribute("Health", sds.Health.ToString());
-        xml.AddAttribute("Flamability", sds.Flamability.ToString());
-        xml.AddAttribute("Reaction", sds.Reaction.ToString());
-        xml.AddAttribute("PersonalProtection", sds.PersonalProtection.ToString());
+        //xml.AddAttribute("Health", sds.Health.ToString());
+        //xml.AddAttribute("Flamability", sds.Flamability.ToString());
+        //xml.AddAttribute("Reaction", sds.Reaction.ToString());
+        //xml.AddAttribute("PersonalProtection", sds.PersonalProtection.ToString());
 
         return xml;
     }
@@ -28,13 +28,13 @@ public class ScriptableBarell : FMPrefab
     public override GameObject InstanciatePrefab(XML xml)
     {
         Barell barell = base.InstanciatePrefab(xml).GetComponent<Barell>();
-        Barell.SDS sds = barell.sds;
-        sds.Health = int.Parse(xml.attributes["Health"]);
-        sds.Flamability = int.Parse(xml.attributes["Flamability"]);
-        sds.Reaction = int.Parse(xml.attributes["Reaction"]);
-        sds.PersonalProtection = int.Parse(xml.attributes["PersonalProtection"]);
+        //Barell.SDS sds = barell.sds;
+        //sds.Health = int.Parse(xml.attributes["Health"]);
+        //sds.Flamability = int.Parse(xml.attributes["Flamability"]);
+        //sds.Reaction = int.Parse(xml.attributes["Reaction"]);
+        //sds.PersonalProtection = int.Parse(xml.attributes["PersonalProtection"]);
 
-        barell.sds = sds;
+        //barell.sds = sds;
 
         return barell.gameObject;
     }
