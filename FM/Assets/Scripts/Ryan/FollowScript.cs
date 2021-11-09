@@ -41,6 +41,11 @@ public class FollowScript : MonoBehaviour
             //move prefab position to where the raycast is hitting on the x, y and z. For the y, add the prefabs y transform so that it is appropriately above the ground
 
             transform.position = new Vector3(hit.point.x, hit.point.y + editor.CurrentPrefab.examplePrefab.transform.position.y, hit.point.z);
+
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                transform.eulerAngles += new Vector3(0, 90, 0);
+            }
         }
     }
 }

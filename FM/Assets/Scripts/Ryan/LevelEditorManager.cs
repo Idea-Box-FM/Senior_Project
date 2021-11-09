@@ -70,6 +70,7 @@ public class LevelEditorManager : MonoBehaviour
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
         if(Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
         {
+            GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
             //ray from camera to mouse location
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
@@ -81,7 +82,7 @@ public class LevelEditorManager : MonoBehaviour
                 CurrentButton.isClicked = false;
 
                 //instantiate prefab based on current button pressed at the raycast hit location
-                GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.identity);
+                GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
                 finalPrefab.SetActive(true);
 
                 DestroyCurrentExample();
