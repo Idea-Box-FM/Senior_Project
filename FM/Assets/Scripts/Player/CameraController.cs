@@ -49,16 +49,16 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         //**Examples**//!
-        //example for specific key
+        //example direct acess, for a specific key
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) { Debug.Log("Pressed \"" + Keyboard.current.spaceKey.name + "\" key"); }
 
-        //example of a specific InputAction as a button
+        //example of a specific InputAction as a single trigger
         //if (controlScript.Player/*action map*/.MoveHorizontal/*action*/.triggered == true) { Debug.Log("Pressed \"" + controlScript.Player.MoveHorizontal.activeControl.name + "\" key"); }
 
-        //example of a specific InputAction as an axis
+        //example of a specific InputAction as a constant trigger (all inputs cause true)
         //if (controlScript.Player/*action map*/.MoveHorizontal/*action*/.phase == InputActionPhase.Started) { Debug.Log("Pressed \"" + controlScript.Player.MoveHorizontal.activeControl.name + "\" key");}
 
-        //example of the first InputAction in the first InputActionMap of the InputActionAsset
+        //example of array acess, using the first InputAction in the first InputActionMap of the InputActionAsset
         //if (controlScript.asset.actionMaps[0].actions[0].triggered == true) { Debug.Log("Pressed \"" + controlScript.asset.actionMaps[0].actions[0].activeControl.name + "\" key"); };
 
 
