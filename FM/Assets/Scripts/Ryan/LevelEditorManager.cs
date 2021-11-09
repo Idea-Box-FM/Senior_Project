@@ -136,7 +136,7 @@ public class LevelEditorManager : MonoBehaviour
             }
         }
 
-        xml.ExportXML(fileManager.currentFile);
+        xml.ExportXML(fileManager.currentSimulation);
     }
 
     /// <summary>
