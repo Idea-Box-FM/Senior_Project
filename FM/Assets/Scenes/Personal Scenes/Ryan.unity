@@ -368,7 +368,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   collision: {fileID: 1846884618}
-  material1: {fileID: 2100000, guid: 027cb3d3d7dc79d41ad763e01759de07, type: 2}
+  material1: {fileID: 2100000, guid: 9766944477c43b4449be3512c112b4b6, type: 2}
 --- !u!1 &386889669
 GameObject:
   m_ObjectHideFlags: 0
