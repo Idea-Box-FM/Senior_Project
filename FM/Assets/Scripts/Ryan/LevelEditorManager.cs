@@ -99,7 +99,7 @@ public class LevelEditorManager : MonoBehaviour
             //if the raycast hits a valid target on the layer mask, destroy the object
             if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
             {
-                //destroys parent of game object -- WORKS FOR SHELF RIGHT NOW BUT NOT FOR BARREL
+                //destroys game object -- WORKS FOR BARREL NOT SHELF
                 Destroy(deleteHit.transform.gameObject);
             }
         }
