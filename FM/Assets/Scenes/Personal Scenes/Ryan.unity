@@ -280,12 +280,6 @@ MonoBehaviour:
   itemButtons:
   - {fileID: 897707025}
   - {fileID: 1399926745}
-  itemExample:
-  - {fileID: 1688194298496617983, guid: 0e14666c1a4a01049973b45a222fc7db, type: 3}
-  - {fileID: 149420956798490994, guid: 5d73e7b7df91d6445ac0c9652dfa858d, type: 3}
-  badItemExample:
-  - {fileID: 1688194298496617983, guid: 00eb9a6971a58eb49af93000bcc27d16, type: 3}
-  - {fileID: 149420956798490994, guid: 6f071829be2734e46a26df34418c6701, type: 3}
   currentButtonPressed: 0
   mainCamera: {fileID: 1687258584}
   deleteMask:
@@ -294,6 +288,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 384
+  collision: {fileID: 1846884618}
 --- !u!1 &386889669
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlace: 1
+  editor: {fileID: 353158410}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlace: 1
+  editor: {fileID: 353158410}
 --- !u!1 &668773078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlace: 1
+  editor: {fileID: 353158410}
 --- !u!1 &1709814088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlace: 1
+  editor: {fileID: 353158410}
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0

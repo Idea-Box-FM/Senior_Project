@@ -52,7 +52,8 @@ public class LevelEditorManager : MonoBehaviour
     public LayerMask deleteMask;
     //layer mask for the raycast to place items
     public LayerMask mask;
-
+    //grabs collision script for collision
+    public CollisionDetect collision;
 
     XML xml;
     FileManager fileManager;
@@ -67,19 +68,18 @@ public class LevelEditorManager : MonoBehaviour
     private void Update()
     {
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
-
         if(Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
-
         {
-            //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
-            CurrentButton.isClicked = false;
             //ray from camera to mouse location
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
 
             //if the raycast hits something on the layer mask
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
             {
+                //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
+                CurrentButton.isClicked = false;
+
                 //instantiate prefab based on current button pressed at the raycast hit location
                 GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.identity);
                 finalPrefab.SetActive(true);

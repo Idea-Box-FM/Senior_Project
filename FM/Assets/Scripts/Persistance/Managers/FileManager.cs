@@ -14,6 +14,7 @@ using UnityEngine.Networking;
  * Edited By: Patrick Naatz
  *  Added persistance 11/2/21
  *  Proper Commenting 11/2/21
+ *  Added NewFile function 11/8/2021
  */ 
 
 public class FileManager : MonoBehaviour
@@ -101,6 +102,29 @@ public class FileManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// When calling this function pass in the file name without the XML
+    /// </summary>
+    /// <param name="fileName">if this file name is already in existance then it will automatically select that file</param>
+    public void NewFile(string fileName)
+    {
+        //stops if file already exists
+        foreach(string file in fileNames)
+        {
+            if(file == fileName + ".XML")
+            {
+                SelectFile(file);
+                return;
+            }
+        }
+
+        //creates the new file in the folder
+        XML xml = new XML();
+        xml.name = fileName;
+
+        xml.ExportXML(fileName + ".XML");
     }
 
 
