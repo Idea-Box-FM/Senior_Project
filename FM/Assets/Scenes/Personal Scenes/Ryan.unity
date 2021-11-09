@@ -363,11 +363,12 @@ MonoBehaviour:
   mainCamera: {fileID: 1687258584}
   deleteMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 1024
   mask:
     serializedVersion: 2
     m_Bits: 384
   collision: {fileID: 1846884618}
+  material1: {fileID: 2100000, guid: 027cb3d3d7dc79d41ad763e01759de07, type: 2}
 --- !u!1 &386889669
 GameObject:
   m_ObjectHideFlags: 0
