@@ -35,7 +35,7 @@ public class PlayMusic : MonoBehaviour
         }
         if (playing == false)
         {
-            StartCoroutine(StartAudioFade());
+            //StartCoroutine(StartAudioFade());
         }
         if (fadedOut)
         {

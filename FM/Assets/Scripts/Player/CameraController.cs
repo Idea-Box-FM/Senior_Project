@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+[RequireComponent(typeof(Rigidbody))]
 public class CameraController : MonoBehaviour
 {
     [Header("Objects")]
     public Camera cam;
+    public Rigidbody rb;
     public CameraControl/*InputActionAsset script's class*/ controlScript;//script generated from InputActionAsset
     [Header("Event Variables")]
     public Vector2 horizontalAxis = Vector2.zero;
@@ -18,6 +21,7 @@ public class CameraController : MonoBehaviour
     public float camUnlockPress = 0;
 
     [Header("Variables")]
+    public float moveSpeed = 0.01f;
     public bool camLocked = true;
 
     #region Setup Methods
@@ -88,33 +92,18 @@ public class CameraController : MonoBehaviour
     #region Event Methods
     private void MoveHorizontal()
     {
-        if (controlScript.Player.MoveHorizontal.phase == InputActionPhase.Started)
-        {
-            //...//!add comments
-            horizontalAxis = controlScript.Player.MoveHorizontal.ReadValue<Vector2>();
-        }
-        else
-        {
-            horizontalAxis = Vector2.zero;
-        }
+        horizontalAxis = controlScript.Player.MoveHorizontal.ReadValue<Vector2>();//get input
+        Vector3 horiAxisConvert = new Vector3(horizontalAxis.x, 0, horizontalAxis.y);//convert to horizontal plane for movement
+        Vector3 moveVelocity = (cam.transform.rotation * horiAxisConvert.normalized) * moveSpeed;//get velocity to apply
 
-        var translation = horizontalAxis * Time.deltaTime;//!Factor in where camera is facing
-        cam.transform.position += new Vector3(translation.x, 0, translation.y);
+        cam.transform.position += moveVelocity;//apply to object
     }
     private void MoveVertical()
     {
-        if (controlScript.Player.MoveVertical.phase == InputActionPhase.Started)
-        {
-            //...//!add comments
-            verticalAxis = controlScript.Player.MoveVertical.ReadValue<Vector2>();
-        }
-        else
-        {
-            verticalAxis = Vector2.zero;
-        }
+        verticalAxis = controlScript.Player.MoveVertical.ReadValue<Vector2>();//get input
+        Vector3 moveVelocity = (cam.transform.rotation * verticalAxis.normalized) * moveSpeed;//get velocity to apply
 
-        var translation = verticalAxis * Time.deltaTime;//!Factor in where camera is facing
-        cam.transform.position += new Vector3(translation.x, translation.y, 0);
+        cam.transform.position += moveVelocity;//apply to object
     }
     private void Look(bool invertY)
     {
