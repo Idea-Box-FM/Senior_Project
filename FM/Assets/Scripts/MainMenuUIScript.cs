@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
+public static class ButtonExtension
+{
+    public static void AddEventListener<T> (this Button button, T param, Action<T> OnClick)
+    {
+        button.onClick.AddListener(delegate ()
+       {
+           OnClick(param);
+       });
+    }
+}
 
 public class MainMenuUIScript : MonoBehaviour
 {
@@ -17,8 +29,11 @@ public class MainMenuUIScript : MonoBehaviour
 
     [Header("Scroll List")]
     public GameObject gameManager;
-    string[] nameList;
-    public Text listText;
+    public GameObject panel;
+    public string[] nameList;
+    string currentItem;
+    //public Text listText;
+    //public Button[] simList;
 
 
     // Start is called before the first frame update
@@ -27,16 +42,23 @@ public class MainMenuUIScript : MonoBehaviour
         newButton.interactable = false;
         uploadButton.interactable = false;
         loginButton.interactable = false;
+       // Debug.Log(FileManager.fileManager);
+        nameList = FileManager.fileManager.fileNames;
+        //currentItem = FileManager.fileManager.currentFile;
 
-        nameList = gameManager.gameObject.GetComponent<FileManager>().fileNames;
+        GameObject itemTemplate = panel.transform.GetChild(0).gameObject;
+        GameObject s;
 
         for(int i = 0; i < nameList.Length; i++)
         {
-            string tempText = nameList[i];
-            Instantiate<Text>(listText);
-            listText.text = tempText;
+            s = Instantiate(itemTemplate, panel.transform);
+            s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
+
+            s.GetComponent<Button>().AddEventListener(i, ItemClicked);
             
         }
+
+        Destroy(itemTemplate);
         
     }
 
@@ -60,5 +82,11 @@ public class MainMenuUIScript : MonoBehaviour
             password.text = "";
 
         }
+    }
+
+    void ItemClicked (int itemIndex)
+    {
+        Debug.Log("Button " + itemIndex + " was clicked");
+        FileManager.fileManager.currentFile = nameList[itemIndex];
     }
 }
