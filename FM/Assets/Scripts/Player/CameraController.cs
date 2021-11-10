@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 public class CameraController : MonoBehaviour
 {
     [Header("Objects")]
-    public Camera cam;
-    public Rigidbody rb;
+    public GameObject obj;
+    //public Rigidbody rb;
     public CameraControl/*InputActionAsset script's class*/ controlScript;//script generated from InputActionAsset
     [Header("Event Variables")]
     public Vector2 horizontalAxis = Vector2.zero;
@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour
     public float camUnlockPress = 0;
 
     [Header("Variables")]
+    public Vector3 Rotation;
     public float moveSpeed = 0.01f;
     public bool camLocked = true;
 
@@ -93,40 +94,30 @@ public class CameraController : MonoBehaviour
     private void MoveHorizontal()
     {
         horizontalAxis = controlScript.Player.MoveHorizontal.ReadValue<Vector2>();//get input
-        Vector3 horiAxisConvert = new Vector3(horizontalAxis.x, 0, horizontalAxis.y);//convert to horizontal plane for movement
-        Vector3 moveVelocity = (cam.transform.rotation * horiAxisConvert.normalized) * moveSpeed;//get velocity to apply
+        Vector3 horiAxisFix = new Vector3(horizontalAxis.x, 0, horizontalAxis.y);//convert to horizontal plane for movement
+        Vector3 moveVelocity = (obj.transform.rotation * horiAxisFix.normalized) * moveSpeed;//get velocity to apply
 
-        cam.transform.position += moveVelocity;//apply to object
+        obj.transform.position += moveVelocity;//apply to object
     }
     private void MoveVertical()
     {
         verticalAxis = controlScript.Player.MoveVertical.ReadValue<Vector2>();//get input
-        Vector3 moveVelocity = (cam.transform.rotation * verticalAxis.normalized) * moveSpeed;//get velocity to apply
+        Vector3 moveVelocity = (obj.transform.rotation * verticalAxis.normalized) * moveSpeed;//get velocity to apply
 
-        cam.transform.position += moveVelocity;//apply to object
+        obj.transform.position += moveVelocity;//apply to object
     }
     private void Look(bool invertY)
     {
-        if (controlScript.Player.Look.phase == InputActionPhase.Started)
-        {
-            //Debug.Log(controlScript.Player.Look.ReadValueAsObject());//displays a vector of the cursor's velocity
-            mouseAxis = controlScript.Player.Look.ReadValue<Vector2>();
-
-        }
-        else
-        {
-
-        }
-
         if (Cursor.visible == false)
         {
-            var mouseMovement = mouseAxis * Time.deltaTime * 5;
-            if (invertY)
-                mouseMovement.y = -mouseMovement.y;
-            //var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);//!refactor
-            cam.transform.Rotate(-mouseMovement.y, -mouseMovement.x, 0);//!make mouse movement more consistent
+            float mouseSpeed = 3;
+            mouseAxis = controlScript.Player.Look.ReadValue<Vector2>();//get input
+            Vector2 mouseAxisFix = new Vector2(mouseAxis.y, mouseAxis.x);//correct values of look are swapped
+            Vector2 mouseVelocity = mouseAxisFix.normalized * mouseSpeed;//get rotation to apply
+            obj.transform.Rotate(new Vector3(-mouseVelocity.x, mouseVelocity.y, 0));
+            obj.transform.eulerAngles = new Vector3(Mathf.Clamp(obj.transform.eulerAngles.x, 0, 360), obj.transform.eulerAngles.y, obj.transform.eulerAngles.z);//prevents rotation from getting too high
         }
-        
+        Rotation = obj.transform.eulerAngles;//!rotation does not properly rotate about the player's y axis, use this var to track values
     }
     private void Place()
     {
@@ -164,8 +155,8 @@ public class CameraController : MonoBehaviour
             //Debug.Log(controlScript.Player.ResetPosition.ReadValueAsObject().GetType());//System.single = float
             resetPress = controlScript.Player.ResetPosition.ReadValue<float>();
 
-            cam.transform.position = new Vector3(0, 0, 0);
-            cam.transform.rotation = new Quaternion(0, 0, 0, 0);
+            obj.transform.position = new Vector3(0, 0, 0);
+            obj.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
         else
         {
