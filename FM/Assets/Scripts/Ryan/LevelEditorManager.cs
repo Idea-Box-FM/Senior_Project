@@ -12,6 +12,7 @@ using UnityEngine.InputSystem;
  *   Added Comments 11/2/21
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
  *   Added properties to simplify readablility 11/8/2021
+ *   Added the save functionality 11/15/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -57,14 +58,14 @@ public class LevelEditorManager : MonoBehaviour
 
     XML xml;
     FileManager fileManager;
-    RoomLoader room;
+    Room room;
     #endregion
 
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
-        room = FindObjectOfType<RoomLoader>();
+        room = FindObjectOfType<Room>();
     }
 
     private void Update()
@@ -122,7 +123,7 @@ public class LevelEditorManager : MonoBehaviour
     public void Save() //NOTE currently this function will override the existing file without prompting
     {
         xml = new XML();
-        xml.AddAttribute("RoomSize", room.RoomSize.ToString());
+        room.ConvertToXML(ref xml);
         foreach (FMPrefab prefab in prefabList.prefabs)
         {
             if (prefab.parent == null)

@@ -2,7 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomLoader : MonoBehaviour
+/*Programmer Pat Naatz
+ * Intention to make a script capable of saving and loading the room size to and from and xml tag
+ * 
+ * Made the room size save and load 11/15/2021
+ * Made the materials save and load 11/15/2021
+ */
+
+public class Room : MonoBehaviour
 {
     [System.Serializable] struct Walls
     {
@@ -69,12 +76,20 @@ public class RoomLoader : MonoBehaviour
             }
         }
         #endregion
+
+        public void SetMaterial(Material mat)
+        {
+            foreach(GameObject wall in walls)
+            {
+                wall.GetComponent<MeshRenderer>().materials[0] = mat;
+            }
+        }
     }
 
     #region Fields
     [SerializeField] Walls walls;
-    [SerializeField] GameObject roof;
-    [SerializeField] GameObject floor;
+    public GameObject roof;
+    public GameObject floor;
     #endregion
 
     #region Properties
@@ -174,6 +189,54 @@ public class RoomLoader : MonoBehaviour
         floor.transform.position = new Vector3(position.x, 0, position.z);
         floor.transform.localScale = new Vector3(Width, floor.transform.localScale.y, Length) / 10;
 
+    }
+    #endregion
+
+    #region Persistance
+    public void ConvertToXML(ref XML xml)
+    {
+        XML roomXML = xml.AddChild("Room");
+        roomXML.AddAttribute("RoomSize", RoomSize.ToString());
+        XML Walls = roomXML.AddChild("Walls");
+
+        Walls.AddAttribute("Material", walls.North.GetComponent<MeshRenderer>().materials[0].name);
+        XML Roof = roomXML.AddChild("Roof");
+
+        Roof.AddAttribute("Material", roof.GetComponent<MeshRenderer>().materials[0].name);
+        XML Floor = roomXML.AddChild("Floor");
+        Floor.AddAttribute("Material", floor.GetComponent<MeshRenderer>().materials[0].name);
+    }
+
+    public void LoadFromXML(XML xml)
+    {
+        XML roomXML = xml.FindChild("Room");
+        RoomSize = FMPrefab.ConvertToVector3(roomXML.attributes["RoomSize"]);
+
+        XML wallsXML = roomXML.FindChild("Walls");
+
+        string materialName = wallsXML.attributes["Material"];
+        Material material = (Material)Resources.Load(materialName, typeof(Material));
+        if (material != null)
+        {
+            walls.SetMaterial(material);
+        }
+
+        XML roofXML = roomXML.FindChild("Roof");
+        materialName = roofXML.attributes["Material"];
+        material = (Material)Resources.Load(materialName, typeof(Material));
+        if (material != null)
+        {
+            roof.GetComponent<MeshRenderer>().materials[0] = material;
+        }
+
+        XML floorXML = roomXML.FindChild("Floor");
+        materialName = floorXML.attributes["Material"];
+        material = (Material)Resources.Load(materialName, typeof(Material));
+
+        if (material != null)
+        {
+            floor.GetComponent<MeshRenderer>().materials[0] = material;
+        }
     }
     #endregion
 }
