@@ -19,8 +19,6 @@ public class LoadingManager : MonoBehaviour
     FMPrefabList prefabList;
     FileManager fileManager;
 
-    [SerializeField] Vector3 roomSize;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +27,10 @@ public class LoadingManager : MonoBehaviour
 
         XML xml = XML.readfromfile(fileManager.currentFile);
 
-        FindObjectOfType<RoomLoader>().RoomSize = roomSize;
-
-        //LoadFromXML(xml);
+        //loads the room size
+        FindObjectOfType<RoomLoader>().RoomSize = FMPrefab.ConvertToVector3(xml.attributes["RoomSize"]); ;
+            
+        LoadFromXML(xml);
     }
 
     void LoadFromXML(XML xml)
