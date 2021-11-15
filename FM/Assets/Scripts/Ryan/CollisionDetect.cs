@@ -18,6 +18,10 @@ public class CollisionDetect : MonoBehaviour
         if (col.gameObject.CompareTag("GoodPrefab"))
         {
             col.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            for(int i = 0; i < col.gameObject.transform.childCount; i++)
+            {
+                col.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.red;
+            }
             editor.collision = this;
             canPlace = false;
         }
@@ -28,6 +32,10 @@ public class CollisionDetect : MonoBehaviour
         if (col.gameObject.CompareTag("GoodPrefab"))
         {
             col.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+            for (int i = 0; i < col.gameObject.transform.childCount; i++)
+            {
+                col.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.green;
+            }
             canPlace = true;
         }
     }
