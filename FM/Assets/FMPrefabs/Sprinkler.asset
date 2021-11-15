@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
   m_Name: Sprinkler
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2656945179452663667, guid: c5f3f9ce23293cf40b63fb5ba0d43c7e, type: 3}
-  examplePrefab: {fileID: 2656945179452663667, guid: d4cc0b410e917694bac09bfad1ccfc51, type: 3}
+  prefab: {fileID: 3172005994316312707, guid: c5f3f9ce23293cf40b63fb5ba0d43c7e, type: 3}
+  examplePrefab: {fileID: 3172005994316312707, guid: 5693dc2fa726a8a43a681d3a046e5276, type: 3}
   parent: {fileID: 0}

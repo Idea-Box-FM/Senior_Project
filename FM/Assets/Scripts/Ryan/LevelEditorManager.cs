@@ -50,6 +50,8 @@ public class LevelEditorManager : MonoBehaviour
     public Camera mainCamera;
     //layer mask for the raycast to delete items
     public LayerMask deleteMask;
+    //layer mask for the raycast to change wall texture
+    public LayerMask wallMask;
     //layer mask for the raycast to place items
     public LayerMask mask;
     //grabs collision script for collision
@@ -114,7 +116,7 @@ public class LevelEditorManager : MonoBehaviour
             RaycastHit wallHit;
 
             //if the raycast hits a valid target on the wall layer mask, change the material
-            if (Physics.Raycast(wallRay, out wallHit, Mathf.Infinity, deleteMask))
+            if (Physics.Raycast(wallRay, out wallHit, Mathf.Infinity, wallMask))
             {
                 wallHit.transform.gameObject.GetComponent<MeshRenderer>().material = material1;
             }
