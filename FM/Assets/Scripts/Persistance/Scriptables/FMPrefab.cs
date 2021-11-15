@@ -57,7 +57,7 @@ public class FMPrefab : ScriptableObject
     #endregion
 
     #region Helper Functions
-    Vector3 ConvertToVector3(string line)
+    public static Vector3 ConvertToVector3(string line)
     {
         line = line.Substring(1, line.Length - 2);
         line = line.Replace(" ", "");
@@ -70,7 +70,7 @@ public class FMPrefab : ScriptableObject
         return new Vector3(x,y,z);
     }
 
-    Quaternion ConvertToQuaternion(string line)
+    public static Quaternion ConvertToQuaternion(string line)
     {
         line = line.Substring(1, line.Length - 2);
         line = line.Replace(" ", "");

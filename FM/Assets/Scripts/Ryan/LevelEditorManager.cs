@@ -61,12 +61,14 @@ public class LevelEditorManager : MonoBehaviour
 
     XML xml;
     FileManager fileManager;
+    RoomLoader room;
     #endregion
 
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
+        room = FindObjectOfType<RoomLoader>();
     }
 
     private void Update()
@@ -139,6 +141,7 @@ public class LevelEditorManager : MonoBehaviour
     public void Save() //NOTE currently this function will override the existing file without prompting
     {
         xml = new XML();
+        xml.AddAttribute("RoomSize", room.RoomSize.ToString());
         foreach (FMPrefab prefab in prefabList.prefabs)
         {
             if (prefab.parent == null)
@@ -147,6 +150,7 @@ public class LevelEditorManager : MonoBehaviour
             }
 
             XML Section = xml.AddChild(prefab.parent.name);
+
             bool worthSaving = ConvertChildrenToXML(ref Section, prefab.parent.transform, prefab); //Note XML is worth saving only if it has a object inside it
 
             if (!worthSaving)
