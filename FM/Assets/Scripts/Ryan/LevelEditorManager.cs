@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
  *   Proper file saving 11/1/21
  *   Added Comments 11/2/21
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
- *   Added properties to simplify readablility 11/8/2021
+ *   Added properties to simplify readability 11/8/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
