@@ -10,22 +10,37 @@ public class CameraController : MonoBehaviour
     public GameObject cam;
     [Tooltip("The object that uses the horizontal axis (y) of the view")]
     public GameObject camBody;
+    [Tooltip("Script generated from InputActionAsset")]
     public CameraControl/*InputActionAsset script's class*/ controlScript;//script generated from InputActionAsset
+
     [Header("Event Variables")]
+    [Tooltip("")]
     public Vector2 horizontalAxis = Vector2.zero;
+    [Tooltip("")]
     public Vector2 verticalAxis = Vector2.zero;
+    [Tooltip("")]
     public Vector2 mouseAxis = Vector2.zero;
+    [Tooltip("")]
     public float placePress = 0;
+    [Tooltip("")]
     public float removePress = 0;
+    [Tooltip("")]
     public float resetPress = 0;
+    [Tooltip("")]
     public float camUnlockPress = 0;
 
     [Header("Variables")]
-    public float moveSpeed = 0.01f;//speed of the player
-    public float mouseSpeed = 3;//mouse sensitivity
-    private float yRotation;//store added rotation for each frame
-    public bool camLocked = true;//is the camera able ot be moved
+    [Tooltip("Speed of the player")]
+    public float moveSpeed = 0.01f;
+    [Tooltip("Mouse sensitivity")]
+    public float mouseSpeed = 3;
+    [Tooltip("Store added rotation for each frame")]
+    private float yRotation;
+    [Tooltip("Is the camera able to be moved?")]
+    public bool camLocked = true;
+    [Tooltip("The inital position of the camera when the simulation starts, stored before updates")]
     public Vector3 initPos;
+    [Tooltip("The inital rotation of the camera when the simulation starts, stored before updates")]
     public Quaternion initRot;
 
     #region Setup Methods
@@ -75,29 +90,25 @@ public class CameraController : MonoBehaviour
 
 
         //**Implementation**//!
-        //Move on horizontal axis
         MoveHorizontal();
 
-        //Move on vertical axis
         MoveVertical();
 
-        //Move the camera's rotation based upon the mouse
-        Look(false);
+        Look();
 
-        //Place the object
-        Place();
+        //Place();//not used for now, refer to LevelEditorManager.cs
 
-        //Remove the object
-        Remove();
+        //Remove();//not used for now, refer to LevelEditorManager.cs
 
-        //Reset the position
-        ResetPosition();
+        ResetObj();
 
-        //Unlock/Lock the camera
         CameraLock();
     }
 
     #region Event Methods
+    /// <summary>
+    /// Move on the horizontal axis (left or right, forward or back)
+    /// </summary>
     private void MoveHorizontal()
     {
         horizontalAxis = controlScript.Player.MoveHorizontal.ReadValue<Vector2>();//get input
@@ -106,6 +117,10 @@ public class CameraController : MonoBehaviour
 
         camBody.transform.position += moveVelocity;//apply to object
     }
+
+    /// <summary>
+    /// Move on the vertical axis (up or down)
+    /// </summary>
     private void MoveVertical()
     {
         verticalAxis = controlScript.Player.MoveVertical.ReadValue<Vector2>();//get input
@@ -113,7 +128,11 @@ public class CameraController : MonoBehaviour
 
         camBody.transform.position += moveVelocity;//apply to object
     }
-    private void Look(bool invertY)
+    
+    /// <summary>
+    /// Move the camera's rotation based upon the mouse
+    /// </summary>
+    private void Look()
     {
         if (camLocked == false)
         {
@@ -131,7 +150,11 @@ public class CameraController : MonoBehaviour
             camBody.transform.Rotate(new Vector3(0, mouseVelocity.y, 0));
         }
     }
-    private void Place()
+
+    /// <summary>
+    /// Place the object
+    /// </summary>
+    /*private void Place()//not used for now, refer to LevelEditorManager.cs
     {
         if (controlScript.Player.Place.triggered == true)
         {
@@ -140,12 +163,12 @@ public class CameraController : MonoBehaviour
             placePress = controlScript.Player.Place.ReadValue<float>();
             //!place object here
         }
-        else
-        {
+    }*/
 
-        }
-    }
-    private void Remove()
+    /// <summary>
+    /// Remove the object
+    /// </summary>
+    /*private void Remove()//not used for now, refer to LevelEditorManager.cs
     {
         if (controlScript.Player.Remove.triggered == true)
         {
@@ -154,12 +177,12 @@ public class CameraController : MonoBehaviour
             removePress = controlScript.Player.Remove.ReadValue<float>();
             //!remove object here
         }
-        else
-        {
-
-        }
-    }
-    private void ResetPosition()
+    }*/
+    
+    /// <summary>
+    /// Reset the position and rotation
+    /// </summary>
+    private void ResetObj()
     {
         if (controlScript.Player.ResetPosition.triggered == true)
         {
@@ -172,6 +195,10 @@ public class CameraController : MonoBehaviour
             camBody.transform.rotation = initRot;
         }
     }
+    
+    /// <summary>
+    /// Unlock or lock the camera's rotation
+    /// </summary>
     private void CameraLock()
     {
         if (controlScript.Player.CameraLock.phase == InputActionPhase.Started)
