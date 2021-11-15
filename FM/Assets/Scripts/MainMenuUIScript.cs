@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public static class ButtonExtension
 {
@@ -49,16 +50,6 @@ public class MainMenuUIScript : MonoBehaviour
         nameList = FileManager.fileManager.localSimulations;
         //currentItem = FileManager.fileManager.currentFile;
 
-        //itemTemplate = panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
-
-        //for(int i = 0; i < nameList.Length; i++)
-        //{
-        //    s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
-        //    s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
-
-        //    s.GetComponent<Button>().AddEventListener(i, ItemClicked);
-            
-        //}
 
         UpdateList();
         
@@ -90,12 +81,6 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UpdateList()
     {
-        //for (int i = 0; i < nameList.Length; i++)
-        //{
-        //    Destroy(panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-        //}
-
-
 
         nameList = FileManager.fileManager.localSimulations;
 
@@ -126,5 +111,10 @@ public class MainMenuUIScript : MonoBehaviour
     {
         Debug.Log("Button " + itemIndex + " was clicked");
         FileManager.fileManager.SelectFile(nameList[itemIndex]);
+    }
+
+    public void ChangeScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }
