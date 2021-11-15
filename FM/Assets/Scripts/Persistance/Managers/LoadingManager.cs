@@ -25,7 +25,7 @@ public class LoadingManager : MonoBehaviour
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
 
-        XML xml = XML.readfromfile(fileManager.currentFile);
+        XML xml = XML.readfromfile(fileManager.currentSimulation);
 
         LoadFromXML(xml);
     }
