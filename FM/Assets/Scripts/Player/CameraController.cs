@@ -14,19 +14,19 @@ public class CameraController : MonoBehaviour
     public CameraControl/*InputActionAsset script's class*/ controlScript;//script generated from InputActionAsset
 
     [Header("Event Variables")]
-    [Tooltip("")]
+    [Tooltip("Input value for the horizontal plane of the camera")]
     public Vector2 horizontalAxis = Vector2.zero;
-    [Tooltip("")]
+    [Tooltip("Input value for the vertical plane of the camera")]
     public Vector2 verticalAxis = Vector2.zero;
-    [Tooltip("")]
+    [Tooltip("Value of the mouse's velocity")]
     public Vector2 mouseAxis = Vector2.zero;
-    [Tooltip("")]
-    public float placePress = 0;
-    [Tooltip("")]
-    public float removePress = 0;
-    [Tooltip("")]
+    /*[Tooltip("Value of the button press for placement of objects")]
+    public float placePress = 0;*/
+    /*[Tooltip("Value of the button press for removal of objects")]
+    public float removePress = 0;*/
+    [Tooltip("Value of the button press for resetting the object")]
     public float resetPress = 0;
-    [Tooltip("")]
+    [Tooltip("Value of the button press for unlocking the camera")]
     public float camUnlockPress = 0;
 
     [Header("Variables")]
