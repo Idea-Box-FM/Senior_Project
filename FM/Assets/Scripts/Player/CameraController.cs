@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-//[RequireComponent(typeof(Rigidbody))]
 public class CameraController : MonoBehaviour
 {
-    [Header("Objects")]
-    public GameObject obj;
-    //public Rigidbody rb;
+    [Header("Objects To Assign")]
+    [Tooltip("The object that uses the horizontal axis (x) of the view")]
+    public GameObject cam;
+    [Tooltip("The object that uses the horizontal axis (y) of the view")]
+    public GameObject camBody;
     public CameraControl/*InputActionAsset script's class*/ controlScript;//script generated from InputActionAsset
     [Header("Event Variables")]
     public Vector2 horizontalAxis = Vector2.zero;
@@ -21,9 +21,12 @@ public class CameraController : MonoBehaviour
     public float camUnlockPress = 0;
 
     [Header("Variables")]
-    public Vector3 Rotation;
-    public float moveSpeed = 0.01f;
-    public bool camLocked = true;
+    public float moveSpeed = 0.01f;//speed of the player
+    public float mouseSpeed = 3;//mouse sensitivity
+    private float yRotation;//store added rotation for each frame
+    public bool camLocked = true;//is the camera able ot be moved
+    public Vector3 initPos;
+    public Quaternion initRot;
 
     #region Setup Methods
     private void Awake()
@@ -48,6 +51,10 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         //GetAllInputs(true);//!List all inputs
+
+        //store inital values of camera
+        initPos = this.transform.position;
+        initRot = this.transform.rotation;
     }
 
     // Update is called once per frame
@@ -95,29 +102,34 @@ public class CameraController : MonoBehaviour
     {
         horizontalAxis = controlScript.Player.MoveHorizontal.ReadValue<Vector2>();//get input
         Vector3 horiAxisFix = new Vector3(horizontalAxis.x, 0, horizontalAxis.y);//convert to horizontal plane for movement
-        Vector3 moveVelocity = (obj.transform.rotation * horiAxisFix.normalized) * moveSpeed;//get velocity to apply
+        Vector3 moveVelocity = (camBody.transform.rotation * horiAxisFix.normalized) * moveSpeed;//get velocity to apply
 
-        obj.transform.position += moveVelocity;//apply to object
+        camBody.transform.position += moveVelocity;//apply to object
     }
     private void MoveVertical()
     {
         verticalAxis = controlScript.Player.MoveVertical.ReadValue<Vector2>();//get input
-        Vector3 moveVelocity = (obj.transform.rotation * verticalAxis.normalized) * moveSpeed;//get velocity to apply
+        Vector3 moveVelocity = (camBody.transform.rotation * verticalAxis.normalized) * moveSpeed;//get velocity to apply
 
-        obj.transform.position += moveVelocity;//apply to object
+        camBody.transform.position += moveVelocity;//apply to object
     }
     private void Look(bool invertY)
     {
-        if (Cursor.visible == false)
+        if (camLocked == false)
         {
-            float mouseSpeed = 3;
+            //use 2 objects to have each axis represented
             mouseAxis = controlScript.Player.Look.ReadValue<Vector2>();//get input
             Vector2 mouseAxisFix = new Vector2(mouseAxis.y, mouseAxis.x);//correct values of look are swapped
             Vector2 mouseVelocity = mouseAxisFix.normalized * mouseSpeed;//get rotation to apply
-            obj.transform.Rotate(new Vector3(-mouseVelocity.x, mouseVelocity.y, 0));
-            obj.transform.eulerAngles = new Vector3(Mathf.Clamp(obj.transform.eulerAngles.x, 0, 360), obj.transform.eulerAngles.y, obj.transform.eulerAngles.z);//prevents rotation from getting too high
+
+            //limit rotation
+            yRotation -= mouseVelocity.x;
+            yRotation = Mathf.Clamp(yRotation, -90, 90);//clamp to ceiling and floor
+
+            //apply rotation
+            cam.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+            camBody.transform.Rotate(new Vector3(0, mouseVelocity.y, 0));
         }
-        Rotation = obj.transform.eulerAngles;//!rotation does not properly rotate about the player's y axis, use this var to track values
     }
     private void Place()
     {
@@ -155,12 +167,9 @@ public class CameraController : MonoBehaviour
             //Debug.Log(controlScript.Player.ResetPosition.ReadValueAsObject().GetType());//System.single = float
             resetPress = controlScript.Player.ResetPosition.ReadValue<float>();
 
-            obj.transform.position = new Vector3(0, 0, 0);
-            obj.transform.rotation = new Quaternion(0, 0, 0, 0);
-        }
-        else
-        {
-
+            //reset to inital starting position
+            camBody.transform.position = initPos;
+            camBody.transform.rotation = initRot;
         }
     }
     private void CameraLock()
@@ -174,12 +183,14 @@ public class CameraController : MonoBehaviour
             if (camUnlockPress > .5)//if more than 1/2 pressed
             {
                 Cursor.visible = false;
+                camLocked = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
         else
         {
             Cursor.visible = true;
+            camLocked = true;
             Cursor.lockState = CursorLockMode.None;
         }
     }
