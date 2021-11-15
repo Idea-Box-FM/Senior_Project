@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    #region Parameters
     [Header("Objects To Assign")]
     [Tooltip("The object that uses the horizontal axis (x) of the view")]
     public GameObject cam;
@@ -42,6 +43,7 @@ public class CameraController : MonoBehaviour
     public Vector3 initPos;
     [Tooltip("The inital rotation of the camera when the simulation starts, stored before updates")]
     public Quaternion initRot;
+    #endregion
 
     #region Setup Methods
     private void Awake()
@@ -75,7 +77,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //**Examples**//!
+        #region Examples
         //example direct acess, for a specific key
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) { Debug.Log("Pressed \"" + Keyboard.current.spaceKey.name + "\" key"); }
 
@@ -87,9 +89,9 @@ public class CameraController : MonoBehaviour
 
         //example of array acess, using the first InputAction in the first InputActionMap of the InputActionAsset
         //if (controlScript.asset.actionMaps[0].actions[0].triggered == true) { Debug.Log("Pressed \"" + controlScript.asset.actionMaps[0].actions[0].activeControl.name + "\" key"); };
+        #endregion
 
-
-        //**Implementation**//!
+        #region Implementation
         MoveHorizontal();
 
         MoveVertical();
@@ -103,6 +105,7 @@ public class CameraController : MonoBehaviour
         ResetObj();
 
         CameraLock();
+        #endregion
     }
 
     #region Event Methods
