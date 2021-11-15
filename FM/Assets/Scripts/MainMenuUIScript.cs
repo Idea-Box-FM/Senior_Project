@@ -35,6 +35,9 @@ public class MainMenuUIScript : MonoBehaviour
     //public Text listText;
     //public Button[] simList;
 
+    public GameObject itemTemplate;
+    GameObject s;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,22 +46,21 @@ public class MainMenuUIScript : MonoBehaviour
         uploadButton.interactable = false;
         loginButton.interactable = false;
        // Debug.Log(FileManager.fileManager);
-        nameList = FileManager.fileManager.fileNames;
+        nameList = FileManager.fileManager.localSimulations;
         //currentItem = FileManager.fileManager.currentFile;
 
-        GameObject itemTemplate = panel.transform.GetChild(0).gameObject;
-        GameObject s;
+        //itemTemplate = panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
 
-        for(int i = 0; i < nameList.Length; i++)
-        {
-            s = Instantiate(itemTemplate, panel.transform);
-            s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
+        //for(int i = 0; i < nameList.Length; i++)
+        //{
+        //    s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
+        //    s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
 
-            s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+        //    s.GetComponent<Button>().AddEventListener(i, ItemClicked);
             
-        }
+        //}
 
-        Destroy(itemTemplate);
+        UpdateList();
         
     }
 
@@ -69,6 +71,8 @@ public class MainMenuUIScript : MonoBehaviour
         {
             loginButton.interactable = true;
         }
+
+        //UpdateList();
 
     }
 
@@ -82,6 +86,40 @@ public class MainMenuUIScript : MonoBehaviour
             password.text = "";
 
         }
+    }
+
+    public void UpdateList()
+    {
+        //for (int i = 0; i < nameList.Length; i++)
+        //{
+        //    Destroy(panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+        //}
+
+
+
+        nameList = FileManager.fileManager.localSimulations;
+
+        for (int i = 0; i < nameList.Length; i++)
+        {
+
+            s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
+            s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
+
+            s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+
+        }
+    }
+
+    public void UnloadList()
+    {
+        Debug.Log(nameList.Length);
+        for (int i = 0; i < nameList.Length; i++)
+        {
+            Debug.Log(panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+           Destroy(panel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
+        }
+
+        UpdateList();
     }
 
     void ItemClicked (int itemIndex)
