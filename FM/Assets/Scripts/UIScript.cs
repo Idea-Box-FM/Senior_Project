@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
-    
+
 
     public void OnButtonHover(Text text)
     {
@@ -16,4 +16,5 @@ public class UIScript : MonoBehaviour
     {
         text.enabled = false;
     }
+
 }

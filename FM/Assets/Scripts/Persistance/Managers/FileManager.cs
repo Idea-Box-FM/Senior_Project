@@ -181,6 +181,7 @@ public class FileManager : MonoBehaviour
         LoadLocalFiles();
     }
 
+
     /// <summary>
     /// Call this function to download a simulation. it wont do anything if the file doesn't exist
     /// </summary>
