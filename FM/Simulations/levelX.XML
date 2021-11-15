@@ -1,16 +1,13 @@
 <XML>
-	<Barell>
-		<Barell(Clone) Position="(1.0, 0.2, 0.5)" Rotation="(0.7, 0.1, -0.2, 0.7)" Health="1" Flamability="2" Reaction="1" PersonalProtection="0"/>
-		<Barell(Clone)(1)(1) Position="(1.0, 1.0, 0.0)" Rotation="(0.0, 0.8, 0.0, 0.6)" Health="1" Flamability="2" Reaction="1" PersonalProtection="0"/>
-		<Barell(Clone)(1)(2) Position="(0.6, 0.2, 0.7)" Rotation="(0.6, -0.5, 0.4, 0.5)" Health="1" Flamability="2" Reaction="1" PersonalProtection="0"/>
-		<Barell(Clone)(1)(3) Position="(1.0, 1.0, 0.4)" Rotation="(0.0, 0.7, 0.0, -0.7)" Health="1" Flamability="2" Reaction="1" PersonalProtection="0"/>
-		<Barell(Clone)(1)(4) Position="(1.0, 1.4, 0.4)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="1" Flamability="2" Reaction="1" PersonalProtection="0"/>
-		<Barell(Clone)(1)(2)(1) Position="(2.0, 0.2, -0.8)" Rotation="(-0.5, 0.2, -0.5, -0.7)" Health="1" Flamability="2" Reaction="1" PersonalProtection="0"/>
-	</Barell>
-	<Stud>
-		<Stud(Clone) Position="(1.0, 1.0, 1.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Stud(Clone)(1) Position="(1.0, 1.0, -1.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Stud(Clone)(1)(1) Position="(1.0, 1.0, -0.2)" Rotation="(0.7, 0.0, 0.0, 0.7)"/>
-		<Stud(Clone)(1)(2) Position="(1.0, 2.1, -0.2)" Rotation="(0.7, 0.0, 0.0, 0.7)"/>
-	</Stud>
+
+	<Barrel>
+		<Barrel(Clone) Position="(0.2, 0.0, 2.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Barrel(Clone) Position="(-3.1, 1.8, 1.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Barrel(Clone) Position="(3.3, 0.0, 0.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Barrel>
+	<Shelf>
+		<Shelf(Clone) Position="(-2.2, 0.0, 1.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Shelf(Clone) Position="(3.6, 0.0, 4.2)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Shelf>
 </XML>
+
