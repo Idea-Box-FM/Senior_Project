@@ -24,9 +24,4 @@ public class NewSimScript : MonoBehaviour
         Debug.Log(name.text);
         FileManager.fileManager.NewFile(name.text);
     }
-
-    public void BackButton()
-    {
-
-    }
 }
