@@ -27,6 +27,9 @@ public class LoadingManager : MonoBehaviour
 
         XML xml = XML.readfromfile(fileManager.currentSimulation);
 
+        //loads the room size
+        FindObjectOfType<RoomLoader>().RoomSize = FMPrefab.ConvertToVector3(xml.attributes["RoomSize"]); ;
+            
         LoadFromXML(xml);
     }
 

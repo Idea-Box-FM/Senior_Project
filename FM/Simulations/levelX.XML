@@ -1,13 +1,7 @@
-<XML>
-
+<XML RoomSize="(20.0, 5.0, 20.0)">
 	<Barrel>
-		<Barrel(Clone) Position="(0.2, 0.0, 2.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Barrel(Clone) Position="(-3.1, 1.8, 1.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Barrel(Clone) Position="(3.3, 0.0, 0.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Barrel(Clone) Position="(0.4, 0.0, 1.9)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</Barrel>
-	<Shelf>
-		<Shelf(Clone) Position="(-2.2, 0.0, 1.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Shelf(Clone) Position="(3.6, 0.0, 4.2)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-	</Shelf>
 </XML>
+
 

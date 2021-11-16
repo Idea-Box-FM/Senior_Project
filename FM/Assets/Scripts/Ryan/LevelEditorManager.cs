@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
  *   Proper file saving 11/1/21
  *   Added Comments 11/2/21
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
- *   Added properties to simplify readablility 11/8/2021
+ *   Added properties to simplify readability 11/8/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -50,19 +50,25 @@ public class LevelEditorManager : MonoBehaviour
     public Camera mainCamera;
     //layer mask for the raycast to delete items
     public LayerMask deleteMask;
+    //layer mask for the raycast to change wall texture
+    public LayerMask wallMask;
     //layer mask for the raycast to place items
     public LayerMask mask;
     //grabs collision script for collision
     public CollisionDetect collision;
 
+    public Material material1;
+
     XML xml;
     FileManager fileManager;
+    RoomLoader room;
     #endregion
 
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
+        room = FindObjectOfType<RoomLoader>();
     }
 
     private void Update()
@@ -103,6 +109,20 @@ public class LevelEditorManager : MonoBehaviour
                 Destroy(deleteHit.transform.gameObject);
             }
         }
+
+        //if m is pressed, change material on wall only
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            //raycast from main camera to mouse position
+            Ray wallRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit wallHit;
+
+            //if the raycast hits a valid target on the wall layer mask, change the material
+            if (Physics.Raycast(wallRay, out wallHit, Mathf.Infinity, wallMask))
+            {
+                wallHit.transform.gameObject.GetComponent<MeshRenderer>().material = material1;
+            }
+        }
     }
 
     public static void DestroyCurrentExample()
@@ -121,6 +141,7 @@ public class LevelEditorManager : MonoBehaviour
     public void Save() //NOTE currently this function will override the existing file without prompting
     {
         xml = new XML();
+        xml.AddAttribute("RoomSize", room.RoomSize.ToString());
         foreach (FMPrefab prefab in prefabList.prefabs)
         {
             if (prefab.parent == null)
@@ -129,6 +150,7 @@ public class LevelEditorManager : MonoBehaviour
             }
 
             XML Section = xml.AddChild(prefab.parent.name);
+
             bool worthSaving = ConvertChildrenToXML(ref Section, prefab.parent.transform, prefab); //Note XML is worth saving only if it has a object inside it
 
             if (!worthSaving)
