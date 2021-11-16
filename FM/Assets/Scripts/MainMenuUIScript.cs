@@ -121,8 +121,9 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void DownloadButton()
     {
-        string fileName = FileManager.fileManager.currentSimulation;
-        
+        //string fileName = FileManager.fileManager.currentSimulation + xml;
+        string fileName = currentItem;
+        Debug.Log(fileName);
         FileManager.fileManager.DownloadSimulation(fileName);
     }
 
