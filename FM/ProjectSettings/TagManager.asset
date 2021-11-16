@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - FMPrefab
+  - GameManager
+  - GoodPrefab
+  - Room
+  - BadPrefab
+  - Wall
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -12,12 +18,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Objects
+  - Floor
+  - Shelf
+  - Barrel
+  - Wall
+  - Ceiling
   - 
   - 
   - 

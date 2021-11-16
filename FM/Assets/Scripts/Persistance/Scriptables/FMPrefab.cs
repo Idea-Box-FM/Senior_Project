@@ -10,12 +10,19 @@ using UnityEngine;
  * Remember To: tag the prefab as FMPrefab
  * 
  * TODO modify for scale
+ * 
+ * Editited:
+ *  Made it so the Instanciation automatically implements the changes in spacing 11/8/2021
  */
 
 [CreateAssetMenu(fileName = "FMPrefab", menuName = "FMPrefabs/FMPrefab")]
 public class FMPrefab : ScriptableObject
 {
+    [Tooltip("Make sure this prefab is tagged FMPrefab")]
     [SerializeField] GameObject prefab;
+    public GameObject examplePrefab;
+
+    [HideInInspector]
     public GameObject parent;
 
     #region InstanciatePrefab
@@ -37,7 +44,7 @@ public class FMPrefab : ScriptableObject
 
         Rotation ??= Quaternion.identity;
 
-        GameObject instance = Instantiate(prefab, position, Rotation.Value, parent: parent.transform);
+        GameObject instance = Instantiate(prefab, position + examplePrefab.transform.position, Rotation.Value, parent: parent.transform);
         instance.SetActive(false);
 
         if (name != "")
@@ -50,7 +57,7 @@ public class FMPrefab : ScriptableObject
     #endregion
 
     #region Helper Functions
-    Vector3 ConvertToVector3(string line)
+    public static Vector3 ConvertToVector3(string line)
     {
         line = line.Substring(1, line.Length - 2);
         line = line.Replace(" ", "");
@@ -63,7 +70,7 @@ public class FMPrefab : ScriptableObject
         return new Vector3(x,y,z);
     }
 
-    Quaternion ConvertToQuaternion(string line)
+    public static Quaternion ConvertToQuaternion(string line)
     {
         line = line.Substring(1, line.Length - 2);
         line = line.Replace(" ", "");
@@ -93,7 +100,8 @@ public class FMPrefab : ScriptableObject
         XML child = new XML(gameObject.name.Replace(" ", ""));
 
         //NOTE we use local transforms because we will be reparenting it to a parent
-        child.attributes.Add("Position", gameObject.transform.localPosition.ToString());
+        //Note we remove the original prefabs location because we systematically add it in the instanciate function
+        child.attributes.Add("Position", (gameObject.transform.localPosition - examplePrefab.transform.position).ToString());
         child.attributes.Add("Rotation", gameObject.transform.localRotation.ToString());
 
         return child;
