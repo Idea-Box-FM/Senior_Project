@@ -5,20 +5,20 @@ using UnityEngine.InputSystem;
 
 public class TestingScript : MonoBehaviour
 {
-    //[SerializeField] EditingManager editor;
+    [SerializeField] LevelEditorManager editor;
 
     //// Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (Keyboard.current.spaceKey.isPressed)
-    //    {
-    //        editor.Save();
-    //    }
-    //}
+    // Update is called once per frame
+    void Update()
+    {
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            editor.Save();
+        }
+    }
 }
