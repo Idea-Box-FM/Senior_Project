@@ -33,11 +33,11 @@ public class MainMenuUIScript : MonoBehaviour
     public GameObject panel;
     public string[] nameList;
     string currentItem;
-    //public Text listText;
-    //public Button[] simList;
 
     public GameObject itemTemplate;
     GameObject s;
+
+    string xml = ".XML";
 
 
     // Start is called before the first frame update
@@ -63,7 +63,6 @@ public class MainMenuUIScript : MonoBehaviour
             loginButton.interactable = true;
         }
 
-        //UpdateList();
 
     }
 
@@ -97,7 +96,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UnloadList()
     {
-        Debug.Log(nameList.Length);
+        //Debug.Log(nameList.Length);
         for (int i = 0; i < nameList.Length; i++)
         {
             Debug.Log(panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
@@ -110,11 +109,28 @@ public class MainMenuUIScript : MonoBehaviour
     void ItemClicked (int itemIndex)
     {
         Debug.Log("Button " + itemIndex + " was clicked");
-        FileManager.fileManager.SelectFile(nameList[itemIndex]);
+        currentItem = nameList[itemIndex];
+        Debug.Log(currentItem);
+        //FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
 
     public void ChangeScene(int scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void DownloadButton()
+    {
+        string fileName = FileManager.fileManager.currentSimulation;
+        
+        FileManager.fileManager.DownloadSimulation(fileName);
+    }
+
+    public void UploadButton()
+    {
+        //string fileName = FileManager.fileManager.currentSimulation + xml;
+        string fileName = currentItem;
+        Debug.Log(fileName);
+        FileManager.fileManager.UploadSimulation(fileName);
     }
 }
