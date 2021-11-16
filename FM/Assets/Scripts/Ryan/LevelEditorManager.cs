@@ -75,7 +75,7 @@ public class LevelEditorManager : MonoBehaviour
     private void Update()
     {
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
-        if(Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
+        if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
         {
             GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
             //ray from camera to mouse location
@@ -106,8 +106,8 @@ public class LevelEditorManager : MonoBehaviour
             //if the raycast hits a valid target on the layer mask, destroy the object
             if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
             {
-                //destroys game object -- WORKS FOR BARREL NOT SHELF
-                Destroy(deleteHit.transform.gameObject);
+                //destroys game object by parent -- IMPORTANT -- ALL ITEMS NEED TO HAVE A PARENT
+                Destroy(deleteHit.transform.parent.gameObject);
             }
         }
 
