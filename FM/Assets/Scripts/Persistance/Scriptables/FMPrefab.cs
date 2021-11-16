@@ -18,8 +18,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FMPrefab", menuName = "FMPrefabs/FMPrefab")]
 public class FMPrefab : ScriptableObject
 {
+    [Tooltip("Make sure this prefab is tagged FMPrefab")]
     [SerializeField] GameObject prefab;
     public GameObject examplePrefab;
+
+    [HideInInspector]
     public GameObject parent;
 
     #region InstanciatePrefab

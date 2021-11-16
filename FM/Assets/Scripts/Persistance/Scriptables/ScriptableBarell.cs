@@ -34,7 +34,7 @@ public class ScriptableBarell : FMPrefab
         sds.Reaction = int.Parse(xml.attributes["Reaction"]);
         sds.PersonalProtection = int.Parse(xml.attributes["PersonalProtection"]);
 
-        barell.sds = sds;
+        //barell.sds = sds;
 
         return barell.gameObject;
     }

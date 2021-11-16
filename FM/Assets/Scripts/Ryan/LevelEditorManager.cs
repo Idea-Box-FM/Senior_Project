@@ -51,10 +51,14 @@ public class LevelEditorManager : MonoBehaviour
     public Camera mainCamera;
     //layer mask for the raycast to delete items
     public LayerMask deleteMask;
+    //layer mask for the raycast to change wall texture
+    public LayerMask wallMask;
     //layer mask for the raycast to place items
     public LayerMask mask;
     //grabs collision script for collision
     public CollisionDetect collision;
+
+    public Material material1;
 
     XML xml;
     FileManager fileManager;
@@ -73,6 +77,7 @@ public class LevelEditorManager : MonoBehaviour
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
         if(Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
         {
+            GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
             //ray from camera to mouse location
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
@@ -84,7 +89,7 @@ public class LevelEditorManager : MonoBehaviour
                 CurrentButton.isClicked = false;
 
                 //instantiate prefab based on current button pressed at the raycast hit location
-                GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.identity);
+                GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
                 finalPrefab.SetActive(true);
 
                 DestroyCurrentExample();
@@ -101,8 +106,22 @@ public class LevelEditorManager : MonoBehaviour
             //if the raycast hits a valid target on the layer mask, destroy the object
             if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
             {
-                //destroys parent of game object -- WORKS FOR SHELF RIGHT NOW BUT NOT FOR BARREL
+                //destroys game object -- WORKS FOR BARREL NOT SHELF
                 Destroy(deleteHit.transform.gameObject);
+            }
+        }
+
+        //if m is pressed, change material on wall only
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            //raycast from main camera to mouse position
+            Ray wallRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit wallHit;
+
+            //if the raycast hits a valid target on the wall layer mask, change the material
+            if (Physics.Raycast(wallRay, out wallHit, Mathf.Infinity, wallMask))
+            {
+                wallHit.transform.gameObject.GetComponent<MeshRenderer>().material = material1;
             }
         }
     }
@@ -141,7 +160,7 @@ public class LevelEditorManager : MonoBehaviour
             }
         }
 
-        xml.ExportXML(fileManager.currentFile);
+        xml.ExportXML(fileManager.currentSimulation);
     }
 
     /// <summary>
