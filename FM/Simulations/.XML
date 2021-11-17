@@ -1,1 +1,15 @@
-<XML/>
+<XML>
+	<Room RoomSize="(20.0, 5.0, 20.0)">
+		<Walls Material="Wall (Instance)"/>
+		<Roof Material="Ceiling (Instance)"/>
+		<Floor Material="Floor (Instance)"/>
+	</Room>
+	<Shelf>
+		<Shelf(Clone) Position="(0.0, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Shelf(Clone) Position="(1.6, 0.0, 4.6)" Rotation="(0.0, 0.7, 0.0, -0.7)"/>
+	</Shelf>
+	<Sprinkler>
+		<Sprinkler(Clone) Position="(8.3, 0.0, 0.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Sprinkler(Clone) Position="(7.7, 4.5, 3.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Sprinkler>
+</XML>

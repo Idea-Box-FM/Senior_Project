@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Realms;
 using System.Linq;
+using UnityEngine.UI;
 
 /*Flower Box
  * Made by:Patrick Naatz
@@ -24,6 +25,8 @@ using System.Linq;
 
 public class FileManager : MonoBehaviour
 {
+    public Text text;
+
     #region fields
     public static FileManager fileManager;
 
@@ -117,7 +120,9 @@ public class FileManager : MonoBehaviour
     #region Helper functions
     private void LoadLocalFiles()
     {
+        text.text = path;
         DirectoryInfo info = new DirectoryInfo(path);
+
         FileInfo[] fileInfo = info.GetFiles();
 
         List<string> localSimulations = new List<string>();
