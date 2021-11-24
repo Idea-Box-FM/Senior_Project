@@ -24,9 +24,11 @@ public class MainMenuUIScript : MonoBehaviour
     public Button newButton;
     public Button uploadButton;
     public Button loginButton;
-    [Header("Input fields")]
+    [Header("Login")]
     public InputField username;
     public InputField password;
+    public Text validation;
+    public GameObject login;
 
     [Header("Scroll List")]
     public GameObject gameManager;
@@ -39,6 +41,8 @@ public class MainMenuUIScript : MonoBehaviour
 
     string xml = ".XML";
 
+    public Image roomSize;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +50,7 @@ public class MainMenuUIScript : MonoBehaviour
         newButton.interactable = false;
         uploadButton.interactable = false;
         loginButton.interactable = false;
+        validation.text = "";
        // Debug.Log(FileManager.fileManager);
         nameList = FileManager.fileManager.localSimulations;
         //currentItem = FileManager.fileManager.currentFile;
@@ -74,7 +79,13 @@ public class MainMenuUIScript : MonoBehaviour
             uploadButton.interactable = true;
             username.text = "";
             password.text = "";
-
+            validation.text = "Login successful";
+            login.SetActive(false);
+            
+        }
+        else
+        {
+            validation.text = "Wrong username or Password. Try Again.";
         }
     }
 
@@ -133,5 +144,10 @@ public class MainMenuUIScript : MonoBehaviour
         string fileName = currentItem;
         Debug.Log(fileName);
         FileManager.fileManager.UploadSimulation(fileName);
+    }
+
+    public void ChangeImage(Sprite sprite)
+    {
+        roomSize.sprite = sprite;
     }
 }
