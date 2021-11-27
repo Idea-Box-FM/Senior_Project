@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Realms;
 using System.Linq;
-using UnityEngine.UI;
 
 /*Flower Box
  * Made by:Patrick Naatz
@@ -20,13 +19,12 @@ using UnityEngine.UI;
  *  Added NewFile function 11/8/2021
  *  Added Database connection 11/9/2021 --local database
  *  Changed name of some variables to help with clarification between online and local files
+ *  Fixed a bug with realms with singleton pattern 11/27/2021
  * TODO make the data base connect to the online version of the cluster using config
  */
 
 public class FileManager : MonoBehaviour
 {
-    public Text text;
-
     #region fields
     public static FileManager fileManager;
 
@@ -120,7 +118,6 @@ public class FileManager : MonoBehaviour
     #region Helper functions
     private void LoadLocalFiles()
     {
-        text.text = path;
         DirectoryInfo info = new DirectoryInfo(path);
 
         FileInfo[] fileInfo = info.GetFiles();
@@ -250,6 +247,7 @@ public class FileManager : MonoBehaviour
 
     private void OnDisable()
     {
-        realm.Dispose(); //this is required otherwise we destroy our database
+        if(fileManager == this) //do not want to dismiss realm if it is just because of a singleton pattern
+            realm.Dispose(); //this is required otherwise we destroy our database
     }
 }

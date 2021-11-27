@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 /*Flower Box
  * Programmer: Patrick Naatz
@@ -14,6 +13,7 @@ using UnityEngine.UI;
  *  proper file loading 11/1/21
  *  Add comments 11/2/21
  *  Added the room loading 11/15/2021
+ *  Removed some debugging features 11/27/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -22,15 +22,11 @@ public class LoadingManager : MonoBehaviour
     FMPrefabList prefabList;
     FileManager fileManager;
 
-    public Text text;
-
     // Start is called before the first frame update
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
-
-        //text.text = fileManager.currentSimulation + " from loading manager";
 
         XML xml = XML.readfromfile(fileManager.currentSimulation);
  
