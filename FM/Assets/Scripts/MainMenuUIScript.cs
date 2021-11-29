@@ -43,6 +43,12 @@ public class MainMenuUIScript : MonoBehaviour
 
     public Image roomSize;
 
+    char[] xmlTrim = { '.', 'X', 'M', 'L' };
+
+    int selectedSim;
+
+    GameObject selectedButton;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +60,8 @@ public class MainMenuUIScript : MonoBehaviour
        // Debug.Log(FileManager.fileManager);
         nameList = FileManager.fileManager.localSimulations;
         //currentItem = FileManager.fileManager.currentFile;
+
+        selectedSim = -1;
 
 
         UpdateList();
@@ -68,6 +76,26 @@ public class MainMenuUIScript : MonoBehaviour
             loginButton.interactable = true;
         }
 
+
+        selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
+        selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 1);
+
+
+        for(int i = 0; i < nameList.Length; i++)
+        {
+            if(i == selectedSim)
+            {
+                selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
+                selectedButton.GetComponent<Button>().image.color = new Color(0, 1, 0, 1);
+            }
+            else
+            {
+                selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject;
+                selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 0);
+            }
+        }
+
+        
 
     }
 
@@ -98,7 +126,8 @@ public class MainMenuUIScript : MonoBehaviour
         {
 
             s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
-            s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
+            string simName = nameList[i].TrimEnd(xmlTrim);
+            s.transform.GetChild(0).GetComponent<Text>().text = simName;
 
             s.GetComponent<Button>().AddEventListener(i, ItemClicked);
 
@@ -119,8 +148,12 @@ public class MainMenuUIScript : MonoBehaviour
 
     void ItemClicked (int itemIndex)
     {
-        Debug.Log("Button " + itemIndex + " was clicked");
+       // Debug.Log("Button " + itemIndex + " was clicked");
         currentItem = nameList[itemIndex];
+
+        selectedSim = itemIndex;
+
+        
         Debug.Log(currentItem);
         //FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
