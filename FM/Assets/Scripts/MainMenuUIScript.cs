@@ -57,9 +57,7 @@ public class MainMenuUIScript : MonoBehaviour
         uploadButton.interactable = false;
         loginButton.interactable = false;
         validation.text = "";
-       // Debug.Log(FileManager.fileManager);
         nameList = FileManager.fileManager.localSimulations;
-        //currentItem = FileManager.fileManager.currentFile;
 
         selectedSim = -1;
 
@@ -105,8 +103,8 @@ public class MainMenuUIScript : MonoBehaviour
         {
             newButton.interactable = true;
             uploadButton.interactable = true;
-            username.text = "";
-            password.text = "";
+            //username.text = "";
+            //password.text = "";
             validation.text = "Login successful";
             login.SetActive(false);
             
