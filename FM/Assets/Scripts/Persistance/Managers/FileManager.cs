@@ -19,6 +19,7 @@ using System.Linq;
  *  Added NewFile function 11/8/2021
  *  Added Database connection 11/9/2021 --local database
  *  Changed name of some variables to help with clarification between online and local files
+ *  Fixed a bug with realms with singleton pattern 11/27/2021
  * TODO make the data base connect to the online version of the cluster using config
  */
 
@@ -120,6 +121,7 @@ public class FileManager : MonoBehaviour
     private void LoadLocalFiles()
     {
         DirectoryInfo info = new DirectoryInfo(path);
+
         FileInfo[] fileInfo = info.GetFiles();
 
         List<string> localSimulations = new List<string>();
@@ -247,6 +249,7 @@ public class FileManager : MonoBehaviour
 
     private void OnDisable()
     {
-        realm.Dispose(); //this is required otherwise we destroy our database
+        if(fileManager == this) //do not want to dismiss realm if it is just because of a singleton pattern
+            realm.Dispose(); //this is required otherwise we destroy our database
     }
 }
