@@ -4,12 +4,15 @@
 		<Roof Material="Ceiling (Instance)"/>
 		<Floor Material="Floor (Instance)"/>
 	</Room>
+	<Barrel>
+		<Barrel(Clone) Position="(0.9, 1.8, 3.9)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Barrel>
 	<Shelf>
-		<Shelf(Clone) Position="(0.0, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Shelf(Clone) Position="(1.6, 0.0, 4.6)" Rotation="(0.0, 0.7, 0.0, -0.7)"/>
+		<Shelf(Clone) Position="(2.2, 0.0, 4.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Shelf(Clone) Position="(-2.4, 0.0, 3.3)" Rotation="(0.0, 0.7, 0.0, 0.7)"/>
 	</Shelf>
 	<Sprinkler>
-		<Sprinkler(Clone) Position="(8.3, 0.0, 0.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<Sprinkler(Clone) Position="(7.7, 4.5, 3.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Sprinkler(Clone) Position="(6.0, 4.5, 7.2)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Sprinkler(Clone) Position="(1.2, 4.5, 7.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</Sprinkler>
 </XML>
