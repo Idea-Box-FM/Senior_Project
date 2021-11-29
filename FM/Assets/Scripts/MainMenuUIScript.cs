@@ -24,20 +24,30 @@ public class MainMenuUIScript : MonoBehaviour
     public Button newButton;
     public Button uploadButton;
     public Button loginButton;
-    [Header("Input fields")]
+    [Header("Login")]
     public InputField username;
     public InputField password;
+    public Text validation;
+    public GameObject login;
 
     [Header("Scroll List")]
     public GameObject gameManager;
     public GameObject panel;
     public string[] nameList;
     string currentItem;
-    //public Text listText;
-    //public Button[] simList;
 
     public GameObject itemTemplate;
     GameObject s;
+
+    string xml = ".XML";
+
+    public Image roomSize;
+
+    char[] xmlTrim = { '.', 'X', 'M', 'L' };
+
+    int selectedSim;
+
+    GameObject selectedButton;
 
 
     // Start is called before the first frame update
@@ -46,9 +56,10 @@ public class MainMenuUIScript : MonoBehaviour
         newButton.interactable = false;
         uploadButton.interactable = false;
         loginButton.interactable = false;
-       // Debug.Log(FileManager.fileManager);
+        validation.text = "";
         nameList = FileManager.fileManager.localSimulations;
-        //currentItem = FileManager.fileManager.currentFile;
+
+        selectedSim = -1;
 
 
         UpdateList();
@@ -63,7 +74,26 @@ public class MainMenuUIScript : MonoBehaviour
             loginButton.interactable = true;
         }
 
-        //UpdateList();
+
+        selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
+        selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 1);
+
+
+        for(int i = 0; i < nameList.Length; i++)
+        {
+            if(i == selectedSim)
+            {
+                selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
+                selectedButton.GetComponent<Button>().image.color = new Color(0, 1, 0, 1);
+            }
+            else
+            {
+                selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject;
+                selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 0);
+            }
+        }
+
+        
 
     }
 
@@ -73,9 +103,15 @@ public class MainMenuUIScript : MonoBehaviour
         {
             newButton.interactable = true;
             uploadButton.interactable = true;
-            username.text = "";
-            password.text = "";
-
+            //username.text = "";
+            //password.text = "";
+            validation.text = "Login successful";
+            login.SetActive(false);
+            
+        }
+        else
+        {
+            validation.text = "Wrong username or Password. Try Again.";
         }
     }
 
@@ -88,7 +124,8 @@ public class MainMenuUIScript : MonoBehaviour
         {
 
             s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
-            s.transform.GetChild(0).GetComponent<Text>().text = nameList[i];
+            string simName = nameList[i].TrimEnd(xmlTrim);
+            s.transform.GetChild(0).GetComponent<Text>().text = simName;
 
             s.GetComponent<Button>().AddEventListener(i, ItemClicked);
 
@@ -97,7 +134,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UnloadList()
     {
-        Debug.Log(nameList.Length);
+        //Debug.Log(nameList.Length);
         for (int i = 0; i < nameList.Length; i++)
         {
             Debug.Log(panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
@@ -109,12 +146,39 @@ public class MainMenuUIScript : MonoBehaviour
 
     void ItemClicked (int itemIndex)
     {
-        Debug.Log("Button " + itemIndex + " was clicked");
-        FileManager.fileManager.SelectFile(nameList[itemIndex]);
+       // Debug.Log("Button " + itemIndex + " was clicked");
+        currentItem = nameList[itemIndex];
+
+        selectedSim = itemIndex;
+
+        
+        Debug.Log(currentItem);
+        //FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
 
     public void ChangeScene(int scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void DownloadButton()
+    {
+        //string fileName = FileManager.fileManager.currentSimulation + xml;
+        string fileName = currentItem;
+        Debug.Log(fileName);
+        FileManager.fileManager.DownloadSimulation(fileName);
+    }
+
+    public void UploadButton()
+    {
+        //string fileName = FileManager.fileManager.currentSimulation + xml;
+        string fileName = currentItem;
+        Debug.Log(fileName);
+        FileManager.fileManager.UploadSimulation(fileName);
+    }
+
+    public void ChangeImage(Sprite sprite)
+    {
+        roomSize.sprite = sprite;
     }
 }
