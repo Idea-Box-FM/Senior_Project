@@ -35,9 +35,9 @@ public class MainMenuUIScript : MonoBehaviour
     public GameObject panel;
     public string[] nameList;
     string currentItem;
-
     public GameObject itemTemplate;
     GameObject s;
+
 
     string xml = ".XML";
 
@@ -52,6 +52,8 @@ public class MainMenuUIScript : MonoBehaviour
     //audio script input
     public PlaySoundEffect audio;
 
+    private bool waited;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +63,7 @@ public class MainMenuUIScript : MonoBehaviour
         validation.text = "";
         nameList = FileManager.fileManager.localSimulations;
 
-        selectedSim = -1;
+        selectedSim = 0;
 
 
         UpdateList();
@@ -160,7 +162,8 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void ChangeScene(int scene)
     {
-        SceneManager.LoadScene(scene);
+        Wait(audio.soundClips[audio.selectedClip].length);
+        if(waited == true) SceneManager.LoadScene(scene);
     }
 
     public void DownloadButton()
@@ -187,5 +190,13 @@ public class MainMenuUIScript : MonoBehaviour
     public void playButtonSoundEffect(string caller)
     {
         audio.Play(caller: caller);
+    }
+
+    IEnumerator Wait(float delay)
+    {
+      //   waited = true;
+        yield return new WaitForSeconds(delay);
+        
+
     }
 }
