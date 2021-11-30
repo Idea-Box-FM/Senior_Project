@@ -25,9 +25,4 @@ public class NewSimScript : MonoBehaviour
         //temporarily commented this out because of changes to the NewFile function
         //FileManager.fileManager.NewFile(name.text);
     }
-
-    public void BackButton()
-    {
-
-    }
 }

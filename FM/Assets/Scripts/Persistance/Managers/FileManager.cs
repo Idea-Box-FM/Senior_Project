@@ -30,7 +30,9 @@ public class FileManager : MonoBehaviour
     public static FileManager fileManager;
 
     #region path formatting
-    const char slash = '\\'; //if this isn't used often enough remove it for memory management
+    const char slash = '/'; //if this isn't used often enough remove it for memory management
+
+    //string slashV2 = "/";
 
     string path = "";
     [SerializeField] string folderName = "Simulations";
