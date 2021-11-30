@@ -20,6 +20,7 @@ using System.Linq;
  *  Added Database connection 11/9/2021 --local database
  *  Changed name of some variables to help with clarification between online and local files
  *  Fixed a bug with realms with singleton pattern 11/27/2021
+ *  Updated the new file function to work with room requirements 11/29/2021
  * TODO make the data base connect to the online version of the cluster using config
  */
 
@@ -162,7 +163,8 @@ public class FileManager : MonoBehaviour
     /// When calling this function pass in the file name without the XML
     /// </summary>
     /// <param name="fileName">if this file name is already in existance then it will automatically select that file</param>
-    public void NewFile(string fileName)
+    /// <param name="roomSize">x = width, y = height, z = depth</param>
+    public void NewFile(string fileName, Vector3 roomSize)
     {
         //stops if file already exists
         foreach(string file in localSimulations)
@@ -177,6 +179,18 @@ public class FileManager : MonoBehaviour
         //creates the new file in the folder
         XML xml = new XML();
         xml.name = fileName;
+
+        XML roomXML = xml.AddChild("Room");
+        roomXML.AddAttribute("RoomSize", roomSize.ToString());
+
+        XML Walls = roomXML.AddChild("Walls");
+        Walls.AddAttribute("Material", "Wall");
+
+        XML Roof = roomXML.AddChild("Roof");
+        Roof.AddAttribute("Material", "Ceiling");
+
+        XML Floor = roomXML.AddChild("Floor");
+        Floor.AddAttribute("Material", "Floor");
 
         xml.ExportXML(fileName + ".XML");
 

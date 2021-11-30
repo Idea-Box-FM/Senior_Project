@@ -22,7 +22,8 @@ public class NewSimScript : MonoBehaviour
     public void NewFileButton()
     {
         Debug.Log(name.text);
-        FileManager.fileManager.NewFile(name.text);
+        //temporarily commented this out because of changes to the NewFile function
+        //FileManager.fileManager.NewFile(name.text);
     }
 
     public void BackButton()
