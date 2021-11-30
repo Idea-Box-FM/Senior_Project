@@ -13,6 +13,7 @@ using UnityEngine;
  *  proper file loading 11/1/21
  *  Add comments 11/2/21
  *  Added the room loading 11/15/2021
+ *  Removed some debugging features 11/27/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
