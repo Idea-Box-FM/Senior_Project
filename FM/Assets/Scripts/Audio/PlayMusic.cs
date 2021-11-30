@@ -3,20 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
 [RequireComponent(typeof(AudioSource))]
 public class PlayMusic : MonoBehaviour
 {
+    public enum MusicAction
+    {
+        Idle,
+        FadeIn,
+        FadeOut,
+        Done
+    }
+
     [Tooltip("Requires Audio Source Component, can be empty")]
     public AudioSource src;//can have no audio clip
     [Header("Sound Selection")]
     public List<AudioClip> musicClips = new List<AudioClip>();//the selection of sounds that the object is able to play
     public int selectedClip = 0;
-    [Tooltip("Playing the selected sound?")]
-    public bool playing = false;
-    public bool fadedOut = true;
+    [Tooltip("Current music's status")]
+    public MusicAction currentMusicAction = MusicAction.FadeIn;//fade in by default
+    public bool currentlyPlaying = true;
+    private bool storedLastValue;
+    static bool changeableState;
 
+    //!fix inital starting of music
+    //condense toggling of values within function
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,38 +38,156 @@ public class PlayMusic : MonoBehaviour
         src.loop = true;//make audio loop
         if (musicClips == null) //if no entries in list
             musicClips.Add(src.clip);//add one from the source
+        currentlyPlaying = storedLastValue;
     }
     // Update is called once per frame
     void Update()
     {
-        if (playing == true && src.isPlaying == false)
-        {
-            if (musicClips.Count > selectedClip) src.PlayOneShot(musicClips[selectedClip]);//play it
-            else Debug.Log("Tried playing clip outside of range");
+        //test inputs
+        if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {
+            Debug.Log("Play");
+            Play();
         }
-        if (playing == false)
+        if (Keyboard.current.leftShiftKey/*specific key*/.isPressed == true)
         {
-            //StartCoroutine(StartAudioFade());
+            Debug.Log("Stop");
+            Stop();
         }
-        if (fadedOut)
+
+        UpdateCurrentState();
+        UpdateAudioClip();
+        PreformCurrentState();
+
+        storedLastValue = currentlyPlaying;
+    }
+
+    public void UpdateCurrentState()
+    {
+        changeableState = currentMusicAction != MusicAction.FadeIn || currentMusicAction != MusicAction.FadeOut || currentMusicAction != MusicAction.Done;//store if changeable every frame
+
+        if (currentlyPlaying != storedLastValue)//if value of bool updated
         {
-            src.Stop();
+            switch (currentlyPlaying)
+            {
+                case true:
+                    currentMusicAction = MusicAction.FadeIn;
+                    break;
+                case false:
+                    currentMusicAction = MusicAction.FadeOut;
+                    break;
+            }
         }
     }
 
-    public IEnumerator StartAudioFade()
+    private void UpdateAudioClip()
+    {
+        if (src.isPlaying == false && currentlyPlaying == false)//if is not already playing something else
+        {
+            if (selectedClip <= musicClips.Count)//if within range
+                src.clip = musicClips[selectedClip];//add it to source to allow editing
+            else Debug.LogError("Tried playing clip outside of range");//otherwise show error
+        }
+    }
+
+    private void PreformCurrentState()
+    {
+        if (src.clip != null)//if there is a sound clip within the slot
+        {
+            switch (currentMusicAction)
+            {
+                case MusicAction.FadeIn://if want to play music and idle
+                    StartCoroutine(AudioFade(MusicAction.FadeIn, 1f));//fade in audio
+                    break;
+                case MusicAction.FadeOut://if want to stop playing music and idle
+                    StartCoroutine(AudioFade(MusicAction.FadeOut, 1f));//fade out audio
+                    break;
+                case MusicAction.Done://if done with task
+                    currentMusicAction = MusicAction.Idle;//reset after completing task
+                    break;
+                default:
+                    //Debug.Log("No action!");
+                    break;
+            }
+        }
+        else { Debug.Log("No audio clip!"); }
+    }
+
+    public IEnumerator AudioFade(MusicAction action, float duration)
     {
         float currentTime = 0;
         float start = src.volume;
+        float targetVolume = start;//keep same by default
 
-        while (currentTime < src.clip.length)
+        Debug.Log("Action: " + action);
+
+        if (action == MusicAction.FadeIn && src.isPlaying == false)//if fading in and is not playing
+        {
+            src.Play();//play
+        }
+        else
+        {
+            Debug.Log("Could not call play, still in fade state");
+        }
+
+        switch (action)//determine target
+        {
+            case MusicAction.FadeIn:
+                targetVolume = 1;
+                break;
+            case MusicAction.FadeOut:
+                targetVolume = 0;
+                break;
+            default:
+                targetVolume = .5f;
+                break;
+        }
+
+        while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            src.volume = Mathf.Lerp(start, 0, currentTime / src.clip.length);
+            src.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            //Debug.Log("Action: " + action + ", Time: " + currentTime);
             yield return null;
         }
-        fadedOut = true;
-        Debug.Log("E");
+
+        if (action == MusicAction.FadeOut && src.isPlaying == true)//if fading out and is playing
+        {
+            src.Pause(); //pause after fading out
+        }
+
+        //Debug.Log("Reached requested audio volume");
+        currentMusicAction = MusicAction.Done;
+
         yield break;
     }
+
+    public void Play()
+    {
+        if (changeableState == true)
+            currentlyPlaying = true;
+        else
+            Debug.Log("Unable to change state to play");
+    }
+    public void Stop()
+    {
+        if (changeableState == true)
+            currentlyPlaying = false;
+        else
+            Debug.Log("Unable to change state to stop");
+    }
+    public void Next()//plays the next music clip
+    {
+        //process: fade out, change selected clip, fade in
+        currentMusicAction = MusicAction.FadeOut;
+
+        selectedClip++;
+        if (selectedClip > musicClips.Count)//if outside of range
+        {
+            selectedClip = 0;//reset
+        }
+
+        currentMusicAction = MusicAction.FadeIn;
+    }
+
+    
 }
