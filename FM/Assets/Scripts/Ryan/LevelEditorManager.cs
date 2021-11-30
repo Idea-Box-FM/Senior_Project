@@ -11,7 +11,8 @@ using UnityEngine.InputSystem;
  *   Proper file saving 11/1/21
  *   Added Comments 11/2/21
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
- *   Added properties to simplify readability 11/8/2021
+ *   Added properties to simplify readablility 11/8/2021
+ *   Added the save functionality 11/15/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -61,20 +62,20 @@ public class LevelEditorManager : MonoBehaviour
 
     XML xml;
     FileManager fileManager;
-    RoomLoader room;
+    Room room;
     #endregion
 
     void Start()
     {
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
-        room = FindObjectOfType<RoomLoader>();
+        room = FindObjectOfType<Room>();
     }
 
     private void Update()
     {
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
-        if(Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
+        if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
         {
             GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
             //ray from camera to mouse location
@@ -105,8 +106,8 @@ public class LevelEditorManager : MonoBehaviour
             //if the raycast hits a valid target on the layer mask, destroy the object
             if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
             {
-                //destroys game object -- WORKS FOR BARREL NOT SHELF
-                Destroy(deleteHit.transform.gameObject);
+                //destroys game object by parent -- IMPORTANT -- ALL ITEMS NEED TO HAVE A PARENT
+                Destroy(deleteHit.transform.parent.gameObject);
             }
         }
 
@@ -141,7 +142,7 @@ public class LevelEditorManager : MonoBehaviour
     public void Save() //NOTE currently this function will override the existing file without prompting
     {
         xml = new XML();
-        xml.AddAttribute("RoomSize", room.RoomSize.ToString());
+        room.ConvertToXML(ref xml);
         foreach (FMPrefab prefab in prefabList.prefabs)
         {
             if (prefab.parent == null)

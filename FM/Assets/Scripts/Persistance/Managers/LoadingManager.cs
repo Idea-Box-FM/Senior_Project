@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ using UnityEngine;
  * Edited by: Pat Naatz
  *  proper file loading 11/1/21
  *  Add comments 11/2/21
+ *  Added the room loading 11/15/2021
+ *  Removed some debugging features 11/27/2021
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -26,9 +29,9 @@ public class LoadingManager : MonoBehaviour
         fileManager = FileManager.fileManager;
 
         XML xml = XML.readfromfile(fileManager.currentSimulation);
-
-        //loads the room size
-        FindObjectOfType<RoomLoader>().RoomSize = FMPrefab.ConvertToVector3(xml.attributes["RoomSize"]); ;
+ 
+        //loads the room
+        FindObjectOfType<Room>().LoadFromXML(xml);
             
         LoadFromXML(xml);
     }
