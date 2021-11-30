@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using System;
 
-//NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
-[RequireComponent(typeof(AudioSource))]
+//NOTICE: The gameobject with this script attached MUST have an audio source for it to function properly
+//[RequireComponent(typeof(AudioSource))]
 public class PlaySoundEffect : MonoBehaviour
 {
     [Tooltip("Requires Audio Source Component, can be empty")]
@@ -26,7 +27,12 @@ public class PlaySoundEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        src = this.GetComponent<AudioSource>();//get the component from the object this is on if it exists
+        if(src == null)//if source is not assigned
+        {
+            bool foundSrc = this.TryGetComponent<AudioSource>(out src);//get the component from the object this is on if it exists
+            if (foundSrc == false)//if it is still not found
+                Debug.LogError("Did not assign \"src\" in the \"" + this.name + "\" game object");//log an error
+        }
         if (soundClips == null) //if no entries in list
             soundClips.Add(src.clip);//add one from the source
     }
@@ -50,13 +56,40 @@ public class PlaySoundEffect : MonoBehaviour
         }
     }
     /// <summary>
-    /// play individual regardless of last sound state
+    /// Play sound effect
     /// </summary>
     /// <param name="soundClip">The specific sound clip to play, does not need to be within the instance</param>
-    public void Play(AudioClip soundClip)
+    /// <param name="playOver">Play over other sounds without waiting in a queue?</param>
+    /// <param name="caller">The name of the object signaling for a sound to play</param>
+    public void Play(AudioClip soundClip = null, bool playOver = true, string caller = "")
     {
-        src.PlayOneShot(soundClip);
-        play = false;
+        if(soundClip == null)//if default
+            soundClip = soundClips[selectedClip];//assign current selected
+
+        if (playOver == true)//if play over other sounds
+        {
+            //play manually
+            src.PlayOneShot(soundClip);
+            play = false;
+        }
+        if (playOver == false)//if wait in a queue
+        {
+            //play automatically
+            play = true;//add to queue via bool
+        }
+
+        if (caller != "") Debug.Log("Playing \"" + soundClip.name + "\" sound effect from \"" + caller + "\" game object");
+    }
+    /// <summary>
+    /// Play sound effect, event varient (only allow up to one parameter to be in the list)
+    /// </summary>
+    /// <param name="id">The id of the sound within the list</param>
+    public void Play(int id = 0)
+    {
+        if (id <= soundClips.Count - 1)
+            Play(soundClips[id], caller: this.name/*comment out caller to pervent debugs*/);
+        else
+            Debug.LogError("ID (" + id + ") outside of given soundClips list (limit " + (soundClips.Count - 1) + ")");
     }
     /// <summary>
     /// Add entry to queue to play (use externally)

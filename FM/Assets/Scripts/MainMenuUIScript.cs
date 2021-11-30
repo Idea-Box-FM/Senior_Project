@@ -49,6 +49,8 @@ public class MainMenuUIScript : MonoBehaviour
 
     GameObject selectedButton;
 
+    //audio script input
+    public PlaySoundEffect audio;
 
     // Start is called before the first frame update
     void Start()
@@ -180,5 +182,10 @@ public class MainMenuUIScript : MonoBehaviour
     public void ChangeImage(Sprite sprite)
     {
         roomSize.sprite = sprite;
+    }
+
+    public void playButtonSoundEffect(string caller)
+    {
+        audio.Play(caller: caller);
     }
 }
