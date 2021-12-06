@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 11400000, guid: 833c213f8d0d0d8499526590aab80208, type: 2}
+  - {fileID: 11400000, guid: 4b2b95287834c854aa648d27ab6e590f, type: 2}
   - {fileID: 11400000, guid: a0622723637bbe6459cefcc1876d6670, type: 2}
   - {fileID: 11400000, guid: 046c8c3364425264fb448a4e5c2d3a04, type: 2}
 --- !u!4 &353158409
@@ -371,7 +371,7 @@ MonoBehaviour:
     m_Bits: 1024
   mask:
     serializedVersion: 2
-    m_Bits: 2432
+    m_Bits: 6272
   collision: {fileID: 1846884618}
   material1: {fileID: 2100000, guid: f1cca2882b4e0894995b5c1ef0af4112, type: 2}
 --- !u!1 &386889669

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b87723c8ea4e19f4c8410778117c763a, type: 3}
-  m_Name: Barrel
+  m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
+  m_Name: PlasticBarrel
   m_EditorClassIdentifier: 
   prefab: {fileID: 3575485364818120575, guid: bf1dcd3a279056e49ad433ac0dd8c749, type: 3}
   examplePrefab: {fileID: 3575485364818120575, guid: 67ac23f22b94a234dae649c8cdc58c39, type: 3}
