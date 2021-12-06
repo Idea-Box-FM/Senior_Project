@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEditor.SceneManagement;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
 [RequireComponent(typeof(AudioSource))]
@@ -27,10 +28,11 @@ public class PlayMusic : MonoBehaviour
     public bool currentlyPlaying = true;
     private bool storedLastValue;
     static bool changeableState;
+    float fadeTime = 1f;
 
     //!fix inital starting of music
     //condense toggling of values within function
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,11 @@ public class PlayMusic : MonoBehaviour
         {
             Debug.Log("Stop");
             Stop();
+        }
+        if (Keyboard.current.leftCtrlKey/*specific key*/.wasReleasedThisFrame == true)
+        {
+            Debug.Log("Next");
+            SceneChange();
         }
 
         UpdateCurrentState();
@@ -81,7 +88,7 @@ public class PlayMusic : MonoBehaviour
 
     private void UpdateAudioClip()
     {
-        if (src.isPlaying == false && currentlyPlaying == false)//if is not already playing something else
+        if (src.isPlaying == false)//if is not already playing something else
         {
             if (selectedClip <= musicClips.Count)//if within range
                 src.clip = musicClips[selectedClip];//add it to source to allow editing
@@ -96,10 +103,10 @@ public class PlayMusic : MonoBehaviour
             switch (currentMusicAction)
             {
                 case MusicAction.FadeIn://if want to play music and idle
-                    StartCoroutine(AudioFade(MusicAction.FadeIn, 1f));//fade in audio
+                    StartCoroutine(AudioFade(MusicAction.FadeIn, fadeTime));//fade in audio
                     break;
                 case MusicAction.FadeOut://if want to stop playing music and idle
-                    StartCoroutine(AudioFade(MusicAction.FadeOut, 1f));//fade out audio
+                    StartCoroutine(AudioFade(MusicAction.FadeOut, fadeTime));//fade out audio
                     break;
                 case MusicAction.Done://if done with task
                     currentMusicAction = MusicAction.Idle;//reset after completing task
@@ -118,7 +125,7 @@ public class PlayMusic : MonoBehaviour
         float start = src.volume;
         float targetVolume = start;//keep same by default
 
-        Debug.Log("Action: " + action);
+        //Debug.Log("Action: " + action);
 
         if (action == MusicAction.FadeIn && src.isPlaying == false)//if fading in and is not playing
         {
@@ -155,6 +162,11 @@ public class PlayMusic : MonoBehaviour
             src.Pause(); //pause after fading out
         }
 
+        if(action == MusicAction.FadeIn)
+        {
+            currentlyPlaying = true;
+        }
+
         //Debug.Log("Reached requested audio volume");
         currentMusicAction = MusicAction.Done;
 
@@ -175,19 +187,28 @@ public class PlayMusic : MonoBehaviour
         else
             Debug.Log("Unable to change state to stop");
     }
-    public void Next()//plays the next music clip
+    public void SceneChange()//plays the next music clip
     {
         //process: fade out, change selected clip, fade in
+        //fade out music
         currentMusicAction = MusicAction.FadeOut;
 
+        //change scene and clip
         selectedClip++;
-        if (selectedClip > musicClips.Count)//if outside of range
+        if (selectedClip > musicClips.Count - 1)//if outside of range
         {
             selectedClip = 0;//reset
         }
 
-        currentMusicAction = MusicAction.FadeIn;
+        StartCoroutine(WaitAndFadeIn(fadeTime*2));
     }
 
+    public IEnumerator WaitAndFadeIn(float timeS)
+    {
+        yield return new WaitForSeconds(timeS);
+
+        //fade in music
+        currentMusicAction = MusicAction.FadeIn;
+    }
     
 }
