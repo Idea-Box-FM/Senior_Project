@@ -30,8 +30,8 @@ public class PlaySoundEffect : MonoBehaviour
         if(src == null)//if source is not assigned
         {
             bool foundSrc = this.TryGetComponent<AudioSource>(out src);//get the component from the object this is on if it exists
-            if (foundSrc == false)//if it is still not found
-                Debug.LogError("Did not assign \"src\" in the \"" + this.name + "\" game object");//log an error
+            //if (foundSrc == false)//if it is still not found
+            //    Debug.LogError("Did not assign \"src\" in the \"" + this.gameObject.name + "\" game object");//log an error
         }
         if (soundClips == null) //if no entries in list
             soundClips.Add(src.clip);//add one from the source

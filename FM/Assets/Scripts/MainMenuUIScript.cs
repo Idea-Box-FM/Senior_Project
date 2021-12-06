@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public static class ButtonExtension
 {
@@ -129,7 +131,7 @@ public class MainMenuUIScript : MonoBehaviour
 
             s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
             string simName = nameList[i].TrimEnd(xmlTrim);
-            s.transform.GetChild(0).GetComponent<Text>().text = simName;
+            s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
 
             s.GetComponent<Button>().AddEventListener(i, ItemClicked);
 
