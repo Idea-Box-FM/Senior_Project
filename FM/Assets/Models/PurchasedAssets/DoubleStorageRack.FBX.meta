@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: 73d68daa00aef4c4a91a26a26bb23a11
+guid: 8c66edc79531f7544b78f2e6adff464a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel
+    second: {fileID: 2100000, guid: f05ac5fc9d30f654ca09cc76b0fb88a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box
+    second: {fileID: 2100000, guid: dfe8cdcf71e181e428b3e6d29087bab9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crossbars_and_bolts
+    second: {fileID: 2100000, guid: 9766944477c43b4449be3512c112b4b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pallet
+    second: {fileID: 2100000, guid: 918b06a874c2f9147ae7e38ae23babaa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plywood
+    second: {fileID: 2100000, guid: 4ee8f1ef5e1e7ef4f9ae7d5c5e7c50ef, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

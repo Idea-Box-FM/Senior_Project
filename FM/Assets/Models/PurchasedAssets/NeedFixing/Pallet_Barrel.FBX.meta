@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Pallet
     second: {fileID: 2100000, guid: 090bf6c116955a841bfe8ce3210e8316, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic_white
+    second: {fileID: 2100000, guid: 6588f244b01e0d844bc9c01d102810d3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
