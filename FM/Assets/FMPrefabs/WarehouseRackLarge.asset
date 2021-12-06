@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
   m_Name: WarehouseRackLarge
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6432633107844390645, guid: 09ef8fa880b0625469ea6b9d53d90ce3, type: 3}
-  examplePrefab: {fileID: 6432633107844390645, guid: 4ea9fc3a9748d8148afd92e58a133c22, type: 3}
+  prefab: {fileID: 9077027188872736265, guid: de03fbeeb1f098f4b8ea4a6c6597a081, type: 3}
+  examplePrefab: {fileID: 301209890297343703, guid: 2cd3614bae3b92f408670a42d91c678a, type: 3}
   parent: {fileID: 0}
