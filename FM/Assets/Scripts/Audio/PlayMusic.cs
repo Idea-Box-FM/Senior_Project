@@ -28,7 +28,7 @@ public class PlayMusic : MonoBehaviour
     public bool currentlyPlaying = true;
     private bool storedLastValue;
     static bool changeableState;
-    float fadeTime = 1f;
+    public static float fadeTime = 1f;//make publically available
 
     //!fix inital starting of music
     //condense toggling of values within function
@@ -116,7 +116,7 @@ public class PlayMusic : MonoBehaviour
                     break;
             }
         }
-        else { Debug.Log("No audio clip!"); }
+        else { /*Debug.Log("No audio clip!");*/ }
     }
 
     public IEnumerator AudioFade(MusicAction action, float duration)
@@ -131,10 +131,7 @@ public class PlayMusic : MonoBehaviour
         {
             src.Play();//play
         }
-        else
-        {
-            Debug.Log("Could not call play, still in fade state");
-        }
+        else{/*Debug.Log("Could not call play, still in fade state");*/}
 
         switch (action)//determine target
         {
