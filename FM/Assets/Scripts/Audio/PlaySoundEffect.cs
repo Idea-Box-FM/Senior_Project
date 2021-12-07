@@ -43,7 +43,7 @@ public class PlaySoundEffect : MonoBehaviour
         if (play == true)
         {
             AddToQueue(soundClips[selectedClip], playOver);
-            //soundQueue = soundQueue.Distinct().ToList();//remove dupes
+            //soundEffectQueueDisplay = soundEffectQueueDisplay.Distinct().ToList();//remove dupes
         }
 
         if (soundEffectQueue.Count > 0)//if more than 1 entry
