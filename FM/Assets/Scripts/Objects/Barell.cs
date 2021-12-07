@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class Barell : MonoBehaviour
 {
+
     [System.Serializable] public struct SDS
     {
         public int Health;
