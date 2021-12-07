@@ -61,7 +61,7 @@ public class MainMenuUIScript : MonoBehaviour
         validation.text = "";
         nameList = FileManager.fileManager.localSimulations;
 
-        selectedSim = -1;
+        selectedSim = 0;
 
 
         UpdateList();
@@ -81,9 +81,9 @@ public class MainMenuUIScript : MonoBehaviour
         selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 1);
 
 
-        for(int i = 0; i < nameList.Length; i++)
+        for (int i = 0; i < nameList.Length; i++)
         {
-            if(i == selectedSim)
+            if (i == selectedSim)
             {
                 selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
                 selectedButton.GetComponent<Button>().image.color = new Color(0, 1, 0, 1);
@@ -95,7 +95,7 @@ public class MainMenuUIScript : MonoBehaviour
             }
         }
 
-        
+
 
     }
 
