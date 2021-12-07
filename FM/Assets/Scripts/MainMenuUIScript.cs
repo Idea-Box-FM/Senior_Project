@@ -39,10 +39,13 @@ public class MainMenuUIScript : MonoBehaviour
     //public GameObject OnlinePanel;
     public string[] localSimList;
     public string[] onlineSimList;
+    public List<string> simList;
     string currentItem;
     public GameObject itemTemplate;
     GameObject l;
     GameObject o;
+    GameObject s;
+    int simListLength;
 
 
     string xml = ".XML";
@@ -60,7 +63,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     private bool waited;
 
-    int simListLength;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -136,58 +139,92 @@ public class MainMenuUIScript : MonoBehaviour
         localSimList = FileManager.fileManager.localSimulations;
 
         onlineSimList = FileManager.fileManager.onlineSimulations;
-
-        int osListDifference = 0;
-
+        //onlineSimList = localSimList.Distinct().ToArray<string>();
 
 
-        //for (int i = 0; i < onlineSimList.Length; i++)
+        simListLength = localSimList.Length + onlineSimList.Length;
+
+
+
+
+        for(int i = 0; i < simListLength; i++)
+        {
+            if(i < localSimList.Length)
+            {
+                simList.Add(localSimList[i]);
+            }
+            else if(i > localSimList.Length)
+            {
+                
+                simList.Add(onlineSimList[i - localSimList.Length]);
+            }
+            
+
+        }
+
+
+
+
+
+
+        //for (int i = 0; i < localSimList.Length; i++)
         //{
-        //    for (int j = 0; j < localSimList.Length; j++)
-        //    {
-        //        if (onlineSimList[i] == localSimList[j])
-        //        {
-        //            //onlineSimList[i] = null;
-                    
-        //            //simListLength--;
-        //            osListDifference++;
-        //        }
-        //    }
+
+        //    l = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+        //    string simName = localSimList[i].TrimEnd(xmlTrim);
+        //    l.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+        //    l.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
+        //    l.GetComponent<Button>().AddEventListener(i, ItemClickedL);
+
+
         //}
 
-        onlineSimList = localSimList.Distinct().ToArray<string>();
+        //for (int i = 0; i < (onlineSimList.Length); i++)
+        //{
+        //    if (onlineSimList[i] != null)
+        //    {
+        //        o = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+        //        string simName = onlineSimList[i].TrimEnd(xmlTrim);
+        //        o.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+        //        o.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
+        //        o.GetComponent<Button>().AddEventListener(i, ItemClickedO);
+        //    }
 
 
+        //}
 
-        for (int i = 0; i < localSimList.Length; i++)
+        //for (int i = simList.Count; i < 0; i--)
+        //{
+        //    for (int j = simList.Count; j < 0; j--)
+        //    {
+        //        if (simList[i] == simList[j - 1])
+        //        {
+        //            simList[i].Remove(i);
+        //        }
+        //    }
+
+        //}
+
+        for (int i = 0; i < simList.Count;i++)
         {
-
-            l = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-            string simName = localSimList[i].TrimEnd(xmlTrim);
-            l.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-            l.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
-            l.GetComponent<Button>().AddEventListener(i, ItemClickedL);
-
-
-        }
-
-        for (int i = 0; i < (onlineSimList.Length); i++)
-        {
-            if (onlineSimList[i] != null)
+            if(i < localSimList.Length)
             {
-                o = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-                string simName = onlineSimList[i].TrimEnd(xmlTrim);
-                o.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-                o.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
-                o.GetComponent<Button>().AddEventListener(i, ItemClickedO);
+                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+                string simName = simList[i].TrimEnd(xmlTrim);
+                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
+                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
             }
-
-
+            else
+            {
+                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+                string simName = simList[i].TrimEnd(xmlTrim);
+                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
+                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            }
+            
         }
-
-
-
-
 
     }
 
@@ -203,10 +240,10 @@ public class MainMenuUIScript : MonoBehaviour
         UpdateList();
     }
 
-    void ItemClickedL (int itemIndex)
+    void ItemClicked (int itemIndex)
     {
         // Debug.Log("Button " + itemIndex + " was clicked");
-        currentItem = localSimList[itemIndex];  // + xml;
+        currentItem = simList[itemIndex];  // + xml;
 
         FileManager.fileManager.SelectFile(currentItem);
 
