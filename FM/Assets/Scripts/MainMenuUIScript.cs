@@ -93,11 +93,8 @@ public class MainMenuUIScript : MonoBehaviour
         
 
 
-        selectedButton = LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
-        selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 1);
 
-
-        for (int i = 0; i < simListLength; i++)
+        for (int i = 0; i < LocalPanel.transform.GetChild(0).gameObject.transform.childCount; i++)
         {
             if (i == selectedSim)
             {
@@ -146,7 +143,7 @@ public class MainMenuUIScript : MonoBehaviour
 
 
 
-
+        //combining the two simulation list into one
         for(int i = 0; i < simListLength; i++)
         {
             if(i < localSimList.Length)
@@ -163,36 +160,6 @@ public class MainMenuUIScript : MonoBehaviour
         }
 
 
-
-
-
-
-        //for (int i = 0; i < localSimList.Length; i++)
-        //{
-
-        //    l = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-        //    string simName = localSimList[i].TrimEnd(xmlTrim);
-        //    l.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-        //    l.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
-        //    l.GetComponent<Button>().AddEventListener(i, ItemClickedL);
-
-
-        //}
-
-        //for (int i = 0; i < (onlineSimList.Length); i++)
-        //{
-        //    if (onlineSimList[i] != null)
-        //    {
-        //        o = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-        //        string simName = onlineSimList[i].TrimEnd(xmlTrim);
-        //        o.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-        //        o.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
-        //        o.GetComponent<Button>().AddEventListener(i, ItemClickedO);
-        //    }
-
-
-        //}
-
         //for (int i = simList.Count; i < 0; i--)
         //{
         //    for (int j = simList.Count; j < 0; j--)
@@ -204,6 +171,8 @@ public class MainMenuUIScript : MonoBehaviour
         //    }
 
         //}
+
+        simList = simList.Distinct().ToList<string>();
 
         for (int i = 0; i < simList.Count;i++)
         {
@@ -250,19 +219,6 @@ public class MainMenuUIScript : MonoBehaviour
         selectedSim = itemIndex;
 
         
-        Debug.Log(currentItem);
-        //FileManager.fileManager.SelectFile(nameList[itemIndex]);
-    }
-    void ItemClickedO(int itemIndex)
-    {
-        // Debug.Log("Button " + itemIndex + " was clicked");
-        currentItem = onlineSimList[itemIndex];  // + xml;
-
-        FileManager.fileManager.SelectFile(currentItem);
-
-        selectedSim = itemIndex + localSimList.Length;
-
-
         Debug.Log(currentItem);
         //FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
