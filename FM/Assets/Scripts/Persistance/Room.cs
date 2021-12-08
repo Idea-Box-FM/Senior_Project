@@ -196,8 +196,10 @@ public class Room : MonoBehaviour
         floor.transform.position = new Vector3(position.x, 0, position.z);
         floor.transform.localScale = new Vector3(Width, floor.transform.localScale.y, Length) / 10;
 
-        int maxGratesHorizontally = (int)(floor.transform.localScale.x / grate.transform.localScale.x);
-        int maxGratesVertically = (int)(floor.transform.localScale.z / grate.transform.localScale.z);
+        grate.transform.position = new Vector3(position.x, 0, position.z);
+
+        int maxGratesHorizontally = (int)(10 * floor.transform.localScale.x);
+        int maxGratesVertically = (int)(10 * floor.transform.localScale.z);
 
         int gratesNeededHorizontally = (int)(gratePerSquareFoot * floor.transform.localScale.z);
         int gratesNeededVertically = (int)(gratePerSquareFoot * floor.transform.localScale.x);
