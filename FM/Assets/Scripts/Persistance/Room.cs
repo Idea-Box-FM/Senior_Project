@@ -197,12 +197,13 @@ public class Room : MonoBehaviour
     {
         XML roomXML = xml.AddChild("Room");
         roomXML.AddAttribute("RoomSize", RoomSize.ToString());
+
         XML Walls = roomXML.AddChild("Walls");
-
         Walls.AddAttribute("Material", walls.North.GetComponent<MeshRenderer>().materials[0].name);
+        
         XML Roof = roomXML.AddChild("Roof");
-
         Roof.AddAttribute("Material", roof.GetComponent<MeshRenderer>().materials[0].name);
+        
         XML Floor = roomXML.AddChild("Floor");
         Floor.AddAttribute("Material", floor.GetComponent<MeshRenderer>().materials[0].name);
     }

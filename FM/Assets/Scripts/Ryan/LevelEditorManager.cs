@@ -39,6 +39,9 @@ public class LevelEditorManager : MonoBehaviour
     #endregion
 
     #region Fields
+
+    Barell barell;
+
     //array of prefabs
     FMPrefabList prefabList;
 
@@ -54,11 +57,11 @@ public class LevelEditorManager : MonoBehaviour
     //layer mask for the raycast to change wall texture
     public LayerMask wallMask;
     //layer mask for the raycast to place items
-    public LayerMask mask;
+    public LayerMask mask;   
     //grabs collision script for collision
     public CollisionDetect collision;
 
-    public Material material1;
+    public Material material1;     
 
     GameObject hitTarget;
 
@@ -72,10 +75,13 @@ public class LevelEditorManager : MonoBehaviour
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
         room = FindObjectOfType<Room>();
+        barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
     }
 
     private void Update()
     {
+        
+
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
         if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
         {
