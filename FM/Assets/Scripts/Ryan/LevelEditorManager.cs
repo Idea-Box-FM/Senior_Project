@@ -75,7 +75,7 @@ public class LevelEditorManager : MonoBehaviour
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
         room = FindObjectOfType<Room>();
-        barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
+        //barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
     }
 
     private void Update()
