@@ -260,6 +260,8 @@ MonoBehaviour:
     - {fileID: 2145946570}
   roof: {fileID: 1281993686}
   floor: {fileID: 1714383081}
+  grate: {fileID: 0}
+  gratePerSquareFoot: 1
 --- !u!4 &452738861
 Transform:
   m_ObjectHideFlags: 0
