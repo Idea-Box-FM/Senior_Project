@@ -103,7 +103,7 @@ public class FileManager : MonoBehaviour
 
     private void UpdateOnlineSimulations()
     {
-        table.simulations.Split(',');
+        onlineSimulations = table.simulations.Split(',');
     }
 
     private void LoadLastSelectedFile()

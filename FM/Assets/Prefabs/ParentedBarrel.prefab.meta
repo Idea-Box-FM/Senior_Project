@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:FM/Assets/TextMesh Pro/Documentation.meta
+guid: 73767e3da6cf954479882784174384af
+folderAsset: yes
+DefaultImporter:
+=======
 guid: c2cb02544c1aeb34386026cf752bdea6
 PrefabImporter:
+>>>>>>> main:FM/Assets/Prefabs/ParentedBarrel.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
