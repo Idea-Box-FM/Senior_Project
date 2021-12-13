@@ -7,6 +7,7 @@ using UnityEngine;
  * 
  * Made the room size save and load 11/15/2021
  * Made the materials save and load 11/15/2021
+ * Added automatic grate generation to match room size 12/7/2021
  */
 
 public class Room : MonoBehaviour
@@ -90,6 +91,12 @@ public class Room : MonoBehaviour
     [SerializeField] Walls walls;
     public GameObject roof;
     public GameObject floor;
+
+    [Tooltip("Add refernces to grate in scene")]
+    [SerializeField] GameObject grate;
+
+    [Tooltip("How many feet across one wall corresponds to one row set of grates")]
+    [Range(1,10)][SerializeField] int gratePerSquareFoot;
     #endregion
 
     #region Properties
@@ -189,6 +196,30 @@ public class Room : MonoBehaviour
         floor.transform.position = new Vector3(position.x, 0, position.z);
         floor.transform.localScale = new Vector3(Width, floor.transform.localScale.y, Length) / 10;
 
+        //grate logic
+        grate.transform.position = new Vector3(position.x, 0, position.z);
+
+        int maxGratesHorizontally = (int)(10 * floor.transform.localScale.x);
+        int maxGratesVertically = (int)(10 * floor.transform.localScale.z);
+
+        int gratesNeededHorizontally = (int)(gratePerSquareFoot * floor.transform.localScale.z);
+        int gratesNeededVertically = (int)(gratePerSquareFoot * floor.transform.localScale.x);
+
+        Vector3 grateScale = grate.transform.localScale;
+
+        for (int i = 0; i < gratesNeededHorizontally; i++)
+            for (int j = 0; j < maxGratesVertically; j++)
+            {
+                GameObject newGrate = Instantiate(grate);
+                newGrate.transform.position += new Vector3(i, 0, j) - new Vector3(gratesNeededHorizontally / 2, 0, maxGratesVertically / 2);
+            }
+
+        for (int i = 0; i < gratesNeededVertically; i++)
+            for (int j = 0; j < maxGratesHorizontally; j++)
+            {
+                GameObject newGrate = Instantiate(grate);
+                newGrate.transform.position += new Vector3(j, 0, i) - new Vector3(maxGratesHorizontally / 2, 0, gratesNeededVertically / 2);
+            }
     }
     #endregion
 
