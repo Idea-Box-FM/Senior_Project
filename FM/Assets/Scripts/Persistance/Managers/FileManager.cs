@@ -21,6 +21,7 @@ using System.Linq;
  *  Changed name of some variables to help with clarification between online and local files
  *  Fixed a bug with realms with singleton pattern 11/27/2021
  *  Updated the new file function to work with room requirements 11/29/2021
+ *  Fixed a bug where the simulation was reloaded instead of selected 1/11/2022
  * TODO make the data base connect to the online version of the cluster using config
  */
 
@@ -153,7 +154,8 @@ public class FileManager : MonoBehaviour
         {
             if(localSimulations[i] == fileName)
             {
-                currentSimulation = PlayerPrefs.GetString("Last Simulation", "fileName");
+                PlayerPrefs.SetString("Last Simulation", fileName);
+                currentSimulation = fileName;
                 return true;
             }
         }

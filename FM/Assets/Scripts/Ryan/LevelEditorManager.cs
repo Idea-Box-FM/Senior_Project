@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
  *   Added properties to simplify readablility 11/8/2021
  *   Added the save functionality 11/15/2021
+ *   TEMP commented out Barrell because it was not being used for anything just causing an error
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -40,7 +41,7 @@ public class LevelEditorManager : MonoBehaviour
 
     #region Fields
 
-    Barell barell;
+    //Barell barell;
 
     //array of prefabs
     FMPrefabList prefabList;
@@ -75,7 +76,7 @@ public class LevelEditorManager : MonoBehaviour
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
         room = FindObjectOfType<Room>();
-        barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
+        //barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
     }
 
     private void Update()
