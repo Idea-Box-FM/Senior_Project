@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
  *   Merged EditingManager with LevelEditing Manager 11/8/2021
  *   Added properties to simplify readablility 11/8/2021
  *   Added the save functionality 11/15/2021
+ *   TEMP commented out Barrell because it was not being used for anything just causing an error
  */
 
 [RequireComponent(typeof(FMPrefabList))]
@@ -40,7 +41,7 @@ public class LevelEditorManager : MonoBehaviour
 
     #region Fields
 
-    Barell barell;
+    //Barell barell;
 
     //array of prefabs
     FMPrefabList prefabList;
@@ -75,7 +76,7 @@ public class LevelEditorManager : MonoBehaviour
         prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
         room = FindObjectOfType<Room>();
-        barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
+        //barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
     }
 
     private void Update()
@@ -101,20 +102,6 @@ public class LevelEditorManager : MonoBehaviour
                 finalPrefab.SetActive(true);
 
                 DestroyCurrentExample();
-            }
-        }
-
-        if(Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            //raycast from main camera to mouse position
-            Ray deleteRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit deleteHit;
-
-            //if the raycast hits a valid target on the layer mask, destroy the object
-            if (Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
-            {
-                //hightlights game object by parent -- IMPORTANT -- ALL ITEMS NEED TO HAVE A PARENT
-                hitTarget = deleteHit.transform.parent.gameObject;
             }
         }
 
