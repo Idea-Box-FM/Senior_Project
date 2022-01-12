@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
+  m_IndirectSpecularColor: {r: 0.28085276, g: 0.36602777, b: 0.49832976, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -764,7 +764,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 1.6114932e-38}
+  m_BoundingSphereOverride: {x: 1.033e-42, y: 0, z: 0, w: 6e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -776,13 +776,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353899433}
-  m_LocalRotation: {x: 0.7064338, y: 0.47771442, z: 0.030843567, w: 0.5213338}
-  m_LocalPosition: {x: 0.24, y: 3, z: 4.18}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 8.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 45, y: 130, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &426966022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,7 +2168,7 @@ GameObject:
   - component: {fileID: 1019799471}
   - component: {fileID: 1019799470}
   m_Layer: 5
-  m_Name: BarrelsSubMenu
+  m_Name: ContainersSubMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2582,7 +2582,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226728459}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ca29f8dffd7f1946bd13d1851670f53, type: 3}
   m_Name: 
@@ -2724,9 +2724,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 11400000, guid: 833c213f8d0d0d8499526590aab80208, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 046c8c3364425264fb448a4e5c2d3a04, type: 2}
+  - {fileID: 11400000, guid: 4b2b95287834c854aa648d27ab6e590f, type: 2}
+  - {fileID: 11400000, guid: a0622723637bbe6459cefcc1876d6670, type: 2}
+  - {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  - {fileID: 11400000, guid: dc215a01469c640489365570b1bcd035, type: 2}
+  - {fileID: 11400000, guid: 1829f11ab76970b408d2d8997d3f5987, type: 2}
 --- !u!4 &1243021394
 Transform:
   m_ObjectHideFlags: 0
