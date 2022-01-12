@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:FM/Assets/Models/Grate.prefab.meta
-guid: 4fec2f9fd2950624a82c392b20c75a5f
+<<<<<<< HEAD:FM/Assets/TextMesh Pro/Fonts.meta
+guid: 5e5221075448f624f8cc11bec7ec98b4
+folderAsset: yes
+DefaultImporter:
 =======
 guid: e2c174efec7a12f428dc8ab2a5c73a34
->>>>>>> main:FM/Assets/Prefabs/MusicPlayer.prefab.meta
 PrefabImporter:
+>>>>>>> main:FM/Assets/Prefabs/MusicPlayer.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

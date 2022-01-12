@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public static class ButtonExtension
 {
@@ -32,12 +35,18 @@ public class MainMenuUIScript : MonoBehaviour
 
     [Header("Scroll List")]
     public GameObject gameManager;
-    public GameObject panel;
-    public string[] nameList;
+    public GameObject LocalPanel;
+    //public GameObject OnlinePanel;
+    public string[] localSimList;
+    public string[] onlineSimList;
+    public List<string> simList;
     string currentItem;
-
     public GameObject itemTemplate;
+    GameObject l;
+    GameObject o;
     GameObject s;
+    int simListLength;
+
 
     string xml = ".XML";
 
@@ -52,6 +61,10 @@ public class MainMenuUIScript : MonoBehaviour
     //audio script input
     public PlaySoundEffect audio;
 
+    private bool waited;
+
+   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +72,8 @@ public class MainMenuUIScript : MonoBehaviour
         uploadButton.interactable = false;
         loginButton.interactable = false;
         validation.text = "";
-        nameList = FileManager.fileManager.localSimulations;
+        localSimList = FileManager.fileManager.localSimulations;
+        onlineSimList = FileManager.fileManager.onlineSimulations;
 
         selectedSim = 0;
 
@@ -76,21 +90,20 @@ public class MainMenuUIScript : MonoBehaviour
             loginButton.interactable = true;
         }
 
-
-        selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
-        selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 1);
+        
 
 
-        for (int i = 0; i < nameList.Length; i++)
+
+        for (int i = 0; i < LocalPanel.transform.GetChild(0).gameObject.transform.childCount; i++)
         {
             if (i == selectedSim)
             {
-                selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
+                selectedButton = LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(selectedSim).gameObject;
                 selectedButton.GetComponent<Button>().image.color = new Color(0, 1, 0, 1);
             }
             else
             {
-                selectedButton = panel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject;
+                selectedButton = LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject;
                 selectedButton.GetComponent<Button>().image.color = new Color(1, 1, 1, 0);
             }
         }
@@ -120,27 +133,77 @@ public class MainMenuUIScript : MonoBehaviour
     public void UpdateList()
     {
 
-        nameList = FileManager.fileManager.localSimulations;
+        localSimList = FileManager.fileManager.localSimulations;
 
-        for (int i = 0; i < nameList.Length; i++)
+        onlineSimList = FileManager.fileManager.onlineSimulations;
+        //onlineSimList = localSimList.Distinct().ToArray<string>();
+
+
+        simListLength = localSimList.Length + onlineSimList.Length;
+
+
+
+        //combining the two simulation list into one
+        for(int i = 0; i < simListLength; i++)
         {
-
-            s = Instantiate(itemTemplate, panel.transform.GetChild(0).transform);
-            string simName = nameList[i].TrimEnd(xmlTrim);
-            s.transform.GetChild(0).GetComponent<Text>().text = simName;
-
-            s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            if(i < localSimList.Length)
+            {
+                simList.Add(localSimList[i]);
+            }
+            else if(i > localSimList.Length)
+            {
+                
+                simList.Add(onlineSimList[i - localSimList.Length]);
+            }
+            
 
         }
+
+
+        //for (int i = simList.Count; i < 0; i--)
+        //{
+        //    for (int j = simList.Count; j < 0; j--)
+        //    {
+        //        if (simList[i] == simList[j - 1])
+        //        {
+        //            simList[i].Remove(i);
+        //        }
+        //    }
+
+        //}
+
+        simList = simList.Distinct().ToList<string>();
+
+        for (int i = 0; i < simList.Count;i++)
+        {
+            if(i < localSimList.Length)
+            {
+                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+                string simName = simList[i].TrimEnd(xmlTrim);
+                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
+                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            }
+            else
+            {
+                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+                string simName = simList[i].TrimEnd(xmlTrim);
+                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
+                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            }
+            
+        }
+
     }
 
     public void UnloadList()
     {
         //Debug.Log(nameList.Length);
-        for (int i = 0; i < nameList.Length; i++)
+        for (int i = 0; i < localSimList.Length; i++)
         {
-            Debug.Log(panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-           Destroy(panel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
+            Debug.Log(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+           Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
         }
 
         UpdateList();
@@ -148,8 +211,10 @@ public class MainMenuUIScript : MonoBehaviour
 
     void ItemClicked (int itemIndex)
     {
-       // Debug.Log("Button " + itemIndex + " was clicked");
-        currentItem = nameList[itemIndex];
+        // Debug.Log("Button " + itemIndex + " was clicked");
+        currentItem = simList[itemIndex];  // + xml;
+
+        FileManager.fileManager.SelectFile(currentItem);
 
         selectedSim = itemIndex;
 
@@ -160,7 +225,8 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void ChangeScene(int scene)
     {
-        SceneManager.LoadScene(scene);
+        Wait(audio.soundClips[audio.selectedClip].length);
+        if(waited == true) SceneManager.LoadScene(scene);
     }
 
     public void DownloadButton()
@@ -187,5 +253,13 @@ public class MainMenuUIScript : MonoBehaviour
     public void playButtonSoundEffect(string caller)
     {
         audio.Play(caller: caller);
+    }
+
+    IEnumerator Wait(float delay)
+    {
+      //   waited = true;
+        yield return new WaitForSeconds(delay);
+        
+
     }
 }

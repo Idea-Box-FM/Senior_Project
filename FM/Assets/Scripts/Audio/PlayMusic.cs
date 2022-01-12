@@ -6,6 +6,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 //using UnityEditor.SceneManagement;
 
+/*Edited by Pat Naatz
+ * Commented out UnityEditor.SceneManagment because we can not build the game with that library included 1/11/2022
+ */
+
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
 [RequireComponent(typeof(AudioSource))]
 public class PlayMusic : MonoBehaviour

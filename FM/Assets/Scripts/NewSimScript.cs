@@ -7,6 +7,7 @@ using UnityEngine.UI;
  * Editied By: Patrick Naatz
  * Changed:
  *  Made the functionality to edit the room size when creating a new simulations 11/30/2021
+ *  Added automated selecting 1/11/2022
  */
 
 public class NewSimScript : MonoBehaviour
@@ -58,5 +59,6 @@ public class NewSimScript : MonoBehaviour
     {
         Debug.Log(name.text);
         FileManager.fileManager.NewFile(name.text, SelectedRoomSize);
+        FileManager.fileManager.SelectFile(name.text + ".XML");
     }
 }

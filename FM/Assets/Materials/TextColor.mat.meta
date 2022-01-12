@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:FM/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta
+guid: 0428e8b21d20e804ba234d308cfbb039
+TextScriptImporter:
+=======
 guid: ef7446f0466642b4b96a7d90585857df
 NativeFormatImporter:
+>>>>>>> main:FM/Assets/Materials/TextColor.mat.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
