@@ -188,6 +188,18 @@ public class PlayMusic : MonoBehaviour
         else
             Debug.Log("Unable to change state to stop");
     }
+    public void TogglePlayBtn()
+    {
+        if (changeableState == true)
+        {
+            currentlyPlaying = !currentlyPlaying;
+        }
+        else
+            Debug.Log("Unable to toggle state");
+
+        UpdateCurrentState();
+        PreformCurrentState();
+    }
     public void SceneChange()//plays the next music clip
     {
         //process: fade out, change selected clip, fade in
