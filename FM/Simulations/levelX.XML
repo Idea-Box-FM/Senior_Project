@@ -1,9 +1,0 @@
-<XML>
-	<Room RoomSize="(20.0, 5.0, 30.0)">
-		<Walls Material="Wall (Instance)"/>
-		<Roof Material="Ceiling (Instance)"/>
-		<Floor Material="Floor (Instance)"/>
-	</Room>
-</XML>
-
-
