@@ -3,12 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
-//using UnityEditor.SceneManagement;
-
-/*Edited by Pat Naatz
- * Commented out UnityEditor.SceneManagment because we can not build the game with that library included 1/11/2022
- */
+//using UnityEngine.InputSystem;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
 [RequireComponent(typeof(AudioSource))]
@@ -49,21 +44,21 @@ public class PlayMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //test inputs
-        if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {
-            Debug.Log("Play");
-            Play();
-        }
-        if (Keyboard.current.leftShiftKey/*specific key*/.isPressed == true)
-        {
-            Debug.Log("Stop");
-            Stop();
-        }
-        if (Keyboard.current.leftCtrlKey/*specific key*/.wasReleasedThisFrame == true)
-        {
-            Debug.Log("Next");
-            SceneChange();
-        }
+        ////test inputs
+        //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {
+        //    Debug.Log("Play");
+        //    Play();
+        //}
+        //if (Keyboard.current.leftShiftKey/*specific key*/.isPressed == true)
+        //{
+        //    Debug.Log("Stop");
+        //    Stop();
+        //}
+        //if (Keyboard.current.leftCtrlKey/*specific key*/.wasReleasedThisFrame == true)
+        //{
+        //    Debug.Log("Next");
+        //    SceneChange();
+        //}
 
         UpdateCurrentState();
         UpdateAudioClip();
