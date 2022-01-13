@@ -42,6 +42,7 @@ public class SceneManagerObj : MonoBehaviour
 
         if (changedSceneName == "") changedSceneName = "SampleScene";//default
 
+
     }
 
     // Update is called once per frame
@@ -81,10 +82,13 @@ public class SceneManagerObj : MonoBehaviour
 
         yield return new WaitForSeconds(waitS);
 
-        if (nextScene) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);//go to the next scene in the build settings
-        if (changeByName) SceneManager.LoadScene(changedSceneName);//change to the scene that has the string
-        if (changeByID) SceneManager.LoadScene(changedSceneId);//change to the scene that has the ID
-        if (exit) Application.Quit();//quit the application
-        else Debug.LogError("No scene change option selected!");
+        if (this != null)
+        {
+            if (nextScene) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);//go to the next scene in the build settings
+            if (changeByName) SceneManager.LoadScene(changedSceneName);//change to the scene that has the string
+            if (changeByID) SceneManager.LoadScene(changedSceneId);//change to the scene that has the ID
+            if (exit) Application.Quit();//quit the application
+            else Debug.LogError("No scene change option selected!");
+        }
     }
 }
