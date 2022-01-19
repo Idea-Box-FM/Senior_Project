@@ -78,5 +78,18 @@ public class Selector : MonoBehaviour
            }
         }  
 
+        //more RYAN
+        if(Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            //change the material back to selfMat when you click off of an object
+            goMaterial.material = selfMat;
+
+            //again, RYAN's fault
+            if (gameObject.tag == "FMPrefab")
+            {
+                follower.enabled = false;
+            }
+        }
+
     }
 }
