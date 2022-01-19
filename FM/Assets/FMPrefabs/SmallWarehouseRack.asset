@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
-  m_Name: GratedRack
+  m_Name: SmallWarehouseRack
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2016554191418739299, guid: 57e5dfd0fde29ef47bde31c333df3543, type: 3}
-  examplePrefab: {fileID: 1234040624731292623, guid: 2012d6450cbbbc44a85879689ad2707a, type: 3}
+  prefab: {fileID: 8095717215038906595, guid: fc2e707a8442e6241844b7905877f148, type: 3}
+  examplePrefab: {fileID: 8095717215038906595, guid: 48d2dae2b73be6446aa1add946cb4a45, type: 3}
   parent: {fileID: 0}
