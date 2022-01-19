@@ -27,6 +27,20 @@ public class CollisionDetect : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.CompareTag("GoodPrefab"))
+        {
+            col.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            for (int i = 0; i < col.gameObject.transform.childCount; i++)
+            {
+                col.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+            editor.collision = this;
+            canPlace = false;
+        }
+    }
+
     private void OnTriggerExit(Collider col)
     {
         if (col.gameObject.CompareTag("GoodPrefab"))

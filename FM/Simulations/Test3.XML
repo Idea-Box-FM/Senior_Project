@@ -1,9 +1,0 @@
-<XML>
-	<Test3>
-		<Room RoomSize="(33.0, 15.0, 120.0)">
-			<Walls Material="Wall"/>
-			<Roof Material="Ceiling"/>
-			<Floor Material="Floor"/>
-		</Room>
-	</Test3>
-</XML>

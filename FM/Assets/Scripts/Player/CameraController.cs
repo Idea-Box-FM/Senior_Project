@@ -98,10 +98,6 @@ public class CameraController : MonoBehaviour
 
         Look();
 
-        //Place();//not used for now, refer to LevelEditorManager.cs
-
-        //Remove();//not used for now, refer to LevelEditorManager.cs
-
         ResetObj();
 
         CameraLock();
@@ -153,34 +149,6 @@ public class CameraController : MonoBehaviour
             camBody.transform.Rotate(new Vector3(0, mouseVelocity.y, 0));
         }
     }
-
-    /// <summary>
-    /// Place the object
-    /// </summary>
-    /*private void Place()//not used for now, refer to LevelEditorManager.cs
-    {
-        if (controlScript.Player.Place.triggered == true)
-        {
-            //Debug.Log(controlScript.Player.Place.ReadValueAsObject());//range between 0 and 1, 1 being fully pressed
-            //Debug.Log(controlScript.Player.Place.ReadValueAsObject().GetType());//System.single = float
-            placePress = controlScript.Player.Place.ReadValue<float>();
-            //!place object here
-        }
-    }*/
-
-    /// <summary>
-    /// Remove the object
-    /// </summary>
-    /*private void Remove()//not used for now, refer to LevelEditorManager.cs
-    {
-        if (controlScript.Player.Remove.triggered == true)
-        {
-            //Debug.Log(controlScript.Player.Remove.ReadValueAsObject());//range between 0 and 1, 1 being fully pressed
-            //Debug.Log(controlScript.Player.Remove.ReadValueAsObject().GetType());//System.single = float
-            removePress = controlScript.Player.Remove.ReadValue<float>();
-            //!remove object here
-        }
-    }*/
     
     /// <summary>
     /// Reset the position and rotation
