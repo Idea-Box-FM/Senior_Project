@@ -160,17 +160,6 @@ public class MainMenuUIScript : MonoBehaviour
         }
 
 
-        //for (int i = simList.Count; i < 0; i--)
-        //{
-        //    for (int j = simList.Count; j < 0; j--)
-        //    {
-        //        if (simList[i] == simList[j - 1])
-        //        {
-        //            simList[i].Remove(i);
-        //        }
-        //    }
-
-        //}
 
         simList = simList.Distinct().ToList<string>();
 
