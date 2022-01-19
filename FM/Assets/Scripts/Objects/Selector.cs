@@ -23,13 +23,21 @@ public class Selector : MonoBehaviour
     public Camera mainCamera;
     //mesh renderer for materials
     public MeshRenderer goMaterial;
+
+    //RYAN DID THIS
+    FollowScript follower;
     
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
         goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
         selfMat = goMaterial.material;
+        if (gameObject.tag == "FMPrefab")
+        {
+            follower = gameObject.GetComponent<FollowScript>();
+        }
     }
+
     //find the main Camera
     void Start()
     {
@@ -50,13 +58,24 @@ public class Selector : MonoBehaviour
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
-
+                
+                //again, RYAN's fault
+                if (gameObject.tag == "FMPrefab")
+                {
+                    follower.enabled = true;
+                }
             }
            else
-            {
+           {
                 //change the material back to selfMat when you click off of an object
                 goMaterial.material = selfMat;
-            }
+                
+                //again, RYAN's fault
+                if (gameObject.tag == "FMPrefab")
+                {
+                    follower.enabled = false;
+                }
+           }
         }  
 
     }

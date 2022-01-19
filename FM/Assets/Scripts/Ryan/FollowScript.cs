@@ -21,6 +21,10 @@ public class FollowScript : MonoBehaviour
 
     void Start()
     {
+        if(gameObject.tag == "FMPrefab")
+        {
+            gameObject.GetComponent<FollowScript>().enabled = false;
+        }
         //grab the LevelEditorManager component
         editor = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelEditorManager>();
         //grab the main camera
