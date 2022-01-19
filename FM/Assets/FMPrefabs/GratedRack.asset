@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
+  m_Name: GratedRack
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2016554191418739299, guid: 57e5dfd0fde29ef47bde31c333df3543, type: 3}
+  examplePrefab: {fileID: 1234040624731292623, guid: 2012d6450cbbbc44a85879689ad2707a, type: 3}
+  parent: {fileID: 0}
