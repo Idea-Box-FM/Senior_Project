@@ -63,8 +63,7 @@ public class Selector : MonoBehaviour
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
-
-                isSelected = true;
+                selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
             }
             else
             {
