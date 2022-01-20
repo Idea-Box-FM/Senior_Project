@@ -3073,8 +3073,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 11400000, guid: 833c213f8d0d0d8499526590aab80208, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 046c8c3364425264fb448a4e5c2d3a04, type: 2}
+  - {fileID: 11400000, guid: a0622723637bbe6459cefcc1876d6670, type: 2}
+  - {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  - {fileID: 11400000, guid: dc215a01469c640489365570b1bcd035, type: 2}
+  - {fileID: 11400000, guid: 1829f11ab76970b408d2d8997d3f5987, type: 2}
+  - {fileID: 11400000, guid: c084cce3b16f41b4dae04bb254908851, type: 2}
 --- !u!4 &1243021394
 Transform:
   m_ObjectHideFlags: 0
