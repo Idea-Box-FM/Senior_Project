@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /*Flower Box
  * 
@@ -26,22 +27,26 @@ public class Selector : MonoBehaviour
 
     //RYAN DID THIS
     FollowScript follower;
+    public Button moveButton;
+    public bool isSelected = false;
     
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
         goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
         selfMat = goMaterial.material;
-        if (gameObject.tag == "FMPrefab")
-        {
-            follower = gameObject.GetComponent<FollowScript>();
-        }
+        moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
     }
 
     //find the main Camera
     void Start()
     {
-        mainCamera = GameObject.FindObjectOfType<Camera>();       
+        mainCamera = GameObject.FindObjectOfType<Camera>();
+
+        if (gameObject.tag == "FMPrefab")
+        {
+            follower = gameObject.GetComponent<FollowScript>();
+        }
     }
 
     // Update is called once per frame
@@ -58,28 +63,25 @@ public class Selector : MonoBehaviour
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
-                
-                //again, RYAN's fault
-                if (gameObject.tag == "FMPrefab")
-                {
-                    follower.enabled = true;
-                }
+
+                isSelected = true;
             }
-           else
-           {
+            else
+            {
                 //change the material back to selfMat when you click off of an object
                 goMaterial.material = selfMat;
-                
-                //again, RYAN's fault
-                if (gameObject.tag == "FMPrefab")
-                {
-                    follower.enabled = false;
-                }
-           }
+
+                isSelected = false;
+            }
         }  
 
+        if (isSelected == true)
+        {
+            moveButton.onClick.AddListener(MoveItem);
+        }
+
         //more RYAN
-        if(Mouse.current.rightButton.wasPressedThisFrame)
+        if (Keyboard.current.pKey.wasPressedThisFrame)
         {
             //change the material back to selfMat when you click off of an object
             goMaterial.material = selfMat;
@@ -91,5 +93,10 @@ public class Selector : MonoBehaviour
             }
         }
 
+    }
+
+    void MoveItem()
+    {
+        this.follower.enabled = true;
     }
 }
