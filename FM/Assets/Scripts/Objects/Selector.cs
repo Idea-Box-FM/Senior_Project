@@ -58,7 +58,12 @@ public class Selector : MonoBehaviour
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
-                
+
+                for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
+                {
+                    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material = testMat;
+                }
+
                 //again, RYAN's fault
                 if (gameObject.tag == "FMPrefab")
                 {
