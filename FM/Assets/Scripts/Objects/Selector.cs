@@ -24,6 +24,14 @@ public class Selector : MonoBehaviour
     //mesh renderer for materials
     public MeshRenderer goMaterial;
     
+    public bool IsSelected
+    {
+        get
+        {
+            return goMaterial.material == testMat;
+        }
+    }
+
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
