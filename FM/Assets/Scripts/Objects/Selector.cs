@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class Selector : MonoBehaviour
 {
     //layer mask to select items
     public LayerMask selectMask;
+    //layer mask to deselect
+    public LayerMask deselectMask;
     //object's original material
     public Material selfMat;
     //material used after clicking the object
@@ -29,6 +32,8 @@ public class Selector : MonoBehaviour
     FollowScript follower;
     public Button moveButton;
     public bool isSelected = false;
+
+    private UnityAction action;
     
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
@@ -47,6 +52,8 @@ public class Selector : MonoBehaviour
         {
             follower = gameObject.GetComponent<FollowScript>();
         }
+
+        action = new UnityAction(MoveItem);
     }
 
     // Update is called once per frame
@@ -64,20 +71,23 @@ public class Selector : MonoBehaviour
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
                 selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                if (isSelected == true)
+                {
+                    moveButton.onClick.AddListener(action);
+                }
             }
-            else
+            else if (!Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, deselectMask))
             {
                 //change the material back to selfMat when you click off of an object
                 goMaterial.material = selfMat;
 
                 isSelected = false;
+                follower.enabled = false;
+                moveButton.onClick.RemoveListener(action);
             }
         }  
 
-        if (isSelected == true)
-        {
-            moveButton.onClick.AddListener(MoveItem);
-        }
+        
 
         //more RYAN
         if (Keyboard.current.pKey.wasPressedThisFrame)
@@ -85,17 +95,15 @@ public class Selector : MonoBehaviour
             //change the material back to selfMat when you click off of an object
             goMaterial.material = selfMat;
 
-            //again, RYAN's fault
-            if (gameObject.tag == "FMPrefab")
-            {
-                follower.enabled = false;
-            }
+            follower.enabled = false;
+            isSelected = false;
+            moveButton.onClick.RemoveListener(action);
         }
 
     }
 
     void MoveItem()
     {
-        this.follower.enabled = true;
+            follower.enabled = true;
     }
 }
