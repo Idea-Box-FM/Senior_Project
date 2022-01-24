@@ -31,9 +31,11 @@ public class Selector : MonoBehaviour
     //RYAN DID THIS
     FollowScript follower;
     public Button moveButton;
+    public Button cancelButton;
     public bool isSelected = false;
 
     private UnityAction action;
+    private UnityAction deselect;
     
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
@@ -41,6 +43,7 @@ public class Selector : MonoBehaviour
         goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
         selfMat = goMaterial.material;
         moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
+        cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
     }
 
     //find the main Camera
@@ -54,6 +57,7 @@ public class Selector : MonoBehaviour
         }
 
         action = new UnityAction(MoveItem);
+        deselect = new UnityAction(Deselect);
     }
 
     // Update is called once per frame
@@ -74,20 +78,10 @@ public class Selector : MonoBehaviour
                 if (isSelected == true)
                 {
                     moveButton.onClick.AddListener(action);
+                    cancelButton.onClick.AddListener(deselect);
                 }
             }
-            else if (!Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, deselectMask))
-            {
-                //change the material back to selfMat when you click off of an object
-                goMaterial.material = selfMat;
-
-                isSelected = false;
-                follower.enabled = false;
-                moveButton.onClick.RemoveListener(action);
-            }
         }  
-
-        
 
         //more RYAN
         if (Keyboard.current.pKey.wasPressedThisFrame)
@@ -99,11 +93,21 @@ public class Selector : MonoBehaviour
             isSelected = false;
             moveButton.onClick.RemoveListener(action);
         }
-
     }
 
     void MoveItem()
     {
             follower.enabled = true;
+    }
+
+    void Deselect()
+    {
+        //change the material back to selfMat when you click off of an object
+        goMaterial.material = selfMat;
+
+        isSelected = false;
+        follower.enabled = false;
+        moveButton.onClick.RemoveListener(action);
+        cancelButton.onClick.RemoveListener(deselect);
     }
 }
