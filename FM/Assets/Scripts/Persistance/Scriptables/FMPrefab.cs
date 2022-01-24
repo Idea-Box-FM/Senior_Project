@@ -113,7 +113,7 @@ public class FMPrefab : ScriptableObject
         return gameObject.tag == "FMPrefab";
     }
 
-    bool IsThisTypeOfPrefab(GameObject gameObject)
+    public bool IsThisTypeOfPrefab(GameObject gameObject)
     {
         return gameObject.name.Contains(prefab.name);
     }

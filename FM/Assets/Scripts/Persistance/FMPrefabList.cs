@@ -11,4 +11,18 @@ using UnityEngine;
 public class FMPrefabList : MonoBehaviour
 {
     public FMPrefab[] prefabs;
+
+    public FMPrefab GetPrefabType(GameObject originalObject)
+    {
+        foreach(FMPrefab prefab in prefabs)
+        {
+            if (prefab.IsThisTypeOfPrefab(originalObject))
+            {
+                return prefab;
+            }
+        }
+
+        Debug.LogError(originalObject.name + " is not a FMPrefab");
+        return null;
+    }
 }
