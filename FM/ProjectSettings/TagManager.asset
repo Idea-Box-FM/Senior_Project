@@ -11,6 +11,7 @@ TagManager:
   - BadPrefab
   - Wall
   - Ceiling
+  - MoveButton
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /*Flower Box
  * 
@@ -15,6 +17,8 @@ public class Selector : MonoBehaviour
 {
     //layer mask to select items
     public LayerMask selectMask;
+    //layer mask to deselect
+    public LayerMask deselectMask;
     //object's original material
     public Material selfMat;
     //material used after clicking the object
@@ -26,22 +30,30 @@ public class Selector : MonoBehaviour
 
     //RYAN DID THIS
     FollowScript follower;
+    public Button moveButton;
+    public bool isSelected = false;
+
+    private UnityAction action;
     
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
         goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
         selfMat = goMaterial.material;
-        if (gameObject.tag == "FMPrefab")
-        {
-            follower = gameObject.GetComponent<FollowScript>();
-        }
+        moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
     }
 
     //find the main Camera
     void Start()
     {
-        mainCamera = GameObject.FindObjectOfType<Camera>();       
+        mainCamera = GameObject.FindObjectOfType<Camera>();
+
+        if (gameObject.tag == "FMPrefab")
+        {
+            follower = gameObject.GetComponent<FollowScript>();
+        }
+
+        action = new UnityAction(MoveItem);
     }
 
     // Update is called once per frame
@@ -58,43 +70,40 @@ public class Selector : MonoBehaviour
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
-
-                for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
+                selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                if (isSelected == true)
                 {
-                    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material = testMat;
-                }
-
-                //again, RYAN's fault
-                if (gameObject.tag == "FMPrefab")
-                {
-                    follower.enabled = true;
+                    moveButton.onClick.AddListener(action);
                 }
             }
-           else
-           {
+            else if (!Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, deselectMask))
+            {
                 //change the material back to selfMat when you click off of an object
                 goMaterial.material = selfMat;
-                
-                //again, RYAN's fault
-                if (gameObject.tag == "FMPrefab")
-                {
-                    follower.enabled = false;
-                }
-           }
+
+                isSelected = false;
+                follower.enabled = false;
+                moveButton.onClick.RemoveListener(action);
+            }
         }  
 
+        
+
         //more RYAN
-        if(Mouse.current.rightButton.wasPressedThisFrame)
+        if (Keyboard.current.pKey.wasPressedThisFrame)
         {
             //change the material back to selfMat when you click off of an object
             goMaterial.material = selfMat;
 
-            //again, RYAN's fault
-            if (gameObject.tag == "FMPrefab")
-            {
-                follower.enabled = false;
-            }
+            follower.enabled = false;
+            isSelected = false;
+            moveButton.onClick.RemoveListener(action);
         }
 
+    }
+
+    void MoveItem()
+    {
+            follower.enabled = true;
     }
 }
