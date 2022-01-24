@@ -73,15 +73,13 @@ public class PanelManagerObj : MonoBehaviour
         }
     }
 
-    public void ChangePanel(bool executed = false)
+    public void ChangePanel(GameObject newPanel = null)
     {
-        StartCoroutine(DelayedChange(PlayMusic.fadeTime * 1.5f, executed));
+        StartCoroutine(DelayedChange(PlayMusic.fadeTime * 1.5f, newPanel));
     }
 
-    IEnumerator DelayedChange(float waitS, bool executed = false)
-    { 
-        this.GetComponent<PlayMusic>().Stop();
-
+    IEnumerator DelayedChange(float waitS, GameObject panelToChangeTo = null, bool executed = false)
+    {
         yield return new WaitForSeconds(waitS);
 
         //check if object still exists after Panel transition
@@ -95,12 +93,17 @@ public class PanelManagerObj : MonoBehaviour
         }
         if (changeByName)
         {
-            SetPanel(newPanelName:changedPanelName);//change to the Panel that has the string
+            SetPanel(newPanelName: changedPanelName);//change to the Panel that has the string
+            executed = true;
+        }
+        if (panelToChangeTo != null)//change to the Panel by passing in it's object
+        {
+            SetPanel(newPanelName: panelToChangeTo.name);//change to the Panel that was passed in
             executed = true;
         }
         if (changeByID)
         {
-            SetPanel(newPanelID:changedPanelID);//change to the Panel that has the ID
+            SetPanel(newPanelID: changedPanelID);//change to the Panel that has the ID
             executed = true;
         }
         if (exit)
@@ -108,7 +111,7 @@ public class PanelManagerObj : MonoBehaviour
             Application.Quit();//quit the application
             executed = true;
         }
-        else if (executed == false)
+        else if(executed == false)
         {
             Debug.LogError("No Panel change option selected on " + this.gameObject.name + " object!");
         }
@@ -119,17 +122,18 @@ public class PanelManagerObj : MonoBehaviour
         for (int i = 0; i < panels.Count; i++)//loop through all panels
         {
             panels[i].SetActive(false);//set them to false
-            if (i == newPanelID)//if current panel
+            if (i == newPanelID)//if current panel's ID
             {
+                currentPanelName = panels[newPanelID].name;//store current panel Name (get to keep consistent)
                 panels[i].SetActive(true);//set it to true
             }
-            if(panels[i].name == newPanelName)
+            if(panels[i].name == newPanelName)//if current panel's Name
             {
+                currentPanelID = i;//store current panel ID (get to keep consistent)
                 panels[i].SetActive(true);//set it to true
             }
         }
-
-        this.currentPanelName = panels[newPanelID].name;
+        this.currentPanelName = newPanelName;
         this.currentPanelID = newPanelID;
     }
 
@@ -137,8 +141,6 @@ public class PanelManagerObj : MonoBehaviour
 
     public void SetPanelBtn(GameObject newPanel)
     {
-        SetPanel(newPanelName:newPanel.name);
-
-        ChangePanel(true);
+        ChangePanel(newPanel);
     }
 }
