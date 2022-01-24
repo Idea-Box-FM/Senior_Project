@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
+public class CameraControllerGame : MonoBehaviour
 {
     #region Parameters
     [Header("Objects To Assign")]
@@ -94,11 +94,7 @@ public class CameraController : MonoBehaviour
         #region Implementation
         MoveHorizontal();
 
-        MoveVertical();
-
         Look();
-
-        ResetObj();
 
         CameraLock();
         #endregion
@@ -113,17 +109,6 @@ public class CameraController : MonoBehaviour
         horizontalAxis = controlScript.Player.MoveHorizontal.ReadValue<Vector2>();//get input
         Vector3 horiAxisFix = new Vector3(horizontalAxis.x, 0, horizontalAxis.y);//convert to horizontal plane for movement
         Vector3 moveVelocity = (camBody.transform.rotation * horiAxisFix.normalized) * moveSpeed;//get velocity to apply
-
-        camBody.transform.position += moveVelocity;//apply to object
-    }
-
-    /// <summary>
-    /// Move on the vertical axis (up or down)
-    /// </summary>
-    private void MoveVertical()
-    {
-        verticalAxis = controlScript.Player.MoveVertical.ReadValue<Vector2>();//get input
-        Vector3 moveVelocity = (camBody.transform.rotation * verticalAxis.normalized) * moveSpeed;//get velocity to apply
 
         camBody.transform.position += moveVelocity;//apply to object
     }
@@ -147,23 +132,6 @@ public class CameraController : MonoBehaviour
             //apply rotation
             cam.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
             camBody.transform.Rotate(new Vector3(0, mouseVelocity.y, 0));
-        }
-    }
-    
-    /// <summary>
-    /// Reset the position and rotation
-    /// </summary>
-    private void ResetObj()
-    {
-        if (controlScript.Player.ResetPosition.triggered == true)
-        {
-            //Debug.Log(controlScript.Player.ResetPosition.ReadValueAsObject());//range between 0 and 1, 1 being fully pressed
-            //Debug.Log(controlScript.Player.ResetPosition.ReadValueAsObject().GetType());//System.single = float
-            resetPress = controlScript.Player.ResetPosition.ReadValue<float>();
-
-            //reset to inital starting position
-            camBody.transform.position = initPos;
-            camBody.transform.rotation = initRot;
         }
     }
     
