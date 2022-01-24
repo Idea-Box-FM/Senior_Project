@@ -829,8 +829,43 @@ PrefabInstance:
       propertyPath: mouseSpeed
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 299609835305858286, guid: b940824cc72018e4fa78519b620c0742, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b940824cc72018e4fa78519b620c0742, type: 3}
+--- !u!1 &1304277914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 299609834969635163, guid: b940824cc72018e4fa78519b620c0742, type: 3}
+  m_PrefabInstance: {fileID: 1304277913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1304277915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 299609835305858284, guid: b940824cc72018e4fa78519b620c0742, type: 3}
+  m_PrefabInstance: {fileID: 1304277913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1304277916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304277915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517d1aba15839f6468e477a389230c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1304277915}
+  camBody: {fileID: 1304277914}
+  horizontalAxis: {x: 0, y: 0}
+  verticalAxis: {x: 0, y: 0}
+  mouseAxis: {x: 0, y: 0}
+  resetPress: 0
+  camUnlockPress: 0
+  moveSpeed: 0.05
+  mouseSpeed: 1
+  camLocked: 1
+  initPos: {x: 0, y: 0, z: 0}
+  initRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1330398210
 GameObject:
   m_ObjectHideFlags: 0
