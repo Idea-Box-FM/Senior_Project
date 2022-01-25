@@ -26,6 +26,13 @@ public class FMPrefab : ScriptableObject
     public GameObject parent;
 
     #region InstanciatePrefab
+
+    public virtual GameObject InstanciateExample()
+    {
+        //instantiate the example item(green) based on the id of the clicked button
+        return Instantiate(examplePrefab, new Vector3(0, 2, 0), Quaternion.identity);
+    }
+
     public virtual GameObject InstanciatePrefab(XML xml)
     {
         Vector3 position = ConvertToVector3(xml.attributes["Position"]);

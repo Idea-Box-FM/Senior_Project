@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(FMPrefabList))]
 public class GroupingTool : MonoBehaviour
@@ -11,16 +12,20 @@ public class GroupingTool : MonoBehaviour
     List<CopyInfo> copiedObjects = new List<CopyInfo>();
     Vector3 centerPoint = Vector3.positiveInfinity;
     #endregion
+    CameraControl.EditorActions editorActions;
+    [SerializeField] Transform groupingArea;
 
-    public void Start()
+    public enum State
     {
-        prefabList = GetComponent<FMPrefabList>();
+        Copy,
+        PreviewPaste,
+        Paste
     }
-
-    #region functionality
+    public State currentState = State.Copy;
 
     class HighAndLow
     {
+        #region Properties
         #region High
         public float High
         {
@@ -38,7 +43,8 @@ public class GroupingTool : MonoBehaviour
         #endregion
 
         #region Low
-        public float Low {
+        public float Low
+        {
             get
             {
                 return low;
@@ -59,8 +65,9 @@ public class GroupingTool : MonoBehaviour
                 return high - (low - high) / 2;
             }
         }
+        #endregion
 
-        #region Constructor
+        #region Constructors
         public HighAndLow() { }
 
         public HighAndLow(float f)
@@ -76,13 +83,38 @@ public class GroupingTool : MonoBehaviour
         }
 
         public static implicit operator float(HighAndLow hal) => hal.Center;
-        //public static implicit operator HighAndLow(float f) => new HighAndLow(f);
-        //public static HighAndLow operator =(HighAndLow hal, float f) { return hal.Set(f)};
     }
 
+    public void Start()
+    {
+        editorActions = new CameraControl().Editor;
+        prefabList = GetComponent<FMPrefabList>();
+        CopyInfo.group = groupingArea;
+    }
+
+    private void Update()
+    {
+        if (editorActions.Control.triggered)
+        {
+            if (editorActions.Copy.triggered)
+            {
+                Copy();
+            }
+            else if (currentState == State.Paste && editorActions.Paste.triggered)
+            {
+                    Paste();
+            }
+        }
+        else if (currentState == State.Paste && editorActions.Cancel.triggered)
+        {
+            CancelPreview();
+        }
+    }
+
+    #region functionality
     public void Copy()
     {
-        copiedObjects.Clear(); //forget about the old copied stuff
+        bool cleared = false;
 
         //variables for center point calculation
         HighAndLow X = new HighAndLow();
@@ -93,6 +125,11 @@ public class GroupingTool : MonoBehaviour
         {
             if (selector.IsSelected)
             {
+                if(cleared == false)
+                {//only clear the inputs after we are sure something else is copied
+                    copiedObjects.Clear(); //forget about the old copied stuff
+                    cleared = true;
+                }
                 //save copied objects info
                 FMPrefab prefabType = prefabList.GetPrefabType(selector.gameObject);
                 XML details = prefabType.ConvertToXML(selector.gameObject);
@@ -102,7 +139,7 @@ public class GroupingTool : MonoBehaviour
 
                 //center point variable update
                 Vector3 position = selector.transform.position;
-                X.Set(position.x); //todo all = function instead of set
+                X.Set(position.x);
                 Y.Set(position.y);
                 Z.Set(position.z);
             }
@@ -114,13 +151,33 @@ public class GroupingTool : MonoBehaviour
         {
             copiedInfo.CenterPoint = centerPoint;
         }
+
+        currentState = State.PreviewPaste;
+        Preview();
     }
 
-    public void Paste(Vector3 centerPoint)
+    public void Preview()
     {
         foreach(CopyInfo copyInfo in copiedObjects)
         {
-            copyInfo.Instanciate(centerPoint);
+            copyInfo.Preview();
+        }
+        currentState = State.Paste;
+    }
+
+    public void CancelPreview()
+    {
+        while (groupingArea.childCount > 0)
+        {
+            Destroy(groupingArea.GetChild(0));
+        }
+    }
+
+    public void Paste()
+    {
+        foreach(CopyInfo copyInfo in copiedObjects)
+        {
+            copyInfo.Instanciate();
         }
     }
     #endregion
@@ -133,6 +190,10 @@ public class CopyInfo
     XML details;
     FMPrefab originalPrefab;
     Vector3 offset;
+
+    Transform example;
+
+    public static Transform group;
     #endregion
 
     public Vector3 CenterPoint{
@@ -148,10 +209,19 @@ public class CopyInfo
         this.details = details;
     }
 
-    public GameObject Instanciate(Vector3 centerPoint)
+    public GameObject Preview()
+    {
+        example = originalPrefab.InstanciateExample().transform;
+        example.transform.position = group.position - offset;
+        example.parent = group.transform;
+
+        return example.gameObject;
+    }
+
+    public GameObject Instanciate()
     {
         GameObject newObject = originalPrefab.InstanciatePrefab(details);
-        newObject.transform.position = centerPoint - offset;
+        newObject.transform.position = example.position;
 
         return newObject;
     }
