@@ -150,15 +150,11 @@ public class MainMenuUIScript : MonoBehaviour
             {
                 simList.Add(localSimList[i]);
             }
-            else if(i > localSimList.Length)
+            else if(i >= localSimList.Length)
             {
-                
                 simList.Add(onlineSimList[i - localSimList.Length]);
             }
-            
-
         }
-
 
 
         simList = simList.Distinct().ToList<string>();
