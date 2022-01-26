@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
-  m_Name: PlasticBarrel
+  m_Name: BarrelCart
   m_EditorClassIdentifier: 
-  prefab: {fileID: 641223197585122205, guid: bf1dcd3a279056e49ad433ac0dd8c749, type: 3}
-  examplePrefab: {fileID: 641223197585122205, guid: 3e764e78770db974590225716343edfb, type: 3}
+  prefab: {fileID: 2016554191418739299, guid: 57e5dfd0fde29ef47bde31c333df3543, type: 3}
+  examplePrefab: {fileID: 1234040624731292623, guid: 2012d6450cbbbc44a85879689ad2707a, type: 3}
   parent: {fileID: 0}
