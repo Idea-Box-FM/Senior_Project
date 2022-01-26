@@ -12,7 +12,7 @@ public class GroupingTool : MonoBehaviour
     List<CopyInfo> copiedObjects = new List<CopyInfo>();
     Vector3 centerPoint = Vector3.positiveInfinity;
     #endregion
-    CameraControl.EditorActions editorActions;
+    CameraControl cameraControl;
     [SerializeField] Transform groupingArea;
 
     public enum State
@@ -84,28 +84,44 @@ public class GroupingTool : MonoBehaviour
 
         public static implicit operator float(HighAndLow hal) => hal.Center;
     }
+    private void Awake()
+    {
+        cameraControl = new CameraControl();
+    }
+
+    private void OnEnable()
+    {
+        cameraControl.Enable();//enable every action map
+        //controlScript.Player.Enable();//enable specific action map//Variation 1
+        //controlScript.asset.actionMaps[0].Enable();//enabled specific action map//Variation 2
+    }
+    private void OnDisable()
+    {
+        cameraControl.Disable();//disable every action map
+        //controlScript.Player.Disable();//disable specific action map//Variation 1
+        //controlScript.asset.actionMaps[0].Disable();//disable specific action map/Variation 2
+    }
 
     public void Start()
     {
-        editorActions = new CameraControl().Editor;
         prefabList = GetComponent<FMPrefabList>();
         CopyInfo.group = groupingArea;
     }
 
     private void Update()
     {
-        if (editorActions.Control.triggered)
+        if (cameraControl.Editor.Control.triggered == true)
         {
-            if (editorActions.Copy.triggered)
+            if (cameraControl.Editor.Copy.phase == InputActionPhase.Started)
             {
                 Copy();
             }
-            else if (currentState == State.Paste && editorActions.Paste.triggered)
+            else if (currentState == State.Paste && cameraControl.Editor.Paste.triggered)
             {
                     Paste();
             }
         }
-        else if (currentState == State.Paste && editorActions.Cancel.triggered)
+        else if (currentState == State.Paste && cameraControl.Editor.Cancel.triggered)
         {
             CancelPreview();
         }

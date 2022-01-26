@@ -451,11 +451,11 @@ public class @CameraControl : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Copy"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b4a8fd70-1066-4f59-ac85-ab93d3fa4354"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Control"",
@@ -463,7 +463,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""id"": ""606c1a22-3886-49b9-a888-20ae3c174873"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Hold""
                 },
                 {
                     ""name"": ""Cancel"",
@@ -487,7 +487,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""ed1cdd54-fdc7-4454-bec5-efbff14ac4eb"",
                     ""path"": ""<Keyboard>/c"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Copy"",
