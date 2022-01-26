@@ -17,8 +17,6 @@ public class Selector : MonoBehaviour
 {
     //layer mask to select items
     public LayerMask selectMask;
-    //layer mask to deselect
-    public LayerMask deselectMask;
     //object's original material
     public Material selfMat;
     //material used after clicking the object
@@ -53,7 +51,6 @@ public class Selector : MonoBehaviour
     void Start()
     {
         mainCamera = GameObject.FindObjectOfType<Camera>();
-
         if (gameObject.tag == "FMPrefab")
         {
             follower = gameObject.GetComponent<FollowScript>();
@@ -77,8 +74,14 @@ public class Selector : MonoBehaviour
             if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask))
             {
                 //change material of the raycasted object to the testMat
-                selectHit.transform.gameObject.GetComponent<MeshRenderer>().material = testMat;
+                selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
+                {
+                    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
+                }
+
                 selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+
                 if (isSelected == true)
                 {
                     moveButton.onClick.AddListener(action);
@@ -93,10 +96,17 @@ public class Selector : MonoBehaviour
         {
             //change the material back to selfMat when you click off of an object
             goMaterial.material = selfMat;
+            this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+            for (int i = 0; i < this.gameObject.transform.childCount; i++)
+            {
+                this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
+            }
 
             follower.enabled = false;
             isSelected = false;
             moveButton.onClick.RemoveListener(action);
+            cancelButton.onClick.RemoveListener(deselect);
+            deleteButton.onClick.RemoveListener(delete);
         }
     }
 
@@ -109,11 +119,17 @@ public class Selector : MonoBehaviour
     {
         //change the material back to selfMat when you click off of an object
         goMaterial.material = selfMat;
+        this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
+        }
 
         isSelected = false;
         follower.enabled = false;
         moveButton.onClick.RemoveListener(action);
         cancelButton.onClick.RemoveListener(deselect);
+        deleteButton.onClick.RemoveListener(delete);
     }
 
     void Delete()
