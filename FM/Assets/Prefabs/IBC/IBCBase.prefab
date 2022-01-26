@@ -2198,7 +2198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2465400873797151124}
   m_Layer: 0
-  m_Name: hiddenIBC
+  m_Name: IBCBase
   m_TagString: FMPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
