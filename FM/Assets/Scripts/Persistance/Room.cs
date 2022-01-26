@@ -187,7 +187,7 @@ public class Room : MonoBehaviour
     {
         Vector3 position = roof.transform.position;
         roof.transform.position = new Vector3(position.x, Height, position.z);
-        roof.transform.localScale = new Vector3(Width, roof.transform.localScale.y, Length);
+        roof.transform.localScale = new Vector3(Width, roof.transform.localScale.y * 10, Length) / 10;
     }
 
     private void SetFloor()

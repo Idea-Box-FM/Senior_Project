@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
-  m_Name: SmallShelf
+  m_Name: BlackPlasticBarrel
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8095717215038906595, guid: fc2e707a8442e6241844b7905877f148, type: 3}
-  examplePrefab: {fileID: 8095717215038906595, guid: 48d2dae2b73be6446aa1add946cb4a45, type: 3}
+  prefab: {fileID: 641223197585122205, guid: bf1dcd3a279056e49ad433ac0dd8c749, type: 3}
+  examplePrefab: {fileID: 641223197585122205, guid: 3e764e78770db974590225716343edfb, type: 3}
   parent: {fileID: 0}

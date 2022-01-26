@@ -150,15 +150,11 @@ public class MainMenuUIScript : MonoBehaviour
             {
                 simList.Add(localSimList[i]);
             }
-            else if(i > localSimList.Length)
+            else if(i >= localSimList.Length)
             {
-                
                 simList.Add(onlineSimList[i - localSimList.Length]);
             }
-            
-
         }
-
 
 
         simList = simList.Distinct().ToList<string>();
@@ -172,6 +168,7 @@ public class MainMenuUIScript : MonoBehaviour
                 s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
                 s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
                 s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+                
             }
             else
             {
@@ -181,7 +178,9 @@ public class MainMenuUIScript : MonoBehaviour
                 s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
                 s.GetComponent<Button>().AddEventListener(i, ItemClicked);
             }
-            
+
+            if (simList[i] == FileManager.fileManager.currentSimulation)
+                selectedSim = i;
         }
 
     }

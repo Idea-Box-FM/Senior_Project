@@ -1,9 +1,10 @@
 <XML>
-	<Dylan>
-		<Room RoomSize="(12.0, 5.0, 10.0)">
-			<Walls Material="Wall"/>
-			<Roof Material="Ceiling"/>
-			<Floor Material="Floor"/>
-		</Room>
-	</Dylan>
+	<Room RoomSize="(12.0, 5.0, 10.0)">
+		<Walls Material="Wall (Instance)"/>
+		<Roof Material="Floor (Instance)"/>
+		<Floor Material="Floor (Instance)"/>
+	</Room>
+	<IBC>
+		<IBC(Clone) Position="(0.8, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</IBC>
 </XML>
