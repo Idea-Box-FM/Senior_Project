@@ -105,20 +105,6 @@ public class LevelEditorManager : MonoBehaviour
             }
         }
 
-        if(Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            //raycast from main camera to mouse position
-            Ray deleteRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit deleteHit;
-
-            //if the raycast hits a valid target on the layer mask, destroy the object
-            if (Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
-            {
-                //hightlights game object by parent -- IMPORTANT -- ALL ITEMS NEED TO HAVE A PARENT
-                hitTarget = deleteHit.transform.parent.gameObject;
-            }
-        }
-
         //if the middle mouse button is clicked, ray cast out
         if (Mouse.current.middleButton.wasPressedThisFrame)
         {
