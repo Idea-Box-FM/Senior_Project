@@ -32,10 +32,12 @@ public class Selector : MonoBehaviour
     FollowScript follower;
     public Button moveButton;
     public Button cancelButton;
+    public Button deleteButton;
     public bool isSelected = false;
 
     private UnityAction action;
     private UnityAction deselect;
+    private UnityAction delete;
     
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
@@ -44,6 +46,7 @@ public class Selector : MonoBehaviour
         selfMat = goMaterial.material;
         moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
         cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
+        deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
     }
 
     //find the main Camera
@@ -58,6 +61,7 @@ public class Selector : MonoBehaviour
 
         action = new UnityAction(MoveItem);
         deselect = new UnityAction(Deselect);
+        delete = new UnityAction(Delete);
     }
 
     // Update is called once per frame
@@ -79,6 +83,7 @@ public class Selector : MonoBehaviour
                 {
                     moveButton.onClick.AddListener(action);
                     cancelButton.onClick.AddListener(deselect);
+                    deleteButton.onClick.AddListener(delete);
                 }
             }
         }  
@@ -109,5 +114,11 @@ public class Selector : MonoBehaviour
         follower.enabled = false;
         moveButton.onClick.RemoveListener(action);
         cancelButton.onClick.RemoveListener(deselect);
+    }
+
+    void Delete()
+    {
+        Destroy(this.transform.parent.gameObject);
+        deleteButton.onClick.RemoveListener(delete);
     }
 }
