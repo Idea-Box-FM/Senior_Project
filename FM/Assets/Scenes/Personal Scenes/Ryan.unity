@@ -1099,7 +1099,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 4224
-  collision: {fileID: 0}
+  collision: {fileID: 929868487}
   material1: {fileID: 2100000, guid: f1cca2882b4e0894995b5c1ef0af4112, type: 2}
 --- !u!114 &534633309
 MonoBehaviour:
@@ -6375,6 +6375,7 @@ GameObject:
   - component: {fileID: 2073721119}
   - component: {fileID: 2073721118}
   - component: {fileID: 2073721117}
+  - component: {fileID: 2073721121}
   m_Layer: 7
   m_Name: Floor
   m_TagString: Room
@@ -6459,6 +6460,19 @@ Transform:
   m_Father: {fileID: 974352829}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2073721121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073721116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b2971802c80dd49abea7dabfb505db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canPlace: 1
 --- !u!1 &2082101027
 GameObject:
   m_ObjectHideFlags: 0
