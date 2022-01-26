@@ -1,9 +1,0 @@
-<XML>
-	<Maleek>
-		<Room RoomSize="(33.0, 15.0, 120.0)">
-			<Walls Material="Wall"/>
-			<Roof Material="Ceiling"/>
-			<Floor Material="Floor"/>
-		</Room>
-	</Maleek>
-</XML>
