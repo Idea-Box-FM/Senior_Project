@@ -11,17 +11,14 @@ public class SaveLoadOptions : MonoBehaviour
 
     //try to save all prefs as strings, then parse them to get their values
     //find a way of also storing preferences within a string
+    //transform into arrays
 
-    public enum PrefType
-    {
-        Float,
-        Int,
-        String
-    }
+    //Note: MAKE SURE OBJECTS ARE DIFFERENT NAMES TO SAVE THEM PROPERLY
 
-    public List <string> prefKeys = new List<string>();
+    public List<string> prefKeys = new List<string>();
     public List<string> prefValues = new List<string>();
-    int iterator = 0;
+
+    public List<int> instanceIDs = new List<int>();
 
     private void OnEnable()
     {
@@ -39,33 +36,53 @@ public class SaveLoadOptions : MonoBehaviour
         prefValues.Clear();//clear on play to store new values //!temp?
     }
 
-    public void AddEntry(string key, string value)//1st part of key is data type, 2nd part is Name and ID if needed, 3rd part is data
+    public void AddEntry(string newKey, string newValue)//1st part of key is data type, 2nd part is Name and ID if needed, 3rd part is data
     {
-        //look if an entry already exists under the same ID, if so replace it
+        if (prefKeys.Count <= 0)//if there are no entries
+        {
+            prefKeys.Add(newKey);
+            prefValues.Add(newValue);
 
-        //if there is not an entry, add one to the list
+            Debug.Log("Created key with value");
+            //Debug.Log(Time.realtimeSinceStartup + " -> Created " + key + " key with " + value + " value");
+        }
+        else//if there are entries
+        {
 
-        prefKeys.Add(key);
-        prefValues.Add(value);
+            if (prefKeys.Contains(newKey))//if an entry already exists under the same ID
+            {
+                for (int i = 0; i < prefKeys.Count; i++)//loop through list
+                {
+                    if(prefKeys[i] == newKey)//if same key
+                    {
+                        prefValues[i] = newValue;//update it
+                        Debug.Log("Updated key with value");
+                        //Debug.Log(Time.realtimeSinceStartup + " -> Updated " + key + " key with " + value + " value");
+                        break;
+                    }
+                }
+            }
+            else//if there is not an entry, add one to the list
+            {
+                prefKeys.Add(newKey);//add iterator to key to differentiate
+                prefValues.Add(newValue);
+
+                
+
+                Debug.Log("Created key with value");
+                //Debug.Log(Time.realtimeSinceStartup + " -> Created " + key + " key with " + value + " value");
+            }
+        }
     }
-    public void AddEntry(List<string> keys, List<string> values)//1st part of key is data type, 2nd part is Name and ID if needed, 3rd part is data
+
+    public void StoreSliderPref(Slider slider)
     {
-        //look if an entry already exists under the same ID, if so replace it
+        string newKey = "Float" + ", " + slider.name + ", " + slider.GetInstanceID();
+        string newValue = slider.value.ToString();
 
-        //if there is not an entry, add one to the list
-
-        prefKeys.AddRange(keys);
-        prefValues.AddRange(values);
-    }
-
-    public void StoreSliderPref(Slider value)
-    {
-        //1st part of key is data type, 2nd part is Name and ID if needed, 3rd part is data
-        AddEntry(key: "Float" + ", " + value.name + ", " + iterator, value: value.value.ToString());//!placeholder
-
-        Debug.Log("Stored a value of " + value.value + " from the \"" + value.name +"\" game object");
-
-        //SavePrefs();
+        //1st part of key is data type, 2nd part is instance ID, 3rd part is data
+        AddEntry(newKey, newValue);//!placeholder
+        instanceIDs.Add(slider.GetInstanceID());
     }
     //methods in comment below should be similar to the one above
     /*public void SaveTextPrefs(List<Text> valuesToSave)
