@@ -2892,7 +2892,7 @@ PrefabInstance:
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2014930195}
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -13089,9 +13089,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460d97fe4f77f7b4d8b1e8758b9fb474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefAmount: 0
+  prefKeys: []
+  prefValues: []
   instanceIDs: 
-  prefKeysDisplay: []
-  prefValuesDisplay: []
 --- !u!1 &2023383793
 GameObject:
   m_ObjectHideFlags: 0

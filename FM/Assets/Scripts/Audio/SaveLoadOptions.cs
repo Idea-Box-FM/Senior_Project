@@ -14,27 +14,34 @@ public class SaveLoadOptions : MonoBehaviour
     //0th part of key is data type, 1st part is name, 2nd part is instance ID //# <- look for #
     //make sure to set default values within the UI component!
 
+    //!store everything in a file instead of Player Preferences
+    //!make sure after pressing the reset preferences button it also adjusts the sliders
+
+    [Header("To Fill")]
+    public List<string> prefDefaultKeys = new List<string>();
+    public List<string> prefDefaultValues = new List<string>();
+
+    [Header("Display")]
     public int playerPrefAmount = 0;//how many player prefs are there?
     public List<string> prefKeys = new List<string>();
     public List<string> prefValues = new List<string>();
 
-    public static List<int> instanceIDs = new List<int>();//!does this need to be static?
+    public List<int> instanceIDs = new List<int>();
 
     #region Setup Methods
     private void OnEnable()
     {
-        //DefaultPrefs();
+        LoadListFile();
         GetAllPrefs();//load options
-        //!load in all preferences to sliders and place in lists
     }
     private void OnDisable()
     {
-        //DefaultPrefs();
+        GetAllPrefs();
         SetAllPrefs();//save options
     }
     void Start()
     {
-        //DefaultPrefs();
+        
     }
     #endregion
     
@@ -43,17 +50,24 @@ public class SaveLoadOptions : MonoBehaviour
         
     }
 
-    private void DefaultPrefs()//Adds a placeholder entry
+    private KeyValuePair<string, string> GetDefaultPref()
     {
-        string key = "Int, Default, 0";
+        string key = "Void, Default, 0";
         string value = "100";
+
+        return new KeyValuePair<string, string>(key, value);
+    }
+
+    private void AddDefaultPref()//Adds a placeholder entry
+    {
+        KeyValuePair<string, string> pair = GetDefaultPref();
         int ID = 0;
 
         //add a first entry
-        if (prefKeys.Contains(key) == false)
-            prefKeys.Add(key);//key
-        if (prefValues.Contains(value) == false)
-            prefValues.Add(value);//value
+        if (prefKeys.Contains(pair.Key) == false)
+            prefKeys.Add(pair.Key);//key
+        if (prefValues.Contains(pair.Value) == false)
+            prefValues.Add(pair.Value);//value
         if (instanceIDs.Contains(ID) == false)
             instanceIDs.Add(ID);//instance ID
     }
@@ -94,6 +108,7 @@ public class SaveLoadOptions : MonoBehaviour
 
         playerPrefAmount++;
 
+        SaveListFile();
         //Debug.Log("Created key with value");
         Debug.Log(Time.realtimeSinceStartup + " -> Created " + newKey + " key with " + newValue.ToString() + " value");
     }
@@ -117,7 +132,15 @@ public class SaveLoadOptions : MonoBehaviour
         var prefs = GetAllPrefs();
 
         //checks order inversed to have most recent updated last
-        if (prefs.ContainsKey(getKey) == true)//if the key exists //!use with playerPrefs
+        if (prefDefaultKeys.Contains(getKey) == true)//if default param exists
+        {
+            slider.value = prefDefaultValues.IndexOf(getKey);
+            lastUpdated = "Defaults";
+        }
+        else
+            Debug.LogWarning("Unable to get default value, did you set one?");
+
+        if (prefs.ContainsKey(getKey) == true)//if the key exists
         {
             //update the value
             float newValue = float.Parse(prefs[getKey]);//parse needed to convert, otherwise specified cast not valid
@@ -142,35 +165,48 @@ public class SaveLoadOptions : MonoBehaviour
             switch (stringSplit[0])//data type as a string
             {
                 case "Float"://if float data type
-                    PlayerPrefs.SetFloat(prefKeys[i], float.Parse(prefValues[i]));
+                    PlayerPrefs.SetFloat(prefKeys[i], float.Parse(prefValues[i]));//!replace with read in file
                     break;
                 case "Int"://if integer data type
-                    PlayerPrefs.SetInt(prefKeys[i], int.Parse(prefValues[i]));
+                    PlayerPrefs.SetInt(prefKeys[i], int.Parse(prefValues[i]));//!replace with read in file
                     break;
                 case "String"://if string data type
-                    PlayerPrefs.SetString(prefKeys[i], prefValues[i]);
+                    PlayerPrefs.SetString(prefKeys[i], prefValues[i]);//!replace with read in file
+                    break;
+                case "Void":
+                    //Void, no assignment
+                    break;
+                default:
+                    Debug.LogWarning("Unable to set preference of key \"" + prefKeys[i] + "\"");
                     break;
             }
-            Debug.Log("Saved new " + stringSplit[0] + " with \"" + prefKeys[i] + "\"  key and \"" + prefValues[i].ToString() + "\" value");
+            //Debug.Log("Saved new " + stringSplit[0] + " with \"" + prefKeys[i] + "\"  key and \"" + prefValues[i].ToString() + "\" value");
         }
 
         Debug.Log("Saved all preferences");
-        PlayerPrefs.Save();//save to disk//!not required?
+        PlayerPrefs.Save();//save to disk//!not required?//!replace with read in file
     }
 
     public void ResetAllPrefs()//delete all preferences from all sources
     {
         //remove player preferences
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();//!replace with read in file
         //clear lists
         prefKeys.Clear();
         prefValues.Clear();
         instanceIDs.Clear();
         playerPrefAmount = 0;
+
+        //remove file
+        string fileLocation = Application.persistentDataPath + "/preferences0.dat";
+        if(File.Exists(fileLocation) == true){
+            File.Delete(fileLocation);
+        }
+
         Debug.Log("Removed all preferences");
 
         //set default preferences here
-        DefaultPrefs();
+        AddDefaultPref();
     }
     #endregion
 
@@ -186,13 +222,19 @@ public class SaveLoadOptions : MonoBehaviour
             switch (stringSplit[0])//data type as a string
             {
                 case "Float"://if float data type
-                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetFloat(prefKeys[i], float.Parse(prefValues[i])).ToString());
+                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetFloat(prefKeys[i], float.Parse(prefValues[i])).ToString());//!replace with read in file
                     break;
                 case "Int"://if integer data type
-                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetInt(prefKeys[i], int.Parse(prefValues[i])).ToString());
+                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetInt(prefKeys[i], int.Parse(prefValues[i])).ToString());//!replace with read in file
                     break;
                 case "String"://if string data type
-                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetString(prefKeys[i], prefValues[i]));
+                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetString(prefKeys[i], prefValues[i]));//!replace with read in file
+                    break;
+                case "Void":
+                    //Void, no assignment
+                    break;
+                default:
+                    Debug.LogWarning("Unable to get preference of key \"" + prefKeys[i] + "\"");
                     break;
             }
             Debug.Log("Loaded " + stringSplit[0] + " \"" + prefKeys[i] + "\"  key and \"" + prefValues[i] + "\" value");
@@ -208,65 +250,60 @@ public class SaveLoadOptions : MonoBehaviour
         return loadedEntries;//return in case needed
     }
 
-    //!end
 
-    /*//file method (DO NOT USE)
-    private void SaveFile()
+    #region File Management Methods
+    //!Save default preferences from the list to a file
+    //!Load default preferences from a file to the list
+
+    private void SaveListFile()
     {
-        string destination = Application.persistentDataPath + "/preferences0.dat";
+        string fileLocation = Application.persistentDataPath + "/preferencesCurrent.dat";
         FileStream file;
 
-        if (File.Exists(destination)) file = File.OpenWrite(destination);
-        else file = File.Create(destination);
+        if (File.Exists(fileLocation)) file = File.OpenWrite(fileLocation);
+        else file = File.Create(fileLocation);
 
         SortedList<string, string> data = GetAllPrefs();
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, data);
         file.Close();
 
-        Debug.Log("Saved file to " + destination);
+        Debug.Log("Saved file to " + fileLocation);
     }
-    private void LoadFile()
+    private void LoadListFile()
     {
-        string destination = Application.persistentDataPath + "/preferences0.dat";
+        string fileLocation = Application.persistentDataPath + "/preferencesCurrent.dat";
         FileStream file;
 
-        if (File.Exists(destination))
-            file = File.OpenRead(destination);
-        else
+        if (File.Exists(fileLocation))
         {
-            Debug.Log("File not found");
-            return;
-        }
+            file = File.OpenRead(fileLocation);
 
-        BinaryFormatter bf = new BinaryFormatter();
-        SortedList<string, string> data = (SortedList<string, string>)bf.Deserialize(file);
-        file.Close();
+            BinaryFormatter bf = new BinaryFormatter();
+            SortedList<string, string> data = (SortedList<string, string>)bf.Deserialize(file);
+            file.Close();
 
-        if (data != null)
-        {
-            foreach (string key in data.Keys)
+            for (int i = 0; i < data.Keys.Count; i++)
             {
-                if (prefKeys.Contains(key) == false)
-                    prefKeys.Add(key);//get keys
+                if (prefKeys.Contains(data.Keys[i]) == false)
+                {
+                    prefKeys.Add(data.Keys[i]);//get keys
+                    prefValues.Add(data.Values[i]);//get values
+                }
 
-                string[] stringSplit = key.Split(',');//separate parts of key
+                string[] stringSplit = data.Keys[i].Split(',');//separate parts of key
                 if (instanceIDs.Contains(int.Parse(stringSplit[2])) == false)
                     instanceIDs.Add(int.Parse(stringSplit[2]));//get instance ids
-            }
-            foreach (string value in data.Values)
-            {
-                if (prefValues.Contains(value) == false
-                    ) prefValues.Add(value);//get values
+                    
             }
 
-            Debug.Log("Loaded file");
+            Debug.Log("Loaded file from " + fileLocation);
         }
         else
-        {
-            Debug.Log("Could not parse data from file");
-        }
+            Debug.Log("File not found");
 
     }
-    */
+    #endregion
+
+    //!end
 }
