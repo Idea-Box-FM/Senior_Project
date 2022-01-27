@@ -463,7 +463,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""id"": ""606c1a22-3886-49b9-a888-20ae3c174873"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Cancel"",
@@ -487,7 +487,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""ed1cdd54-fdc7-4454-bec5-efbff14ac4eb"",
                     ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Copy"",
@@ -498,7 +498,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""674cfbbb-0102-43f2-be65-c91f3d0841b2"",
                     ""path"": ""<Keyboard>/ctrl"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Control"",
@@ -519,7 +519,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1ee673fb-0604-4744-9a34-73c29a5b5f72"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

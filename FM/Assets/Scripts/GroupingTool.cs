@@ -11,8 +11,10 @@ public class GroupingTool : MonoBehaviour
 
     List<CopyInfo> copiedObjects = new List<CopyInfo>();
     Vector3 centerPoint = Vector3.positiveInfinity;
-    #endregion
+
     CameraControl cameraControl;
+    bool control = false;
+
     [SerializeField] Transform groupingArea;
 
     public enum State
@@ -20,8 +22,8 @@ public class GroupingTool : MonoBehaviour
         Copy,
         PreviewPaste,
         Paste
-    }
-    public State currentState = State.Copy;
+    } public State currentState = State.Copy;
+    #endregion
 
     class HighAndLow
     {
@@ -84,22 +86,26 @@ public class GroupingTool : MonoBehaviour
 
         public static implicit operator float(HighAndLow hal) => hal.Center;
     }
+
+    #region Unity functions
     private void Awake()
     {
         cameraControl = new CameraControl();
+        cameraControl.Editor.Control.performed += Control_performed;
+        cameraControl.Editor.Control.canceled += Control_canceled;
+
+        cameraControl.Editor.Copy.canceled += Copy_performed;//NOTE we add these function to the canceled function because we want to wait for them to release the command first
+        cameraControl.Editor.Paste.canceled += Paste_performed;
     }
 
     private void OnEnable()
     {
         cameraControl.Enable();//enable every action map
-        //controlScript.Player.Enable();//enable specific action map//Variation 1
-        //controlScript.asset.actionMaps[0].Enable();//enabled specific action map//Variation 2
     }
+
     private void OnDisable()
     {
         cameraControl.Disable();//disable every action map
-        //controlScript.Player.Disable();//disable specific action map//Variation 1
-        //controlScript.asset.actionMaps[0].Disable();//disable specific action map/Variation 2
     }
 
     public void Start()
@@ -107,25 +113,43 @@ public class GroupingTool : MonoBehaviour
         prefabList = GetComponent<FMPrefabList>();
         CopyInfo.group = groupingArea;
     }
+    #endregion
 
-    private void Update()
+    #region event handling
+    private void Paste_performed(InputAction.CallbackContext obj)
     {
-        if (cameraControl.Editor.Control.triggered == true)
+        if (control)
         {
-            if (cameraControl.Editor.Copy.phase == InputActionPhase.Started)
+            switch (currentState)
             {
-                Copy();
-            }
-            else if (currentState == State.Paste && cameraControl.Editor.Paste.triggered)
-            {
+                case State.Paste:
                     Paste();
+                    break;
+                case State.PreviewPaste:
+                    Preview();
+                    break;
             }
-        }
-        else if (currentState == State.Paste && cameraControl.Editor.Cancel.triggered)
-        {
-            CancelPreview();
         }
     }
+
+    private void Copy_performed(InputAction.CallbackContext obj)
+    {
+        if(control)
+            Copy();
+    }
+
+    #region Control handlers
+    private void Control_canceled(InputAction.CallbackContext obj)
+    {
+        control = false;
+    }
+
+    private void Control_performed(InputAction.CallbackContext obj)
+    {
+        control = true;
+    }
+    #endregion
+    #endregion
 
     #region functionality
     public void Copy()
@@ -144,11 +168,13 @@ public class GroupingTool : MonoBehaviour
                 if(cleared == false)
                 {//only clear the inputs after we are sure something else is copied
                     copiedObjects.Clear(); //forget about the old copied stuff
+                    CancelPreview();//incase they are a real programmer who goes ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C, ctrl+V
                     cleared = true;
                 }
+
                 //save copied objects info
-                FMPrefab prefabType = prefabList.GetPrefabType(selector.gameObject);
-                XML details = prefabType.ConvertToXML(selector.gameObject);
+                FMPrefab prefabType = prefabList.GetPrefabType(selector.transform.parent.gameObject);
+                XML details = prefabType.ConvertToXML(selector.transform.parent.gameObject);
                 CopyInfo copiedObject = new CopyInfo(prefabType, details);
 
                 copiedObjects.Add(copiedObject);
@@ -172,22 +198,28 @@ public class GroupingTool : MonoBehaviour
         Preview();
     }
 
+    #region Pasting
+    #region Preview
     public void Preview()
     {
         foreach(CopyInfo copyInfo in copiedObjects)
         {
             copyInfo.Preview();
         }
+
         currentState = State.Paste;
     }
 
     public void CancelPreview()
     {
-        while (groupingArea.childCount > 0)
+        for(int i = groupingArea.childCount; i > 0; i--)
         {
-            Destroy(groupingArea.GetChild(0));
+            Destroy(groupingArea.GetChild(i - 1).gameObject);
         }
+
+        currentState = State.PreviewPaste;
     }
+    #endregion
 
     public void Paste()
     {
@@ -195,7 +227,9 @@ public class GroupingTool : MonoBehaviour
         {
             copyInfo.Instanciate();
         }
+        CancelPreview();
     }
+    #endregion
     #endregion
 }
 
@@ -225,11 +259,12 @@ public class CopyInfo
         this.details = details;
     }
 
+    #region Behaviors
     public GameObject Preview()
     {
         example = originalPrefab.InstanciateExample().transform;
-        example.transform.position = group.position - offset;
         example.parent = group.transform;
+        example.GetChild(0).transform.localPosition = offset;//NOTE for some reason example.transform.localPosition/Position does not actually change the location of the object. Unity Glitch
 
         return example.gameObject;
     }
@@ -237,8 +272,10 @@ public class CopyInfo
     public GameObject Instanciate()
     {
         GameObject newObject = originalPrefab.InstanciatePrefab(details);
-        newObject.transform.position = example.position;
+        newObject.transform.position = example.GetChild(0).transform.position;//See Preview for explanation
+        newObject.SetActive(true);
 
         return newObject;
     }
+    #endregion
 }

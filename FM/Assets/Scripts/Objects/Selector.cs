@@ -28,7 +28,7 @@ public class Selector : MonoBehaviour
     {
         get
         {
-            return goMaterial.material == testMat;
+            return goMaterial.material != selfMat; //for some reason goMaterial.material == testMat does not work, probably because the layers of materials used
         }
     }
 
