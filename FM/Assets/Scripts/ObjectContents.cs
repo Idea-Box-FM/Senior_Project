@@ -8,6 +8,7 @@ public class ObjectContents : MonoBehaviour
 
     //This is a enum for the 9 different Hazard types
     public enum Contents { HealthHazard, Flammability, CompressedGas, Corrosive, Explosive, Oxidizers, Environmental, AcuteToxicity, Other, None};
+
     [Tooltip("This variable is used to set the contents of the object")]
     public Contents currentContent = Contents.None;
 
