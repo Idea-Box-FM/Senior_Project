@@ -97,11 +97,14 @@ public class LevelEditorManager : MonoBehaviour
                 //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
                 CurrentButton.isClicked = false;
 
-                //instantiate prefab based on current button pressed at the raycast hit location
-                GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
-                finalPrefab.SetActive(true);
+                if (example != null)
+                {
+                    //instantiate prefab based on current button pressed at the raycast hit location
+                    GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
+                    finalPrefab.SetActive(true);
 
-                DestroyCurrentExample();
+                    DestroyCurrentExample();
+                }
             }
         }
 
