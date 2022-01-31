@@ -480,6 +480,14 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""938aadc8-84a5-414e-a64e-d0d769705be7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -524,6 +532,17 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Paste"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""229f57ac-020d-4a9f-a63b-36d1031849ba"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -615,6 +634,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
         m_Editor_Control = m_Editor.FindAction("Control", throwIfNotFound: true);
         m_Editor_Cancel = m_Editor.FindAction("Cancel", throwIfNotFound: true);
         m_Editor_Paste = m_Editor.FindAction("Paste", throwIfNotFound: true);
+        m_Editor_Click = m_Editor.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -814,6 +834,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_Control;
     private readonly InputAction m_Editor_Cancel;
     private readonly InputAction m_Editor_Paste;
+    private readonly InputAction m_Editor_Click;
     public struct EditorActions
     {
         private @CameraControl m_Wrapper;
@@ -822,6 +843,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
         public InputAction @Control => m_Wrapper.m_Editor_Control;
         public InputAction @Cancel => m_Wrapper.m_Editor_Cancel;
         public InputAction @Paste => m_Wrapper.m_Editor_Paste;
+        public InputAction @Click => m_Wrapper.m_Editor_Click;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -843,6 +865,9 @@ public class @CameraControl : IInputActionCollection, IDisposable
                 @Paste.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
                 @Paste.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
                 @Paste.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
+                @Click.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -859,6 +884,9 @@ public class @CameraControl : IInputActionCollection, IDisposable
                 @Paste.started += instance.OnPaste;
                 @Paste.performed += instance.OnPaste;
                 @Paste.canceled += instance.OnPaste;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
             }
         }
     }
@@ -932,5 +960,6 @@ public class @CameraControl : IInputActionCollection, IDisposable
         void OnControl(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnPaste(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }

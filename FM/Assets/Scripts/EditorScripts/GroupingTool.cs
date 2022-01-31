@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*FLOWERBOX
+ * Programmer: Patrick Naatz
+ * Purpose: make a script capable on handling copying and pasting of multiple objects
+ * TODO remove debugging pieces cignified by //Debugging
+ * Please test persistance, load scene use copy, exit simulation and relaunch, ensuring copy and paste still works
+ */
+
 [RequireComponent(typeof(FMPrefabList))]
 public class GroupingTool : MonoBehaviour
 {
@@ -16,6 +23,7 @@ public class GroupingTool : MonoBehaviour
     bool control = false;
 
     [SerializeField] Transform groupingArea;
+    [SerializeField] GameObject centerPointObject; //debugging
 
     public enum State
     {
@@ -25,77 +33,20 @@ public class GroupingTool : MonoBehaviour
     } public State currentState = State.Copy;
     #endregion
 
-    class HighAndLow
-    {
-        #region Properties
-        #region High
-        public float High
-        {
-            get
-            {
-                return high;
-            }
-
-            set
-            {
-                high = Mathf.Max(value, high);
-            }
-        }
-        float high = float.NegativeInfinity;
-        #endregion
-
-        #region Low
-        public float Low
-        {
-            get
-            {
-                return low;
-            }
-
-            set
-            {
-                low = Mathf.Min(value, low);
-            }
-        }
-        float low = float.PositiveInfinity;
-        #endregion
-
-        public float Center
-        {
-            get
-            {
-                return high - (low - high) / 2;
-            }
-        }
-        #endregion
-
-        #region Constructors
-        public HighAndLow() { }
-
-        public HighAndLow(float f)
-        {
-            Set(f);
-        }
-        #endregion
-
-        public void Set(float value)
-        {
-            High = value;
-            Low = value;
-        }
-
-        public static implicit operator float(HighAndLow hal) => hal.Center;
-    }
-
     #region Unity functions
     private void Awake()
     {
         cameraControl = new CameraControl();
-        cameraControl.Editor.Control.performed += Control_performed;
-        cameraControl.Editor.Control.canceled += Control_canceled;
 
-        cameraControl.Editor.Copy.canceled += Copy_performed;//NOTE we add these function to the canceled function because we want to wait for them to release the command first
-        cameraControl.Editor.Paste.canceled += Paste_performed;
+        //Control
+        cameraControl.Editor.Control.performed += Control_pressed;
+        cameraControl.Editor.Control.canceled += Control_released;
+
+        cameraControl.Editor.Copy.canceled += Copy_hotkey_attempted;//NOTE we add these function to the canceled function because we want to wait for them to release the command first
+
+        //Paste
+        cameraControl.Editor.Paste.canceled += hotkey_paste_attempted;
+        cameraControl.Editor.Click.canceled += Mouse_Click;
     }
 
     private void OnEnable()
@@ -116,7 +67,13 @@ public class GroupingTool : MonoBehaviour
     #endregion
 
     #region event handling
-    private void Paste_performed(InputAction.CallbackContext obj)
+
+    #region Paste
+    /// <summary>
+    /// Handling the ctrl + v input
+    /// </summary>
+    /// <param name="obj"></param>
+    private void hotkey_paste_attempted(InputAction.CallbackContext obj)
     {
         if (control)
         {
@@ -132,19 +89,30 @@ public class GroupingTool : MonoBehaviour
         }
     }
 
-    private void Copy_performed(InputAction.CallbackContext obj)
+    /// <summary>
+    /// Handling the click function when pasting
+    /// </summary>
+    /// <param name="obj"></param>
+    private void Mouse_Click(InputAction.CallbackContext obj)
+    {
+        if (currentState == State.Paste)
+            Paste();
+    }
+    #endregion
+
+    private void Copy_hotkey_attempted(InputAction.CallbackContext obj)
     {
         if(control)
             Copy();
     }
 
     #region Control handlers
-    private void Control_canceled(InputAction.CallbackContext obj)
+    private void Control_released(InputAction.CallbackContext obj)
     {
         control = false;
     }
 
-    private void Control_performed(InputAction.CallbackContext obj)
+    private void Control_pressed(InputAction.CallbackContext obj)
     {
         control = true;
     }
@@ -152,6 +120,14 @@ public class GroupingTool : MonoBehaviour
     #endregion
 
     #region functionality
+
+    void AlignGroup(float lowestHeight)
+    {
+        Vector3 position = groupingArea.transform.position;
+        position.y = lowestHeight;
+        groupingArea.transform.position = position;
+    }
+
     public void Copy()
     {
         bool cleared = false;
@@ -180,10 +156,12 @@ public class GroupingTool : MonoBehaviour
                 copiedObjects.Add(copiedObject);
 
                 //center point variable update
-                Vector3 position = selector.transform.position;
+                Vector3 position = selector.GetComponent<BoxCollider>().bounds.center;
                 X.Set(position.x);
                 Y.Set(position.y);
                 Z.Set(position.z);
+
+                selector.Deselect();
             }
         }
 
@@ -193,6 +171,10 @@ public class GroupingTool : MonoBehaviour
         {
             copiedInfo.CenterPoint = centerPoint;
         }
+
+        centerPointObject.transform.position = centerPoint; //debugging
+        //TODO add the y.low to the group height
+        AlignGroup(Y.Low);
 
         currentState = State.PreviewPaste;
         Preview();
@@ -212,6 +194,7 @@ public class GroupingTool : MonoBehaviour
 
     public void CancelPreview()
     {
+        //destroy objects from grouping object
         for(int i = groupingArea.childCount; i > 0; i--)
         {
             Destroy(groupingArea.GetChild(i - 1).gameObject);
@@ -227,55 +210,9 @@ public class GroupingTool : MonoBehaviour
         {
             copyInfo.Instanciate();
         }
+
         CancelPreview();
     }
     #endregion
-    #endregion
-}
-
-//todo move to it's own file
-public class CopyInfo
-{
-    #region fields
-    XML details;
-    FMPrefab originalPrefab;
-    Vector3 offset;
-
-    Transform example;
-
-    public static Transform group;
-    #endregion
-
-    public Vector3 CenterPoint{
-        set
-        {
-            offset = value - FMPrefab.ConvertToVector3(details.attributes["Position"]);
-        }
-    }
-
-    public CopyInfo(FMPrefab originalPrefab, XML details)
-    {
-        this.originalPrefab = originalPrefab;
-        this.details = details;
-    }
-
-    #region Behaviors
-    public GameObject Preview()
-    {
-        example = originalPrefab.InstanciateExample().transform;
-        example.parent = group.transform;
-        example.GetChild(0).transform.localPosition = offset;//NOTE for some reason example.transform.localPosition/Position does not actually change the location of the object. Unity Glitch
-
-        return example.gameObject;
-    }
-
-    public GameObject Instanciate()
-    {
-        GameObject newObject = originalPrefab.InstanciatePrefab(details);
-        newObject.transform.position = example.GetChild(0).transform.position;//See Preview for explanation
-        newObject.SetActive(true);
-
-        return newObject;
-    }
     #endregion
 }

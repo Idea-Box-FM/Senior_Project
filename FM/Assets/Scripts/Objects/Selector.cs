@@ -9,6 +9,9 @@ using UnityEngine.InputSystem;
  * 
  * Editor: Tyler Rubenstein
  *   Added to main 12/7/21
+ * Editor: Patrick Naatz
+ *  Added IsSelected Property 1/29/2022
+ *  Added Deselect method 1/31/2022
  */
 
 public class Selector : MonoBehaviour
@@ -67,5 +70,10 @@ public class Selector : MonoBehaviour
             }
         }  
 
+    }
+
+    public void Deselect()
+    {
+        goMaterial.material = selfMat;
     }
 }
