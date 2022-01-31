@@ -120,14 +120,6 @@ public class GroupingTool : MonoBehaviour
     #endregion
 
     #region functionality
-
-    void AlignGroup(float lowestHeight)
-    {
-        Vector3 position = groupingArea.transform.position;
-        position.y = lowestHeight;
-        groupingArea.transform.position = position;
-    }
-
     public void Copy()
     {
         bool cleared = false;
@@ -156,16 +148,17 @@ public class GroupingTool : MonoBehaviour
                 copiedObjects.Add(copiedObject);
 
                 //center point variable update
-                Vector3 position = selector.GetComponent<BoxCollider>().bounds.center;
+                Bounds bounds = selector.GetComponent<BoxCollider>().bounds;
+                Vector3 position = bounds.center;
                 X.Set(position.x);
-                Y.Set(position.y);
+                Y.Set(position.y - bounds.size.y / 2);
                 Z.Set(position.z);
 
                 selector.Deselect();
             }
         }
 
-        Vector3 centerPoint = new Vector3(X, Y, Z);
+        Vector3 centerPoint = new Vector3(X, Y.Low, Z); //Note we use the Y.low because the group follows the floor
 
         foreach(CopyInfo copiedInfo in copiedObjects)
         {
@@ -173,8 +166,6 @@ public class GroupingTool : MonoBehaviour
         }
 
         centerPointObject.transform.position = centerPoint; //debugging
-        //TODO add the y.low to the group height
-        AlignGroup(Y.Low);
 
         currentState = State.PreviewPaste;
         Preview();
