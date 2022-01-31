@@ -92,7 +92,7 @@ public class Selector : MonoBehaviour
         }  
 
         //more RYAN
-        if (Keyboard.current.pKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             //change the material back to selfMat when you click off of an object
             goMaterial.material = selfMat;
