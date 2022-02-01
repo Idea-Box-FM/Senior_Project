@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
  * Please test persistance, load scene use copy, exit simulation and relaunch, ensuring copy and paste still works
  */
 
-[RequireComponent(typeof(FMPrefabList))]
 public class GroupingTool : MonoBehaviour
 {
     #region Fields
@@ -36,6 +35,7 @@ public class GroupingTool : MonoBehaviour
     #region Unity functions
     private void Awake()
     {
+        //Controlls
         cameraControl = new CameraControl();
 
         //Control
@@ -47,6 +47,8 @@ public class GroupingTool : MonoBehaviour
         //Paste
         cameraControl.Editor.Paste.canceled += hotkey_paste_attempted;
         cameraControl.Editor.Click.canceled += Mouse_Click;
+
+        prefabList = FMPrefabList.prefabList;
     }
 
     private void OnEnable()
