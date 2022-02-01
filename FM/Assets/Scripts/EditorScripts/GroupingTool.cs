@@ -197,12 +197,15 @@ public class GroupingTool : MonoBehaviour
 
     public void Paste()
     {
-        foreach(CopyInfo copyInfo in copiedObjects)
+        if (CollisionDetect.CanPlace)
         {
-            copyInfo.Instanciate();
-        }
+            foreach (CopyInfo copyInfo in copiedObjects)
+            {
+                copyInfo.Instanciate();
+            }
 
-        CancelPreview();
+            CancelPreview();
+        }
     }
     #endregion
     #endregion

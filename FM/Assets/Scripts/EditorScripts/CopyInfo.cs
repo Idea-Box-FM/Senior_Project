@@ -39,6 +39,7 @@ public class CopyInfo
     {
         example = originalPrefab.InstanciateExample().transform;
         example.parent = group.transform;
+        example.GetComponent<BoxCollider>().center = offset;//Because of the below note we have to reposition the box collider
         example.GetChild(0).transform.localPosition = offset;//NOTE for some reason example.transform.localPosition/Position does not actually change the location of the object. Unity Glitch
 
         return example.gameObject;
