@@ -78,7 +78,7 @@ public class PlaySoundEffect : MonoBehaviour
             play = true;//add to queue via bool
         }
 
-        if (caller != "") Debug.Log("Playing \"" + soundClip.name + "\" sound effect from \"" + caller + "\" game object");
+        //if (caller != "") Debug.Log("Playing \"" + soundClip.name + "\" sound effect from \"" + caller + "\" game object");
     }
     /// <summary>
     /// Play sound effect, event varient (only allow up to one parameter to be in the list)

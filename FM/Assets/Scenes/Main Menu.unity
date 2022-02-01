@@ -13089,10 +13089,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460d97fe4f77f7b4d8b1e8758b9fb474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefAmount: 0
+  prefDefaultKeys:
+  - Float, AudioMusicSlider, 43136
+  - Float, AudioSoundEffectSlider, 42316
+  - Float, ControlsMouseSensitivitySlider, 42612
+  prefDefaultValues:
+  - 100
+  - 100
+  - 10
   prefKeys: []
   prefValues: []
-  instanceIDs: 
+  fileName: /preferencesCurrent.dat
 --- !u!1 &2023383793
 GameObject:
   m_ObjectHideFlags: 0
