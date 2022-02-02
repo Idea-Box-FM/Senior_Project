@@ -126,7 +126,7 @@ public class Selector : MonoBehaviour
             follower.enabled = true;
     }
 
-    void Deselect()
+    public void Deselect()
     {
         //change the material back to selfMat when you click off of an object
         goMaterial.material = selfMat;
