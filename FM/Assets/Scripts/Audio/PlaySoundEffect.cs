@@ -24,10 +24,15 @@ public class PlaySoundEffect : MonoBehaviour
     [Tooltip("Object Based Sound Queue")]
     public static List<AudioClip> soundEffectQueue = new List<AudioClip>();//a list of sounds for this object to play
 
+    [Header("Options")]
+    public GameObject optionElement;
+    [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
+    public float volumeLimit = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(src == null)//if source is not assigned
+        if (src == null)//if source is not assigned
         {
             bool foundSrc = this.TryGetComponent<AudioSource>(out src);//get the component from the object this is on if it exists
             //if (foundSrc == false)//if it is still not found
@@ -39,6 +44,8 @@ public class PlaySoundEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //volumeLimit = ;//get volume from options//!
+
         soundEffectQueueDisplay = soundEffectQueue;
         if (play == true)
         {
@@ -63,7 +70,9 @@ public class PlaySoundEffect : MonoBehaviour
     /// <param name="caller">The name of the object signaling for a sound to play</param>
     public void Play(AudioClip soundClip = null, bool playOver = true, string caller = "")
     {
-        if(soundClip == null)//if default
+        src.volume = volumeLimit;//set volume
+
+        if (soundClip == null)//if default
             soundClip = soundClips[selectedClip];//assign current selected
 
         if (playOver == true)//if play over other sounds

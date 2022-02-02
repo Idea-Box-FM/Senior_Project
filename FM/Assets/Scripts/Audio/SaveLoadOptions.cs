@@ -15,9 +15,6 @@ public class SaveLoadOptions : MonoBehaviour
     //make sure to set default values within the UI component!
 
     //!make sure after pressing the reset preferences button it also adjusts the sliders
-    //!store everything in a file instead of Player Preferences//!better to have it working
-        //!Save default preferences from the list to a file
-        //!Load default preferences from a file to the list
 
     [Header("To Fill")]
     public List<string> prefDefaultKeys = new List<string>();
@@ -48,8 +45,38 @@ public class SaveLoadOptions : MonoBehaviour
     
     private void Update()
     {
-        
+        OptionsStatic.options = this;
     }
+
+    #region External Data Methods
+    public static object GetValuePref(SaveLoadOptions sLOptions, GameObject optionElement)//make sure to parse the return
+    {
+        string value = "";
+
+        //apply the slider's stored preference when the screen is loaded to prevent it from being shown as the wrong value
+        string getKey = "Float" + ", " + optionElement.name.Replace(",", "") + ", " + optionElement.GetInstanceID();
+
+        //checks order inversed to have most recent updated last
+        string lastUpdated = "Defaults";
+
+        var prefs = sLOptions.GetAllPrefs();
+        if (prefs.ContainsKey(getKey) == true)//if the key exists
+        {
+            //update the value
+            value = prefs[getKey];//parse needed to convert, otherwise specified cast not valid
+            lastUpdated = "Player Preferences";
+        }
+        if (sLOptions.prefKeys.Contains(getKey) == true)//if the key exists
+        {
+            value = sLOptions.prefValues[sLOptions.prefKeys.IndexOf(getKey)];//parse needed to convert, otherwise specified cast not valid
+            lastUpdated = "Session Storage";
+        }
+
+        Debug.Log(optionElement.name + " updated via " + lastUpdated);
+
+        return value;
+    }
+    #endregion
 
     #region Data Management Methods
     private KeyValuePair<string, string> GetDefaultPref()
@@ -122,9 +149,6 @@ public class SaveLoadOptions : MonoBehaviour
             }
         }
 
-        
-
-
         //warning display
         if (missingKeys.Count >= 0)//if entries in missing keys
         {
@@ -153,7 +177,6 @@ public class SaveLoadOptions : MonoBehaviour
         
         //checks order inversed to have most recent updated last
         string lastUpdated = "Defaults";
-        
 
         var prefs = GetAllPrefs();
         if (prefs.ContainsKey(getKey) == true)//if the key exists
@@ -183,13 +206,13 @@ public class SaveLoadOptions : MonoBehaviour
             switch (stringSplit[0])//data type as a string
             {
                 case "Float"://if float data type
-                    PlayerPrefs.SetFloat(prefKeys[i], float.Parse(prefValues[i]));//!replace with read in file
+                    PlayerPrefs.SetFloat(prefKeys[i], float.Parse(prefValues[i]));
                     break;
                 case "Int"://if integer data type
-                    PlayerPrefs.SetInt(prefKeys[i], int.Parse(prefValues[i]));//!replace with read in file
+                    PlayerPrefs.SetInt(prefKeys[i], int.Parse(prefValues[i]));
                     break;
                 case "String"://if string data type
-                    PlayerPrefs.SetString(prefKeys[i], prefValues[i]);//!replace with read in file
+                    PlayerPrefs.SetString(prefKeys[i], prefValues[i]);
                     break;
                 case "Void":
                     //Void, no assignment
@@ -202,16 +225,15 @@ public class SaveLoadOptions : MonoBehaviour
         }
 
         //Debug.Log("Saved all preferences");
-        PlayerPrefs.Save();//save to disk//!not required?//!replace with read in file
+        PlayerPrefs.Save();//save to disk//?not required?
     }
 
     public SortedList<string, string> GetAllPrefs()//grab the preferences from the player preferences file
     {
         SortedList<string, string> loadedEntries = new SortedList<string, string>();//store return value
-        //loadedEntries.Clear();//clear to refill with updated data
 
-        //!loop through player preferences
-        for (int i = 0; i < prefKeys.Count; i++)//! how many entries are in playerprefs?
+        //loop through player preferences
+        for (int i = 0; i < prefKeys.Count; i++)//loop through known keys in player prefs
         {
             string[] stringSplit = prefKeys[i].Split(',');//separate parts of key//#
             switch (stringSplit[0])//data type as a string
@@ -254,10 +276,14 @@ public class SaveLoadOptions : MonoBehaviour
         }
 
         //remove player preferences
-        PlayerPrefs.DeleteAll();//!replace with read in file
+        PlayerPrefs.DeleteAll();
 
         //set default preferences
         SetDefaults();
+
+        //clear lists
+        //prefKeys.Clear();
+        //prefValues.Clear();
 
         //Debug.Log("Removed all preferences");
     }
@@ -309,5 +335,5 @@ public class SaveLoadOptions : MonoBehaviour
     }
     #endregion
 
-    //!end
+    //end
 }
