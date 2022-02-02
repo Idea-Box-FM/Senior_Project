@@ -10,6 +10,11 @@ public class DisplayContent : MonoBehaviour
     public Image billBoardImage;
     public Sprite[] imageList;
 
+    void Start()
+    {
+        billBoardImage.sprite = imageList[9];
+    }
+
 
     // Update is called once per frame
     void Update()
