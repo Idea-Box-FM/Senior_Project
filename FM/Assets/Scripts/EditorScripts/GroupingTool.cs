@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
  * Purpose: make a script capable on handling copying and pasting of multiple objects
  * TODO remove debugging pieces cignified by //Debugging
  * Please test persistance, load scene use copy, exit simulation and relaunch, ensuring copy and paste still works
+ * 
+ * Edited: Pat Naatz
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
  */
 
 public class GroupingTool : MonoBehaviour
@@ -63,7 +66,7 @@ public class GroupingTool : MonoBehaviour
 
     public void Start()
     {
-        prefabList = GetComponent<FMPrefabList>();
+        prefabList = FMPrefabList.prefabList;
         CopyInfo.group = groupingArea;
     }
     #endregion

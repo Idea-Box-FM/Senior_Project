@@ -14,9 +14,9 @@ using UnityEngine.InputSystem;
  *   Added properties to simplify readablility 11/8/2021
  *   Added the save functionality 11/15/2021
  *   TEMP commented out Barrell because it was not being used for anything just causing an error
+ *   Changed FMPrefabList to singleton pattern 2/2/2022
  */
 
-[RequireComponent(typeof(FMPrefabList))]
 public class LevelEditorManager : MonoBehaviour
 {
     //Ryan Consentino
@@ -44,7 +44,13 @@ public class LevelEditorManager : MonoBehaviour
     //Barell barell;
 
     //array of prefabs
-    FMPrefabList prefabList;
+    FMPrefabList prefabList
+    {
+        get
+        {
+            return FMPrefabList.prefabList;
+        }
+    }
 
     //array of buttons for the different items
     public ItemController[] itemButtons;
@@ -73,7 +79,6 @@ public class LevelEditorManager : MonoBehaviour
 
     void Start()
     {
-        prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
         room = FindObjectOfType<Room>();
         //barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
