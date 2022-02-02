@@ -99,7 +99,7 @@ public class FileManager : MonoBehaviour
         }
 
         UpdateOnlineSimulations();
-        Debug.Log("All known files: " + table.simulations);
+        //Debug.Log("All known files: " + table.simulations);
     }
 
     private void UpdateOnlineSimulations()
