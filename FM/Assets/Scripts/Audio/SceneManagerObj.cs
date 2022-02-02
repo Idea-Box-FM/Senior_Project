@@ -26,7 +26,7 @@ public class SceneManagerObj : MonoBehaviour
     public string changedSceneName;//scene to change to as string
     //input new scene location via id
     public bool changeByID = false;//change the scene via the ID of the scene
-    public int changedSceneId;//scene to change to as ID
+    public int changedSceneID;//scene to change to as ID
     //trigger options
     [Header("Trigger options (1 or none):")]
     public bool triggerOnEnter = false;//when entering a trigger, cause the scene to change based upon the above settings
@@ -100,7 +100,7 @@ public class SceneManagerObj : MonoBehaviour
         }
         if (changeByID)
         {
-            SceneManager.LoadScene(changedSceneId);//change to the scene that has the ID
+            SceneManager.LoadScene(changedSceneID);//change to the scene that has the ID
             executed = true;
         }
         if (exit)

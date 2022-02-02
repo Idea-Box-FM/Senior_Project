@@ -156,7 +156,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2327b9d9-f192-4f71-a418-4ddb39e91be7"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -444,6 +444,109 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Editor"",
+            ""id"": ""0d80b434-8636-4eab-8511-3c2ccbe238c4"",
+            ""actions"": [
+                {
+                    ""name"": ""Copy"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b4a8fd70-1066-4f59-ac85-ab93d3fa4354"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Control"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""606c1a22-3886-49b9-a888-20ae3c174873"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""88a6af46-7b2f-41d6-8137-67e1ef852f92"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Paste"",
+                    ""type"": ""Button"",
+                    ""id"": ""06e7fde8-b13c-4a98-9f52-d970fd02a597"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""938aadc8-84a5-414e-a64e-d0d769705be7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ed1cdd54-fdc7-4454-bec5-efbff14ac4eb"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Copy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""674cfbbb-0102-43f2-be65-c91f3d0841b2"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b17f995-0a5d-4bdf-9151-f2cf41815e78"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ee673fb-0604-4744-9a34-73c29a5b5f72"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Paste"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""229f57ac-020d-4a9f-a63b-36d1031849ba"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -525,6 +628,13 @@ public class @CameraControl : IInputActionCollection, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Editor
+        m_Editor = asset.FindActionMap("Editor", throwIfNotFound: true);
+        m_Editor_Copy = m_Editor.FindAction("Copy", throwIfNotFound: true);
+        m_Editor_Control = m_Editor.FindAction("Control", throwIfNotFound: true);
+        m_Editor_Cancel = m_Editor.FindAction("Cancel", throwIfNotFound: true);
+        m_Editor_Paste = m_Editor.FindAction("Paste", throwIfNotFound: true);
+        m_Editor_Click = m_Editor.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -716,6 +826,71 @@ public class @CameraControl : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Editor
+    private readonly InputActionMap m_Editor;
+    private IEditorActions m_EditorActionsCallbackInterface;
+    private readonly InputAction m_Editor_Copy;
+    private readonly InputAction m_Editor_Control;
+    private readonly InputAction m_Editor_Cancel;
+    private readonly InputAction m_Editor_Paste;
+    private readonly InputAction m_Editor_Click;
+    public struct EditorActions
+    {
+        private @CameraControl m_Wrapper;
+        public EditorActions(@CameraControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Copy => m_Wrapper.m_Editor_Copy;
+        public InputAction @Control => m_Wrapper.m_Editor_Control;
+        public InputAction @Cancel => m_Wrapper.m_Editor_Cancel;
+        public InputAction @Paste => m_Wrapper.m_Editor_Paste;
+        public InputAction @Click => m_Wrapper.m_Editor_Click;
+        public InputActionMap Get() { return m_Wrapper.m_Editor; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EditorActions set) { return set.Get(); }
+        public void SetCallbacks(IEditorActions instance)
+        {
+            if (m_Wrapper.m_EditorActionsCallbackInterface != null)
+            {
+                @Copy.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @Copy.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @Copy.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @Control.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnControl;
+                @Control.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnControl;
+                @Control.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnControl;
+                @Cancel.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnCancel;
+                @Paste.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
+                @Paste.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
+                @Paste.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
+                @Click.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_EditorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Copy.started += instance.OnCopy;
+                @Copy.performed += instance.OnCopy;
+                @Copy.canceled += instance.OnCopy;
+                @Control.started += instance.OnControl;
+                @Control.performed += instance.OnControl;
+                @Control.canceled += instance.OnControl;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+                @Paste.started += instance.OnPaste;
+                @Paste.performed += instance.OnPaste;
+                @Paste.canceled += instance.OnPaste;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public EditorActions @Editor => new EditorActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -778,5 +953,13 @@ public class @CameraControl : IInputActionCollection, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IEditorActions
+    {
+        void OnCopy(InputAction.CallbackContext context);
+        void OnControl(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnPaste(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }

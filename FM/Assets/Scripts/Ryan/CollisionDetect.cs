@@ -2,10 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*FlowerBox
+ * Edited by: Patrick Naatz
+ *  Added some funcitonality needed for the copy/paste functionality 1/31/2022
+ *  Organized the new code into sections 1/31/2022
+ */
 public class CollisionDetect : MonoBehaviour
 {
     public bool canPlace = true;
     private LevelEditorManager editor;
+
+    static public bool CanPlace
+    {
+        get
+        {
+            foreach(CollisionDetect collisionDetect in FindObjectsOfType<CollisionDetect>())
+            {
+                if(collisionDetect.canPlace == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
 
     void Start()
     {
@@ -13,31 +34,12 @@ public class CollisionDetect : MonoBehaviour
         editor = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelEditorManager>();
     }
 
+    #region Triggers
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("GoodPrefab"))
         {
-            col.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-            for(int i = 0; i < col.gameObject.transform.childCount; i++)
-            {
-                col.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.red;
-            }
-            editor.collision = this;
-            canPlace = false;
-        }
-    }
-
-    private void OnTriggerStay(Collider col)
-    {
-        if (col.gameObject.CompareTag("GoodPrefab"))
-        {
-            col.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-            for (int i = 0; i < col.gameObject.transform.childCount; i++)
-            {
-                col.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.red;
-            }
-            editor.collision = this;
-            canPlace = false;
+            Prevent(col);
         }
     }
 
@@ -45,12 +47,55 @@ public class CollisionDetect : MonoBehaviour
     {
         if (col.gameObject.CompareTag("GoodPrefab"))
         {
-            col.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
-            for (int i = 0; i < col.gameObject.transform.childCount; i++)
+            Permit(col);
+        }
+    }
+    #endregion
+
+    #region Permissions
+    void Prevent(Collider col)
+    {
+        if (col.transform.parent.name == "Group")
+        {
+            foreach (Transform copiedObject in col.transform.parent.GetComponentInChildren<Transform>())
             {
-                col.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.green;
+                ChangeColor(copiedObject.gameObject, Color.red);
             }
-            canPlace = true;
+        }
+        else
+        {
+            ChangeColor(col.gameObject, Color.red);
+        }
+
+        editor.collision = this;
+        canPlace = false;
+    }
+
+    void Permit(Collider col)
+    {
+        canPlace = true;
+
+        if (col.transform.parent.name == "Group")
+        {
+            if (CanPlace)
+                foreach (Transform copiedObject in col.transform.parent.GetComponentInChildren<Transform>())
+                {
+                    ChangeColor(copiedObject.gameObject, Color.green);
+                }
+        }
+        else
+        {
+            ChangeColor(col.gameObject, Color.green);
+        }
+    }
+    #endregion
+
+    static void ChangeColor(GameObject gameObject, Color color)
+    {
+        gameObject.GetComponent<MeshRenderer>().material.color = color;
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = color;
         }
     }
 }
