@@ -14,6 +14,7 @@ using UnityEngine.UI;
  * Editor: Patrick Naatz
  *  Added IsSelected Property 1/29/2022
  *  Added Deselect method 1/31/2022
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
  */
 
 public class Selector : MonoBehaviour
