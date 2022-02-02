@@ -83,7 +83,7 @@ public class Selector : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask))
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) && selectHit.transform == this.transform)
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
