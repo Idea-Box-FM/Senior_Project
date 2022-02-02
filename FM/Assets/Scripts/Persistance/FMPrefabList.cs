@@ -16,6 +16,14 @@ public class FMPrefabList : MonoBehaviour
 
     public static FMPrefabList prefabList;
 
+    public static FMPrefab[] Prefabs
+    {
+        get
+        {
+            return prefabList.prefabs;
+        }
+    }
+
     private void Start()
     {
         if(prefabList == null)

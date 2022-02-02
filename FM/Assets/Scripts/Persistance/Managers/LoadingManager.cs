@@ -14,18 +14,16 @@ using UnityEngine;
  *  Add comments 11/2/21
  *  Added the room loading 11/15/2021
  *  Removed some debugging features 11/27/2021
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
  */
 
-[RequireComponent(typeof(FMPrefabList))]
 public class LoadingManager : MonoBehaviour
 {
-    FMPrefabList prefabList;
     FileManager fileManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
 
         XML xml = XML.readfromfile(fileManager.currentSimulation);
@@ -40,7 +38,7 @@ public class LoadingManager : MonoBehaviour
     {
         List<GameObject> newObjects = new List<GameObject>(); //we save the gameobjects, disabled to this list because they have rigidbodies, we do not want gravity taking effect while we are still spawning the parts
 
-        foreach (FMPrefab prefab in prefabList.prefabs)
+        foreach (FMPrefab prefab in FMPrefabList.Prefabs)
         {
             XML section;
             if ((section = xml.FindChild(prefab.name)) != null)

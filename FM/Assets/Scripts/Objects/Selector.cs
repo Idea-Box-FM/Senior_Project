@@ -14,6 +14,8 @@ using UnityEngine.UI;
  * Editor: Patrick Naatz
  *  Added IsSelected Property 1/29/2022
  *  Added Deselect method 1/31/2022
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
+ *  Fixed a bug where you can select things without the selector script on it 2/2/2022
  */
 
 public class Selector : MonoBehaviour
@@ -82,7 +84,7 @@ public class Selector : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask))
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) && selectHit.transform == this.transform)
             {
                 //change material of the raycasted object to the testMat
                 selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
