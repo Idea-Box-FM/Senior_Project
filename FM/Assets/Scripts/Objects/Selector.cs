@@ -148,9 +148,4 @@ public class Selector : MonoBehaviour
         Destroy(this.transform.parent.gameObject);
         deleteButton.onClick.RemoveListener(delete);
     }
-
-    public void Deselect()
-    {
-        goMaterial.material = selfMat;
-    }
 }
