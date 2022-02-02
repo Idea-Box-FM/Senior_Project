@@ -25,7 +25,7 @@ public class PlaySoundEffect : MonoBehaviour
     public static List<AudioClip> soundEffectQueue = new List<AudioClip>();//a list of sounds for this object to play
 
     [Header("Options")]
-    public GameObject optionElement;
+    public GameObject optionSlider;
     [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
     public float volumeLimit = 1f;
 

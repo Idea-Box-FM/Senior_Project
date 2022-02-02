@@ -45,7 +45,7 @@ public class SaveLoadOptions : MonoBehaviour
     
     private void Update()
     {
-        OptionsStatic.options = this;
+        
     }
 
     #region External Data Methods
