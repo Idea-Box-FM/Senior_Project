@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 /*
  * Editor: Patrick Naatz
  *  fixed variable names that no longer existed in LevelEditingManager 11/8/2021
- */  
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
+ */
 
 public class FollowScript : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class FollowScript : MonoBehaviour
 
     void Start()
     {
+        if(gameObject.tag == "FMPrefab")
+        {
+            gameObject.GetComponent<FollowScript>().enabled = false;
+        }
         //grab the LevelEditorManager component
         editor = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelEditorManager>();
         //grab the main camera
@@ -45,6 +50,11 @@ public class FollowScript : MonoBehaviour
             if (Keyboard.current.rKey.wasPressedThisFrame)
             {
                 transform.eulerAngles += new Vector3(0, 90, 0);
+            }
+
+            if (Keyboard.current.deleteKey.wasPressedThisFrame)
+            {
+                LevelEditorManager.DestroyCurrentExample();
             }
         }
     }

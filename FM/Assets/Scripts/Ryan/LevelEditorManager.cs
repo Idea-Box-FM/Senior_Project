@@ -14,9 +14,9 @@ using UnityEngine.InputSystem;
  *   Added properties to simplify readablility 11/8/2021
  *   Added the save functionality 11/15/2021
  *   TEMP commented out Barrell because it was not being used for anything just causing an error
+ *   Changed FMPrefabList to singleton pattern 2/2/2022
  */
 
-[RequireComponent(typeof(FMPrefabList))]
 public class LevelEditorManager : MonoBehaviour
 {
     //Ryan Consentino
@@ -44,7 +44,13 @@ public class LevelEditorManager : MonoBehaviour
     //Barell barell;
 
     //array of prefabs
-    FMPrefabList prefabList;
+    FMPrefabList prefabList
+    {
+        get
+        {
+            return FMPrefabList.prefabList;
+        }
+    }
 
     //array of buttons for the different items
     public ItemController[] itemButtons;
@@ -73,7 +79,6 @@ public class LevelEditorManager : MonoBehaviour
 
     void Start()
     {
-        prefabList = GetComponent<FMPrefabList>();
         fileManager = FileManager.fileManager;
         room = FindObjectOfType<Room>();
         //barell = GameObject.FindGameObjectWithTag("FMPrefab").GetComponent<Barell>();
@@ -97,28 +102,31 @@ public class LevelEditorManager : MonoBehaviour
                 //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
                 CurrentButton.isClicked = false;
 
-                //instantiate prefab based on current button pressed at the raycast hit location
-                GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
-                finalPrefab.SetActive(true);
+                if (example != null)
+                {
+                    //instantiate prefab based on current button pressed at the raycast hit location
+                    GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
+                    finalPrefab.SetActive(true);
 
-                DestroyCurrentExample();
+                    DestroyCurrentExample();
+                }
             }
         }
 
-        //if the middle mouse button is clicked, ray cast out
-        if (Mouse.current.middleButton.wasPressedThisFrame)
-        {
-            //raycast from main camera to mouse position
-            Ray deleteRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit deleteHit;
+        ////if the middle mouse button is clicked, ray cast out
+        //if (Mouse.current.middleButton.wasPressedThisFrame)
+        //{
+        //    //raycast from main camera to mouse position
+        //    Ray deleteRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        //    RaycastHit deleteHit;
 
-            //if the raycast hits a valid target on the layer mask, destroy the object
-            if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
-            {
-                //destroys game object by parent -- IMPORTANT -- ALL ITEMS NEED TO HAVE A PARENT
-                Destroy(deleteHit.transform.parent.gameObject);
-            }
-        }
+        //    //if the raycast hits a valid target on the layer mask, destroy the object
+        //    if(Physics.Raycast(deleteRay, out deleteHit, Mathf.Infinity, deleteMask))
+        //    {
+        //        //destroys game object by parent -- IMPORTANT -- ALL ITEMS NEED TO HAVE A PARENT
+        //        Destroy(deleteHit.transform.parent.gameObject);
+        //    }
+        //}
 
         //if m is pressed, change material on wall only
         if (Keyboard.current.mKey.wasPressedThisFrame)
