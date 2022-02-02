@@ -1488,6 +1488,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682939925}
   m_CullTransparentMesh: 1
+--- !u!1 &688925030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 148829255526232531, guid: eb017e03fac5de647ab2d195ebf69967, type: 3}
+  m_PrefabInstance: {fileID: 1986193015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &709014885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2277,7 @@ MonoBehaviour:
     - {fileID: 929868486}
     - {fileID: 1877016112}
     - {fileID: 1914231275}
-  roof: {fileID: 0}
+  roof: {fileID: 688925030}
   floor: {fileID: 2073721116}
   grate: {fileID: 801517878}
   gratePerSquareFoot: 1
