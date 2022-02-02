@@ -13090,9 +13090,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefDefaultKeys:
-  - Float, AudioMusicSlider, 43136
-  - Float, AudioSoundEffectSlider, 42316
-  - Float, ControlsMouseSensitivitySlider, 42612
+  - Float, AudioMusicSlider, 20930
+  - Float, AudioSoundEffectSlider, 20110
+  - Float, ControlsMouseSensitivitySlider, 20406
   prefDefaultValues:
   - 100
   - 100
