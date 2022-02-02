@@ -14,6 +14,7 @@ using UnityEngine.UI;
  * Editor: Patrick Naatz
  *  Added IsSelected Property 1/29/2022
  *  Added Deselect method 1/31/2022
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
  */
 
 public class Selector : MonoBehaviour
@@ -126,7 +127,7 @@ public class Selector : MonoBehaviour
             follower.enabled = true;
     }
 
-    void Deselect()
+    public void Deselect()
     {
         //change the material back to selfMat when you click off of an object
         goMaterial.material = selfMat;
@@ -147,10 +148,5 @@ public class Selector : MonoBehaviour
     {
         Destroy(this.transform.parent.gameObject);
         deleteButton.onClick.RemoveListener(delete);
-    }
-
-    public void Deselect()
-    {
-        goMaterial.material = selfMat;
     }
 }

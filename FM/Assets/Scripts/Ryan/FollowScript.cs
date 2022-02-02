@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 /*
  * Editor: Patrick Naatz
  *  fixed variable names that no longer existed in LevelEditingManager 11/8/2021
- */  
+ *  Changed FMPrefabList to singleton pattern 2/2/2022
+ */
 
 public class FollowScript : MonoBehaviour
 {
