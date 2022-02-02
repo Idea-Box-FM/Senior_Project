@@ -11,6 +11,9 @@ using UnityEngine.UI;
  * 
  * Editor: Tyler Rubenstein
  *   Added to main 12/7/21
+ * Editor: Patrick Naatz
+ *  Added IsSelected Property 1/29/2022
+ *  Added Deselect method 1/31/2022
  */
 
 public class Selector : MonoBehaviour
@@ -37,6 +40,14 @@ public class Selector : MonoBehaviour
     private UnityAction deselect;
     private UnityAction delete;
     
+    public bool IsSelected
+    {
+        get
+        {
+            return goMaterial.material != selfMat; //for some reason goMaterial.material == testMat does not work, probably because the layers of materials used
+        }
+    }
+
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
@@ -136,5 +147,10 @@ public class Selector : MonoBehaviour
     {
         Destroy(this.transform.parent.gameObject);
         deleteButton.onClick.RemoveListener(delete);
+    }
+
+    public void Deselect()
+    {
+        goMaterial.material = selfMat;
     }
 }
