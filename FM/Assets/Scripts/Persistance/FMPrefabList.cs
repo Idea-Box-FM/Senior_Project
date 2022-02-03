@@ -28,7 +28,6 @@ public class FMPrefabList : MonoBehaviour
     {
         if(prefabList == null)
         {
-            Debug.Log("prefab exists");
             prefabList = this;
         } else
         {

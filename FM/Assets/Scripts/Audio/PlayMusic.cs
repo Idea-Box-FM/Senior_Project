@@ -27,7 +27,13 @@ public class PlayMusic : MonoBehaviour
     public bool currentlyPlaying = true;
     private bool storedLastValue;
     static bool changeableState;
+    [Tooltip("How long it takes to fade to the other state")]
     public static float fadeTime = 1f;//make publically available
+
+    [Header("Options")]
+    public GameObject optionElement;
+    [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
+    public float volumeLimit = 1f;
 
     //!fix inital starting of music
     //condense toggling of values within function
@@ -44,6 +50,9 @@ public class PlayMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //volumeLimit = ;//get volume from options//!
+
         ////test inputs
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {
         //    Debug.Log("Play");
@@ -135,7 +144,7 @@ public class PlayMusic : MonoBehaviour
         switch (action)//determine target
         {
             case MusicAction.FadeIn:
-                targetVolume = 1;
+                targetVolume = volumeLimit;
                 break;
             case MusicAction.FadeOut:
                 targetVolume = 0;
