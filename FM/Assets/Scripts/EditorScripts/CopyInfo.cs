@@ -38,6 +38,7 @@ public class CopyInfo
     public GameObject Preview()
     {
         example = originalPrefab.InstanciateExample().transform;
+        example.transform.rotation = FMPrefab.ConvertToQuaternion(details.attributes["Rotation"]);
         example.GetComponent<FollowScript>().enabled = false;
         example.parent = group.transform;
         example.transform.localPosition = offset;

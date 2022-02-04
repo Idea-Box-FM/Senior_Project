@@ -155,9 +155,9 @@ public class GroupingTool : MonoBehaviour
                 copiedObjects.Add(copiedObject);
 
                 //center point variable update
-                Vector3 position = transform.position;
+                Vector3 position = parent.transform.position;
                 X.Set(position.x);
-                Y.Set(position.y - prefabType.height / 2);
+                Y.Set(position.y);
                 Z.Set(position.z);
 
                 selector.Deselect();
