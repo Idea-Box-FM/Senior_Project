@@ -16,6 +16,7 @@ using UnityEngine.UI;
  *  Added Deselect method 1/31/2022
  *  Changed FMPrefabList to singleton pattern 2/2/2022
  *  Fixed a bug where you can select things without the selector script on it 2/2/2022
+ *  Helped runtime length 2/3/2022
  */
 
 public class Selector : MonoBehaviour
@@ -41,14 +42,6 @@ public class Selector : MonoBehaviour
     private UnityAction action;
     private UnityAction deselect;
     private UnityAction delete;
-    
-    public bool IsSelected
-    {
-        get
-        {
-            return goMaterial.material != selfMat; //for some reason goMaterial.material == testMat does not work, probably because the layers of materials used
-        }
-    }
 
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
@@ -77,12 +70,12 @@ public class Selector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //raycast from camera to mouse location
-        Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit selectHit;
-
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            //raycast from camera to mouse location
+            Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit selectHit;
+
             //If the raycast hits an object under the selectMask
             if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) && selectHit.transform == this.transform)
             {
@@ -105,7 +98,7 @@ public class Selector : MonoBehaviour
         }  
 
         //more RYAN
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
             //change the material back to selfMat when you click off of an object
             goMaterial.material = selfMat;
@@ -125,7 +118,7 @@ public class Selector : MonoBehaviour
 
     void MoveItem()
     {
-            follower.enabled = true;
+        follower.enabled = true;
     }
 
     public void Deselect()

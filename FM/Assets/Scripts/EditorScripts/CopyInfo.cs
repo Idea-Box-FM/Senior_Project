@@ -38,9 +38,9 @@ public class CopyInfo
     public GameObject Preview()
     {
         example = originalPrefab.InstanciateExample().transform;
+        example.GetComponent<FollowScript>().enabled = false;
         example.parent = group.transform;
-        example.GetComponent<BoxCollider>().center = offset;//Because of the below note we have to reposition the box collider
-        example.GetChild(0).transform.localPosition = offset;//NOTE for some reason example.transform.localPosition/Position does not actually change the location of the object. Unity Glitch
+        example.transform.localPosition = offset;
 
         return example.gameObject;
     }
@@ -48,7 +48,7 @@ public class CopyInfo
     public GameObject Instanciate()
     {
         GameObject newObject = originalPrefab.InstanciatePrefab(details);
-        newObject.transform.position = example.GetChild(0).transform.position;//See Preview for explanation
+        newObject.transform.position = example.transform.position;
         newObject.SetActive(true);
 
         return newObject;

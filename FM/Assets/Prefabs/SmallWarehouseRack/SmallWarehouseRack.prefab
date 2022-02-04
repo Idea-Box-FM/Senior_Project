@@ -101,6 +101,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5420028774540946582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978113030471390304}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61c48263d9ca3a4d98c68b9ba949042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &6964754378054929610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +148,10 @@ MonoBehaviour:
   testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
   mainCamera: {fileID: 0}
   goMaterial: {fileID: 0}
+  moveButton: {fileID: 0}
+  cancelButton: {fileID: 0}
+  deleteButton: {fileID: 0}
+  isSelected: 0
 --- !u!1001 &8095717216214886705
 PrefabInstance:
   m_ObjectHideFlags: 0
