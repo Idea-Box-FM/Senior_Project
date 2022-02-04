@@ -84,22 +84,25 @@ public class Selector : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) && selectHit.transform == this.transform)
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) /*&& selectHit.transform == this.transform*/)
             {
-                //change material of the raycasted object to the testMat
-                selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
+                if (selectHit.collider.tag == "FMPrefab")
                 {
-                    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
-                }
+                    //change material of the raycasted object to the testMat
+                    selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
+                    {
+                        selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    }
 
-                selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
 
-                if (isSelected == true)
-                {
-                    moveButton.onClick.AddListener(action);
-                    cancelButton.onClick.AddListener(deselect);
-                    deleteButton.onClick.AddListener(delete);
+                    if (isSelected == true)
+                    {
+                        moveButton.onClick.AddListener(action);
+                        cancelButton.onClick.AddListener(deselect);
+                        deleteButton.onClick.AddListener(delete);
+                    }
                 }
             }
         }  
