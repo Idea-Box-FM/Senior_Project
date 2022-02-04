@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 //NOTICE: The gameobject with this script attached MUST have an audio source for it to function properly
 //[RequireComponent(typeof(AudioSource))]
@@ -25,7 +26,7 @@ public class PlaySoundEffect : MonoBehaviour
     public static List<AudioClip> soundEffectQueue = new List<AudioClip>();//a list of sounds for this object to play
 
     [Header("Options")]
-    public GameObject optionSlider;
+    public Slider optionSlider;
     [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
     public float volumeLimit = 1f;
 
@@ -44,7 +45,7 @@ public class PlaySoundEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //volumeLimit = ;//get volume from options//!
+        //volumeLimit = float.Parse((string)newVolume) / 100;//get volume from options//!
 
         soundEffectQueueDisplay = soundEffectQueue;
         if (play == true)

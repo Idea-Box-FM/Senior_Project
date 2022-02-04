@@ -26,72 +26,33 @@ public class SaveLoadOptions : MonoBehaviour
 
     public string fileName = "/preferencesCurrent.dat";
 
-    #region Setup Methods
-    private void OnEnable()
-    {
-        LoadListFile();
-        GetAllPrefs();//load options
-    }
-    private void OnDisable()
-    {
-        GetAllPrefs();
-        SetAllPrefs();//save options
-    }
     void Start()
     {
         
     }
-    #endregion
     
     private void Update()
     {
-        
+        //update static options//!issue if more than 1 of these scripts in the scene
+        GetOptionsStored.sLOptions = this;
+        GetOptionsStored.prefKeys = prefKeys;
+        GetOptionsStored.prefValues = prefValues;
     }
 
-    #region External Data Methods
-    public static object GetValuePref(SaveLoadOptions sLOptions, GameObject optionElement)//make sure to parse the return
-    {
-        string value = "";
-
-        //apply the slider's stored preference when the screen is loaded to prevent it from being shown as the wrong value
-        string getKey = "Float" + ", " + optionElement.name.Replace(",", "") + ", " + optionElement.GetInstanceID();
-
-        //checks order inversed to have most recent updated last
-        string lastUpdated = "Defaults";
-
-        var prefs = sLOptions.GetAllPrefs();
-        if (prefs.ContainsKey(getKey) == true)//if the key exists
-        {
-            //update the value
-            value = prefs[getKey];//parse needed to convert, otherwise specified cast not valid
-            lastUpdated = "Player Preferences";
-        }
-        if (sLOptions.prefKeys.Contains(getKey) == true)//if the key exists
-        {
-            value = sLOptions.prefValues[sLOptions.prefKeys.IndexOf(getKey)];//parse needed to convert, otherwise specified cast not valid
-            lastUpdated = "Session Storage";
-        }
-
-        Debug.Log(optionElement.name + " updated via " + lastUpdated);
-
-        return value;
-    }
-    #endregion
-
-    #region Data Management Methods
     private KeyValuePair<string, string> GetDefaultPref()
     {
-        string key = "Void, Default, 0";
+        string key = "Default";
         string value = "100";
 
         return new KeyValuePair<string, string>(key, value);
     }
 
-    public void AddEntry(string newKey, string newValue)//add/update an entry in the list
+    public void AddEntry(string newKey, string newValue)//add/update an entry in the lists
     {
         if (prefKeys.Count <= 0)//if there are no entries
         {
-            EntryStore(newKey, newValue);//add one to the list
+            prefKeys.Add(newKey);
+            prefValues.Add(newValue);
         }
         else//if there are entries
         {
@@ -110,220 +71,100 @@ public class SaveLoadOptions : MonoBehaviour
             }
             else//if there is not an entry
             {
-                EntryStore(newKey, newValue);//add one to the list
+                prefKeys.Add(newKey);
+                prefValues.Add(newValue);
             }
         }
     }
 
-    private void EntryStore(string newKey, string newValue)//add the entry into the proper lists
+    public void ResetAllPrefs()//delete all preferences from all sources
     {
-        //add it to the lists
-        prefKeys.Add(newKey);
-        prefValues.Add(newValue);
-
-        SaveListFile();
-        //Debug.Log("Created key with value");
-        //Debug.Log(Time.realtimeSinceStartup + " -> Created " + newKey + " key with " + newValue.ToString() + " value");
-    }
-
-    private void SetDefaults()
-    {
-        KeyValuePair<string, string> defaultSolo = GetDefaultPref();//get the default entry
-
-        //set the default value of the key
+        //set default preferences
         List<string> missingKeys = new List<string>();
-        for (int i = 0; i < prefKeys.Count; i++)//loop through 
+        for (int i = 0; i < prefKeys.Count; i++)//loop through keys
         {
-            bool check = false;
             for (int j = 0; j < prefDefaultKeys.Count; j++)//loop through defaults
             {
-                check = prefKeys[i] == prefDefaultKeys[j];//same key check
-                if (check == true)//if the same key
+                if (prefKeys[i] == prefDefaultKeys[j])//if the same key
                 {
-                    prefValues[i] = prefDefaultValues[j];//update the value
+                    prefValues[i] = prefDefaultValues[j];//update the value to its default
                 }
             }
             if (prefDefaultKeys.Contains(prefKeys[i]) == false)//if not containing same key
             {
                 missingKeys.Add(prefKeys[i]);//add to warning
+                //remove the key and its entry
+                prefKeys.RemoveAt(i);
+                prefValues.RemoveAt(i);
             }
         }
-
-        //warning display
         if (missingKeys.Count >= 0)//if entries in missing keys
         {
-            foreach (string key in missingKeys)
+            foreach (string key in missingKeys)//loop through them
             {
-                Debug.LogWarning("Unable to get default value of \"" + key + "\", did you set one?");
+                Debug.LogWarning("Unable to get default value of \"" + key + "\", did you set one?");//warning display
             }
         }
 
-    }
-    #endregion
-
-    #region Component Management Methods
-    public void SetSliderPref(Slider slider)//stores the slider's value
-    {
-        string newKey = "Float" + ", " + slider.name.Replace(",", "") + ", " + slider.GetInstanceID();//key has sections
-        string newValue = slider.value.ToString();
-
-        AddEntry(newKey, newValue);
-    }
-    
-    public void GetSliderPref(Slider slider)//apply the saved preferences to the sliders
-    {
-        //apply the slider's stored preference when the screen is loaded to prevent it from being shown as the wrong value
-        string getKey = "Float" + ", " + slider.name.Replace(",", "") + ", " + slider.GetInstanceID();
-        
-        //checks order inversed to have most recent updated last
-        string lastUpdated = "Defaults";
-
-        var prefs = GetAllPrefs();
-        if (prefs.ContainsKey(getKey) == true)//if the key exists
-        {
-            //update the value
-            float newValue = float.Parse(prefs[getKey]);//parse needed to convert, otherwise specified cast not valid
-            slider.value = newValue;//update the value
-            lastUpdated = "Player Preferences";
-        }
-        if (prefKeys.Contains(getKey) == true)//if the key exists
-        {
-            float newValue = float.Parse(prefValues[prefKeys.IndexOf(getKey)]);//parse needed to convert, otherwise specified cast not valid
-            slider.value = newValue;//update the value
-            lastUpdated = "Session Storage";
-        }
-
-        Debug.Log(slider.name + " updated via " + lastUpdated);
-    }
-    #endregion
-
-    #region Preference Management Methods
-    public void SetAllPrefs()//store the preferences in the list into the player prefs file
-    {
-        for (int i = 0; i < prefKeys.Count; i++)
-        {
-            string[] stringSplit = prefKeys[i].Split(',');//separate parts of key
-            switch (stringSplit[0])//data type as a string
-            {
-                case "Float"://if float data type
-                    PlayerPrefs.SetFloat(prefKeys[i], float.Parse(prefValues[i]));
-                    break;
-                case "Int"://if integer data type
-                    PlayerPrefs.SetInt(prefKeys[i], int.Parse(prefValues[i]));
-                    break;
-                case "String"://if string data type
-                    PlayerPrefs.SetString(prefKeys[i], prefValues[i]);
-                    break;
-                case "Void":
-                    //Void, no assignment
-                    break;
-                default:
-                    Debug.LogWarning("Unable to set preference of key \"" + prefKeys[i] + "\"");
-                    break;
-            }
-            //Debug.Log("Saved new " + stringSplit[0] + " with \"" + prefKeys[i] + "\"  key and \"" + prefValues[i].ToString() + "\" value");
-        }
-
-        //Debug.Log("Saved all preferences");
-        PlayerPrefs.Save();//save to disk//?not required?
-    }
-
-    public SortedList<string, string> GetAllPrefs()//grab the preferences from the player preferences file
-    {
-        SortedList<string, string> loadedEntries = new SortedList<string, string>();//store return value
-
-        //loop through player preferences
-        for (int i = 0; i < prefKeys.Count; i++)//loop through known keys in player prefs
-        {
-            string[] stringSplit = prefKeys[i].Split(',');//separate parts of key//#
-            switch (stringSplit[0])//data type as a string
-            {
-                case "Float"://if float data type
-                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetFloat(prefKeys[i], float.Parse(prefValues[i])).ToString());//!replace with read in file
-                    break;
-                case "Int"://if integer data type
-                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetInt(prefKeys[i], int.Parse(prefValues[i])).ToString());//!replace with read in file
-                    break;
-                case "String"://if string data type
-                    loadedEntries.Add(/*Key*/prefKeys[i], /*Value*/PlayerPrefs.GetString(prefKeys[i], prefValues[i]));//!replace with read in file
-                    break;
-                case "Void":
-                    //Void, no assignment
-                    break;
-                default:
-                    Debug.LogWarning("Unable to get preference of key \"" + prefKeys[i] + "\"");
-                    break;
-            }
-            //Debug.Log("Loaded " + stringSplit[0] + " \"" + prefKeys[i] + "\"  key and \"" + prefValues[i] + "\" value");
-        }
-
-        for(int i = 0; i<loadedEntries.Count; i++)
-        {
-            AddEntry(loadedEntries.Keys[i], loadedEntries.Values[i]);
-        }
-
-        //Debug.Log("Loaded all preferences");
-
-        return loadedEntries;//return in case needed
-    }
-    public void ResetAllPrefs()//delete all preferences from all sources
-    {
-        //remove file
-        string fileLocation = Application.persistentDataPath + "/preferences0.dat";
-        if (File.Exists(fileLocation) == true)
-        {
-            File.Delete(fileLocation);
-        }
-
-        //remove player preferences
-        PlayerPrefs.DeleteAll();
-
-        //set default preferences
-        SetDefaults();
-
-        //clear lists
-        //prefKeys.Clear();
-        //prefValues.Clear();
+        SaveListFile();//save to file
 
         //Debug.Log("Removed all preferences");
     }
-    #endregion
 
     #region File Management Methods
-    private void SaveListFile()
+    public void SaveListFile()//button
     {
-        string fileLocation = Application.persistentDataPath + fileName;
-        FileStream file;
+        string fileLocation = Application.persistentDataPath + fileName;//file location
+        FileStream file;//the file contents
 
-        if (File.Exists(fileLocation)) file = File.OpenWrite(fileLocation);
-        else file = File.Create(fileLocation);
+        if (File.Exists(fileLocation))//if the file exists already
+            file = File.OpenWrite(fileLocation);//write to it
+        else //otherwise
+            file = File.Create(fileLocation);//create it
 
-        SortedList<string, string> data = GetAllPrefs();
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, data);
-        file.Close();
-
-        Debug.Log("Saved file to " + fileLocation);
-    }
-    private void LoadListFile()
-    {
-        string fileLocation = Application.persistentDataPath + fileName;
-        FileStream file;
-
-        if (File.Exists(fileLocation))
+        SortedList<string, string> data = new SortedList<string, string>();//variable to store data written to file
+        for (int i = 0; i < prefKeys.Count; i++)//loop through keys
         {
-            file = File.OpenRead(fileLocation);
+            data.Add(prefKeys[i], prefValues[i]);
+        }
 
-            BinaryFormatter bf = new BinaryFormatter();
-            SortedList<string, string> data = (SortedList<string, string>)bf.Deserialize(file);
-            file.Close();
+        BinaryFormatter bf = new BinaryFormatter();//formatter
+        bf.Serialize(file, data);//serialization, will write to file
+        file.Close();//close the file
 
-            for (int i = 0; i < data.Keys.Count; i++)
+        Debug.Log("Saved file to " + fileLocation);//debug location
+    }
+    public void LoadListFile()//button
+    {
+        string fileLocation = Application.persistentDataPath + fileName;//file location
+        FileStream file;//the file contents
+
+        if (File.Exists(fileLocation))//if the file exists already
+        {
+            file = File.OpenRead(fileLocation);//open it and store the data
+
+            BinaryFormatter bf = new BinaryFormatter();//formatter
+            SortedList<string, string> data = (SortedList<string, string>)bf.Deserialize(file);//get the data from the file and convert it
+            file.Close();//close the file
+
+            for (int i = 0; i < data.Keys.Count; i++)//loop through converted data
             {
-                if (prefKeys.Contains(data.Keys[i]) == false)
+                if (prefKeys.Contains(data.Keys[i]) == false)//if there is not the key in the list
                 {
-                    prefKeys.Add(data.Keys[i]);//get keys
-                    prefValues.Add(data.Values[i]);//get values
+                    prefKeys.Add(data.Keys[i]);//store the key
+                    prefValues.Add(data.Values[i]);//store the value
+                }
+                for(int j = 0; j < prefKeys.Count; j++)
+                {
+                    if(prefKeys[j] == data.Keys[i])//if same key
+                    {
+                        //convert values to list
+                        List<string> newValues = new List<string>();
+                        foreach (string value in data.Values)
+                            newValues.Add(value);
+
+                        prefValues = newValues;//update it's list
+                    }
                 }
             }
 
@@ -331,7 +172,29 @@ public class SaveLoadOptions : MonoBehaviour
         }
         else
             Debug.Log("File not found");
+    }
+    #endregion
 
+    #region Component Management Methods
+    public void SetSliderPref(Slider slider)//stores the slider's value //button
+    {
+        AddEntry(slider.name, slider.value.ToString());
+
+        SaveListFile();
+    }
+
+    public void GetSliderPref(Slider slider)//apply the saved preferences to the sliders //button
+    {
+        LoadListFile();//update values for sure
+
+        //apply the slider's stored preference when the screen is loaded to prevent it from being shown as the wrong value     
+        //checks order inversed to have most recent updated last
+
+        if (prefKeys.Contains(slider.name) == true)//if the key exists
+        {
+            float newValue = float.Parse(prefValues[prefKeys.IndexOf(slider.name)]);//parse needed to convert, otherwise specified cast not valid
+            slider.value = newValue;//update the value
+        }
     }
     #endregion
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 //using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
 [RequireComponent(typeof(AudioSource))]
@@ -31,7 +32,6 @@ public class PlayMusic : MonoBehaviour
     public static float fadeTime = 1f;//make publically available
 
     [Header("Options")]
-    public GameObject optionSlider;
     [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
     public float volumeLimit = 1f;
 
@@ -50,7 +50,7 @@ public class PlayMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //volumeLimit = ;//get volume from options//!
+        //volumeLimit = float.Parse((string)newVolume) / 100;//get volume from options//!
 
         ////test inputs
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {

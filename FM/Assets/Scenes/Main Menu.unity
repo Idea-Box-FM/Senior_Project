@@ -1146,7 +1146,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2014930195}
         m_TargetAssemblyTypeName: SaveLoadOptions, Assembly-CSharp
-        m_MethodName: SetAllPrefs
+        m_MethodName: SaveListFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1309,7 +1309,7 @@ MonoBehaviour:
   playOver: 0
   play: 0
   soundEffectQueueDisplay: []
-  optionSlider: {fileID: 0}
+  optionSlider: {fileID: 286916301}
   volumeLimit: 1
 --- !u!1 &170144904
 GameObject:
@@ -1587,19 +1587,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2014930195}
         m_TargetAssemblyTypeName: SaveLoadOptions, Assembly-CSharp
-        m_MethodName: SetAllPrefs
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2014930195}
-        m_TargetAssemblyTypeName: SaveLoadOptions, Assembly-CSharp
-        m_MethodName: SetAllPrefs
+        m_MethodName: SaveListFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2768,7 +2756,7 @@ MonoBehaviour:
   playOver: 0
   play: 0
   soundEffectQueueDisplay: []
-  optionSlider: {fileID: 0}
+  optionSlider: {fileID: 286916301}
   volumeLimit: 1
 --- !u!1 &286916300
 GameObject:
@@ -6760,7 +6748,7 @@ MonoBehaviour:
   playOver: 0
   play: 0
   soundEffectQueueDisplay: []
-  optionSlider: {fileID: 0}
+  optionSlider: {fileID: 286916301}
   volumeLimit: 1
 --- !u!1 &953485558
 GameObject:
@@ -8819,7 +8807,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2014930195}
         m_TargetAssemblyTypeName: SaveLoadOptions, Assembly-CSharp
-        m_MethodName: SetAllPrefs
+        m_MethodName: SaveListFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10850,6 +10838,14 @@ PrefabInstance:
       value: MusicPlayerMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644363, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
+      propertyPath: options
+      value: 
+      objectReference: {fileID: 2014930195}
+    - target: {fileID: 3259084887768644363, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
+      propertyPath: optionSlider
+      value: 
+      objectReference: {fileID: 2023383794}
+    - target: {fileID: 3259084887768644363, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: musicClips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: a19875d9569aa404382068b88842b83e, type: 3}
@@ -10859,15 +10855,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13629048
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9152002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.9654038
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12115,7 +12111,7 @@ MonoBehaviour:
   playOver: 0
   play: 0
   soundEffectQueueDisplay: []
-  optionSlider: {fileID: 0}
+  optionSlider: {fileID: 286916301}
   volumeLimit: 1
 --- !u!114 &1836046065
 MonoBehaviour:
@@ -13715,9 +13711,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefDefaultKeys:
-  - Float, AudioMusicSlider, 49862
-  - Float, AudioSoundEffectSlider, 49042
-  - Float, ControlsMouseSensitivitySlider, 49338
+  - AudioMusicSlider
+  - AudioSoundEffectSlider
+  - ControlsMouseSensitivitySlider
   prefDefaultValues:
   - 100
   - 100
