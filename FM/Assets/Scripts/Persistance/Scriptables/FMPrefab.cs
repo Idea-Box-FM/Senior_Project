@@ -21,6 +21,8 @@ public class FMPrefab : ScriptableObject
     [Tooltip("Make sure this prefab is tagged FMPrefab")]
     [SerializeField] GameObject prefab;
     public GameObject examplePrefab;
+    public GameObject selectorPrefab;
+    public float height;
 
     [HideInInspector]
     public GameObject parent;
