@@ -136,7 +136,7 @@ public class GroupingTool : MonoBehaviour
 
         foreach(Selector selector in FindObjectsOfType<Selector>())
         {
-            if (selector.IsSelected)
+            if (selector.isSelected)
             {
                 if(cleared == false)
                 {//only clear the inputs after we are sure something else is copied
@@ -146,34 +146,38 @@ public class GroupingTool : MonoBehaviour
                 }
 
                 //save copied objects info
-                FMPrefab prefabType = prefabList.GetPrefabType(selector.transform.parent.gameObject);
-                XML details = prefabType.ConvertToXML(selector.transform.parent.gameObject);
+                Transform transform = selector.transform;
+                GameObject parent = transform.parent.gameObject;
+                FMPrefab prefabType = prefabList.GetPrefabType(parent);
+                XML details = prefabType.ConvertToXML(parent);
                 CopyInfo copiedObject = new CopyInfo(prefabType, details);
 
                 copiedObjects.Add(copiedObject);
 
                 //center point variable update
-                Bounds bounds = selector.GetComponent<BoxCollider>().bounds;
-                Vector3 position = bounds.center;
+                Vector3 position = parent.transform.position;
                 X.Set(position.x);
-                Y.Set(position.y - bounds.size.y / 2);
+                Y.Set(position.y);
                 Z.Set(position.z);
 
                 selector.Deselect();
             }
         }
 
-        Vector3 centerPoint = new Vector3(X, Y.Low, Z); //Note we use the Y.low because the group follows the floor
-
-        foreach(CopyInfo copiedInfo in copiedObjects)
+        if (cleared)
         {
-            copiedInfo.CenterPoint = centerPoint;
+            Vector3 centerPoint = new Vector3(X, Y.Low, Z); //Note we use the Y.low because the group follows the floor
+
+            foreach (CopyInfo copiedInfo in copiedObjects)
+            {
+                copiedInfo.CenterPoint = centerPoint;
+            }
+
+            centerPointObject.transform.position = centerPoint; //debugging
+
+            currentState = State.PreviewPaste;
+            Preview();
         }
-
-        centerPointObject.transform.position = centerPoint; //debugging
-
-        currentState = State.PreviewPaste;
-        Preview();
     }
 
     #region Pasting
