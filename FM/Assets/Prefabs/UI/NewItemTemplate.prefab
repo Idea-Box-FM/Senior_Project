@@ -309,8 +309,6 @@ MonoBehaviour:
   playOver: 0
   play: 0
   soundEffectQueueDisplay: []
-  optionSliderName: AudioSoundEffectSlider
-  volumeLimit: 1
 --- !u!82 &6119306507520425206
 AudioSource:
   m_ObjectHideFlags: 0

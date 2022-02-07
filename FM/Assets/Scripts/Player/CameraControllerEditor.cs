@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class CameraControllerEditor : MonoBehaviour
 {
@@ -44,10 +43,6 @@ public class CameraControllerEditor : MonoBehaviour
     public Vector3 initPos;
     [Tooltip("The inital rotation of the camera when the simulation starts, stored before updates")]
     public Quaternion initRot;
-
-    [Header("Options")]
-    [Tooltip("The name of the options slider game object, is a key")]
-    public string optionSliderName;
     #endregion
 
     #region Setup Methods
@@ -82,23 +77,6 @@ public class CameraControllerEditor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //get options
-        if (optionSliderName != "")
-        {
-            if (GetOptionsStored.prefKeys.Count > 0)//if there are items in the list
-            {
-                int index = GetOptionsStored.prefKeys.IndexOf(optionSliderName);//find index, will return -1 if not found
-                if (index < GetOptionsStored.prefValues.Count && index >= 0)//if is within amount of list and is found
-                {
-                    mouseSpeed = float.Parse((string)GetOptionsStored.prefValues[index]) / 100;//get volume from options and set the value
-                }
-                else
-                    Debug.Log("Unable to find " + optionSliderName + " in current list of keys");
-            }
-        }
-        else
-            Debug.LogError("Assign optionSlider on \"" + gameObject.name + "\" game object");
-
         #region Examples
         //example direct acess, for a specific key
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) { Debug.Log("Pressed \"" + Keyboard.current.spaceKey.name + "\" key"); }

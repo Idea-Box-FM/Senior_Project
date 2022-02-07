@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3259084887768644365}
-  - component: {fileID: 7005329768991058066}
-  - component: {fileID: 3259084887768644363}
   - component: {fileID: 3259084887768644362}
+  - component: {fileID: 3259084887768644363}
+  - component: {fileID: 7005329768991058066}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -33,47 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7005329768991058066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259084887768644360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc533ad442673eb44af32cce3283b0fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextScene: 1
-  exit: 0
-  changeByName: 0
-  changedSceneName: 
-  changeByID: 0
-  changedSceneID: 0
-  triggerOnEnter: 0
-  triggerOnExit: 0
-  instantChange: 0
---- !u!114 &3259084887768644363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259084887768644360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb69f6908cf4d54088714a04e8edcd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  src: {fileID: 3259084887768644362}
-  musicClips:
-  - {fileID: 8300000, guid: a19875d9569aa404382068b88842b83e, type: 3}
-  selectedClip: 0
-  currentMusicAction: 1
-  currentlyPlaying: 1
-  optionSliderName: AudioMusicSlider
-  volumeLimit: 1
 --- !u!82 &3259084887768644362
 AudioSource:
   m_ObjectHideFlags: 0
@@ -170,3 +129,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3259084887768644363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259084887768644360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb69f6908cf4d54088714a04e8edcd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  src: {fileID: 3259084887768644362}
+  musicClips:
+  - {fileID: 0}
+  selectedClip: 0
+  currentMusicAction: 1
+  currentlyPlaying: 1
+--- !u!114 &7005329768991058066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259084887768644360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc533ad442673eb44af32cce3283b0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScene: 0
+  exit: 0
+  changeByName: 0
+  changedSceneName: 
+  changeByID: 0
+  changedSceneId: 0
+  triggerOnEnter: 0
+  triggerOnExit: 0
+  instantChange: 0
