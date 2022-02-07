@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1097805115643086015}
   - component: {fileID: 4111062809355120394}
   m_Layer: 6
-  m_Name: GoodBlackPlasticBarrel
+  m_Name: GoodPlasticBarrel
   m_TagString: GoodPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
