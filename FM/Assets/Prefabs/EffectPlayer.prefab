@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3259084887768644360
+--- !u!1 &7193267061644296242
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,85 +8,64 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3259084887768644365}
-  - component: {fileID: 7005329768991058066}
-  - component: {fileID: 3259084887768644363}
-  - component: {fileID: 3259084887768644362}
+  - component: {fileID: 6391903618462396489}
+  - component: {fileID: 6314788537141262945}
+  - component: {fileID: 6383953395235903208}
   m_Layer: 0
-  m_Name: MusicPlayer
+  m_Name: EffectPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3259084887768644365
+--- !u!4 &6391903618462396489
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259084887768644360}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13629048, y: 1.9152002, z: 0.9654038}
+  m_GameObject: {fileID: 7193267061644296242}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7005329768991058066
+--- !u!114 &6314788537141262945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259084887768644360}
+  m_GameObject: {fileID: 7193267061644296242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc533ad442673eb44af32cce3283b0fd, type: 3}
+  m_Script: {fileID: 11500000, guid: c0216216815c14f4b8f581541619036f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 1
-  exit: 0
-  changeByName: 0
-  changedSceneName: 
-  changeByID: 0
-  changedSceneID: 0
-  triggerOnEnter: 0
-  triggerOnExit: 0
-  instantChange: 0
---- !u!114 &3259084887768644363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259084887768644360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb69f6908cf4d54088714a04e8edcd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  src: {fileID: 3259084887768644362}
-  musicClips:
-  - {fileID: 8300000, guid: a19875d9569aa404382068b88842b83e, type: 3}
+  src: {fileID: 6383953395235903208}
+  soundClips:
+  - {fileID: 8300000, guid: 7287ad77d59eb2c4695cbb6e0f547b2e, type: 3}
   selectedClip: 0
-  currentMusicAction: 1
-  currentlyPlaying: 1
-  optionSliderName: AudioMusicSlider
+  playOver: 0
+  play: 0
+  soundEffectQueueDisplay: []
+  optionSliderName: AudioSoundEffectSlider
   volumeLimit: 1
---- !u!82 &3259084887768644362
+--- !u!82 &6383953395235903208
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259084887768644360}
+  m_GameObject: {fileID: 7193267061644296242}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

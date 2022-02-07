@@ -28,7 +28,7 @@ public class SaveLoadOptions : MonoBehaviour
 
     void Start()
     {
-        
+        LoadListFile();//load options on startup
     }
     
     private void Update()
@@ -101,7 +101,7 @@ public class SaveLoadOptions : MonoBehaviour
         {
             foreach (string key in missingKeys)//loop through them
             {
-                Debug.LogWarning("Unable to get default value of \"" + key + "\", did you set one?");//warning display
+                Debug.LogWarning("Unable to get default value of \"" + key + "\", did you set one? Removed to prevent errors");//warning display
             }
         }
 
