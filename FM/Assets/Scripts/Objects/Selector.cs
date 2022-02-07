@@ -79,7 +79,7 @@ public class Selector : MonoBehaviour
             RaycastHit selectHit;
 
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) && selectHit.transform == this.transform)
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) /*&& selectHit.transform == this.transform*/)
             {
                 if (selectHit.collider.tag == "FMPrefab")
                 {
