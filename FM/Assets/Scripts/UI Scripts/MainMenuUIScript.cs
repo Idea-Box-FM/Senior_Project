@@ -211,7 +211,9 @@ public class MainMenuUIScript : MonoBehaviour
         //FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
 
-    public void ChangeScene(int scene)
+    #region Helper Methods
+
+ public void ChangeScene(int scene)
     {
         Wait(audio.soundClips[audio.selectedClip].length);
         if(waited == true) SceneManager.LoadScene(scene);
@@ -250,4 +252,14 @@ public class MainMenuUIScript : MonoBehaviour
         
 
     }
+
+    public void EndGame()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    #endregion
+
+   
 }

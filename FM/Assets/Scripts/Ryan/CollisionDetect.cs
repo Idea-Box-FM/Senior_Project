@@ -55,16 +55,17 @@ public class CollisionDetect : MonoBehaviour
     #region Permissions
     void Prevent(Collider col)
     {
-        if (col.transform.parent.name == "Group")
+        ChangeColor(col.gameObject, Color.red);
+
+        if (col.transform.parent != null)
         {
-            foreach (Transform copiedObject in col.transform.parent.GetComponentInChildren<Transform>())
+            if (col.transform.parent.name == "Group")
             {
-                ChangeColor(copiedObject.gameObject, Color.red);
+                foreach (Transform copiedObject in col.transform.parent.GetComponentInChildren<Transform>())
+                {
+                    ChangeColor(copiedObject.gameObject, Color.red);
+                }
             }
-        }
-        else
-        {
-            ChangeColor(col.gameObject, Color.red);
         }
 
         editor.collision = this;
@@ -75,17 +76,18 @@ public class CollisionDetect : MonoBehaviour
     {
         canPlace = true;
 
-        if (col.transform.parent.name == "Group")
+        ChangeColor(col.gameObject, Color.green);
+
+        if (col.transform.parent != null)
         {
-            if (CanPlace)
-                foreach (Transform copiedObject in col.transform.parent.GetComponentInChildren<Transform>())
-                {
-                    ChangeColor(copiedObject.gameObject, Color.green);
-                }
-        }
-        else
-        {
-            ChangeColor(col.gameObject, Color.green);
+            if (col.transform.parent.name == "Group")
+            {
+                if (CanPlace)
+                    foreach (Transform copiedObject in col.transform.parent.GetComponentInChildren<Transform>())
+                    {
+                        ChangeColor(copiedObject.gameObject, Color.green);
+                    }
+            }
         }
     }
     #endregion
