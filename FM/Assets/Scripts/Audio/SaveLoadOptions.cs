@@ -34,9 +34,8 @@ public class SaveLoadOptions : MonoBehaviour
     private void Update()
     {
         //update static options//!issue if more than 1 of these scripts in the scene
-        GetOptionsStored.sLOptions = this;
-        GetOptionsStored.prefKeys = prefKeys;
-        GetOptionsStored.prefValues = prefValues;
+        GetOptionsStored.prefKeys = this.prefKeys;
+        GetOptionsStored.prefValues = this.prefValues;
     }
 
     private KeyValuePair<string, string> GetDefaultPref()

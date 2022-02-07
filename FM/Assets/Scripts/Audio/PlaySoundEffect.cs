@@ -45,7 +45,7 @@ public class PlaySoundEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //volumeLimit = float.Parse((string)newVolume) / 100;//get volume from options//!
+        //!get volume from options
 
         soundEffectQueueDisplay = soundEffectQueue;
         if (play == true)

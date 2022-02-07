@@ -32,6 +32,7 @@ public class PlayMusic : MonoBehaviour
     public static float fadeTime = 1f;//make publically available
 
     [Header("Options")]
+    public Slider optionSlider;
     [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
     public float volumeLimit = 1f;
 
@@ -50,7 +51,15 @@ public class PlayMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //volumeLimit = float.Parse((string)newVolume) / 100;//get volume from options//!
+        if(GetOptionsStored.prefKeys.Count > 0)
+        {
+            int index = GetOptionsStored.prefKeys.IndexOf(optionSlider.name);//find index, will return -1 if not found
+            if (index < GetOptionsStored.prefValues.Count && index >= 0)//if is within amount of list and is found
+            {
+                volumeLimit = float.Parse((string)GetOptionsStored.prefValues[index]) / 100;//get volume from options//!
+                src.volume = volumeLimit;
+            }
+        }
 
         ////test inputs
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {
