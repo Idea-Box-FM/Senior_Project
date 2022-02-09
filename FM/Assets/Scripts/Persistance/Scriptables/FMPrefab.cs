@@ -13,6 +13,9 @@ using UnityEngine;
  * 
  * Editited:
  *  Made it so the Instanciation automatically implements the changes in spacing 11/8/2021
+ *
+ * Edited (Dylan):
+ *  Added Audio sound effect requirements 2/9/2022
  */
 
 [CreateAssetMenu(fileName = "FMPrefab", menuName = "FMPrefabs/FMPrefab")]
@@ -26,6 +29,8 @@ public class FMPrefab : ScriptableObject
 
     [HideInInspector]
     public GameObject parent;
+
+    public GameObject soundEffect;
 
     #region InstanciatePrefab
 
@@ -52,6 +57,8 @@ public class FMPrefab : ScriptableObject
         }
 
         Rotation ??= Quaternion.identity;
+
+        FindObjectOfType<PlaySoundEffect>().Play(1);//play placement sound here//Very innefficent due to needing an instance that exists only in the scene (im sorry Pat)
 
         GameObject instance = Instantiate(prefab, position + examplePrefab.transform.position, Rotation.Value, parent: parent.transform);
         instance.SetActive(false);
