@@ -2351,6 +2351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicPlayerEditor
       objectReference: {fileID: 0}
+    - target: {fileID: 3259084887768644363, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
+      propertyPath: musicClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_RootOrder
       value: 1

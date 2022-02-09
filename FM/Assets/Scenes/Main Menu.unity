@@ -5786,7 +5786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3259084887768644365, guid: 5e5221075448f624f8cc11bec7ec98b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7640,7 +7640,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6391903618462396489, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6391903618462396489, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7684,7 +7684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7193267061644296242, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}
       propertyPath: m_Name
-      value: EffectPlayerMainMenuButton
+      value: EffectPlayerMainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}
