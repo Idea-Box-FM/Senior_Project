@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
   m_Name: BarrelCart
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2016554191418739299, guid: 57e5dfd0fde29ef47bde31c333df3543, type: 3}
-  examplePrefab: {fileID: 1234040624731292623, guid: 2012d6450cbbbc44a85879689ad2707a, type: 3}
+  prefab: {fileID: 1797064465741206977, guid: 57e5dfd0fde29ef47bde31c333df3543, type: 3}
+  examplePrefab: {fileID: 578741240367372556, guid: 2012d6450cbbbc44a85879689ad2707a, type: 3}
+  selectorPrefab: {fileID: 0}
+  height: 0
   parent: {fileID: 0}
