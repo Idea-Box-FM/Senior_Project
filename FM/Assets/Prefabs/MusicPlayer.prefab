@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc533ad442673eb44af32cce3283b0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 1
+  nextScene: 0
   exit: 0
   changeByName: 0
   changedSceneName: 
-  changeByID: 0
+  changeByID: 1
   changedSceneID: 0
   triggerOnEnter: 0
   triggerOnExit: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   src: {fileID: 3259084887768644362}
   musicClips:
-  - {fileID: 8300000, guid: a19875d9569aa404382068b88842b83e, type: 3}
+  - {fileID: 8300000, guid: fa681b6d32138a4408d1a737d668930b, type: 3}
   selectedClip: 0
   currentMusicAction: 1
   currentlyPlaying: 1
