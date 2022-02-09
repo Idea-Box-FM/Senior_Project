@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Pallet
   m_EditorClassIdentifier: 
   prefab: {fileID: 8572408210122856972, guid: 41c51ab2099637e4dae161c3e78c5112, type: 3}
-  examplePrefab: {fileID: 7974798315049201510, guid: cf524e058b15af24ca6bef449076994e, type: 3}
+  examplePrefab: {fileID: 4658940176353983594, guid: cf524e058b15af24ca6bef449076994e, type: 3}
+  selectorPrefab: {fileID: 0}
+  height: 0
   parent: {fileID: 0}

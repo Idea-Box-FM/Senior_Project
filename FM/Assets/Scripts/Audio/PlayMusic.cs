@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 //using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //NOTICE: The gameobject with this script attached MUST have a audio source attached for it to function properly
 [RequireComponent(typeof(AudioSource))]
@@ -31,7 +32,8 @@ public class PlayMusic : MonoBehaviour
     public static float fadeTime = 1f;//make publically available
 
     [Header("Options")]
-    public GameObject optionElement;
+    [Tooltip("The name of the options slider game object, is a key")]
+    public string optionSliderName;
     [Tooltip("How high the volume can be set, 1 is limit (100% volume)")]
     public float volumeLimit = 1f;
 
@@ -50,8 +52,23 @@ public class PlayMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //volumeLimit = ;//get volume from options//!
+        //get options
+        if (optionSliderName != "")
+        {
+            if (GetOptionsStored.prefKeys.Count > 0)//if there are items in the list
+            {
+                int index = GetOptionsStored.prefKeys.IndexOf(optionSliderName);//find index, will return -1 if not found
+                if (index < GetOptionsStored.prefValues.Count && index >= 0)//if is within amount of list and is found
+                {
+                    volumeLimit = float.Parse((string)GetOptionsStored.prefValues[index]) / 100;//get volume from options
+                    src.volume = volumeLimit;//set the value
+                }
+                else
+                    Debug.Log("Unable to find " + optionSliderName + " in current list of keys");
+            }
+        }
+        else
+            Debug.LogError("Assign optionSlider on \"" + gameObject.name + "\" game object");
 
         ////test inputs
         //if (Keyboard.current.spaceKey/*specific key*/.isPressed == true) {
