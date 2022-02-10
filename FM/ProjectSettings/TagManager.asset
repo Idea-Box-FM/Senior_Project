@@ -13,6 +13,7 @@ TagManager:
   - Ceiling
   - MoveButton
   - Floor
+  - SelectedPrefab
   layers:
   - Default
   - TransparentFX
