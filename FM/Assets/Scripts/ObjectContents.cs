@@ -12,6 +12,8 @@ public class ObjectContents : MonoBehaviour
     [Tooltip("This variable is used to set the contents of the object")]
     public Contents currentContent = Contents.None;
 
+     
+
 
     /// <summary>
     /// This function is meant to change the contents of the object this script is on
