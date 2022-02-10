@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1097805115643086015}
   - component: {fileID: 4111062809355120394}
   m_Layer: 6
-  m_Name: GoodBlackPlasticBarrel
-  m_TagString: GoodPrefab
+  m_Name: SelectedPlasticBarrel
+  m_TagString: SelectedPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,7 @@ PrefabInstance:
     - target: {fileID: 4115683671872032585, guid: 03ffb8a142ce43d4b9ec5ead3c22b0ad, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0a95bf0d22c2f6246b53c3f3a8e87c68, type: 2}
+      objectReference: {fileID: 2100000, guid: 32c4c5dbdd5a3f244912e8ca5e44aa08, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03ffb8a142ce43d4b9ec5ead3c22b0ad, type: 3}
 --- !u!4 &2427688394020507235 stripped
