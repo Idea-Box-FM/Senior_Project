@@ -36,9 +36,9 @@ public class LabelScript : MonoBehaviour
         
     }
 
-    public void ChangeOption(int i)
+    public void ChangeOption(int m)
     {
-        content = i;
+        content = m;
     }
 
 

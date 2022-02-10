@@ -3288,9 +3288,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d16f93b0867d8b448b9f2c89f495475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderName: Simulations
+  simulationFolderName: Simulations
+  sdsFolderName: SDS
   localSimulations: []
   currentSimulation: 
+  sdsFiles: []
   onlineSimulations: []
 --- !u!4 &739979346
 Transform:
@@ -5971,9 +5973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d16f93b0867d8b448b9f2c89f495475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderName: Simulations
+  simulationFolderName: Simulations
+  sdsFolderName: SDS
   localSimulations: []
   currentSimulation: 
+  sdsFiles: []
   onlineSimulations: []
 --- !u!4 &1396040192
 Transform:

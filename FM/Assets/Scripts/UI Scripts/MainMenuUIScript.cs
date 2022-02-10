@@ -134,6 +134,8 @@ public class MainMenuUIScript : MonoBehaviour
         }
     }
 
+    #region List funstions
+
     public void UpdateList()
     {
 
@@ -148,13 +150,13 @@ public class MainMenuUIScript : MonoBehaviour
 
 
         //combining the two simulation list into one
-        for(int i = 0; i < simListLength; i++)
+        for (int i = 0; i < simListLength; i++)
         {
-            if(i < localSimList.Length)
+            if (i < localSimList.Length)
             {
                 simList.Add(localSimList[i]);
             }
-            else if(i >= localSimList.Length)
+            else if (i >= localSimList.Length)
             {
                 simList.Add(onlineSimList[i - localSimList.Length]);
             }
@@ -163,16 +165,16 @@ public class MainMenuUIScript : MonoBehaviour
 
         simList = simList.Distinct().ToList<string>();
 
-        for (int i = 0; i < simList.Count;i++)
+        for (int i = 0; i < simList.Count; i++)
         {
-            if(i < localSimList.Length)
+            if (i < localSimList.Length)
             {
                 s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
                 string simName = simList[i].TrimEnd(xmlTrim);
                 s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
                 s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
                 s.GetComponent<Button>().AddEventListener(i, ItemClicked);
-                
+
             }
             else
             {
@@ -195,11 +197,15 @@ public class MainMenuUIScript : MonoBehaviour
         for (int i = 0; i < localSimList.Length; i++)
         {
             Debug.Log(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-           Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
+            Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
         }
 
         UpdateList();
     }
+
+    #endregion
+
+
 
     void ItemClicked (int itemIndex)
     {
