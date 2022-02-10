@@ -37,7 +37,7 @@ public class CollisionDetect : MonoBehaviour
     #region Triggers
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("GoodPrefab"))
+        if (col.gameObject.CompareTag("GoodPrefab") || col.gameObject.CompareTag("SelectedPrefab"))
         {
             Prevent(col);
         }
@@ -45,7 +45,7 @@ public class CollisionDetect : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.CompareTag("GoodPrefab"))
+        if (col.gameObject.CompareTag("GoodPrefab") || col.gameObject.CompareTag("SelectedPrefab"))
         {
             Permit(col);
         }
