@@ -22,7 +22,10 @@ using System.Linq;
  *  Fixed a bug with realms with singleton pattern 11/27/2021
  *  Updated the new file function to work with room requirements 11/29/2021
  *  Fixed a bug where the simulation was reloaded instead of selected 1/11/2022
+ *  Updated to include SDS files inside the SDS folder, please see TODO for more details 2/10/2022
  * TODO make the data base connect to the online version of the cluster using config
+ * TODO to optimize this script we should refactor it using a Folder class. this is marked as
+ * todo and not done because we included a new folder path near the end of the project
  */
 
 public class FileManager : MonoBehaviour
@@ -33,16 +36,19 @@ public class FileManager : MonoBehaviour
     #region path formatting
     const char slash = '/'; //if this isn't used often enough remove it for memory management
 
-    //string slashV2 = "/";
-
-    string path = "";
-    [SerializeField] string folderName = "Simulations";
+    string path;
+    string simulationPath = "";
+    string sdsPath = "";
+    [SerializeField] string simulationFolderName = "Simulations";
+    [SerializeField] string sdsFolderName = "SDS";
     #endregion
 
     public string[] localSimulations; //use to be called fileNames
 
     public string currentSimulation; //use to be current simulation
                                      //consider changing this to a property
+
+    public string[] sdsFiles;
 
     #region DataBase
     private Realm realm;
@@ -72,9 +78,12 @@ public class FileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        path = Directory.GetCurrentDirectory() + slash + folderName;
+        path = Directory.GetCurrentDirectory();
+        simulationPath = path + slash + simulationFolderName;
+        sdsPath = path + slash + sdsFolderName;
 
-        LoadLocalFiles();
+        localSimulations = LoadLocalFiles(simulationPath);
+        sdsFiles = LoadLocalFiles(sdsPath);
 
         LoadLastSelectedFile();
     }
@@ -120,21 +129,21 @@ public class FileManager : MonoBehaviour
     #endregion
 
     #region Helper functions
-    private void LoadLocalFiles()
+    private string[] LoadLocalFiles(string path)
     {
         DirectoryInfo info = new DirectoryInfo(path);
 
         FileInfo[] fileInfo = info.GetFiles();
 
-        List<string> localSimulations = new List<string>();
+        List<string> localFiles = new List<string>();
         foreach (FileInfo file in fileInfo)
         {
-            localSimulations.Add(file.Name);
+            localFiles.Add(file.Name);
         }
-        this.localSimulations = localSimulations.ToArray();
+        return localFiles.ToArray();
     }
 
-    string FormatPath(string fileName)
+    string FormatPath(string path, string fileName)
     {
         fileName = path + slash + fileName;
 
@@ -198,7 +207,7 @@ public class FileManager : MonoBehaviour
 
         xml.ExportXML(fileName + ".XML");
 
-        LoadLocalFiles();
+        localSimulations = LoadLocalFiles(simulationPath);
     }
 
 
@@ -215,7 +224,7 @@ public class FileManager : MonoBehaviour
         }
         else
         {
-            string fileName = FormatPath(simulationName);
+            string fileName = FormatPath(simulationPath, simulationName);
 
             StreamWriter writer = new StreamWriter(fileName);
             {
@@ -223,7 +232,7 @@ public class FileManager : MonoBehaviour
             } writer.Close();
 
             //update UI
-            LoadLocalFiles();
+            localSimulations = LoadLocalFiles(simulationPath);
             SelectFile(simulationName);
         }
     }
@@ -246,7 +255,7 @@ public class FileManager : MonoBehaviour
             });
         }
 
-        string fileName = FormatPath(simulationName);
+        string fileName = FormatPath(simulationPath, simulationName);
 
         //converts XML file to single string
         StreamReader myfile = new StreamReader(fileName);
