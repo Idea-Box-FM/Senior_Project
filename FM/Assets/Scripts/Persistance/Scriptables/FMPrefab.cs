@@ -58,7 +58,7 @@ public class FMPrefab : ScriptableObject
 
         Rotation ??= Quaternion.identity;
 
-        FindObjectOfType<PlaySoundEffect>().Play(1);//play placement sound here//Very innefficent due to needing an instance that exists only in the scene (im sorry Pat)
+        GameObject.Find("EffectPlayer").GetComponent<PlaySoundEffect>().Play(1);//play placement sound here//Very innefficent due to needing an instance that exists only in the scene (im sorry Pat)
 
         GameObject instance = Instantiate(prefab, position + examplePrefab.transform.position, Rotation.Value, parent: parent.transform);
         instance.SetActive(false);
