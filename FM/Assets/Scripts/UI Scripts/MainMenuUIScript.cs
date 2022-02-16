@@ -30,12 +30,12 @@ public class MainMenuUIScript : MonoBehaviour
     public Button startButton;
     public Button newButton;
     public Button uploadButton;
-    public Button loginButton;
-    [Header("Login")]
-    public InputField username;
-    public InputField password;
-    public Text validation;
-    public GameObject login;
+    //public Button loginButton;
+    //[Header("Login")]
+    //public InputField username;
+    //public InputField password;
+    //public Text validation;
+    //public GameObject login;
 
     [Header("Scroll List")]
     public GameObject gameManager;
@@ -74,8 +74,8 @@ public class MainMenuUIScript : MonoBehaviour
     {
         newButton.interactable = false;
         uploadButton.interactable = false;
-        loginButton.interactable = false;
-        validation.text = "";
+        //loginButton.interactable = false;
+        //validation.text = "";
         localSimList = FileManager.fileManager.localSimulations;
         onlineSimList = FileManager.fileManager.onlineSimulations;
 
@@ -89,10 +89,10 @@ public class MainMenuUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(username.text != "" && password.text != "")
-        {
-            loginButton.interactable = true;
-        }
+        //if(username.text != "" && password.text != "")
+        //{
+        //    loginButton.interactable = true;
+        //}
 
         
 
@@ -118,20 +118,20 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void Login()
     {
-        if (username.text == "King" && password.text == "1234")
-        {
-            newButton.interactable = true;
-            uploadButton.interactable = true;
-            //username.text = "";
-            //password.text = "";
-            validation.text = "Login successful";
-            login.SetActive(false);
+        //if (username.text == "King" && password.text == "1234")
+        //{
+        //    newButton.interactable = true;
+        //    uploadButton.interactable = true;
+        //    //username.text = "";
+        //    //password.text = "";
+        //    validation.text = "Login successful";
+        //    login.SetActive(false);
             
-        }
-        else
-        {
-            validation.text = "Wrong username or Password. Try Again.";
-        }
+        //}
+        //else
+        //{
+        //    validation.text = "Wrong username or Password. Try Again.";
+        //}
     }
 
     public void UpdateList()
