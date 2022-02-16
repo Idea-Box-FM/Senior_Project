@@ -18,6 +18,10 @@ public static class ButtonExtension
        });
     }
 }
+/*
+ * Editor Patrick Naatz
+ *  Removed a UnityEditor line preventing building from end game function 2/10/2022
+ */
 
 public class MainMenuUIScript : MonoBehaviour
 {
@@ -256,7 +260,6 @@ public class MainMenuUIScript : MonoBehaviour
     public void EndGame()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     #endregion
