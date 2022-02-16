@@ -12,6 +12,8 @@ using UnityEngine.UI;
 
 public class SceneManagerObj : MonoBehaviour
 {
+    public PlayMusic musicPlayer;
+
     //current scene options
     private string currentSceneName;//the current scene as a string
     private int currentSceneID;//the current scene as a ID
@@ -80,7 +82,7 @@ public class SceneManagerObj : MonoBehaviour
     {
         bool executed = false;
 
-        this.GetComponent<PlayMusic>().Stop();
+        musicPlayer.Stop();
 
         yield return new WaitForSeconds(waitS);
 

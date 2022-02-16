@@ -113,10 +113,10 @@ public class PlaySoundEffect : MonoBehaviour
     /// <param name="id">The id of the sound within the list</param>
     public void Play(int id = 0)
     {
-        if (id <= soundClips.Count - 1)
-            Play(soundClips[id], caller: this.name/*comment out caller to pervent debugs*/);
+        if (id < soundClips.Count)
+            Play(soundClips[id], caller: this.name/*comment out caller to prevent debugs*/);
         else
-            Debug.LogError("ID (" + id + ") outside of given soundClips list (limit " + (soundClips.Count - 1) + ")");
+            Debug.LogError("ID (" + id + ") outside of given soundClips list (limit " + (soundClips.Count) + ")");
     }
     /// <summary>
     /// Add entry to queue to play (use externally)

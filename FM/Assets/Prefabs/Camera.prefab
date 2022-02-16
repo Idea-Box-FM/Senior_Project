@@ -165,11 +165,11 @@ MonoBehaviour:
   horizontalAxis: {x: 0, y: 0}
   verticalAxis: {x: 0, y: 0}
   mouseAxis: {x: 0, y: 0}
-  placePress: 0
-  removePress: 0
   resetPress: 0
   camUnlockPress: 0
-  moveSpeed: 0.01
-  mouseSpeed: 3
+  moveSpeed: 0.05
+  mouseSpeed: 1
   camLocked: 1
-  initalTransform: {fileID: 0}
+  initPos: {x: 0, y: 0, z: 0}
+  initRot: {x: 0, y: 0, z: 0, w: 0}
+  optionSliderName: ControlsMouseSensitivitySlider

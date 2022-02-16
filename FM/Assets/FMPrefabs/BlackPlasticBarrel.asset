@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 641223197585122205, guid: bf1dcd3a279056e49ad433ac0dd8c749, type: 3}
   examplePrefab: {fileID: 641223197585122205, guid: 3e764e78770db974590225716343edfb, type: 3}
+  selectorPrefab: {fileID: 0}
+  height: 0
   parent: {fileID: 0}
+  soundEffect: {fileID: 7193267061644296242, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}
