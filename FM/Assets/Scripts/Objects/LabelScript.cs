@@ -78,12 +78,21 @@ public class LabelScript : MonoBehaviour
                 //change sds
                 //objects[i].Label = SDS
                 objects[i].GetComponent<ObjectContents>().ChangeContents(content);
+               // 
 
             }
 
         }
     }
 
+    public void DeselectObject()
+    {
+        for (int i = 0; i < objects.Length; i++)
+        {
+            objects[i].GetComponent<Selector>().Deselect();
+
+        }
+    }
 
 
     public void ChangeOption(int m)
