@@ -116,7 +116,7 @@ public class PlaySoundEffect : MonoBehaviour
         if (id < soundClips.Count)
             Play(soundClips[id], caller: this.name/*comment out caller to prevent debugs*/);
         else
-            Debug.LogError("ID (" + id + ") more than soundClips (total " + (soundClips.Count) + ") in \"" + this.name + "\" Object");
+            Debug.LogError("ID (" + id + ") more than soundClips (ID limit: " + (soundClips.Count-1) + ") in \"" + this.name + "\" Object");
     }
     /// <summary>
     /// Add entry to queue to play (use externally)

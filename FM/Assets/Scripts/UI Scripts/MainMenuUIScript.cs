@@ -20,7 +20,7 @@ public static class ButtonExtension
 }
 /*
  * Editor Patrick Naatz
- *  Removed a UnityEditor line preventing building from end game function 2/10/2022
+ *  Removed a UnityEditor line preventing building from end game function 2/10/2022'
  */
 
 public class MainMenuUIScript : MonoBehaviour

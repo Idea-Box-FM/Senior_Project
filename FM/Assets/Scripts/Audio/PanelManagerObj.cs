@@ -15,8 +15,6 @@ public class PanelManagerObj : MonoBehaviour
     public Canvas canvas;//canvas, mostly for close functionality
     public List<GameObject> panels = new List<GameObject>();//all panels, mostly for using nextPanel functionality
     public int initalPanelID = 0;//the panel to activate first
-
-    public Transform softLockZone;//where to put the object when it is not being used
     
     private Vector3 objStart;
     private string currentPanelName;//the current Panel as a string
