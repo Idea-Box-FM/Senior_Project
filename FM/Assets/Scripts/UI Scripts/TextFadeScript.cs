@@ -7,17 +7,19 @@ using TMPro;
 
 /// <summary>
 /// This script is placed on a Text element and will fadde in text and after a time fade it out
+/// Also you have to put this on a text mesh Pro(TMP) element
 /// </summary>
 
 public class TextFadeScript : MonoBehaviour
 {
-
+    [Tooltip("This variable set how many seconds will wait until it starts to fade out")]
+    public float fadeOutStart;
 
     public void FadeText()
     {
         StartCoroutine(FadeTextToFullAlpha(1f, GetComponent<TMP_Text>()));
 
-        StartCoroutine(FadeTextToZeroAlpha(1f, GetComponent<TMP_Text>(), 1.5f));
+        StartCoroutine(FadeTextToZeroAlpha(1f, GetComponent<TMP_Text>(), fadeOutStart));
 
     }
 
