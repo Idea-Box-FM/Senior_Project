@@ -62,7 +62,7 @@ public class PanelManagerObj : MonoBehaviour
     {
         if (instantChange)//if change by script
         {
-            ChangePanelDelay();
+            StartCoroutine(ChangePanelDelay());
             instantChange = false;//disable to prevent looping
         }
     }
@@ -71,7 +71,7 @@ public class PanelManagerObj : MonoBehaviour
     {
         if (triggerOnEnter)
         {
-            ChangePanelDelay();
+            StartCoroutine(ChangePanelDelay());
         }
     }
 
@@ -79,12 +79,14 @@ public class PanelManagerObj : MonoBehaviour
     {
         if (triggerOnExit)
         {
-            ChangePanelDelay();
+            StartCoroutine(ChangePanelDelay());
         }
     }
 
-    public void ChangePanelDelay(GameObject newPanel = null)
+    public IEnumerator ChangePanelDelay(GameObject newPanel = null)
     {
+        Debug.Log("E");
+        yield return new WaitForSeconds(0.001f);//wait for millisecond for button to play
         if (soundEffect.src.isPlaying == true)
             StartCoroutine(DelayedChange(soundEffect.src.time, newPanel));
         else
@@ -160,10 +162,10 @@ public class PanelManagerObj : MonoBehaviour
     //button methods
     public void ChangePanel(GameObject newPanel = null)
     {
-        ChangePanelDelay(newPanel);
+        StartCoroutine(ChangePanelDelay(newPanel));
     }
     public void ChangePanel()
     {
-        ChangePanelDelay();
+        StartCoroutine(ChangePanelDelay());
     }
 }

@@ -82,9 +82,12 @@ public class SceneManagerObj : MonoBehaviour
     {
         bool executed = false;
 
-        musicPlayer.Stop();
+        if (musicPlayer.src.isPlaying)//if sound is playing
+        {
+            musicPlayer.Stop();
 
-        yield return new WaitForSeconds(waitS);
+            yield return new WaitForSeconds(waitS);
+        }
 
         //check if object still exists after scene transition
         if (nextScene)
