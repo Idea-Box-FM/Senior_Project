@@ -234,7 +234,7 @@ public class PlayMusic : MonoBehaviour
             selectedClip = 0;//reset
         }
 
-        StartCoroutine(WaitAndFadeIn(fadeTime));
+        StartCoroutine(WaitAndFadeIn(fadeTime*2));
     }
 
     public IEnumerator WaitAndFadeIn(float timeS)

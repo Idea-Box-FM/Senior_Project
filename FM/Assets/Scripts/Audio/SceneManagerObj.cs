@@ -75,7 +75,7 @@ public class SceneManagerObj : MonoBehaviour
 
     public void ChangeScene()
     {
-        StartCoroutine(DelayedChange(PlayMusic.fadeTime));
+        StartCoroutine(DelayedChange(PlayMusic.fadeTime*1.5f));       
     }
 
     IEnumerator DelayedChange(float waitS)
