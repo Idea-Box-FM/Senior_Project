@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,7 +87,7 @@ public class LevelEditorManager : MonoBehaviour
 
     private void Update()
     {
-        
+
 
         //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
         if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
@@ -112,6 +113,7 @@ public class LevelEditorManager : MonoBehaviour
                 }
             }
         }
+        
 
         ////if the middle mouse button is clicked, ray cast out
         //if (Mouse.current.middleButton.wasPressedThisFrame)

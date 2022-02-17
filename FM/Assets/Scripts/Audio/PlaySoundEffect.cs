@@ -37,8 +37,8 @@ public class PlaySoundEffect : MonoBehaviour
         if (src == null)//if source is not assigned
         {
             bool foundSrc = this.TryGetComponent<AudioSource>(out src);//get the component from the object this is on if it exists
-            //if (foundSrc == false)//if it is still not found
-            //    Debug.LogError("Did not assign \"src\" in the \"" + this.gameObject.name + "\" game object");//log an error
+            if (foundSrc == false)//if it is still not found
+                Debug.LogError("Did not assign \"src\" in the \"" + this.gameObject.name + "\" game object");//log an error
         }
         if (soundClips == null) //if no entries in list
             soundClips.Add(src.clip);//add one from the source
@@ -113,10 +113,10 @@ public class PlaySoundEffect : MonoBehaviour
     /// <param name="id">The id of the sound within the list</param>
     public void Play(int id = 0)
     {
-        if (id <= soundClips.Count - 1)
-            Play(soundClips[id], caller: this.name/*comment out caller to pervent debugs*/);
+        if (id < soundClips.Count)
+            Play(soundClips[id], caller: this.name/*comment out caller to prevent debugs*/);
         else
-            Debug.LogError("ID (" + id + ") outside of given soundClips list (limit " + (soundClips.Count - 1) + ")");
+            Debug.LogError("ID (" + id + ") more than soundClips (total " + (soundClips.Count) + ") in \"" + this.name + "\" Object");
     }
     /// <summary>
     /// Add entry to queue to play (use externally)

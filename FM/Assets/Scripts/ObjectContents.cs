@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class ObjectContents : MonoBehaviour
 {
-    //public static ObjectContents contents;
+    //Feel free to work your magic Pat
 
-    //This is a enum for the 9 different Hazard types
-    //public enum Contents { HealthHazard, Flammability, CompressedGas, Corrosive, Explosive, Oxidizers, Environmental, AcuteToxicity, Other, None};
     public string[] contents;
-
-    // [Tooltip("This variable is used to set the contents of the object")]
-    //public Contents currentContent = Contents.None;
 
     public string currentContent;
 
