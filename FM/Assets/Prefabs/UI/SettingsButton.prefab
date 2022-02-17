@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4251871475700190246}
   - component: {fileID: -3990565219041177653}
   - component: {fileID: 8181550123779624445}
-  - component: {fileID: 6805239349453756859}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -122,31 +121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4251871475700190249}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -3990565219041177653}
-        m_TargetAssemblyTypeName: PlaySoundEffect, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6805239349453756859}
-        m_TargetAssemblyTypeName: PanelManagerObj, Assembly-CSharp
-        m_MethodName: ChangePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &-3990565219041177653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0216216815c14f4b8f581541619036f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  src: {fileID: 8181550123779624445}
+  src: {fileID: 8000530472587595875, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
   soundClips:
   - {fileID: 8300000, guid: 4127d6cca73e83343bca997dc650c4de, type: 3}
   selectedClip: 0
@@ -264,28 +239,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6805239349453756859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4251871475700190244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdc5d47919d3c42428155c83ad94b318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  panels: []
-  initalPanelID: 0
-  softLockZone: {fileID: 0}
-  nextPanel: 0
-  close: 0
-  changeByName: 0
-  changedPanelName: 
-  changeByID: 1
-  changedPanelID: 0
-  triggerOnEnter: 0
-  triggerOnExit: 0
-  instantChange: 0
