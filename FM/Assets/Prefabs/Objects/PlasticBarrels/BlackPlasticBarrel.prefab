@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641223197585122202}
+  - component: {fileID: 899148659476011414}
   m_Layer: 6
   m_Name: BlackPlasticBarrel
   m_TagString: FMPrefab
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899148659476011414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641223197585122205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d36fbe117fd1740ba0583fa1c844ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sdsPath: 
+  flamability: 0
+  reactivity: 0
+  health: 0
 --- !u!54 &126166659044831402
 Rigidbody:
   m_ObjectHideFlags: 0
