@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 /*Flower Box
  * 
- * Intention: When you hover over an object, it will change it's material
+ * Intention: When you click an object, it will change it's material
  * 
  * Editor: Tyler Rubenstein
  *   Added to main 12/7/21

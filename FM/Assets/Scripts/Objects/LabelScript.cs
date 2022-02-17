@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Flower Box
+ * 
+ * Intention: To collect all of the objects in the scene and find the ones that are selected 
+ * 
+ * Editor: Tyler Rubenstein
+ *   Added to main 2/7/22
+ *   
+ *
+ */
+
 public class LabelScript : MonoBehaviour
 {
     string SDS;
