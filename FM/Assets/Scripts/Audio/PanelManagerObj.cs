@@ -38,6 +38,7 @@ public class PanelManagerObj : MonoBehaviour
     public bool triggerOnEnter = false;//when entering a trigger, cause the Panel to change based upon the above settings
     public bool triggerOnExit = false;//when exiting a trigger, cause the Panel to change based upon the above settings
     public bool instantChange = false;//bool to be triggered by external scripts
+    private PlaySoundEffect soundEffect;
 
     // Start is called before the first frame update
     private void Start()
@@ -47,6 +48,13 @@ public class PanelManagerObj : MonoBehaviour
         _ = "The current Panel is: " + currentPanelName + " with ID: " + currentPanelID + ", below are options for changing Panels: ";//information about Panel
 
         if (changedPanelName == "") changedPanelName = "SamplePanel";//default
+
+        TryGetComponent<PlaySoundEffect>(out PlaySoundEffect soundEffect);
+
+        if (soundEffect != null)//if it isn't empty
+            this.soundEffect = soundEffect;//assign
+        else
+            Debug.LogWarning("PlaySoundEffect not found on \"" + this.gameObject.name + "\" object");
     }
 
     // Update is called once per frame
@@ -77,18 +85,10 @@ public class PanelManagerObj : MonoBehaviour
 
     public void ChangePanelDelay(GameObject newPanel = null)
     {
-        TryGetComponent<PlaySoundEffect>(out PlaySoundEffect soundEffect);
-        if (soundEffect.soundEffectQueueDisplay.Count > 0) 
-        {
-            StartCoroutine(DelayedChange(soundEffect.soundEffectQueueDisplay[0].length, newPanel));
-            Debug.Log("True");
-        }
+        if (soundEffect.src.isPlaying == true)
+            StartCoroutine(DelayedChange(soundEffect.src.time, newPanel));
         else
-        {
-            StartCoroutine(DelayedChange(PlayMusic.fadeTime, newPanel));
-            Debug.Log("False");
-        }
-        Debug.Log("Hey!");
+            StartCoroutine(DelayedChange(0, newPanel));//instant change
     }
 
     IEnumerator DelayedChange(float waitS, GameObject panelToChangeTo = null)
@@ -96,9 +96,8 @@ public class PanelManagerObj : MonoBehaviour
         bool executed = false;
 
         objStart = this.gameObject.transform.position;//store inital position of button
-        
 
-        yield return new WaitForSeconds(waitS);
+        yield return new WaitForSeconds(waitS);//delay
 
         //check if object still exists after Panel transition
         if (nextPanel)
@@ -135,7 +134,7 @@ public class PanelManagerObj : MonoBehaviour
         }
 
         //after changing panel
-        this.gameObject.SetActive(enabled);//is it enabled?
+        
     }
 
     public void SetPanel(int newPanelID = -1, string newPanelName = null)//use id or string
