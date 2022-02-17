@@ -59,11 +59,6 @@ public class FileManager : MonoBehaviour
     #endregion
     #endregion
 
-    public void OpenSds(string name)
-    {
-        Application.OpenURL(FormatPath(sdsPath, name));
-    }
-
     #region start
     private void Awake()
     {
