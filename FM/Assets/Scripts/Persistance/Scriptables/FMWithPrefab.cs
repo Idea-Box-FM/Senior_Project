@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FmPrefabWithSDS", menuName = "FMPrefabs/FmPrefabWithSDS")]
 public class FMWithPrefab : FMPrefab
 {
+    public Texture diamondBase;
+    public Texture numberBase;
+
     public override XML ConvertToXML(GameObject gameObject)
     {
         XML xml = base.ConvertToXML(gameObject);
