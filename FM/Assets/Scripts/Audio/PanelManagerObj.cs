@@ -83,8 +83,7 @@ public class PanelManagerObj : MonoBehaviour
 
     public IEnumerator ChangePanelDelay(GameObject newPanel = null)
     {
-        Debug.Log("E");
-        yield return new WaitForSeconds(0.001f);//wait for millisecond for button to play
+        yield return new WaitForSeconds(0.1f);//wait for millisecond for button to play
         if (soundEffect.src.isPlaying == true)
             StartCoroutine(DelayedChange(soundEffect.src.time, newPanel));
         else

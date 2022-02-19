@@ -79,6 +79,7 @@ public class FileManager : MonoBehaviour
     void Start()
     {
         path = Directory.GetCurrentDirectory();
+        //Debug.Log("Simulation Save Path: " + path);
         simulationPath = path + slash + simulationFolderName;
         sdsPath = path + slash + sdsFolderName;
 

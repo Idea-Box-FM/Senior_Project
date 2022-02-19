@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /*
  * Editied By: Patrick Naatz
@@ -14,7 +15,7 @@ using UnityEngine.UI;
 public class NewSimScript : MonoBehaviour
 {
     #region Fields
-    public InputField name;
+    public TMP_InputField name;
 
     public enum RoomSizes
     {
