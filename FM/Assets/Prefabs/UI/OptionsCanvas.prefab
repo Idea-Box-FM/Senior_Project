@@ -3279,7 +3279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1850891283498069692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3321,14 +3321,8 @@ MonoBehaviour:
   - 100
   - 100
   - 10
-  prefKeys:
-  - AudioSoundEffectSlider
-  - AudioMusicSlider
-  - ControlsMouseSensitivitySlider
-  prefValues:
-  - 100
-  - 100
-  - 10
+  prefKeys: []
+  prefValues: []
   fileName: /preferencesCurrent.dat
 --- !u!223 &1850891283498069695
 Canvas:
@@ -4440,16 +4434,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1850891283498069695}
   panels:
-  - {fileID: 1850891283307109178}
-  - {fileID: 1850891283920530850}
-  - {fileID: 1850891282324966493}
+  - {fileID: 1850891283498069664}
+  - {fileID: 0}
   initalPanelID: 0
   nextPanel: 0
-  close: 1
+  close: 0
   changeByName: 0
   changedPanelName: 
-  changeByID: 0
-  changedPanelID: 0
+  changeByID: 1
+  changedPanelID: 1
   triggerOnEnter: 0
   triggerOnExit: 0
   instantChange: 0
@@ -4467,16 +4460,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1850891283498069695}
   panels:
-  - {fileID: 1850891283307109178}
-  - {fileID: 1850891283920530850}
-  - {fileID: 1850891282324966493}
+  - {fileID: 1850891283498069664}
+  - {fileID: 0}
   initalPanelID: 0
   nextPanel: 0
-  close: 1
+  close: 0
   changeByName: 0
   changedPanelName: 
-  changeByID: 0
-  changedPanelID: 0
+  changeByID: 1
+  changedPanelID: 1
   triggerOnEnter: 0
   triggerOnExit: 0
   instantChange: 0

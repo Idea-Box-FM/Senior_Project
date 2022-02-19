@@ -277,15 +277,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  panels: []
+  panels:
+  - {fileID: 0}
+  - {fileID: 0}
   initalPanelID: 0
-  softLockZone: {fileID: 0}
   nextPanel: 0
   close: 0
   changeByName: 0
   changedPanelName: 
   changeByID: 1
-  changedPanelID: 0
+  changedPanelID: 1
   triggerOnEnter: 0
   triggerOnExit: 0
   instantChange: 0
