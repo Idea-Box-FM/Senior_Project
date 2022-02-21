@@ -1,9 +1,19 @@
 <XML>
-	<TestCase>
-		<Room RoomSize="(30.0, 10.0, 20.0)">
-			<Walls Material="Wall"/>
-			<Roof Material="Ceiling"/>
-			<Floor Material="Floor"/>
-		</Room>
-	</TestCase>
+	<Room RoomSize="(30.0, 10.0, 20.0)">
+		<Walls Material="Wall (Instance)"/>
+		<Roof Material="Floor (Instance)"/>
+		<Floor Material="Floor (Instance)"/>
+	</Room>
+	<WarehouseRackLarge>
+		<WarehouseRackLarge(Clone) Position="(7.4, 0.0, 8.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</WarehouseRackLarge>
+	<SmallWarehouseRack>
+		<SmallWarehouseRack(Clone) Position="(-5.7, 0.0, 8.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</SmallWarehouseRack>
+	<DoubleStorageRack>
+		<DoubleStorageRack(Clone) Position="(-2.2, 0.0, 7.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</DoubleStorageRack>
+	<55GallonGrime>
+		<55GallonGrime(Clone) Position="(3.6, 0.0, 4.9)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</55GallonGrime>
 </XML>
