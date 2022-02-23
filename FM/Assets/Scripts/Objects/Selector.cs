@@ -51,17 +51,15 @@ public class Selector : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Editor Scene")
         {
-            goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
-            selfMat = goMaterial.material;
+            moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
+            cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
+            deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
         }
         else
         {
             return;
-        }
-           
-        moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
-        cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
-        deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
+        }          
+        
     }
 
     //find the main Camera
