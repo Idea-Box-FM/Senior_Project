@@ -25,7 +25,7 @@ public class SDSRead : MonoBehaviour
         {
             if(selectorScripts[i].isSelected == true)
             {
-                Debug.Log("This is the sds of the object" + selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent);
+                Debug.Log("This is the sds of the object " + selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent);
             }
         }
     }
