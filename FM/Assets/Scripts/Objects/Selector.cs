@@ -44,6 +44,8 @@ public class Selector : MonoBehaviour
     [SerializeField]
     private GameObject selectedPrefab;
 
+    private LevelEditorManager editor;
+
     private Vector3 position;
     private Vector3 movedPosition;
 
@@ -70,6 +72,9 @@ public class Selector : MonoBehaviour
             follower = gameObject.GetComponent<FollowScript>();
         }
 
+        //grab the LevelEditorManager component
+        editor = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelEditorManager>();
+
         action = new UnityAction(MoveItem);
         deselect = new UnityAction(Deselect);
         delete = new UnityAction(Delete);
@@ -91,9 +96,9 @@ public class Selector : MonoBehaviour
                 {
                     //attempt at hiding main prefab and showing selected
                     position = selectHit.transform.parent.gameObject.transform.position;
-                    GameObject selectedObj = Instantiate(selectedPrefab, position, Quaternion.Euler(this.transform.parent.gameObject.transform.eulerAngles));
-                    selectedObj.GetComponent<MeshRenderer>().enabled = true;
-                    selectedObj.GetComponent<BoxCollider>().enabled = true;
+                    selectedPrefab = Instantiate(selectedPrefab, position, Quaternion.Euler(this.transform.parent.gameObject.transform.eulerAngles));
+                    selectedPrefab.GetComponent<MeshRenderer>().enabled = true;
+                    selectedPrefab.GetComponent<BoxCollider>().enabled = true;
                     this.gameObject.GetComponent<MeshRenderer>().enabled = false;
                     this.gameObject.GetComponent<BoxCollider>().enabled = false;
                     
