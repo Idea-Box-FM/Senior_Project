@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6461364278184575831}
   - component: {fileID: 6461364278184575828}
   - component: {fileID: 6461364278184575829}
-  - component: {fileID: 6883986145892270040}
   m_Layer: 6
   m_Name: Barrel_55Gal_A 1
   m_TagString: FMPrefab
@@ -167,20 +166,6 @@ MonoBehaviour:
   cancelButton: {fileID: 0}
   deleteButton: {fileID: 0}
   isSelected: 0
---- !u!114 &6883986145892270040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4434194159726320276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f66394c7995dee4d879d42ccf227695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contents: []
-  currentContent: 
 --- !u!1 &8649225452292067985
 GameObject:
   m_ObjectHideFlags: 0
