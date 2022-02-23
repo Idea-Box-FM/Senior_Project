@@ -15,7 +15,10 @@ public class ObjectContents : MonoBehaviour
     void Start()
     {
         contents = FileManager.fileManager.sdsFiles;
-        currentContent = contents[0];
+        if (currentContent == "")
+        {
+            currentContent = contents[0];
+        }
     }
 
     void Update()

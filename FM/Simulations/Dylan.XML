@@ -8,7 +8,7 @@
 		<BlackPlasticBarrel(Clone) Position="(3.2, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</BlackPlasticBarrel>
 	<IBC>
-		<IBC(Clone) Position="(0.8, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<IBC(Clone) Position="(0.8, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)" SDS="sdsTest2.rtf"/>
 	</IBC>
 	<DoubleStorageRack>
 		<DoubleStorageRack(Clone) Position="(-1.6, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
