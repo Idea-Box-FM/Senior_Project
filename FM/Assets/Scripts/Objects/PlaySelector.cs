@@ -80,7 +80,7 @@ public class PlaySelector : MonoBehaviour
                         selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
                     }
 
-                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                    selectHit.transform.gameObject.GetComponent<PlaySelector>().isSelected = true;
 
                     //if (isSelected == true)
                     //{

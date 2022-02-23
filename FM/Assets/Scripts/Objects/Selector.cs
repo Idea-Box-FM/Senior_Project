@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*Flower Box
  * 
@@ -48,8 +49,16 @@ public class Selector : MonoBehaviour
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
-        goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
-        selfMat = goMaterial.material;
+        if (SceneManager.GetActiveScene().name == "Editor Scene")
+        {
+            goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
+            selfMat = goMaterial.material;
+        }
+        else
+        {
+            return;
+        }
+           
         moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
         cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
         deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
