@@ -2668,15 +2668,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 4b2b95287834c854aa648d27ab6e590f, type: 2}
+  - {fileID: 11400000, guid: a0622723637bbe6459cefcc1876d6670, type: 2}
+  - {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  - {fileID: 11400000, guid: dc215a01469c640489365570b1bcd035, type: 2}
+  - {fileID: 11400000, guid: 1829f11ab76970b408d2d8997d3f5987, type: 2}
   - {fileID: 11400000, guid: c084cce3b16f41b4dae04bb254908851, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 473d1bf42cdb7484ea23e6d6938c5a3e, type: 2}
   - {fileID: 11400000, guid: 2fa1e4a6210afd545b369cffea39103c, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e19029fde2a76784396bb2df8d04256d, type: 2}
 --- !u!114 &852190248
 MonoBehaviour:
   m_ObjectHideFlags: 0
