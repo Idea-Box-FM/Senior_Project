@@ -4,17 +4,16 @@
 		<Roof Material="Floor (Instance)"/>
 		<Floor Material="Floor (Instance)"/>
 	</Room>
-	<BlackPlasticBarrel>
-		<BlackPlasticBarrel(Clone) Position="(-5.0, 0.0, 8.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<BlackPlasticBarrel(Clone) Position="(-3.7, 0.0, 8.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<BlackPlasticBarrel(Clone) Position="(-1.6, 0.0, 8.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-	</BlackPlasticBarrel>
+	<WarehouseRackLarge>
+		<WarehouseRackLarge(Clone) Position="(7.4, 0.0, 8.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</WarehouseRackLarge>
+	<SmallWarehouseRack>
+		<SmallWarehouseRack(Clone) Position="(-5.7, 0.0, 8.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</SmallWarehouseRack>
 	<DoubleStorageRack>
-		<DoubleStorageRack(Clone) Position="(-1.2, 0.0, 7.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<DoubleStorageRack(Clone) Position="(1.3, 0.0, 7.9)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<DoubleStorageRack(Clone) Position="(-2.2, 0.0, 7.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</DoubleStorageRack>
-	<BluePlasticBarrel>
-		<BluePlasticBarrel(Clone) Position="(-1.7, 1.1, 8.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<BluePlasticBarrel(Clone) Position="(-0.6, 1.1, 8.2)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-	</BluePlasticBarrel>
+	<55GallonGrime>
+		<55GallonGrime(Clone) Position="(3.6, 0.0, 4.9)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</55GallonGrime>
 </XML>
