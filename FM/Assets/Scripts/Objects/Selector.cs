@@ -20,6 +20,8 @@ using UnityEngine.SceneManagement;
  *  Helped runtime length 2/3/2022
  * Editor: Ryan Constantino
  *  Fixed bug where you would select multiple objects if they were behind one another 2/4/2022
+ * Editor: Dylan Lavimodiere
+ *  Added Audio Requirements 2/23/2022
  */
 
 public class Selector : MonoBehaviour
@@ -152,6 +154,7 @@ public class Selector : MonoBehaviour
 
     void Delete()
     {
+        GameObject.Find("EffectPlayer").GetComponent<PlaySoundEffect>().Play(2);//play sound effect for destruction
         Destroy(this.transform.parent.gameObject);
         deleteButton.onClick.RemoveListener(delete);
     }

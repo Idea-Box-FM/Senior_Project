@@ -59,11 +59,6 @@ public class FileManager : MonoBehaviour
     #endregion
     #endregion
 
-    public void OpenSds(string name)
-    {
-        Application.OpenURL(FormatPath(sdsPath, name));
-    }
-
     #region start
     private void Awake()
     {
@@ -84,6 +79,7 @@ public class FileManager : MonoBehaviour
     void Start()
     {
         path = Directory.GetCurrentDirectory();
+        //Debug.Log("Simulation Save Path: " + path);
         simulationPath = path + slash + simulationFolderName;
         sdsPath = path + slash + sdsFolderName;
 
