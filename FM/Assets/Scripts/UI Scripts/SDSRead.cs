@@ -25,10 +25,22 @@ public class SDSRead : MonoBehaviour
         {
             if(selectorScripts[i].isSelected == true)
             {
-                Debug.Log("This is the sds of the object " + selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent);
+                //Debug.Log("This is the sds of the object " + selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent);
+                string content = selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent;
                 //Use object contents.contents to find sds files in filemanager
-                //Application.OpenURL("file:///c:/filename.PDF");
+                Application.OpenURL("file:///c:/filename.PDF");
                 //display SDS
+            }
+        }
+    }
+
+    public void DeselectObjects()
+    {
+        for (int i = 0; i < selectorScripts.Length; i++)
+        {
+            if (selectorScripts[i].isSelected == true)
+            {
+                selectorScripts[i].Deselect();
             }
         }
     }
