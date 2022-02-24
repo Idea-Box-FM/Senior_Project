@@ -39,10 +39,14 @@ public class PlaySelector : MonoBehaviour
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
-        goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
-        selfMat = goMaterial.material;
+        //goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
+        //selfMat = goMaterial.material;
         if (SceneManager.GetActiveScene().name == "Game Scene")
             cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
+        else
+        {
+            return;
+        }
     }
 
     //find the main Camera
