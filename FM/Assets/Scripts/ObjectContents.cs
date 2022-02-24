@@ -33,9 +33,7 @@ public class ObjectContents : MonoBehaviour
     /// <param name="c">The Input for the is the index number of the Contents enum + 1 </param>
     public void ChangeContents(int c)
     {
-
         currentContent = contents[c];
-
     }
 
 

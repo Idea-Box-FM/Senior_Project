@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SDSInfo : MonoBehaviour
 {
-    public string sdsPath;
+    #region Fields
+    public string currentContent;
 
     [SerializeField][Range(0,4)] int flamability, reactivity, health;
+    #endregion
 
+    #region Properties
     public int Flamability
     {
         get
@@ -45,15 +48,30 @@ public class SDSInfo : MonoBehaviour
         }
     }
 
+    public string[] Contents
+    {
+        get
+        {
+            return FileManager.fileManager.sdsFiles;
+        }
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (currentContent == "")
+        {
+            currentContent = Contents[0];
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// This function is meant to change the contents of the object this script is on
+    /// </summary>
+    /// <param name="c">The Input for the is the index number of the Contents enum + 1 </param>
+    public void ChangeContents(int c)
     {
-        
+        currentContent = Contents[c];
     }
 }
