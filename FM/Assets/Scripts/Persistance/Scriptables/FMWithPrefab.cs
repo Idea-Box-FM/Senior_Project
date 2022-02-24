@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*FlowerBox
+ * Programmer: Patrick Naatz
+ * Intention: Make a script capable of handling FMPrefabs with SDS data
+ * 
+ * Edited:
+ * changed script to match new naming convention in SDSInfo 2/24/2022
+ */
 [CreateAssetMenu(fileName = "FmPrefabWithSDS", menuName = "FMPrefabs/FmPrefabWithSDS")]
 public class FMWithPrefab : FMPrefab
 {

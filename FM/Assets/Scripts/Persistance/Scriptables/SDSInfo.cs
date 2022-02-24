@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*FlowerBox
+ * Programmer: Patrick Naatz
+ * Intention: Make a script ot go on each object that requires SDS data
+ * 
+ * Edited:
+ * Merged the functionality of ObjectContents with SDSInfo 2/24/2022
+ * Changed some naming conventions in SDSInfo to match ObjectContents 2/24/2022
+ */
 public class SDSInfo : MonoBehaviour
 {
     #region Fields
