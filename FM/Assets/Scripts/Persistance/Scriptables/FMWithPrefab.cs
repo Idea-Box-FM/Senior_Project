@@ -18,7 +18,7 @@ public class FMWithPrefab : FMPrefab
         xml.AddAttribute("Flamability", sds.Flamability.ToString());
         xml.AddAttribute("Reaction", sds.Reactivity.ToString());
 
-        xml.AddAttribute("SDSSheet", sds.sdsPath);
+        xml.AddAttribute("SDSSheet", sds.currentContent);
 
         return xml;
     }
@@ -32,7 +32,7 @@ public class FMWithPrefab : FMPrefab
         sds.Flamability = int.Parse(xml.attributes["Flamability"]);
         sds.Reactivity = int.Parse(xml.attributes["Reaction"]);
 
-        sds.sdsPath = xml.attributes["SDSSheet"];
+        sds.currentContent = xml.attributes["SDSSheet"];
 
         return gameObject;
     }
