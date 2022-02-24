@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1414059455}
   m_Direction: 2
   m_Value: 0.5000001
-  m_Size: 0.48780492
+  m_Size: 0.4878049
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3394,8 +3394,8 @@ GameObject:
   - component: {fileID: 943949109}
   - component: {fileID: 943949111}
   - component: {fileID: 943949110}
-  - component: {fileID: 943949113}
   - component: {fileID: 943949114}
+  - component: {fileID: 943949113}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: GameManager
@@ -3498,9 +3498,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 943949108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db7e0ad25d0fb44eb11a0f9071564d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 21c55c49398a73a4bba6f10641ae1814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objects: []
+  sdsList: []
+  itemtemplate: {fileID: 5453792802885642276, guid: 8c1805e6cbb68b44b88d3fd652ad40ad, type: 3}
+  buttonList: {fileID: 100918981}
 --- !u!114 &943949114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7840,7 +7844,7 @@ PrefabInstance:
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 943949113}
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
