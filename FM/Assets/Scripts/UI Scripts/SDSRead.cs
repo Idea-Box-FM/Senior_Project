@@ -18,27 +18,31 @@ public class SDSRead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
     }
 
     public void ReadSDS()
     {
+        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
+
         for (int i = 0; i < selectorScripts.Length; i++)
         {
             if(selectorScripts[i].isSelected == true)
             {
-                string content = selectorScripts[i].gameObject.GetComponentInParent<SDSInfo>().currentContent;
-                //Use object contents.contents to find sds files in filemanager
+                //create sds file path
+                string content = selectorScripts[i].GetComponentInParent<SDSInfo>().currentContent;
                 FileManager fileManager = FileManager.fileManager;
                 string path = fileManager.FormatPath(fileManager.sdsPath, content);
-                Application.OpenURL(path);
+
                 //display SDS
+                Application.OpenURL(path);
             }
         }
     }
 
     public void DeselectObjects()
     {
+        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
+
         for (int i = 0; i < selectorScripts.Length; i++)
         {
             if (selectorScripts[i].isSelected == true)

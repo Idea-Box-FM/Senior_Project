@@ -13,6 +13,8 @@ using UnityEngine.SceneManagement;
  * Editor: Tyler Rubenstein
  *   Added to main 2/17/21
  * 
+ * Editor: Patrick Naatz
+ *  Fixed the goMaterial bug 2/24/2022
  */
 
 public class PlaySelector : MonoBehaviour
@@ -61,6 +63,7 @@ public class PlaySelector : MonoBehaviour
         //action = new UnityAction(MoveItem);
         //deselect = new UnityAction(Deselect);
         //delete = new UnityAction(Delete);
+        goMaterial = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
