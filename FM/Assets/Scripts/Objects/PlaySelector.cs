@@ -114,20 +114,20 @@ public class PlaySelector : MonoBehaviour
 
 
 
-    //public void Deselect()
-    //{
-    //    //change the material back to selfMat when you click off of an object
-    //    goMaterial.material = selfMat;
-    //    this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-    //    for (int i = 0; i < this.gameObject.transform.childCount; i++)
-    //    {
-    //        this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
-    //    }
+    public void Deselect()
+    {
+        //change the material back to selfMat when you click off of an object
+        goMaterial.material = selfMat;
+        this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
+        }
 
-    //    isSelected = false;
-    //    follower.enabled = false;
-    //    moveButton.onClick.RemoveListener(action);
-    //    cancelButton.onClick.RemoveListener(deselect);
-    //    deleteButton.onClick.RemoveListener(delete);
-    //}
+        isSelected = false;
+        //follower.enabled = false;
+        //moveButton.onClick.RemoveListener(action);
+        //cancelButton.onClick.RemoveListener(deselect);
+        //deleteButton.onClick.RemoveListener(delete);
+    }
 }
