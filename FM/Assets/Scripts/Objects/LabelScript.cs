@@ -87,11 +87,7 @@ public class LabelScript : MonoBehaviour
             if (objects[i].GetComponent<Selector>().isSelected == true)
             {
                //change sds
-               //objects[i].Label = SDS
-                objects[i].GetComponent<SDSInfo>().ChangeContents(content);
-                Debug.Log(objects[i].GetComponent<SDSInfo>().currentContent);
-               // 
-
+                objects[i].GetComponentInParent<SDSInfo>().ChangeContents(content);
             }
 
         }
