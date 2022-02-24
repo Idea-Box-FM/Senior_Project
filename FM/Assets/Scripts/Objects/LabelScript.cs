@@ -71,7 +71,7 @@ public class LabelScript : MonoBehaviour
     }
     void ItemClicked(int itemIndex)
     {
-        Debug.Log("Button " + itemIndex + " was clicked");
+       // Debug.Log("Button " + itemIndex + " was clicked");
         ChangeOption(itemIndex);
 
         SelectObject();
@@ -85,9 +85,10 @@ public class LabelScript : MonoBehaviour
         {
             if (objects[i].GetComponent<Selector>().isSelected == true)
             {
-                //change sds
-                //objects[i].Label = SDS
+               //change sds
+               //objects[i].Label = SDS
                 objects[i].GetComponent<ObjectContents>().ChangeContents(content);
+                Debug.Log(objects[i].GetComponent<ObjectContents>().currentContent);
                // 
 
             }

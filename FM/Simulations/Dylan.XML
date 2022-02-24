@@ -5,18 +5,15 @@
 		<Floor Material="Floor (Instance)"/>
 	</Room>
 	<BlackPlasticBarrel>
-		<BlackPlasticBarrel(Clone) Position="(3.2, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<BlackPlasticBarrel(Clone) Position="(-4.4, 0.0, 3.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</BlackPlasticBarrel>
 	<IBC>
-		<IBC(Clone) Position="(0.8, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)" SDS="sdsTest2.rtf"/>
+		<IBC(Clone) Position="(2.9, 0.0, 2.7)" Rotation="(0.0, 0.0, 0.0, 1.0)" SDS="sdsTest.rtf"/>
 	</IBC>
-	<DoubleStorageRack>
-		<DoubleStorageRack(Clone) Position="(-1.6, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-	</DoubleStorageRack>
 	<BluePlasticBarrel>
-		<BluePlasticBarrel(Clone) Position="(2.2, 0.0, 3.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<BluePlasticBarrel(Clone) Position="(-2.4, 0.0, 3.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</BluePlasticBarrel>
 	<55GallonGrime>
-		<55GallonGrime(Clone) Position="(4.2, 0.0, 3.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<55GallonGrime(Clone) Position="(0.5, 0.0, 3.2)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</55GallonGrime>
 </XML>

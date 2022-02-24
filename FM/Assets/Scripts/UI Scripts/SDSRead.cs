@@ -26,6 +26,9 @@ public class SDSRead : MonoBehaviour
             if(selectorScripts[i].isSelected == true)
             {
                 Debug.Log("This is the sds of the object " + selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent);
+                //Use object contents.contents to find sds files in filemanager
+                //Application.OpenURL("file:///c:/filename.PDF");
+                //display SDS
             }
         }
     }

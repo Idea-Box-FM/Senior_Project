@@ -97,7 +97,7 @@ public class Selector : MonoBehaviour
                         selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
                     }
 
-                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;                   
 
                     if (isSelected == true)
                     {
@@ -113,7 +113,7 @@ public class Selector : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
             //change the material back to selfMat when you click off of an object
-            goMaterial.material = selfMat;
+            //goMaterial.material = selfMat;
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             for (int i = 0; i < this.gameObject.transform.childCount; i++)
             {
@@ -136,7 +136,7 @@ public class Selector : MonoBehaviour
     public void Deselect()
     {
         //change the material back to selfMat when you click off of an object
-        goMaterial.material = selfMat;
+        //goMaterial.material = selfMat;
         this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {

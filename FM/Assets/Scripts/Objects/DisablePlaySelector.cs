@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisableSelector : MonoBehaviour
+public class DisablePlaySelector : MonoBehaviour
 {
-    public Selector[] selectorScripts;
+    public PlaySelector[] selectorScripts;
 
 
     // Update is called once per frame
     void Update()
     {
-        selectorScripts = GameObject.FindObjectsOfType<Selector>();
+        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
 
         for (int i = 0; i < selectorScripts.Length; i++)
         {
