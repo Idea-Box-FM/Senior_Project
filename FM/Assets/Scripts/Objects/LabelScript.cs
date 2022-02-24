@@ -15,7 +15,8 @@ using TMPro;
  * Editor: Tyler Rubenstein
  *   Added to main 2/7/22
  *   
- *
+ * Editor: Pat Naatz
+ *  replaced ObjectContents with SDSInfo 2/24/2022
  */
 
 public class LabelScript : MonoBehaviour
@@ -87,8 +88,8 @@ public class LabelScript : MonoBehaviour
             {
                //change sds
                //objects[i].Label = SDS
-                objects[i].GetComponent<ObjectContents>().ChangeContents(content);
-                Debug.Log(objects[i].GetComponent<ObjectContents>().currentContent);
+                objects[i].GetComponent<SDSInfo>().ChangeContents(content);
+                Debug.Log(objects[i].GetComponent<SDSInfo>().currentContent);
                // 
 
             }
