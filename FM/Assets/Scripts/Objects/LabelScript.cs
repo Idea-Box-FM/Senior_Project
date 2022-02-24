@@ -17,6 +17,7 @@ using TMPro;
  *   
  * Editor: Pat Naatz
  *  replaced ObjectContents with SDSInfo 2/24/2022
+ *  Fixed bug where SDSInfo was on parent 2/24/2022
  */
 
 public class LabelScript : MonoBehaviour

@@ -38,7 +38,7 @@ public class FileManager : MonoBehaviour
 
     string path;
     string simulationPath = "";
-    string sdsPath = "";
+    public string sdsPath = "";
     [SerializeField] string simulationFolderName = "Simulations";
     [SerializeField] string sdsFolderName = "SDS";
     #endregion
@@ -126,7 +126,6 @@ public class FileManager : MonoBehaviour
             currentSimulation = localSimulations[0];
         }
     }
-
     #endregion
 
     #region Helper functions
@@ -144,7 +143,7 @@ public class FileManager : MonoBehaviour
         return localFiles.ToArray();
     }
 
-    string FormatPath(string path, string fileName)
+    public string FormatPath(string path, string fileName)
     {
         fileName = path + slash + fileName;
 

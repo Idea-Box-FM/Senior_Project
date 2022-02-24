@@ -27,9 +27,11 @@ public class SDSRead : MonoBehaviour
         {
             if(selectorScripts[i].isSelected == true)
             {
-                string content = selectorScripts[i].gameObject.GetComponent<SDSInfo>().currentContent;
+                string content = selectorScripts[i].gameObject.GetComponentInParent<SDSInfo>().currentContent;
                 //Use object contents.contents to find sds files in filemanager
-                Application.OpenURL("file:///c:/filename.PDF");
+                FileManager fileManager = FileManager.fileManager;
+                string path = fileManager.FormatPath(fileManager.sdsPath, content);
+                Application.OpenURL(path);
                 //display SDS
             }
         }
