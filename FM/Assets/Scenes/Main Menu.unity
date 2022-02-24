@@ -1126,6 +1126,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 289469465}
     m_Modifications:
+    - target: {fileID: 3062168048492205471, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595873, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_Name
       value: ExitButton
@@ -2906,6 +2910,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 289469465}
     m_Modifications:
+    - target: {fileID: 3062168048492205471, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595873, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_Name
       value: PlayButton
@@ -3849,6 +3857,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 289469465}
     m_Modifications:
+    - target: {fileID: 3062168048492205471, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595873, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_Name
       value: UploadButton
@@ -4705,6 +4717,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 289469465}
     m_Modifications:
+    - target: {fileID: 3062168048492205471, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595873, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_Name
       value: EditButton
@@ -6212,6 +6228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 289469465}
     m_Modifications:
+    - target: {fileID: 3062168048492205471, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595873, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_Name
       value: NewButton
@@ -6517,6 +6537,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 289469465}
     m_Modifications:
+    - target: {fileID: 3062168048492205471, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595873, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_Name
       value: DownloadButton
