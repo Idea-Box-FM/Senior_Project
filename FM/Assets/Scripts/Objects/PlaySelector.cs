@@ -8,23 +8,16 @@ using UnityEngine.SceneManagement;
 
 /*Flower Box
  * 
- * Intention: When you click an object, it will change it's material
+ * Intention: Select objects in Play mode to access ability to read SDS
  * 
  * Editor: Tyler Rubenstein
- *   Added to main 12/7/21
+ *   Added to main 2/17/21
+ * 
  * Editor: Patrick Naatz
- *  Added IsSelected Property 1/29/2022
- *  Added Deselect method 1/31/2022
- *  Changed FMPrefabList to singleton pattern 2/2/2022
- *  Fixed a bug where you can select things without the selector script on it 2/2/2022
- *  Helped runtime length 2/3/2022
- * Editor: Ryan Constantino
- *  Fixed bug where you would select multiple objects if they were behind one another 2/4/2022
- * Editor: Dylan Lavimodiere
- *  Added Audio Requirements 2/23/2022
+ *  Fixed the goMaterial bug 2/24/2022
  */
 
-public class Selector : MonoBehaviour
+public class PlaySelector : MonoBehaviour
 {
     //layer mask to select items
     public LayerMask selectMask;
@@ -36,52 +29,47 @@ public class Selector : MonoBehaviour
     public Camera mainCamera;
     //mesh renderer for materials
     public MeshRenderer goMaterial;
-
-    //RYAN DID THIS
-    FollowScript follower;
-    public Button moveButton;
     public Button cancelButton;
-    public Button deleteButton;
+
+
     public bool isSelected = false;
 
-    private UnityAction action;
-    private UnityAction deselect;
-    private UnityAction delete;
+    //private UnityAction action;
+    //private UnityAction deselect;
+    //private UnityAction delete;
 
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "Editor Scene")
-        {
-            moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
+        //goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
+        //selfMat = goMaterial.material;
+        if (SceneManager.GetActiveScene().name == "Game Scene")
             cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
-            deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
-        }
         else
         {
             return;
-        }          
-        
+        }
     }
 
     //find the main Camera
     void Start()
     {
         mainCamera = GameObject.FindObjectOfType<Camera>();
-        if (gameObject.tag == "FMPrefab")
-        {
-            follower = gameObject.GetComponent<FollowScript>();
-        }
+        //if (gameObject.tag == "FMPrefab")
+        //{
+        //    follower = gameObject.GetComponent<FollowScript>();
+        //}
 
-        action = new UnityAction(MoveItem);
-        deselect = new UnityAction(Deselect);
-        delete = new UnityAction(Delete);
+        //action = new UnityAction(MoveItem);
+        //deselect = new UnityAction(Deselect);
+        //delete = new UnityAction(Delete);
+        goMaterial = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame /*PUT TOUCH BASED FUNCTIONALITY HERE*/)
         {
             //raycast from camera to mouse location
             Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -99,46 +87,44 @@ public class Selector : MonoBehaviour
                         selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
                     }
 
-                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;                   
+                    selectHit.transform.gameObject.GetComponent<PlaySelector>().isSelected = true;
 
-                    if (isSelected == true)
-                    {
-                        moveButton.onClick.AddListener(action);
-                        cancelButton.onClick.AddListener(deselect);
-                        deleteButton.onClick.AddListener(delete);
-                    }
+                    //if (isSelected == true)
+                    //{
+                    //    moveButton.onClick.AddListener(action);
+                    //    cancelButton.onClick.AddListener(deselect);
+                    //    deleteButton.onClick.AddListener(delete);
+                    //}
                 }
             }
-        }  
+        }
 
-        //more RYAN
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
-            //change the material back to selfMat when you click off of an object
-            //goMaterial.material = selfMat;
+            //change the material back to selfMat when you press space
+            goMaterial.material = selfMat;
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             for (int i = 0; i < this.gameObject.transform.childCount; i++)
             {
                 this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
             }
 
-            follower.enabled = false;
             isSelected = false;
-            moveButton.onClick.RemoveListener(action);
-            cancelButton.onClick.RemoveListener(deselect);
-            deleteButton.onClick.RemoveListener(delete);
+
+            //follower.enabled = false;            
+            //moveButton.onClick.RemoveListener(action);
+            //cancelButton.onClick.RemoveListener(deselect);
+            //deleteButton.onClick.RemoveListener(delete);
         }
     }
 
-    void MoveItem()
-    {
-        follower.enabled = true;
-    }
+
 
     public void Deselect()
     {
         //change the material back to selfMat when you click off of an object
-        //goMaterial.material = selfMat;
+        goMaterial.material = selfMat;
         this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
@@ -146,16 +132,9 @@ public class Selector : MonoBehaviour
         }
 
         isSelected = false;
-        follower.enabled = false;
-        moveButton.onClick.RemoveListener(action);
-        cancelButton.onClick.RemoveListener(deselect);
-        deleteButton.onClick.RemoveListener(delete);
-    }
-
-    void Delete()
-    {
-        GameObject.Find("EffectPlayer").GetComponent<PlaySoundEffect>().Play(2);//play sound effect for destruction
-        Destroy(this.transform.parent.gameObject);
-        deleteButton.onClick.RemoveListener(delete);
+        //follower.enabled = false;
+        //moveButton.onClick.RemoveListener(action);
+        //cancelButton.onClick.RemoveListener(deselect);
+        //deleteButton.onClick.RemoveListener(delete);
     }
 }

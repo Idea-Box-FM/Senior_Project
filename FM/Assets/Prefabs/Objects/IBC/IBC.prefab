@@ -116,6 +116,41 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &88500539644500899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057778083435552900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f66394c7995dee4d879d42ccf227695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contents: []
+  currentContent: 
+--- !u!114 &2301308143459961160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057778083435552900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6efcfb18c844fb4db4cd7b33b4271dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectMask:
+    serializedVersion: 2
+    m_Bits: 64
+  selfMat: {fileID: 0}
+  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
+  mainCamera: {fileID: 0}
+  goMaterial: {fileID: 5020488910230537437}
+  cancelButton: {fileID: 0}
+  isSelected: 0
 --- !u!114 &7873870902146070785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +182,7 @@ MonoBehaviour:
   selfMat: {fileID: 0}
   testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
   mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
+  goMaterial: {fileID: 5020488910230537437}
   moveButton: {fileID: 0}
   cancelButton: {fileID: 0}
   deleteButton: {fileID: 0}
