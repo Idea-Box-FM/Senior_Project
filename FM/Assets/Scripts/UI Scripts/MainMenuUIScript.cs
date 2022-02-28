@@ -67,7 +67,18 @@ public class MainMenuUIScript : MonoBehaviour
 
     private bool waited;
 
-   
+    string CurrentItem
+    {
+        get
+        {
+            return currentItem ?? FileManager.fileManager.currentSimulation;
+        }
+
+        set
+        {
+            currentItem = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -136,7 +147,10 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UpdateList()
     {
+        Debug.Log("unloading list");
+        UnloadList();
 
+        Debug.Log("reloading list");
         localSimList = FileManager.fileManager.localSimulations;
 
         onlineSimList = FileManager.fileManager.onlineSimulations;
@@ -160,45 +174,61 @@ public class MainMenuUIScript : MonoBehaviour
             }
         }
 
-
+        simList.Reverse();
         simList = simList.Distinct().ToList<string>();
+        simList.Reverse();
 
-        for (int i = 0; i < simList.Count;i++)
+        for(int i = 0; i < simList.Count; i++)
         {
-            if(i < localSimList.Length)
-            {
-                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-                string simName = simList[i].TrimEnd(xmlTrim);
-                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
-                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
-                
-            }
-            else
-            {
-                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-                string simName = simList[i].TrimEnd(xmlTrim);
-                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
-                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
-            }
+            s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+            string simName = simList[i].TrimEnd(xmlTrim);
+            s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+            s.transform.GetChild(0).GetComponent<TMP_Text>().color = (localSimList.Contains(simList[i])) ? Color.blue : Color.black;
+            s.GetComponent<Button>().AddEventListener(i, ItemClicked);
 
             if (simList[i] == FileManager.fileManager.currentSimulation)
                 selectedSim = i;
         }
 
+        //for (int i = 0; i < simList.Count;i++)
+        //{
+        //    if(i < localSimList.Length)
+        //    {
+        //        s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+        //        string simName = simList[i].TrimEnd(xmlTrim);
+        //        s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+        //        s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
+        //        s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+        //        Debug.Log("loading " + simName + " as local");
+        //    }
+        //    else
+        //    {
+        //        s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+        //        string simName = simList[i].TrimEnd(xmlTrim);
+        //        s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+        //        s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
+        //        s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+        //        Debug.Log("loading " + simName + " as online");
+        //    }
+
+        //    if (simList[i] == FileManager.fileManager.currentSimulation)
+        //        selectedSim = i;
+        //}
+
     }
 
     public void UnloadList()
     {
-        //Debug.Log(nameList.Length);
-        for (int i = 0; i < localSimList.Length; i++)
+        foreach(Transform child in LocalPanel.transform.GetChild(0))
         {
-            Debug.Log(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-           Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
+            Destroy(child.gameObject);
         }
-
-        UpdateList();
+        //Debug.Log(nameList.Length);
+        //for (int i = 0; i < simulationListCount; i++)
+        //{
+        //    Debug.Log(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+        //   Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+        //}
     }
 
     void ItemClicked (int itemIndex)
@@ -217,7 +247,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     #region Helper Methods
 
- public void ChangeScene(int scene)
+    public void ChangeScene(int scene)
     {
         Wait(audio.soundClips[audio.selectedClip].length);
         if(waited == true) SceneManager.LoadScene(scene);
@@ -226,17 +256,26 @@ public class MainMenuUIScript : MonoBehaviour
     public void DownloadButton()
     {
         //string fileName = FileManager.fileManager.currentSimulation + xml;
-        string fileName = currentItem;
+        string fileName = CurrentItem;
         Debug.Log(fileName);
         FileManager.fileManager.DownloadSimulation(fileName);
+        UpdateList();
     }
 
     public void UploadButton()
     {
         //string fileName = FileManager.fileManager.currentSimulation + xml;
-        string fileName = currentItem;
+        string fileName = CurrentItem;
         Debug.Log(fileName);
         FileManager.fileManager.UploadSimulation(fileName);
+    }
+
+    public void DeleteButton()
+    {
+        string fileName = CurrentItem;
+        Debug.Log("deleteing " + fileName);
+        FileManager.fileManager.DeleteSimulation(fileName);
+        UpdateList();
     }
 
     public void ChangeImage(Sprite sprite)
