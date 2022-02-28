@@ -96,7 +96,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 32c4c5dbdd5a3f244912e8ca5e44aa08, type: 2}
     - target: {fileID: 7268248424483147699, guid: 316303ad71bd449469ef7d2c041bc42a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7268248424483147699, guid: 316303ad71bd449469ef7d2c041bc42a, type: 3}
       propertyPath: mask.m_Bits
