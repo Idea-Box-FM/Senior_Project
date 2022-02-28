@@ -106,6 +106,7 @@ public class Selector : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             //change the material back to selfMat when you click off of an object
             //goMaterial.material = selfMat;
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -114,6 +115,8 @@ public class Selector : MonoBehaviour
                 this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
             }
 =======
+=======
+>>>>>>> parent of 53e3858 (Button layout changed)
             ////change the material back to selfMat when you click off of an object
             //goMaterial.material = selfMat;
             //this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
