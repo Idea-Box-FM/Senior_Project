@@ -124,14 +124,6 @@ public class Selector : MonoBehaviour
         //more RYAN
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
-            ////change the material back to selfMat when you click off of an object
-            //goMaterial.material = selfMat;
-            //this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-            //for (int i = 0; i < this.gameObject.transform.childCount; i++)
-            //{
-            //    this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
-            //}
-
             movedPosition = selectedPrefab.transform.position;
 
             //trying selected prefab
