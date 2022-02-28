@@ -21,6 +21,11 @@ public static class ButtonExtension
 /*
  * Editor Patrick Naatz
  *  Removed a UnityEditor line preventing building from end game function 2/10/2022'
+ *  Fixed a bug with currentItem, in future reference please use CurrentItem instead for all uses 2/28/2022
+ *  Fixed a bug where reloading the list did not delete the old script 2/28/2022
+ *  Fixed a bug where local sims displayed as online sims and vice versa 2/28/2022
+ *  Fixed a bug where download button did not update the list 2/28/2022
+ *  Added a Delete button function 2/28/2022
  */
 
 public class MainMenuUIScript : MonoBehaviour
@@ -147,20 +152,15 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UpdateList()
     {
-        Debug.Log("unloading list");
         UnloadList();
 
-        Debug.Log("reloading list");
         localSimList = FileManager.fileManager.localSimulations;
 
-        onlineSimList = FileManager.fileManager.onlineSimulations;
-        //onlineSimList = localSimList.Distinct().ToArray<string>();
-
+        onlineSimList = FileManager.fileManager.onlineSimulations.ToList().Except(localSimList).ToArray();
 
         simListLength = localSimList.Length + onlineSimList.Length;
 
-
-
+        simList.Clear();
         //combining the two simulation list into one
         for(int i = 0; i < simListLength; i++)
         {
@@ -174,46 +174,28 @@ public class MainMenuUIScript : MonoBehaviour
             }
         }
 
-        simList.Reverse();
-        simList = simList.Distinct().ToList<string>();
-        simList.Reverse();
-
-        for(int i = 0; i < simList.Count; i++)
+        for (int i = 0; i < simList.Count; i++)
         {
-            s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-            string simName = simList[i].TrimEnd(xmlTrim);
-            s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-            s.transform.GetChild(0).GetComponent<TMP_Text>().color = (localSimList.Contains(simList[i])) ? Color.blue : Color.black;
-            s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            if (i < localSimList.Length)
+            {
+                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+                string simName = simList[i].TrimEnd(xmlTrim);
+                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
+                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            }
+            else
+            {
+                s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
+                string simName = simList[i].TrimEnd(xmlTrim);
+                s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
+                s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
+                s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            }
 
             if (simList[i] == FileManager.fileManager.currentSimulation)
                 selectedSim = i;
         }
-
-        //for (int i = 0; i < simList.Count;i++)
-        //{
-        //    if(i < localSimList.Length)
-        //    {
-        //        s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-        //        string simName = simList[i].TrimEnd(xmlTrim);
-        //        s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-        //        s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
-        //        s.GetComponent<Button>().AddEventListener(i, ItemClicked);
-        //        Debug.Log("loading " + simName + " as local");
-        //    }
-        //    else
-        //    {
-        //        s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
-        //        string simName = simList[i].TrimEnd(xmlTrim);
-        //        s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
-        //        s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.black;
-        //        s.GetComponent<Button>().AddEventListener(i, ItemClicked);
-        //        Debug.Log("loading " + simName + " as online");
-        //    }
-
-        //    if (simList[i] == FileManager.fileManager.currentSimulation)
-        //        selectedSim = i;
-        //}
 
     }
 
@@ -223,6 +205,7 @@ public class MainMenuUIScript : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
         //Debug.Log(nameList.Length);
         //for (int i = 0; i < simulationListCount; i++)
         //{
