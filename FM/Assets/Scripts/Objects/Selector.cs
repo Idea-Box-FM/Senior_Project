@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*Flower Box
  * 
- * Intention: When you hover over an object, it will change it's material
+ * Intention: When you click an object, it will change it's material
  * 
  * Editor: Tyler Rubenstein
  *   Added to main 12/7/21
@@ -43,6 +44,14 @@ public class Selector : MonoBehaviour
     public Button deleteButton;
     public bool isSelected = false;
 
+    [SerializeField]
+    private GameObject selectedPrefab;
+
+    private LevelEditorManager editor;
+
+    private Vector3 position;
+    private Vector3 movedPosition;
+
     private UnityAction action;
     private UnityAction deselect;
     private UnityAction delete;
@@ -50,11 +59,17 @@ public class Selector : MonoBehaviour
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
-        goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
-        selfMat = goMaterial.material;
-        moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
-        cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
-        deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
+        if (SceneManager.GetActiveScene().name == "Editor Scene")
+        {
+            moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
+            cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
+            deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
+        }
+        else
+        {
+            return;
+        }          
+        
     }
 
     //find the main Camera
@@ -65,6 +80,9 @@ public class Selector : MonoBehaviour
         {
             follower = gameObject.GetComponent<FollowScript>();
         }
+
+        //grab the LevelEditorManager component
+        editor = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelEditorManager>();
 
         action = new UnityAction(MoveItem);
         deselect = new UnityAction(Deselect);
@@ -85,14 +103,22 @@ public class Selector : MonoBehaviour
             {
                 if (selectHit.collider.tag == "FMPrefab")
                 {
-                    //change material of the raycasted object to the testMat
-                    selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
-                    {
-                        selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    }
+                    //attempt at hiding main prefab and showing selected
+                    position = selectHit.transform.parent.gameObject.transform.position;
+                    selectedPrefab = Instantiate(selectedPrefab, position, Quaternion.Euler(this.transform.parent.gameObject.transform.eulerAngles));
+                    selectedPrefab.GetComponent<MeshRenderer>().enabled = true;
+                    selectedPrefab.GetComponent<BoxCollider>().enabled = true;
+                    this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    this.gameObject.GetComponent<BoxCollider>().enabled = false;
+                    
+                    ////change material of the raycasted object to the testMat
+                    //selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    //for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
+                    //{
+                    //    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    //}
 
-                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;                   
 
                     if (isSelected == true)
                     {
@@ -107,17 +133,18 @@ public class Selector : MonoBehaviour
         //more RYAN
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
-            //change the material back to selfMat when you click off of an object
-            goMaterial.material = selfMat;
-            this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-            for (int i = 0; i < this.gameObject.transform.childCount; i++)
-            {
-                this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
-            }
+            movedPosition = selectedPrefab.transform.position;
+
+            //trying selected prefab
+            Destroy(selectedPrefab);
+
+            this.gameObject.transform.position = movedPosition;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            this.gameObject.GetComponent<BoxCollider>().enabled = true;
 
             follower.enabled = false;
             isSelected = false;
-            moveButton.onClick.RemoveListener(action);
+            //moveButton.onClick.RemoveListener(action);
             cancelButton.onClick.RemoveListener(deselect);
             deleteButton.onClick.RemoveListener(delete);
         }
@@ -126,17 +153,28 @@ public class Selector : MonoBehaviour
     void MoveItem()
     {
         follower.enabled = true;
+
+        //trying selected prefab
+        selectedPrefab.GetComponent<FollowScript>().enabled = true;
+
+        moveButton.onClick.RemoveListener(action);
     }
 
     public void Deselect()
     {
-        //change the material back to selfMat when you click off of an object
-        goMaterial.material = selfMat;
-        this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-        for (int i = 0; i < this.gameObject.transform.childCount; i++)
-        {
-            this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
-        }
+        ////change the material back to selfMat when you click off of an object
+        //goMaterial.material = selfMat;
+        //this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+        //for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        //{
+        //    this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
+        //}
+
+        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        this.gameObject.GetComponent<BoxCollider>().enabled = true;
+
+        //trying selected prefab
+        Destroy(selectedPrefab);
 
         isSelected = false;
         follower.enabled = false;
@@ -149,6 +187,10 @@ public class Selector : MonoBehaviour
     {
         GameObject.Find("EffectPlayer").GetComponent<PlaySoundEffect>().Play(2);//play sound effect for destruction
         Destroy(this.transform.parent.gameObject);
+
+        //trying selected prefab
+        Destroy(selectedPrefab);
+
         deleteButton.onClick.RemoveListener(delete);
     }
 }
