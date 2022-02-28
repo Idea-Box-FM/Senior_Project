@@ -3959,7 +3959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DeleteButton
+      value: UploadButton
       objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -5976,7 +5976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d16f93b0867d8b448b9f2c89f495475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sdsPath: 
   simulationFolderName: Simulations
   sdsFolderName: SDS
   localSimulations: []
