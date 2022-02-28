@@ -105,6 +105,7 @@ public class Selector : MonoBehaviour
         //more RYAN
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
+<<<<<<< HEAD
             //change the material back to selfMat when you click off of an object
             //goMaterial.material = selfMat;
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -112,6 +113,24 @@ public class Selector : MonoBehaviour
             {
                 this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
             }
+=======
+            ////change the material back to selfMat when you click off of an object
+            //goMaterial.material = selfMat;
+            //this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+            //for (int i = 0; i < this.gameObject.transform.childCount; i++)
+            //{
+            //    this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
+            //}
+
+            movedPosition = selectedPrefab.transform.position;
+
+            //trying selected prefab
+            Destroy(selectedPrefab);
+
+            this.gameObject.transform.position = movedPosition;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            this.gameObject.GetComponent<BoxCollider>().enabled = true;
+>>>>>>> parent of 53e3858 (Button layout changed)
 
             follower.enabled = false;
             isSelected = false;
