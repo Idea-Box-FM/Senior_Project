@@ -107,6 +107,7 @@ public class Selector : MonoBehaviour
         //more RYAN
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
+
             //change the material back to selfMat when you click off of an object
             //goMaterial.material = selfMat;
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
