@@ -48,6 +48,8 @@ public class LoadingManager : MonoBehaviour
                     GameObject gameObject = prefab.InstanciatePrefab(subObject);
                     newObjects.Add(gameObject);
                 }
+
+                
             }
         }
 

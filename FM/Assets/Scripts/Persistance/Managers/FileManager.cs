@@ -23,6 +23,7 @@ using System.Linq;
  *  Updated the new file function to work with room requirements 11/29/2021
  *  Fixed a bug where the simulation was reloaded instead of selected 1/11/2022
  *  Updated to include SDS files inside the SDS folder, please see TODO for more details 2/10/2022
+ *  Made sdsPath and format path public for SDSRead script 2/24/2022
  * TODO make the data base connect to the online version of the cluster using config
  * TODO to optimize this script we should refactor it using a Folder class. this is marked as
  * todo and not done because we included a new folder path near the end of the project
@@ -38,7 +39,7 @@ public class FileManager : MonoBehaviour
 
     string path;
     string simulationPath = "";
-    string sdsPath = "";
+    public string sdsPath = "";
     [SerializeField] string simulationFolderName = "Simulations";
     [SerializeField] string sdsFolderName = "SDS";
     #endregion
@@ -58,11 +59,6 @@ public class FileManager : MonoBehaviour
     public string[] onlineSimulations;
     #endregion
     #endregion
-
-    public void OpenSds(string name)
-    {
-        Application.OpenURL(FormatPath(sdsPath, name));
-    }
 
     #region start
     private void Awake()
@@ -84,6 +80,7 @@ public class FileManager : MonoBehaviour
     void Start()
     {
         path = Directory.GetCurrentDirectory();
+        //Debug.Log("Simulation Save Path: " + path);
         simulationPath = path + slash + simulationFolderName;
         sdsPath = path + slash + sdsFolderName;
 
@@ -130,7 +127,6 @@ public class FileManager : MonoBehaviour
             currentSimulation = localSimulations[0];
         }
     }
-
     #endregion
 
     #region Helper functions
@@ -148,7 +144,7 @@ public class FileManager : MonoBehaviour
         return localFiles.ToArray();
     }
 
-    string FormatPath(string path, string fileName)
+    public string FormatPath(string path, string fileName)
     {
         fileName = path + slash + fileName;
 

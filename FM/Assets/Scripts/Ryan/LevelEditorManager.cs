@@ -170,7 +170,6 @@ public class LevelEditorManager : MonoBehaviour
             }
 
             XML Section = xml.AddChild(prefab.parent.name);
-
             bool worthSaving = ConvertChildrenToXML(ref Section, prefab.parent.transform, prefab); //Note XML is worth saving only if it has a object inside it
 
             if (!worthSaving)

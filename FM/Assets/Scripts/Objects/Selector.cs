@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*Flower Box
  * 
- * Intention: When you hover over an object, it will change it's material
+ * Intention: When you click an object, it will change it's material
  * 
  * Editor: Tyler Rubenstein
  *   Added to main 12/7/21
@@ -19,6 +20,8 @@ using UnityEngine.UI;
  *  Helped runtime length 2/3/2022
  * Editor: Ryan Constantino
  *  Fixed bug where you would select multiple objects if they were behind one another 2/4/2022
+ * Editor: Dylan Lavimodiere
+ *  Added Audio Requirements 2/23/2022
  */
 
 public class Selector : MonoBehaviour
@@ -56,11 +59,17 @@ public class Selector : MonoBehaviour
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
-        goMaterial = transform.gameObject.GetComponent<MeshRenderer>();
-        selfMat = goMaterial.material;
-        moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
-        cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
-        deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
+        if (SceneManager.GetActiveScene().name == "Editor Scene")
+        {
+            moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
+            cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
+            deleteButton = GameObject.Find("DeleteButton").GetComponent<Button>();
+        }
+        else
+        {
+            return;
+        }          
+        
     }
 
     //find the main Camera
@@ -109,7 +118,7 @@ public class Selector : MonoBehaviour
                     //    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
                     //}
 
-                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
+                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;                   
 
                     if (isSelected == true)
                     {
@@ -176,6 +185,7 @@ public class Selector : MonoBehaviour
 
     void Delete()
     {
+        GameObject.Find("EffectPlayer").GetComponent<PlaySoundEffect>().Play(2);//play sound effect for destruction
         Destroy(this.transform.parent.gameObject);
 
         //trying selected prefab

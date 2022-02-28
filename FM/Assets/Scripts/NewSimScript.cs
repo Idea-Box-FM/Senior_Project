@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /*
  * Editied By: Patrick Naatz
  * Changed:
  *  Made the functionality to edit the room size when creating a new simulations 11/30/2021
  *  Added automated selecting 1/11/2022
+ *  Dylan 2/17/22: added case check if empty string
  */
 
 public class NewSimScript : MonoBehaviour
 {
     #region Fields
-    public InputField name;
+    public TMP_InputField name;
 
     public enum RoomSizes
     {
@@ -57,6 +59,7 @@ public class NewSimScript : MonoBehaviour
 
     public void NewFileButton()
     {
+        if (name.text == "") name.text = "Unnamed Simulation";
         Debug.Log(name.text);
         FileManager.fileManager.NewFile(name.text, SelectedRoomSize);
         FileManager.fileManager.SelectFile(name.text + ".XML");

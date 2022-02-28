@@ -12,9 +12,11 @@ using UnityEngine.UI;
 public class PanelManagerObj : MonoBehaviour
 {
     //current Panel options
-    public List<GameObject> panels = new List<GameObject>();
-    public int initalPanelID = 0;//the first activated panel
-
+    public Canvas canvas;//canvas, mostly for close functionality
+    public List<GameObject> panels = new List<GameObject>();//all panels, mostly for using nextPanel functionality
+    public int initalPanelID = 0;//the panel to activate first
+    
+    private Vector3 objStart;
     private string currentPanelName;//the current Panel as a string
     private int currentPanelID;//the current Panel as a ID
     [Header("Below are options for changing Panels, select a trigger type and Panel change option:", order = 0)]//display info about Panel
@@ -22,7 +24,7 @@ public class PanelManagerObj : MonoBehaviour
     //change Panel options
     [Header("Change Panel options (1 w/input or none):", order = 1)]
     public bool nextPanel = false;//next Panel based upon the build settings list
-    public bool exit = false;//Quit the application
+    public bool close = false;//close the panel
     //input new Panel location via name
     public bool changeByName = false;//change the Panel via the name of the Panel
     public string changedPanelName;//Panel to change to as string
@@ -34,6 +36,7 @@ public class PanelManagerObj : MonoBehaviour
     public bool triggerOnEnter = false;//when entering a trigger, cause the Panel to change based upon the above settings
     public bool triggerOnExit = false;//when exiting a trigger, cause the Panel to change based upon the above settings
     public bool instantChange = false;//bool to be triggered by external scripts
+    private PlaySoundEffect soundEffect;
 
     // Start is called before the first frame update
     private void Start()
@@ -44,7 +47,12 @@ public class PanelManagerObj : MonoBehaviour
 
         if (changedPanelName == "") changedPanelName = "SamplePanel";//default
 
+        TryGetComponent<PlaySoundEffect>(out PlaySoundEffect soundEffect);
 
+        if (soundEffect != null)//if it isn't empty
+            this.soundEffect = soundEffect;//assign
+        else
+            Debug.LogWarning("PlaySoundEffect not found on \"" + this.gameObject.name + "\" object");
     }
 
     // Update is called once per frame
@@ -52,7 +60,7 @@ public class PanelManagerObj : MonoBehaviour
     {
         if (instantChange)//if change by script
         {
-            ChangePanel();
+            StartCoroutine(ChangePanelDelay());
             instantChange = false;//disable to prevent looping
         }
     }
@@ -61,7 +69,7 @@ public class PanelManagerObj : MonoBehaviour
     {
         if (triggerOnEnter)
         {
-            ChangePanel();
+            StartCoroutine(ChangePanelDelay());
         }
     }
 
@@ -69,18 +77,26 @@ public class PanelManagerObj : MonoBehaviour
     {
         if (triggerOnExit)
         {
-            ChangePanel();
+            StartCoroutine(ChangePanelDelay());
         }
     }
 
-    public void ChangePanel(GameObject newPanel = null)
+    public IEnumerator ChangePanelDelay(GameObject newPanel = null)
     {
-        StartCoroutine(DelayedChange(PlayMusic.fadeTime * 1.5f, newPanel));
+        yield return new WaitForSeconds(0.1f);//wait for millisecond for button to play
+        if (soundEffect.src.isPlaying == true)
+            StartCoroutine(DelayedChange(soundEffect.src.time, newPanel));
+        else
+            StartCoroutine(DelayedChange(0, newPanel));//instant change
     }
 
-    IEnumerator DelayedChange(float waitS, GameObject panelToChangeTo = null, bool executed = false)
+    IEnumerator DelayedChange(float waitS, GameObject panelToChangeTo = null)
     {
-        yield return new WaitForSeconds(waitS);
+        bool executed = false;
+
+        objStart = this.gameObject.transform.position;//store inital position of button
+
+        yield return new WaitForSeconds(waitS);//delay
 
         //check if object still exists after Panel transition
         if (nextPanel)
@@ -106,15 +122,18 @@ public class PanelManagerObj : MonoBehaviour
             SetPanel(newPanelID: changedPanelID);//change to the Panel that has the ID
             executed = true;
         }
-        if (exit)
+        if (close == true)
         {
-            Application.Quit();//quit the application
+            canvas.gameObject.SetActive(false);
             executed = true;
         }
         else if(executed == false)
         {
             Debug.LogError("No Panel change option selected on " + this.gameObject.name + " object!");
         }
+
+        //after changing panel
+        
     }
 
     public void SetPanel(int newPanelID = -1, string newPanelName = null)//use id or string
@@ -138,9 +157,12 @@ public class PanelManagerObj : MonoBehaviour
     }
 
     //button methods
-
-    public void SetPanelBtn(GameObject newPanel)
+    public void ChangePanel(GameObject newPanel = null)
     {
-        ChangePanel(newPanel);
+        StartCoroutine(ChangePanelDelay(newPanel));
+    }
+    public void ChangePanel()
+    {
+        StartCoroutine(ChangePanelDelay());
     }
 }
