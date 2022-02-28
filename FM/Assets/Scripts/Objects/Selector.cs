@@ -40,6 +40,8 @@ public class Selector : MonoBehaviour
     public Button cancelButton;
     public Button deleteButton;
     public bool isSelected = false;
+    public GameObject selectedPrefab;
+    private Vector3 movedPosition;
 
     private UnityAction action;
     private UnityAction deselect;
@@ -105,8 +107,6 @@ public class Selector : MonoBehaviour
         //more RYAN
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
             //change the material back to selfMat when you click off of an object
             //goMaterial.material = selfMat;
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -114,9 +114,7 @@ public class Selector : MonoBehaviour
             {
                 this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
             }
-=======
-=======
->>>>>>> parent of 53e3858 (Button layout changed)
+
             ////change the material back to selfMat when you click off of an object
             //goMaterial.material = selfMat;
             //this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -133,7 +131,6 @@ public class Selector : MonoBehaviour
             this.gameObject.transform.position = movedPosition;
             this.gameObject.GetComponent<MeshRenderer>().enabled = true;
             this.gameObject.GetComponent<BoxCollider>().enabled = true;
->>>>>>> parent of 53e3858 (Button layout changed)
 
             follower.enabled = false;
             isSelected = false;
