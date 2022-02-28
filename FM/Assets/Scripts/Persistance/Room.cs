@@ -196,30 +196,30 @@ public class Room : MonoBehaviour
         floor.transform.position = new Vector3(position.x, 0, position.z);
         floor.transform.localScale = new Vector3(Width, floor.transform.localScale.y, Length) / 10;
 
-        //grate logic
-        grate.transform.position = new Vector3(position.x, 0, position.z);
+        ////grate logic
+        //grate.transform.position = new Vector3(position.x, 0, position.z);
 
-        int maxGratesHorizontally = (int)(10 * floor.transform.localScale.x);
-        int maxGratesVertically = (int)(10 * floor.transform.localScale.z);
+        //int maxGratesHorizontally = (int)(10 * floor.transform.localScale.x);
+        //int maxGratesVertically = (int)(10 * floor.transform.localScale.z);
 
-        int gratesNeededHorizontally = (int)(gratePerSquareFoot * floor.transform.localScale.z);
-        int gratesNeededVertically = (int)(gratePerSquareFoot * floor.transform.localScale.x);
+        //int gratesNeededHorizontally = (int)(gratePerSquareFoot * floor.transform.localScale.z);
+        //int gratesNeededVertically = (int)(gratePerSquareFoot * floor.transform.localScale.x);
 
-        Vector3 grateScale = grate.transform.localScale;
+        //Vector3 grateScale = grate.transform.localScale;
 
-        for (int i = 0; i < gratesNeededHorizontally; i++)
-            for (int j = 0; j < maxGratesVertically; j++)
-            {
-                GameObject newGrate = Instantiate(grate);
-                newGrate.transform.position += new Vector3(i, 0, j) - new Vector3(gratesNeededHorizontally / 2, 0, maxGratesVertically / 2);
-            }
+        //for (int i = 0; i < gratesNeededHorizontally; i++)
+        //    for (int j = 0; j < maxGratesVertically; j++)
+        //    {
+        //        GameObject newGrate = Instantiate(grate);
+        //        newGrate.transform.position += new Vector3(i, 0, j) - new Vector3(gratesNeededHorizontally / 2, 0, maxGratesVertically / 2);
+        //    }
 
-        for (int i = 0; i < gratesNeededVertically; i++)
-            for (int j = 0; j < maxGratesHorizontally; j++)
-            {
-                GameObject newGrate = Instantiate(grate);
-                newGrate.transform.position += new Vector3(j, 0, i) - new Vector3(maxGratesHorizontally / 2, 0, gratesNeededVertically / 2);
-            }
+        //for (int i = 0; i < gratesNeededVertically; i++)
+        //    for (int j = 0; j < maxGratesHorizontally; j++)
+        //    {
+        //        GameObject newGrate = Instantiate(grate);
+        //        newGrate.transform.position += new Vector3(j, 0, i) - new Vector3(maxGratesHorizontally / 2, 0, gratesNeededVertically / 2);
+        //    }
     }
     #endregion
 
