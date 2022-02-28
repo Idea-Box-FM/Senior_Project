@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contents: []
-  currentContent: 
+  currentContent: 9
 --- !u!114 &2748288555899252243
 MonoBehaviour:
   m_ObjectHideFlags: 0
