@@ -8,18 +8,6 @@ using TMPro;
 
 
 
-/*Flower Box
- * 
- * Intention: To collect all of the objects in the scene and find the ones that are selected 
- * 
- * Editor: Tyler Rubenstein
- *   Added to main 2/7/22
- *   
- * Editor: Pat Naatz
- *  replaced ObjectContents with SDSInfo 2/24/2022
- *  Fixed bug where SDSInfo was on parent 2/24/2022
- */
-
 public class LabelScript : MonoBehaviour
 {
     string SDS;
@@ -73,7 +61,7 @@ public class LabelScript : MonoBehaviour
     }
     void ItemClicked(int itemIndex)
     {
-       // Debug.Log("Button " + itemIndex + " was clicked");
+        Debug.Log("Button " + itemIndex + " was clicked");
         ChangeOption(itemIndex);
 
         SelectObject();
@@ -87,8 +75,11 @@ public class LabelScript : MonoBehaviour
         {
             if (objects[i].GetComponent<Selector>().isSelected == true)
             {
-               //change sds
-                objects[i].GetComponentInParent<SDSInfo>().ChangeContents(content);
+                //change sds
+                //objects[i].Label = SDS
+                objects[i].GetComponent<ObjectContents>().ChangeContents(content);
+               // 
+
             }
 
         }

@@ -75,19 +75,16 @@ public class SceneManagerObj : MonoBehaviour
 
     public void ChangeScene()
     {
-        StartCoroutine(DelayedChange(PlayMusic.fadeTime));
+        StartCoroutine(DelayedChange(PlayMusic.fadeTime*1.5f));       
     }
 
     IEnumerator DelayedChange(float waitS)
     {
         bool executed = false;
 
-        if (musicPlayer.src.isPlaying)//if sound is playing
-        {
-            musicPlayer.Stop();
+        musicPlayer.Stop();
 
-            yield return new WaitForSeconds(waitS);
-        }
+        yield return new WaitForSeconds(waitS);
 
         //check if object still exists after scene transition
         if (nextScene)

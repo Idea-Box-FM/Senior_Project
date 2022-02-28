@@ -6,7 +6,7 @@ using TMPro;
 
 public class SliderAmount : MonoBehaviour
 {
-    public Slider slider;
+    public Slider audioSlider;
     string sliderAmount;
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class SliderAmount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sliderAmount = slider.value.ToString();
+        sliderAmount = audioSlider.value.ToString();
         //gameObject.GetComponent<Text>().text = sliderAmount;
         gameObject.GetComponent<TMP_Text>().text = sliderAmount;
     }

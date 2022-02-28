@@ -131,7 +131,7 @@ public class SaveLoadOptions : MonoBehaviour
         bf.Serialize(file, data);//serialization, will write to file
         file.Close();//close the file
 
-        //Debug.Log("Saved Settings file to " + fileLocation);//debug location
+        Debug.Log("Saved file to " + fileLocation);//debug location
     }
     public void LoadListFile()//button
     {
@@ -170,7 +170,7 @@ public class SaveLoadOptions : MonoBehaviour
             //Debug.Log("Loaded file from " + fileLocation);
         }
         else
-            Debug.LogWarning("File not found");
+            Debug.Log("File not found");
     }
     #endregion
 
