@@ -742,8 +742,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 35}
-  m_SizeDelta: {x: 160, y: 300}
+  m_AnchoredPosition: {x: 300, y: 180}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289469466
 MonoBehaviour:
@@ -5976,6 +5976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d16f93b0867d8b448b9f2c89f495475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sdsPath: 
   simulationFolderName: Simulations
   sdsFolderName: SDS
   localSimulations: []
@@ -7006,6 +7007,26 @@ PrefabInstance:
     - target: {fileID: 1850891283498069692, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850891283498069693, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+      propertyPath: prefKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850891283498069693, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+      propertyPath: prefValues.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850891283498069693, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+      propertyPath: prefKeys.Array.data[0]
+      value: AudioMusicSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850891283498069693, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+      propertyPath: prefKeys.Array.data[1]
+      value: AudioMusicSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850891283498069693, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+      propertyPath: prefValues.Array.data[0]
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6051949158921718837, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
