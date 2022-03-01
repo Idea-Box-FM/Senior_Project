@@ -21,11 +21,6 @@ public static class ButtonExtension
 /*
  * Editor Patrick Naatz
  *  Removed a UnityEditor line preventing building from end game function 2/10/2022'
- *  Fixed a bug with currentItem, in future reference please use CurrentItem instead for all uses 2/28/2022
- *  Fixed a bug where reloading the list did not delete the old script 2/28/2022
- *  Fixed a bug where local sims displayed as online sims and vice versa 2/28/2022
- *  Fixed a bug where download button did not update the list 2/28/2022
- *  Added a Delete button function 2/28/2022
  */
 
 public class MainMenuUIScript : MonoBehaviour
@@ -72,18 +67,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     private bool waited;
 
-    string CurrentItem
-    {
-        get
-        {
-            return currentItem ?? FileManager.fileManager.currentSimulation;
-        }
-
-        set
-        {
-            currentItem = value;
-        }
-    }
+   
 
     // Start is called before the first frame update
     void Start()
@@ -152,15 +136,17 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UpdateList()
     {
-        UnloadList();
 
         localSimList = FileManager.fileManager.localSimulations;
 
-        onlineSimList = FileManager.fileManager.onlineSimulations.ToList().Except(localSimList).ToArray();
+        onlineSimList = FileManager.fileManager.onlineSimulations;
+        //onlineSimList = localSimList.Distinct().ToArray<string>();
+
 
         simListLength = localSimList.Length + onlineSimList.Length;
 
-        simList.Clear();
+
+
         //combining the two simulation list into one
         for(int i = 0; i < simListLength; i++)
         {
@@ -174,15 +160,19 @@ public class MainMenuUIScript : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < simList.Count; i++)
+
+        simList = simList.Distinct().ToList<string>();
+
+        for (int i = 0; i < simList.Count;i++)
         {
-            if (i < localSimList.Length)
+            if(i < localSimList.Length)
             {
                 s = Instantiate(itemTemplate, LocalPanel.transform.GetChild(0).transform);
                 string simName = simList[i].TrimEnd(xmlTrim);
                 s.transform.GetChild(0).GetComponent<TMP_Text>().text = simName;
                 s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
                 s.GetComponent<Button>().AddEventListener(i, ItemClicked);
+                
             }
             else
             {
@@ -201,17 +191,14 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UnloadList()
     {
-        foreach(Transform child in LocalPanel.transform.GetChild(0))
+        //Debug.Log(nameList.Length);
+        for (int i = 0; i < localSimList.Length; i++)
         {
-            Destroy(child.gameObject);
+            Debug.Log(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+           Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject);
         }
 
-        //Debug.Log(nameList.Length);
-        //for (int i = 0; i < simulationListCount; i++)
-        //{
-        //    Debug.Log(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-        //   Destroy(LocalPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
-        //}
+        UpdateList();
     }
 
     void ItemClicked (int itemIndex)
@@ -230,7 +217,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     #region Helper Methods
 
-    public void ChangeScene(int scene)
+ public void ChangeScene(int scene)
     {
         Wait(audio.soundClips[audio.selectedClip].length);
         if(waited == true) SceneManager.LoadScene(scene);
@@ -239,26 +226,17 @@ public class MainMenuUIScript : MonoBehaviour
     public void DownloadButton()
     {
         //string fileName = FileManager.fileManager.currentSimulation + xml;
-        string fileName = CurrentItem;
+        string fileName = currentItem;
         Debug.Log(fileName);
         FileManager.fileManager.DownloadSimulation(fileName);
-        UpdateList();
     }
 
     public void UploadButton()
     {
         //string fileName = FileManager.fileManager.currentSimulation + xml;
-        string fileName = CurrentItem;
+        string fileName = currentItem;
         Debug.Log(fileName);
         FileManager.fileManager.UploadSimulation(fileName);
-    }
-
-    public void DeleteButton()
-    {
-        string fileName = CurrentItem;
-        Debug.Log("deleteing " + fileName);
-        FileManager.fileManager.DeleteSimulation(fileName);
-        UpdateList();
     }
 
     public void ChangeImage(Sprite sprite)

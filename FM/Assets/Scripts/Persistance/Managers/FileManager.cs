@@ -271,20 +271,6 @@ public class FileManager : MonoBehaviour
             realm.Write(() => { fileModel.XMLFile = XMLFile; });
         }myfile.Close();
     }
-
-    /// <summary>
-    /// Perminetly deletes simulation
-    /// </summary>
-    /// <param name="simulationName">include.XML</param>
-    public void DeleteSimulation(string simulationName)
-    {
-        string path = FormatPath(simulationPath, simulationName);
-
-        File.Delete(path);
-        Debug.Log("file deleted");
-        localSimulations = LoadLocalFiles(simulationPath);
-        currentSimulation = localSimulations[0];
-    }
     #endregion
 
     private void OnDisable()
