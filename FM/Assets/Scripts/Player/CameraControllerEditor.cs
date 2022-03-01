@@ -12,6 +12,7 @@ public class CameraControllerEditor : MonoBehaviour
     public GameObject cam;
     [Tooltip("The object that uses the horizontal axis (y) of the view")]
     public GameObject camBody;
+    public SwapImage camUI;
     [Tooltip("Script generated from InputActionAsset")]
     public CameraControl/*InputActionAsset script's class*/ controlScript;//script generated from InputActionAsset
 
@@ -213,6 +214,11 @@ public class CameraControllerEditor : MonoBehaviour
             camLocked = true;
             Cursor.lockState = CursorLockMode.None;
         }
+
+        if (camLocked == true)
+            camUI.SwapSprite(0);
+        if (camLocked == false)
+            camUI.SwapSprite(1);
     }
     #endregion
 
