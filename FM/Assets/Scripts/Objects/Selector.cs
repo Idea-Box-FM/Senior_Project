@@ -59,7 +59,7 @@ public class Selector : MonoBehaviour
     //Set materials on Awake, otherwise new objects will use the testMat
     void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "Editor Scene")
+        if (SceneManager.GetActiveScene().name == "Editor Scene" || SceneManager.GetActiveScene().name == "Ryan")
         {
             moveButton = GameObject.Find("MoveButton").GetComponent<Button>();
             cancelButton = GameObject.Find("CancelButton").GetComponent<Button>();
