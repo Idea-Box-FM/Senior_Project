@@ -216,13 +216,19 @@ public class MainMenuUIScript : MonoBehaviour
     }
 
     #region Helper Methods
-
+/// <summary>
+/// This function changes scenes while playing a sound
+/// </summary>
+/// <param name="scene">Enter the index for the scene from the build settings</param>
  public void ChangeScene(int scene)
     {
         Wait(audio.soundClips[audio.selectedClip].length);
         if(waited == true) SceneManager.LoadScene(scene);
     }
 
+    /// <summary>
+    /// This function downloads a simulation from the database
+    /// </summary>
     public void DownloadButton()
     {
         //string fileName = FileManager.fileManager.currentSimulation + xml;
@@ -231,6 +237,9 @@ public class MainMenuUIScript : MonoBehaviour
         FileManager.fileManager.DownloadSimulation(fileName);
     }
 
+    /// <summary>
+    /// This function uploads a simulation to the database
+    /// </summary>
     public void UploadButton()
     {
         //string fileName = FileManager.fileManager.currentSimulation + xml;
