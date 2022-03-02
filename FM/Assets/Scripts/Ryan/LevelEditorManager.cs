@@ -31,7 +31,7 @@ public class LevelEditorManager : MonoBehaviour
         }
     }
 
-    public ItemController CurrentButton
+    ItemController CurrentButton
     {
         get
         {
@@ -100,7 +100,7 @@ public class LevelEditorManager : MonoBehaviour
             //if the raycast hits something on the layer mask
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
             {
-                //set the bool back to false
+                //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
                 CurrentButton.isClicked = false;
 
                 if (example != null)
@@ -170,7 +170,6 @@ public class LevelEditorManager : MonoBehaviour
             }
 
             XML Section = xml.AddChild(prefab.parent.name);
-
             bool worthSaving = ConvertChildrenToXML(ref Section, prefab.parent.transform, prefab); //Note XML is worth saving only if it has a object inside it
 
             if (!worthSaving)
