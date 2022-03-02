@@ -67,7 +67,19 @@ public class MainMenuUIScript : MonoBehaviour
 
     private bool waited;
 
-   
+    string CurrentItem
+    {
+        get
+        {
+            return currentItem ?? FileManager.fileManager.currentSimulation;
+        }
+
+        set
+        {
+            currentItem = value;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -262,7 +274,14 @@ public class MainMenuUIScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void DeleteButton()
+    {
+        string fileName = CurrentItem;
+        Debug.Log("deleteing " + fileName);
+        FileManager.fileManager.DeleteSimulation(fileName);
+        UpdateList();
+    }
     #endregion
 
-   
+
 }
