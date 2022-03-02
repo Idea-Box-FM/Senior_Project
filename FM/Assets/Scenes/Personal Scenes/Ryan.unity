@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d16f93b0867d8b448b9f2c89f495475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sdsPath: 
   simulationFolderName: Simulations
   sdsFolderName: SDS
   localSimulations: []
@@ -864,15 +865,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e35132dfa2a4d0a40935aa48ef7ebb87, type: 2}
   - {fileID: 11400000, guid: a0622723637bbe6459cefcc1876d6670, type: 2}
-  - {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  - {fileID: 11400000, guid: 1b206a0041e65234e9bd77cb0ce43ae2, type: 2}
   - {fileID: 11400000, guid: dc215a01469c640489365570b1bcd035, type: 2}
   - {fileID: 11400000, guid: 1829f11ab76970b408d2d8997d3f5987, type: 2}
-  - {fileID: 11400000, guid: c084cce3b16f41b4dae04bb254908851, type: 2}
-  - {fileID: 11400000, guid: 473d1bf42cdb7484ea23e6d6938c5a3e, type: 2}
+  - {fileID: 11400000, guid: 6d99f816ffa96b24d822faac76fdc25a, type: 2}
+  - {fileID: 11400000, guid: ea3df5ba4a33c5d4499b040a515ea567, type: 2}
   - {fileID: 11400000, guid: 2fa1e4a6210afd545b369cffea39103c, type: 2}
-  - {fileID: 11400000, guid: e19029fde2a76784396bb2df8d04256d, type: 2}
+  - {fileID: 11400000, guid: 9fea37b6c9f6d0442adeb4e45f1944ea, type: 2}
 --- !u!4 &288391194
 Transform:
   m_ObjectHideFlags: 0
@@ -2471,12 +2472,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc5d47919d3c42428155c83ad94b318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   panels:
   - {fileID: 314470192}
   - {fileID: 2068567581}
   initalPanelID: 0
   nextPanel: 0
-  exit: 0
+  close: 0
   changeByName: 1
   changedPanelName: Canvas
   changeByID: 0
@@ -2639,12 +2641,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc5d47919d3c42428155c83ad94b318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   panels:
   - {fileID: 314470192}
   - {fileID: 2068567581}
   initalPanelID: 0
   nextPanel: 0
-  exit: 0
+  close: 0
   changeByName: 1
   changedPanelName: Canvas
   changeByID: 0
@@ -3165,15 +3168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e35132dfa2a4d0a40935aa48ef7ebb87, type: 2}
   - {fileID: 11400000, guid: a0622723637bbe6459cefcc1876d6670, type: 2}
-  - {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  - {fileID: 11400000, guid: 1b206a0041e65234e9bd77cb0ce43ae2, type: 2}
   - {fileID: 11400000, guid: dc215a01469c640489365570b1bcd035, type: 2}
   - {fileID: 11400000, guid: 1829f11ab76970b408d2d8997d3f5987, type: 2}
-  - {fileID: 11400000, guid: c084cce3b16f41b4dae04bb254908851, type: 2}
-  - {fileID: 11400000, guid: 473d1bf42cdb7484ea23e6d6938c5a3e, type: 2}
+  - {fileID: 11400000, guid: 6d99f816ffa96b24d822faac76fdc25a, type: 2}
+  - {fileID: 11400000, guid: ea3df5ba4a33c5d4499b040a515ea567, type: 2}
   - {fileID: 11400000, guid: 2fa1e4a6210afd545b369cffea39103c, type: 2}
-  - {fileID: 11400000, guid: e19029fde2a76784396bb2df8d04256d, type: 2}
+  - {fileID: 11400000, guid: 9fea37b6c9f6d0442adeb4e45f1944ea, type: 2}
 --- !u!4 &689606891
 Transform:
   m_ObjectHideFlags: 0
@@ -7682,6 +7685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d16f93b0867d8b448b9f2c89f495475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sdsPath: 
   simulationFolderName: Simulations
   sdsFolderName: SDS
   localSimulations: []
