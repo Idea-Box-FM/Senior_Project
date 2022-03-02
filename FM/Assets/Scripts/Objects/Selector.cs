@@ -92,14 +92,14 @@ public class Selector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && !editor.CurrentButton.isClicked)
         {
             //raycast from camera to mouse location
             Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit selectHit;
 
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) /*&& selectHit.transform == this.transform*/)
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask))
             {
                 if (selectHit.collider.tag == "FMPrefab")
                 {

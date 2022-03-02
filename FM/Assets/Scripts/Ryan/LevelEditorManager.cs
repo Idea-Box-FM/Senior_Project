@@ -31,7 +31,7 @@ public class LevelEditorManager : MonoBehaviour
         }
     }
 
-    ItemController CurrentButton
+    public ItemController CurrentButton
     {
         get
         {
@@ -100,7 +100,7 @@ public class LevelEditorManager : MonoBehaviour
             //if the raycast hits something on the layer mask
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
             {
-                //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
+                //set the bool back to false
                 CurrentButton.isClicked = false;
 
                 if (example != null)
