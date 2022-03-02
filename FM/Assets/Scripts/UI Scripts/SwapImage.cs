@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class SwapImage : MonoBehaviour
 {
     public Image img;
-    public Sprite newSprite;
+    public List<Sprite> newSprites = new List<Sprite>();
+    public int currentSpriteID = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +21,9 @@ public class SwapImage : MonoBehaviour
         
     }
 
-    public void SwapSprite(bool storeOld)
+    public void SwapSprite(int newSpriteID = 0)
     {
-        Sprite old = img.sprite;
-
-        img.sprite = newSprite;
-
-        if (storeOld)
-            newSprite = old;
+        currentSpriteID = newSpriteID;
+        img.sprite = newSprites[newSpriteID];
     }
 }
