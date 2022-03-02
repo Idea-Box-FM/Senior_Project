@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*FlowerBox
+ * Programmer: Patrick Naatz
+ * Intention: Make a script capable of handling FMPrefabs with SDS data
+ * 
+ * Edited:
+ * changed script to match new naming convention in SDSInfo 2/24/2022
+ */
 [CreateAssetMenu(fileName = "FmPrefabWithSDS", menuName = "FMPrefabs/FmPrefabWithSDS")]
 public class FMWithPrefab : FMPrefab
 {
@@ -18,7 +25,7 @@ public class FMWithPrefab : FMPrefab
         xml.AddAttribute("Flamability", sds.Flamability.ToString());
         xml.AddAttribute("Reaction", sds.Reactivity.ToString());
 
-        xml.AddAttribute("SDSSheet", sds.sdsPath);
+        xml.AddAttribute("SDSSheet", sds.currentContent);
 
         return xml;
     }
@@ -32,7 +39,7 @@ public class FMWithPrefab : FMPrefab
         sds.Flamability = int.Parse(xml.attributes["Flamability"]);
         sds.Reactivity = int.Parse(xml.attributes["Reaction"]);
 
-        sds.sdsPath = xml.attributes["SDSSheet"];
+        sds.currentContent = xml.attributes["SDSSheet"];
 
         return gameObject;
     }

@@ -100,6 +100,7 @@ MonoBehaviour:
   cancelButton: {fileID: 0}
   deleteButton: {fileID: 0}
   isSelected: 0
+  selectedPrefab: {fileID: 641223197585122205, guid: 6ad5a289c95318c46bc6b958de0ab9f2, type: 3}
 --- !u!114 &2748288555899252243
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,40 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Editor: Pat Naatz
+ *  replaced ObjectContents with SDSInfo 2/24/2022
+ */
+
 public class SDSRead : MonoBehaviour
 {
-    //public ObjectContents objectContents;
     public PlaySelector[] selectorScripts;
 
     void Start()
     {
-        //objectContents.contents = FileManager.fileManager.sdsFiles;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
     }
 
     public void ReadSDS()
     {
+        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
+
         for (int i = 0; i < selectorScripts.Length; i++)
         {
             if(selectorScripts[i].isSelected == true)
             {
-                //Debug.Log("This is the sds of the object " + selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent);
-                string content = selectorScripts[i].gameObject.GetComponent<ObjectContents>().currentContent;
-                //Use object contents.contents to find sds files in filemanager
-                Application.OpenURL("file:///c:/filename.PDF");
+                //create sds file path
+                string content = selectorScripts[i].GetComponentInParent<SDSInfo>().currentContent;
+                FileManager fileManager = FileManager.fileManager;
+                string path = fileManager.FormatPath(fileManager.sdsPath, content);
+
                 //display SDS
+                Application.OpenURL(path);
             }
         }
     }
 
     public void DeselectObjects()
     {
+        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
+
         for (int i = 0; i < selectorScripts.Length; i++)
         {
             if (selectorScripts[i].isSelected == true)

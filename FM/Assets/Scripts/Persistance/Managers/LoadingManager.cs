@@ -47,16 +47,6 @@ public class LoadingManager : MonoBehaviour
                 {
                     GameObject gameObject = prefab.InstanciatePrefab(subObject);
                     newObjects.Add(gameObject);
-                    if (section.name == "IBC")
-                    {
-                        //Debug.LogError("Loading IBC");
-                        Debug.Log(gameObject.name);
-                        Transform ibcBase = gameObject.transform.FindChild("IBCBase");
-                        ObjectContents oC = ibcBase.GetComponentInChildren<ObjectContents>();
-                        Debug.Log(oC.currentContent);
-                        oC.currentContent = subObject.attributes["SDS"];
-                        Debug.Log(oC.currentContent);
-                    }
                 }
 
                 
@@ -71,11 +61,6 @@ public class LoadingManager : MonoBehaviour
         foreach (GameObject gameObject in newObjects)
         {
             gameObject.SetActive(true);
-            if(gameObject.name == "IBC(Clone)")
-            {
-                Debug.Log("found it activating");
-                Debug.Log(gameObject.GetComponentInChildren<ObjectContents>().currentContent);
-            }
         }
     }
 }
