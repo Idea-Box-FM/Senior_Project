@@ -288,7 +288,7 @@ MonoBehaviour:
   playOver: 0
   play: 0
   soundEffectQueueDisplay: []
-  optionSliderName: ghc
+  optionSliderName: 
   volumeLimit: 1
 --- !u!82 &5453792802885642278
 AudioSource:

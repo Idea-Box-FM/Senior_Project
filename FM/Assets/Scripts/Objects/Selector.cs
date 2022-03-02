@@ -68,8 +68,8 @@ public class Selector : MonoBehaviour
         else
         {
             return;
-        }          
-        
+        }
+
     }
 
     //find the main Camera
@@ -92,14 +92,14 @@ public class Selector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && !editor.CurrentButton.isClicked)
         {
             //raycast from camera to mouse location
             Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit selectHit;
 
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask) /*&& selectHit.transform == this.transform*/)
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask))
             {
                 if (selectHit.collider.tag == "FMPrefab")
                 {
@@ -110,15 +110,8 @@ public class Selector : MonoBehaviour
                     selectedPrefab.GetComponent<BoxCollider>().enabled = true;
                     this.gameObject.GetComponent<MeshRenderer>().enabled = false;
                     this.gameObject.GetComponent<BoxCollider>().enabled = false;
-                    
-                    ////change material of the raycasted object to the testMat
-                    //selectHit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    //for (int i = 0; i < selectHit.transform.gameObject.transform.childCount; i++)
-                    //{
-                    //    selectHit.transform.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    //}
 
-                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;                   
+                    selectHit.transform.gameObject.GetComponent<Selector>().isSelected = true;
 
                     if (isSelected == true)
                     {
@@ -128,7 +121,7 @@ public class Selector : MonoBehaviour
                     }
                 }
             }
-        }  
+        }
 
         //more RYAN
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isSelected)
@@ -162,14 +155,6 @@ public class Selector : MonoBehaviour
 
     public void Deselect()
     {
-        ////change the material back to selfMat when you click off of an object
-        //goMaterial.material = selfMat;
-        //this.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
-        //for (int i = 0; i < this.gameObject.transform.childCount; i++)
-        //{
-        //    this.gameObject.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.white;
-        //}
-
         this.gameObject.GetComponent<MeshRenderer>().enabled = true;
         this.gameObject.GetComponent<BoxCollider>().enabled = true;
 

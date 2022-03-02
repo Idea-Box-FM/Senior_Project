@@ -21,8 +21,6 @@ public class TextFadeScript : MonoBehaviour
 
         StartCoroutine(FadeTextToZeroAlpha(1f, GetComponent<TMP_Text>(), fadeOutStart));
 
-        //Debug.Log("The text has Faded");
-
     }
 
 

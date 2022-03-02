@@ -5,8 +5,9 @@
 		<Floor Material="Floor (Instance)"/>
 	</Room>
 	<BlackPlasticBarrel>
-		<BlackPlasticBarrel(Clone) Position="(3.1, 0.0, 5.0)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="3" SDSSheet="sdsTest.rtf"/>
-		<BlackPlasticBarrel(Clone) Position="(-0.2, 0.0, 3.8)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="3" SDSSheet="Gasoline.rtf"/>
+		<BlackPlasticBarrel(Clone) Position="(-1.7, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<BlackPlasticBarrel(Clone) Position="(2.1, 0.0, 5.0)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<BlackPlasticBarrel(Clone) Position="(1.2, 1.5, 7.2)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</BlackPlasticBarrel>
 	<WarehouseRackLarge>
 		<WarehouseRackLarge(Clone) Position="(-0.6, 0.0, 7.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
