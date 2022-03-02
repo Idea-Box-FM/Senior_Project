@@ -89,14 +89,6 @@ public class MainMenuUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(username.text != "" && password.text != "")
-        //{
-        //    loginButton.interactable = true;
-        //}
-
-        
-
-
 
         for (int i = 0; i < LocalPanel.transform.GetChild(0).gameObject.transform.childCount; i++)
         {
@@ -116,31 +108,12 @@ public class MainMenuUIScript : MonoBehaviour
 
     }
 
-    public void Login()
-    {
-        //if (username.text == "King" && password.text == "1234")
-        //{
-        //    newButton.interactable = true;
-        //    uploadButton.interactable = true;
-        //    //username.text = "";
-        //    //password.text = "";
-        //    validation.text = "Login successful";
-        //    login.SetActive(false);
-            
-        //}
-        //else
-        //{
-        //    validation.text = "Wrong username or Password. Try Again.";
-        //}
-    }
-
     public void UpdateList()
     {
 
         localSimList = FileManager.fileManager.localSimulations;
 
         onlineSimList = FileManager.fileManager.onlineSimulations;
-        //onlineSimList = localSimList.Distinct().ToArray<string>();
 
 
         simListLength = localSimList.Length + onlineSimList.Length;
@@ -160,9 +133,10 @@ public class MainMenuUIScript : MonoBehaviour
             }
         }
 
-
+        //this line gets rid of duplicates in the list
         simList = simList.Distinct().ToList<string>();
 
+        //this for loop creates buttons based on the list of simulations
         for (int i = 0; i < simList.Count;i++)
         {
             if(i < localSimList.Length)
@@ -189,6 +163,9 @@ public class MainMenuUIScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// This function gets rid of everything in the list
+    /// </summary>
     public void UnloadList()
     {
         //Debug.Log(nameList.Length);
@@ -201,6 +178,10 @@ public class MainMenuUIScript : MonoBehaviour
         UpdateList();
     }
 
+    /// <summary>
+    /// This functio gets called when a user clicks on a Button for the sim list
+    /// </summary>
+    /// <param name="itemIndex"> the index in the list</param>
     void ItemClicked (int itemIndex)
     {
         // Debug.Log("Button " + itemIndex + " was clicked");
@@ -217,7 +198,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     #region Helper Methods
 
- public void ChangeScene(int scene)
+    public void ChangeScene(int scene)
     {
         Wait(audio.soundClips[audio.selectedClip].length);
         if(waited == true) SceneManager.LoadScene(scene);
