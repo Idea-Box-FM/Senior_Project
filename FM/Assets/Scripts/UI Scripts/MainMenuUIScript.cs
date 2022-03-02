@@ -30,41 +30,27 @@ public class MainMenuUIScript : MonoBehaviour
     public Button startButton;
     public Button newButton;
     public Button uploadButton;
-    //public Button loginButton;
-    //[Header("Login")]
-    //public InputField username;
-    //public InputField password;
-    //public Text validation;
-    //public GameObject login;
 
     [Header("Scroll List")]
     public GameObject gameManager;
     public GameObject LocalPanel;
-    //public GameObject OnlinePanel;
     public string[] localSimList;
     public string[] onlineSimList;
     public List<string> simList;
     string currentItem;
     public GameObject itemTemplate;
-    GameObject l;
-    GameObject o;
     GameObject s;
     int simListLength;
 
 
+    [Header("Miscellaneous")]
     string xml = ".XML";
-
     public Image roomSize;
-
     char[] xmlTrim = { '.', 'X', 'M', 'L' };
-
     int selectedSim;
-
     GameObject selectedButton;
-
     //audio script input
     public PlaySoundEffect audio;
-
     private bool waited;
 
    
@@ -74,8 +60,6 @@ public class MainMenuUIScript : MonoBehaviour
     {
         newButton.interactable = false;
         uploadButton.interactable = false;
-        //loginButton.interactable = false;
-        //validation.text = "";
         localSimList = FileManager.fileManager.localSimulations;
         onlineSimList = FileManager.fileManager.onlineSimulations;
 
@@ -117,7 +101,6 @@ public class MainMenuUIScript : MonoBehaviour
 
 
         simListLength = localSimList.Length + onlineSimList.Length;
-
 
 
         //combining the two simulation list into one
@@ -185,15 +168,13 @@ public class MainMenuUIScript : MonoBehaviour
     void ItemClicked (int itemIndex)
     {
         // Debug.Log("Button " + itemIndex + " was clicked");
-        currentItem = simList[itemIndex];  // + xml;
+        currentItem = simList[itemIndex]; 
 
         FileManager.fileManager.SelectFile(currentItem);
 
         selectedSim = itemIndex;
-
         
         Debug.Log(currentItem);
-        //FileManager.fileManager.SelectFile(nameList[itemIndex]);
     }
 
     #region Helper Methods
@@ -206,7 +187,6 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void DownloadButton()
     {
-        //string fileName = FileManager.fileManager.currentSimulation + xml;
         string fileName = currentItem;
         Debug.Log(fileName);
         FileManager.fileManager.DownloadSimulation(fileName);
@@ -214,7 +194,6 @@ public class MainMenuUIScript : MonoBehaviour
 
     public void UploadButton()
     {
-        //string fileName = FileManager.fileManager.currentSimulation + xml;
         string fileName = currentItem;
         Debug.Log(fileName);
         FileManager.fileManager.UploadSimulation(fileName);
@@ -232,10 +211,7 @@ public class MainMenuUIScript : MonoBehaviour
 
     IEnumerator Wait(float delay)
     {
-      //   waited = true;
         yield return new WaitForSeconds(delay);
-        
-
     }
 
     public void EndGame()
@@ -245,5 +221,4 @@ public class MainMenuUIScript : MonoBehaviour
 
     #endregion
 
-   
 }
