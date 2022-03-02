@@ -205,4 +205,43 @@ public class LevelEditorManager : MonoBehaviour
 
         return worthSaving;
     }
+
+    #region ClimbPrefab
+    /// <summary>
+    /// Finds the given object type
+    /// Overload function for ClimbPrefab
+    /// </summary>
+    /// <typeparam name="ObjectType">this is the component type you are trying to find</typeparam>
+    /// <param name="startingPoint">transform to gaurentee there is a parenting tree to climb</param>
+    /// <returns></returns>
+    public static ObjectType SearchForObjectType<ObjectType>(Component startingPoint) where ObjectType : Component
+    {
+        return SearchForObjectType<ObjectType, ObjectType>(startingPoint);
+    }
+
+    /// <summary>
+    /// Finds a Component in the Object that automatically changes to the wanted return type
+    /// </summary>
+    /// <typeparam name="ReturnType">this should be something every game object has, such as gameobject or transform</typeparam>
+    /// <typeparam name="ObjectType">this is the component type you are trying to find</typeparam>
+    /// <param name="startingPoint">transform to gaurentee there is a parenting tree to climb</param>
+    /// <returns></returns>
+    public static ReturnType SearchForObjectType<ReturnType, ObjectType>(Component startingPoint) where ReturnType : Component where ObjectType : Component 
+    {
+        Transform currentObject = startingPoint.transform;
+
+        ObjectType objectType;
+        while ((objectType = currentObject.GetComponent<ObjectType>()) == null && currentObject.parent != null)
+        {
+            currentObject = currentObject.parent;
+        }
+
+        if(objectType == null)
+        {
+            throw new InvalidOperationException("Cannot find object type of " + typeof(ReturnType) + " on " + startingPoint.name);
+        }
+
+        return objectType.GetComponent<ReturnType>();
+    }
+    #endregion
 }
