@@ -206,7 +206,7 @@ public class LevelEditorManager : MonoBehaviour
         return worthSaving;
     }
 
-    #region ClimbPrefab
+    #region SearchForObject
     /// <summary>
     /// Finds the given object type
     /// Overload function for ClimbPrefab
@@ -244,4 +244,12 @@ public class LevelEditorManager : MonoBehaviour
         return objectType.GetComponent<ReturnType>();
     }
     #endregion
+
+    public void Delete()
+    {
+        foreach(FMInfo selection in SelectorTool.SelectedObjects)
+        {
+            Destroy(selection);
+        }
+    }
 }
