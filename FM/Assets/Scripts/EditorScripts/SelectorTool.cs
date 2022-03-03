@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 /*FLowerBox
  * Programmer: Patrick Naatz
@@ -17,7 +18,7 @@ public class SelectorTool : MonoBehaviour
 
     [SerializeField] List<FMInfo> selectedObjects; //remove serialize field here
     [SerializeField] Camera mainCamera;
-    [SerializeField] LayerMask selectMask;
+    [SerializeField] LayerMask gameObjectMask;
     [SerializeField] int maxSelectedObjects = int.MaxValue;//remove serialize field here //this value is set by default to editor value
 
     Transform groupingTool;
@@ -78,14 +79,14 @@ public class SelectorTool : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
         {
             //raycast from camera to mouse location
             Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit selectHit;
 
             //If the raycast hits an object under the selectMask
-            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, selectMask))
+            if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, gameObjectMask))
             {
                 //Debug.Log("Selection tool hit " + selectHit.transform.name);
                 if (selectHit.collider.tag == "FMPrefab")
