@@ -14,7 +14,7 @@ using TMPro;
  * 
  * Editor: Tyler Rubenstein
  *   Added to main 2/7/22
- *   
+ *
  * Editor: Pat Naatz
  *  replaced ObjectContents with SDSInfo 2/24/2022
  *  Fixed bug where SDSInfo was on parent 2/24/2022
@@ -24,11 +24,9 @@ using TMPro;
 
 public class LabelScript : MonoBehaviour
 {
-    string SDS;
-    public FMInfo[] objects;
-  
-    int content;
 
+    public FMInfo[] objects; 
+    int content;
 
     [Header("SDS Button List")]
     public string[] sdsList;
@@ -44,8 +42,6 @@ public class LabelScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SDS = null;
-        // objects = GameObject.FindGameObjectsWithTag("FMPrefab");
         sdsList = FileManager.fileManager.sdsFiles;
         UpdateSdsList();
     }
@@ -53,14 +49,13 @@ public class LabelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // objects = GameObject.FindGameObjectsWithTag("FMPrefab");
-
-       
-
-        
+        //objects = GameObject.FindObjectsOfType<SelectorTool>();
         
     }
 
+    /// <summary>
+    /// creates the list of buttons for changing the sds of an object
+    /// </summary>
     public void UpdateSdsList()
     {
         for(int i = 0; i < sdsList.Length; i++)
@@ -73,6 +68,7 @@ public class LabelScript : MonoBehaviour
         }
     }
 
+
     void ItemClicked(int itemIndex)
     {
        // Debug.Log("Button " + itemIndex + " was clicked");
@@ -83,27 +79,38 @@ public class LabelScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// loops through list of selected objects and if any of them
+    /// are true then change its sds to the one that is selected
+    /// </summary>
     void SelectObject()
     {
         objects = SelectorTool.SelectedObjects;
 
         for (int i = 0; i < objects.Length; i++)
         {
-            if(objects[i].basePrefab is FMWithPrefab)
-               //change sds
+            if (objects[i].basePrefab is FMWithPrefab)
+                //change sds
                 objects[i].GetComponent<SDSInfo>().ChangeContents(content);
         }
     }
 
+    /// <summary>
+    /// Deselects whatever object is selected
+    /// </summary>
     //public void DeselectObject()
     //{
     //    for (int i = 0; i < objects.Length; i++)
     //    {
-    //        objects[i].GetComponent<Selector>().Deselect();
+    //        objects[i].GetComponent<SelectorTool>().Deselect();
 
     //    }
     //}
 
+    /// <summary>
+    /// CHange the selected index in the array of sds
+    /// </summary>
+    /// <param name="m"> index of sds</param>
     public void ChangeOption(int m)
     {
         content = m;
