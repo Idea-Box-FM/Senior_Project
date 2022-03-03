@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /*Flower Box
@@ -16,6 +17,7 @@ using UnityEngine.InputSystem;
  *   Added the save functionality 11/15/2021
  *   TEMP commented out Barrell because it was not being used for anything just causing an error
  *   Changed FMPrefabList to singleton pattern 2/2/2022
+ *   Added Deleting functionality 3/3/2022
  */
 
 public class LevelEditorManager : MonoBehaviour
@@ -88,31 +90,30 @@ public class LevelEditorManager : MonoBehaviour
     private void Update()
     {
 
-
-        //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
-        if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
-        {
-            GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
-            //ray from camera to mouse location
-            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-
-            //if the raycast hits something on the layer mask
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
+            //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
+            if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
             {
-                //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
-                CurrentButton.isClicked = false;
+                GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
+                //ray from camera to mouse location
+                Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                RaycastHit hit;
 
-                if (example != null)
+                //if the raycast hits something on the layer mask
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
                 {
-                    //instantiate prefab based on current button pressed at the raycast hit location
-                    GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
-                    finalPrefab.SetActive(true);
+                    //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
+                    CurrentButton.isClicked = false;
 
-                    DestroyCurrentExample();
+                    if (example != null)
+                    {
+                        //instantiate prefab based on current button pressed at the raycast hit location
+                        GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
+                        finalPrefab.SetActive(true);
+
+                        DestroyCurrentExample();
+                    }
                 }
             }
-        }
         
 
         ////if the middle mouse button is clicked, ray cast out
@@ -204,5 +205,52 @@ public class LevelEditorManager : MonoBehaviour
         }
 
         return worthSaving;
+    }
+
+    #region SearchForObject
+    /// <summary>
+    /// Finds the given object type
+    /// Overload function for ClimbPrefab
+    /// </summary>
+    /// <typeparam name="ObjectType">this is the component type you are trying to find</typeparam>
+    /// <param name="startingPoint">transform to gaurentee there is a parenting tree to climb</param>
+    /// <returns></returns>
+    public static ObjectType SearchForObjectType<ObjectType>(Component startingPoint) where ObjectType : Component
+    {
+        return SearchForObjectType<ObjectType, ObjectType>(startingPoint);
+    }
+
+    /// <summary>
+    /// Finds a Component in the Object that automatically changes to the wanted return type
+    /// </summary>
+    /// <typeparam name="ReturnType">this should be something every game object has, such as gameobject or transform</typeparam>
+    /// <typeparam name="ObjectType">this is the component type you are trying to find</typeparam>
+    /// <param name="startingPoint">transform to gaurentee there is a parenting tree to climb</param>
+    /// <returns></returns>
+    public static ReturnType SearchForObjectType<ReturnType, ObjectType>(Component startingPoint) where ReturnType : Component where ObjectType : Component 
+    {
+        Transform currentObject = startingPoint.transform;
+
+        ObjectType objectType;
+        while ((objectType = currentObject.GetComponent<ObjectType>()) == null && currentObject.parent != null)
+        {
+            currentObject = currentObject.parent;
+        }
+
+        if(objectType == null)
+        {
+            throw new InvalidOperationException("Cannot find object type of " + typeof(ReturnType) + " on " + startingPoint.name);
+        }
+
+        return objectType.GetComponent<ReturnType>();
+    }
+    #endregion
+
+    public void Delete()
+    {
+        foreach(FMInfo selection in SelectorTool.SelectedObjects)
+        {
+            Destroy(selection);
+        }
     }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fd2d81073ddccc49bf92e45ba37ed1e, type: 3}
-  m_Name: BarrelCartSDS
+  m_Name: 55GallonGrime
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1797064465741206977, guid: 57e5dfd0fde29ef47bde31c333df3543, type: 3}
-  examplePrefab: {fileID: 578741240367372556, guid: 2012d6450cbbbc44a85879689ad2707a, type: 3}
-  selectorPrefab: {fileID: 578741240367372556, guid: 07b7efbb1b5a0d84c817bb1e4612292f, type: 3}
+  prefab: {fileID: 8649225452292067985, guid: fdcda1bf55743254fbb923df0eb43df3, type: 3}
+  examplePrefab: {fileID: 6577016414183101790, guid: c1948f07492fc704683ef32ff78a6067, type: 3}
+  selectorPrefab: {fileID: 6577016414183101790, guid: 516db75430a43c54b917312e41e71fa6, type: 3}
   height: 0
   parent: {fileID: 0}
   soundEffect: {fileID: 7193267061644296242, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}

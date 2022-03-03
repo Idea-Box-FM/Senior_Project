@@ -5,11 +5,12 @@ using UnityEngine;
 /*
  * Editor: Pat Naatz
  *  replaced ObjectContents with SDSInfo 2/24/2022
+ *  Updated script to work with new SelectorTool 3/3/2022
  */
 
 public class SDSRead : MonoBehaviour
 {
-    public PlaySelector[] selectorScripts;
+    public FMInfo[] selectorScripts;
 
     void Start()
     {
@@ -22,14 +23,14 @@ public class SDSRead : MonoBehaviour
 
     public void ReadSDS()
     {
-        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
+        selectorScripts = SelectorTool.SelectedObjects;
 
         for (int i = 0; i < selectorScripts.Length; i++)
         {
-            if(selectorScripts[i].isSelected == true)
+            if (selectorScripts[i].basePrefab is FMWithPrefab)
             {
                 //create sds file path
-                string content = selectorScripts[i].GetComponentInParent<SDSInfo>().currentContent;
+                string content = selectorScripts[i].GetComponent<SDSInfo>().currentContent;
                 FileManager fileManager = FileManager.fileManager;
                 string path = fileManager.FormatPath(fileManager.sdsPath, content);
 
@@ -39,17 +40,17 @@ public class SDSRead : MonoBehaviour
         }
     }
 
-    public void DeselectObjects()
-    {
-        selectorScripts = GameObject.FindObjectsOfType<PlaySelector>();
+    //public void DeselectObjects()
+    //{
+    //    selectorScripts = SelectorTool.selectorTool.selectedObjects.ToArray();
 
-        for (int i = 0; i < selectorScripts.Length; i++)
-        {
-            if (selectorScripts[i].isSelected == true)
-            {
-                selectorScripts[i].Deselect();
-            }
-        }
-    }
+    //    for (int i = 0; i < selectorScripts.Length; i++)
+    //    {
+    //        if (selectorScripts[i].isSelected == true)
+    //        {
+    //            selectorScripts[i].Deselect();
+    //        }
+    //    }
+    //}
 
 }

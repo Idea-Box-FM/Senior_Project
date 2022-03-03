@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 641223197585122202}
   - component: {fileID: 899148659476011414}
+  - component: {fileID: 6521046323529084354}
   m_Layer: 6
   m_Name: BlackPlasticBarrel
   m_TagString: FMPrefab
@@ -44,10 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d36fbe117fd1740ba0583fa1c844ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sdsPath: 
+  currentContent: 
   flamability: 0
   reactivity: 0
   health: 0
+--- !u!114 &6521046323529084354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641223197585122205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2230a5e9c00df2c4fb24ae9d97a06f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePrefab: {fileID: 11400000, guid: 970c80bbe0db56946a8d8601ad8a0e0f, type: 2}
+  selectedObject: {fileID: 0}
 --- !u!54 &126166659044831402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77,30 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0062970705, y: 0.0062980475, z: 0.009343897}
   m_Center: {x: -0.00003567699, y: 0.00020242922, z: 0.00465732}
---- !u!114 &1378880678963272061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097123146895856857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f037218c67225044da889699f114a03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectMask:
-    serializedVersion: 2
-    m_Bits: 64
-  selfMat: {fileID: 0}
-  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
-  mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
-  moveButton: {fileID: 0}
-  cancelButton: {fileID: 0}
-  deleteButton: {fileID: 0}
-  isSelected: 0
-  selectedPrefab: {fileID: 641223197585122205, guid: 6ad5a289c95318c46bc6b958de0ab9f2, type: 3}
 --- !u!114 &2748288555899252243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,27 +107,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 4224
---- !u!114 &3967646564178123336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097123146895856857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6efcfb18c844fb4db4cd7b33b4271dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectMask:
-    serializedVersion: 2
-    m_Bits: 64
-  selfMat: {fileID: 0}
-  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
-  mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
-  cancelButton: {fileID: 0}
-  isSelected: 0
 --- !u!114 &4099515793198596926
 MonoBehaviour:
   m_ObjectHideFlags: 0

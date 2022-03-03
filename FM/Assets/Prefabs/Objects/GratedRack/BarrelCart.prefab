@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1797064465741206978}
+  - component: {fileID: 886796039945686070}
   m_Layer: 6
   m_Name: BarrelCart
   m_TagString: FMPrefab
@@ -31,30 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1797064466667889728
+--- !u!114 &886796039945686070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3644654802412188497}
+  m_GameObject: {fileID: 1797064465741206977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f037218c67225044da889699f114a03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2230a5e9c00df2c4fb24ae9d97a06f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectMask:
-    serializedVersion: 2
-    m_Bits: 64
-  selfMat: {fileID: 0}
-  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
-  mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
-  moveButton: {fileID: 0}
-  cancelButton: {fileID: 0}
-  deleteButton: {fileID: 0}
-  isSelected: 0
-  selectedPrefab: {fileID: 578741240367372556, guid: 07b7efbb1b5a0d84c817bb1e4612292f, type: 3}
+  basePrefab: {fileID: 11400000, guid: c084cce3b16f41b4dae04bb254908851, type: 2}
+  selectedObject: {fileID: 0}
 --- !u!114 &1797064466667889729
 MonoBehaviour:
   m_ObjectHideFlags: 0

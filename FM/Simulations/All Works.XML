@@ -5,21 +5,15 @@
 		<Floor Material="Floor (Instance)"/>
 	</Room>
 	<BlackPlasticBarrel>
-		<BlackPlasticBarrel(Clone) Position="(4.6, 1.1, -2.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<BlackPlasticBarrel(Clone) Position="(3.0, 0.1, 3.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<BlackPlasticBarrel(Clone) Position="(0.3, 1.5, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-		<BlackPlasticBarrel(Clone) Position="(-1.0, 0.0, 1.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<BlackPlasticBarrel(Clone) Position="(0.5, 0.1, 3.5)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Gasoline.rtf"/>
 	</BlackPlasticBarrel>
 	<WarehouseRackLarge>
 		<WarehouseRackLarge(Clone) Position="(-0.3, 0.0, 3.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</WarehouseRackLarge>
-	<SmallWarehouseRack>
-		<SmallWarehouseRack(Clone) Position="(5.0, 0.0, 1.1)" Rotation="(0.0, 0.7, 0.0, 0.7)"/>
-	</SmallWarehouseRack>
 	<DoubleStorageRack>
-		<DoubleStorageRack(Clone) Position="(3.9, 0.0, -2.1)" Rotation="(0.0, 0.7, 0.0, 0.7)"/>
+		<DoubleStorageRack(Clone) Position="(3.8, 0.0, 0.0)" Rotation="(0.0, 0.7, 0.0, 0.7)"/>
 	</DoubleStorageRack>
-	<BarrelCart>
-		<BarrelCart(Clone) Position="(-2.3, 0.0, -3.5)" Rotation="(0.0, 0.7, 0.0, 0.7)"/>
-	</BarrelCart>
+	<Pallet>
+		<Pallet(Clone) Position="(2.7, 0.0, -2.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Pallet>
 </XML>
