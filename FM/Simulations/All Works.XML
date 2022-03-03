@@ -13,13 +13,7 @@
 	<DoubleStorageRack>
 		<DoubleStorageRack(Clone) Position="(3.8, 0.0, 0.0)" Rotation="(0.0, 0.7, 0.0, 0.7)"/>
 	</DoubleStorageRack>
-	<BarrelCart>
-		<BarrelCart(Clone) Position="(4.5, 0.0, -2.9)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-	</BarrelCart>
 	<Pallet>
 		<Pallet(Clone) Position="(2.7, 0.0, -2.7)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
 	</Pallet>
-	<55GallonGrime>
-		<55GallonGrime(Clone) Position="(2.3, 1.5, 3.1)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
-	</55GallonGrime>
 </XML>

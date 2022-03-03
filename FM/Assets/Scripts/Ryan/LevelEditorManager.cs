@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /*Flower Box
@@ -89,31 +90,30 @@ public class LevelEditorManager : MonoBehaviour
     private void Update()
     {
 
-
-        //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
-        if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
-        {
-            GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
-            //ray from camera to mouse location
-            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-
-            //if the raycast hits something on the layer mask
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
+            //if the left mouse button is clicked and a button has been clicked, spawn a prefab at the mouse/raycast location
+            if (Mouse.current.leftButton.wasPressedThisFrame && CurrentButton.isClicked)
             {
-                //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
-                CurrentButton.isClicked = false;
+                GameObject example = GameObject.FindGameObjectWithTag("GoodPrefab");
+                //ray from camera to mouse location
+                Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                RaycastHit hit;
 
-                if (example != null)
+                //if the raycast hits something on the layer mask
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask) && collision.canPlace == true)
                 {
-                    //instantiate prefab based on current button pressed at the raycast hit location
-                    GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
-                    finalPrefab.SetActive(true);
+                    //set the bool back to false -- this needs to be changed to a state machine so we can place multiple items and switch items with the buttons
+                    CurrentButton.isClicked = false;
 
-                    DestroyCurrentExample();
+                    if (example != null)
+                    {
+                        //instantiate prefab based on current button pressed at the raycast hit location
+                        GameObject finalPrefab = CurrentPrefab.InstanciatePrefab(hit.point, Quaternion.Euler(example.transform.eulerAngles));
+                        finalPrefab.SetActive(true);
+
+                        DestroyCurrentExample();
+                    }
                 }
             }
-        }
         
 
         ////if the middle mouse button is clicked, ray cast out
