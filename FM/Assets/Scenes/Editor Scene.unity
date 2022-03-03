@@ -736,7 +736,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7392701538924670567, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_text
-      value: Grime
+      value: 55 Gallon Metal
       objectReference: {fileID: 0}
     - target: {fileID: 7392701539345524161, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_Pivot.x
@@ -2268,7 +2268,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7392701538924670567, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_text
-      value: Shelf
+      value: Large Shelf
       objectReference: {fileID: 0}
     - target: {fileID: 7392701539345524161, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_Pivot.x
@@ -3917,7 +3917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7392701538924670567, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_text
-      value: Barrel
+      value: Blue Plastic
       objectReference: {fileID: 0}
     - target: {fileID: 7392701539345524161, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_Pivot.x
@@ -5092,7 +5092,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7392701538924670567, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_text
-      value: Barrel
+      value: Black Plastic
       objectReference: {fileID: 0}
     - target: {fileID: 7392701539345524161, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_Pivot.x
@@ -5476,7 +5476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc533ad442673eb44af32cce3283b0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicPlayer: {fileID: 0}
+  musicPlayer: {fileID: 479354048}
   nextScene: 0
   exit: 0
   changeByName: 1
@@ -6034,7 +6034,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7392701538924670567, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_text
-      value: Grated Rack
+      value: Barrel Rack
       objectReference: {fileID: 0}
     - target: {fileID: 7392701539345524161, guid: 3e116cc4e45415e42ae6a926c34c9db2, type: 3}
       propertyPath: m_Pivot.x

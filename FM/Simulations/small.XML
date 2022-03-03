@@ -1,0 +1,13 @@
+<XML>
+	<Room RoomSize="(12.0, 5.0, 10.0)">
+		<Walls Material="Wall (Instance)"/>
+		<Roof Material="Floor (Instance)"/>
+		<Floor Material="Floor (Instance)"/>
+	</Room>
+	<BlackPlasticBarrel>
+		<BlackPlasticBarrel(Clone) Position="(3.8, 0.0, 2.3)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Gasoline.rtf"/>
+	</BlackPlasticBarrel>
+	<BluePlasticBarrel>
+		<BluePlasticBarrel(Clone) Position="(3.6, 0.0, -1.7)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Gasoline.rtf"/>
+	</BluePlasticBarrel>
+</XML>

@@ -19,7 +19,7 @@ public class SelectorTool : MonoBehaviour
     public static SelectorTool selectorTool;
 
     //selected objects
-    List<FMInfo> selectedObjects = new List<FMInfo>();
+    [SerializeField] List<FMInfo> selectedObjects = new List<FMInfo>();
     int maxSelectedObjects = int.MaxValue;//this value is set by default to editor value
 
     //Raycast variables
@@ -231,17 +231,21 @@ public class SelectorTool : MonoBehaviour
     #region Button functionality
     private void UpdateButtons()
     {
-        if(selectedObjects.Count == 0)
+        if (selectedObjects.Count == 0)
         {
             //Disable all functionality buttons
-            foreach(Button button in relevantButtons)
+            foreach (Button button in relevantButtons)
             {
-                button.interactable = false;
+                if (button.name != "Exit")
+                {
+                    button.interactable = false;
+                }
             }
-        } else
+        }
+        else
         {
             //enable all functionality buttons
-            foreach(Button button in relevantButtons)
+            foreach (Button button in relevantButtons)
             {
                 button.interactable = true;
             }
