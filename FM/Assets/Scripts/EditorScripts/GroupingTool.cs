@@ -275,6 +275,14 @@ public class GroupingTool : MonoBehaviour
 
 
             SelectorTool.selectorTool.DeselectAll();
+
+            if(copiedObjects.Count > 0)
+            {
+                currentState = State.Copy;
+            } else
+            {
+                currentState = State.PreviewPaste;
+            }
         }
     }
     #endregion
