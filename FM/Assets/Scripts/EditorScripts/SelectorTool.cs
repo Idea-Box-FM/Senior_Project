@@ -16,10 +16,10 @@ public class SelectorTool : MonoBehaviour
 {
     public static SelectorTool selectorTool;
 
-    [SerializeField] List<FMInfo> selectedObjects; //remove serialize field here
-    [SerializeField] Camera mainCamera;
+    List<FMInfo> selectedObjects = new List<FMInfo>(); //remove serialize field here
+    Camera mainCamera;
     [SerializeField] LayerMask objectMask;
-    [SerializeField] int maxSelectedObjects = int.MaxValue;//remove serialize field here //this value is set by default to editor value
+    int maxSelectedObjects = int.MaxValue;//remove serialize field here //this value is set by default to editor value
 
     Transform groupingTool;
 
@@ -62,11 +62,13 @@ public class SelectorTool : MonoBehaviour
 
         mainCamera = GameObject.FindObjectOfType<Camera>();
         relevantButtons = GameObject.Find("ButtonList").GetComponentsInChildren<Button>();
-        groupingTool = GameObject.Find("Group").GetComponent<Transform>();
 
         if(SceneManager.GetActiveScene().name == "Game Scene")
         {
             maxSelectedObjects = 1;
+        } else
+        {
+            groupingTool = GameObject.Find("Group").GetComponent<Transform>();
         }
 
         CancelButton.onClick.AddListener(Cancel);
@@ -111,6 +113,8 @@ public class SelectorTool : MonoBehaviour
                 {
                     //Debug.Log("It is an fmprefab");
                     Transform selectedObject = selectHit.transform;
+                    Debug.Log("select hit name " + selectHit.collider.name);
+                    Debug.Log("Selected object name " + selectedObject.name);
                     if (IsSelected(selectedObject))
                     {
                         Deselect(selectedObject);
@@ -197,9 +201,10 @@ public class SelectorTool : MonoBehaviour
         Destroy(selectedInfo.selectedObject);
     }
     #endregion
-    
+
     #endregion
 
+    #region IsSelected
     public bool IsSelected(Transform transform)
     {
         FMInfo info = LevelEditorManager.SearchForObjectType<FMInfo>(transform);
@@ -210,6 +215,7 @@ public class SelectorTool : MonoBehaviour
     {
         return selectedObjects.Contains(info);
     }
+    #endregion
 
     #region Button functionality
     private void UpdateButtons()
