@@ -43,6 +43,14 @@ public class CollisionDetect : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.CompareTag("GoodPrefab") || col.gameObject.CompareTag("SelectedPrefab"))
+        {
+            Prevent(col);
+        }
+    }
+
     private void OnTriggerExit(Collider col)
     {
         if (col.gameObject.CompareTag("GoodPrefab") || col.gameObject.CompareTag("SelectedPrefab"))
