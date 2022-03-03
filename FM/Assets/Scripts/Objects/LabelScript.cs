@@ -22,11 +22,9 @@ using TMPro;
 
 public class LabelScript : MonoBehaviour
 {
-    string SDS;
-    public Selector[] objects;
-  
-    int content;
 
+    public Selector[] objects; 
+    int content;
 
     [Header("SDS Button List")]
     public string[] sdsList;
@@ -42,8 +40,6 @@ public class LabelScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SDS = null;
-        // objects = GameObject.FindGameObjectsWithTag("FMPrefab");
         sdsList = FileManager.fileManager.sdsFiles;
         UpdateSdsList();
     }
@@ -51,15 +47,13 @@ public class LabelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // objects = GameObject.FindGameObjectsWithTag("FMPrefab");
         objects = GameObject.FindObjectsOfType<Selector>();
-
-       
-
-        
         
     }
 
+    /// <summary>
+    /// creates the list of buttons for changing the sds of an object
+    /// </summary>
     public void UpdateSdsList()
     {
         for(int i = 0; i < sdsList.Length; i++)
@@ -71,6 +65,8 @@ public class LabelScript : MonoBehaviour
             s.GetComponent<Button>().AddEventListener(i, ItemClicked);
         }
     }
+
+
     void ItemClicked(int itemIndex)
     {
        // Debug.Log("Button " + itemIndex + " was clicked");
@@ -81,6 +77,10 @@ public class LabelScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// loops through list of selected objects and if any of them
+    /// are true then change its sds to the one that is selected
+    /// </summary>
     void SelectObject()
     {
         for (int i = 0; i < objects.Length; i++)
@@ -94,6 +94,9 @@ public class LabelScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deselects whatever object is selected
+    /// </summary>
     public void DeselectObject()
     {
         for (int i = 0; i < objects.Length; i++)
@@ -103,7 +106,10 @@ public class LabelScript : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// CHange the selected index in the array of sds
+    /// </summary>
+    /// <param name="m"> index of sds</param>
     public void ChangeOption(int m)
     {
         content = m;
