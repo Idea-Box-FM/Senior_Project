@@ -10,7 +10,7 @@ using UnityEngine;
  * changed script to match new naming convention in SDSInfo 2/24/2022
  */
 [CreateAssetMenu(fileName = "FmPrefabWithSDS", menuName = "FMPrefabs/FmPrefabWithSDS")]
-public class FMWithPrefab : FMPrefab
+public class FMWithPrefab : FMPrefab //TODO Rename this to FMWITHSDS instead of FMWithPrefab
 {
     public Texture diamondBase;
     public Texture numberBase;

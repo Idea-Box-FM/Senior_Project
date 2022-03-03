@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641223197585122202}
+  - component: {fileID: 693674314604047928}
   m_Layer: 6
   m_Name: BluePlasticBarrel
   m_TagString: FMPrefab
@@ -31,6 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693674314604047928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641223197585122205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2230a5e9c00df2c4fb24ae9d97a06f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePrefab: {fileID: 11400000, guid: 473d1bf42cdb7484ea23e6d6938c5a3e, type: 2}
+  selectedObject: {fileID: 0}
 --- !u!54 &126166659044831402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60,20 +75,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0062970705, y: 0.0062980475, z: 0.009343897}
   m_Center: {x: -0.00003567699, y: 0.00020242922, z: 0.00465732}
---- !u!114 &1511655003151118841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097123146895856857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f66394c7995dee4d879d42ccf227695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contents: []
-  currentContent: 9
 --- !u!114 &2748288555899252243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,50 +103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPlace: 1
---- !u!114 &4123725534040455969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097123146895856857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f037218c67225044da889699f114a03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectMask:
-    serializedVersion: 2
-    m_Bits: 64
-  selfMat: {fileID: 0}
-  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
-  mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
-  moveButton: {fileID: 0}
-  cancelButton: {fileID: 0}
-  deleteButton: {fileID: 0}
-  isSelected: 0
---- !u!114 &1849895765249634902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097123146895856857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6efcfb18c844fb4db4cd7b33b4271dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectMask:
-    serializedVersion: 2
-    m_Bits: 64
-  selfMat: {fileID: 0}
-  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
-  mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
-  cancelButton: {fileID: 0}
-  isSelected: 0
 --- !u!1001 &641223196602759749
 PrefabInstance:
   m_ObjectHideFlags: 0

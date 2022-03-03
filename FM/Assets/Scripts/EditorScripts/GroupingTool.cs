@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /*FLOWERBOX
@@ -11,6 +12,8 @@ using UnityEngine.InputSystem;
  * 
  * Edited: Pat Naatz
  *  Changed FMPrefabList to singleton pattern 2/2/2022
+ *  Updated to work with new SelectorTool 3/3/2022
+ *  Fixed bug where you would still click when interacting with UI
  */
 
 public class GroupingTool : MonoBehaviour
@@ -31,7 +34,8 @@ public class GroupingTool : MonoBehaviour
     {
         Copy,
         PreviewPaste,
-        Paste
+        Paste,
+        Place //for move functionality
     } public State currentState = State.Copy;
     #endregion
 
@@ -100,8 +104,18 @@ public class GroupingTool : MonoBehaviour
     /// <param name="obj"></param>
     private void Mouse_Click(InputAction.CallbackContext obj)
     {
-        if (currentState == State.Paste)
-            Paste();
+        if (!EventSystem.current.IsPointerOverGameObject())
+        { //if not clicking on UI
+            switch (currentState)
+            {
+                case State.Paste:
+                    Paste();
+                    break;
+                case State.Place:
+                    Place();
+                    break;
+            }
+        }
     }
     #endregion
 
@@ -134,34 +148,30 @@ public class GroupingTool : MonoBehaviour
         HighAndLow Y = new HighAndLow();
         HighAndLow Z = new HighAndLow();
 
-        foreach(Selector selector in FindObjectsOfType<Selector>())
+        foreach (FMInfo selector in SelectorTool.SelectedObjects)
         {
-            if (selector.isSelected)
-            {
-                if(cleared == false)
-                {//only clear the inputs after we are sure something else is copied
-                    copiedObjects.Clear(); //forget about the old copied stuff
-                    CancelPreview();//incase they are a real programmer who goes ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C, ctrl+V
-                    cleared = true;
-                }
-
-                //save copied objects info
-                Transform transform = selector.transform;
-                GameObject parent = transform.parent.gameObject;
-                FMPrefab prefabType = prefabList.GetPrefabType(parent);
-                XML details = prefabType.ConvertToXML(parent);
-                CopyInfo copiedObject = new CopyInfo(prefabType, details);
-
-                copiedObjects.Add(copiedObject);
-
-                //center point variable update
-                Vector3 position = parent.transform.position;
-                X.Set(position.x);
-                Y.Set(position.y);
-                Z.Set(position.z);
-
-                selector.Deselect();
+            if (cleared == false)
+            {//only clear the inputs after we are sure something else is copied
+                copiedObjects.Clear(); //forget about the old copied stuff
+                CancelPreview();//incase they are a real programmer who goes ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C, ctrl+V
+                cleared = true;
             }
+
+            //save copied objects info
+            Transform transform = selector.transform;
+            FMPrefab prefabType = selector.GetComponent<FMInfo>().basePrefab;
+            XML details = prefabType.ConvertToXML(selector.gameObject);
+            CopyInfo copiedObject = new CopyInfo(prefabType, details);
+
+            copiedObjects.Add(copiedObject);
+
+            //center point variable update
+            Vector3 position = selector.transform.position;
+            X.Set(position.x);
+            Y.Set(position.y);
+            Z.Set(position.z);
+
+            SelectorTool.selectorTool.Deselect(selector);
         }
 
         if (cleared)
@@ -182,6 +192,36 @@ public class GroupingTool : MonoBehaviour
 
     #region Pasting
     #region Preview
+    public void MovePreview()
+    {
+        //TODO move centerPoint calculation to SelectorTool for better usage
+        //calculate center point
+        //variables for center point calculation
+        HighAndLow X = new HighAndLow();
+        HighAndLow Y = new HighAndLow();
+        HighAndLow Z = new HighAndLow();
+
+        foreach (FMInfo selection in SelectorTool.SelectedObjects)
+        {
+            Vector3 position = selection.transform.position;
+            X.Set(position.x);
+            Y.Set(position.y);
+            Z.Set(position.z);
+        }
+
+        Vector3 centerPoint = new Vector3(X, Y.Low, Z);
+
+        //
+        foreach (FMInfo selection in SelectorTool.SelectedObjects)
+        {
+            Transform selectedObject = selection.selectedObject.transform;
+            selectedObject.parent = groupingArea;
+            selectedObject.localPosition = selection.transform.position - centerPoint;
+        }
+
+        currentState = State.Place;
+    }
+
     public void Preview()
     {
         foreach(CopyInfo copyInfo in copiedObjects)
@@ -194,6 +234,11 @@ public class GroupingTool : MonoBehaviour
 
     public void CancelPreview()
     {
+        if(currentState == State.Place)
+        {
+            SelectorTool.selectorTool.DeselectAll();
+        }
+
         //destroy objects from grouping object
         for(int i = groupingArea.childCount; i > 0; i--)
         {
@@ -204,6 +249,7 @@ public class GroupingTool : MonoBehaviour
     }
     #endregion
 
+    #region Post Preview Functionality
     public void Paste()
     {
         if (CollisionDetect.CanPlace)
@@ -216,6 +262,22 @@ public class GroupingTool : MonoBehaviour
             CancelPreview();
         }
     }
+
+    public void Place()
+    {
+        if (CollisionDetect.CanPlace)
+        {
+            //move real objects to selected objects positions
+            foreach(FMInfo selection in SelectorTool.SelectedObjects)
+            {
+                selection.transform.position = selection.selectedObject.transform.position;
+            }
+
+
+            SelectorTool.selectorTool.DeselectAll();
+        }
+    }
+    #endregion
     #endregion
     #endregion
 }

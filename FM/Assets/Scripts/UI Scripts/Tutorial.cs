@@ -9,6 +9,7 @@ public class Tutorial : MonoBehaviour
     public List<GameObject> tutorialSections = new List<GameObject>();
     public int currentSectionID;//the current section as a ID
     public bool ended = false;
+    public bool hidden = false;
 
     public static Tutorial tutorial;
 
@@ -30,10 +31,21 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tutorialSections.Count - 1 == currentSectionID)//if last section in list
+        if(ended == true)
         {
-            ended = true;
+            hidden = true;//make hidden
+            //loop through and disable all
+            for (int i = 0; i < tutorialSections.Count; i++)//loop through all tutorial sections
+            {
+                if (tutorialSections[i] != null)//if it is not empty
+                {
+                    tutorialSections[i].SetActive(false);//set them to false
+                }
+            }
+            currentSectionID = 0;//reset
         }
+
+        tutorialSections[currentSectionID].SetActive(!hidden);
     }
 
     public void NextSection()
@@ -42,35 +54,51 @@ public class Tutorial : MonoBehaviour
         {
             currentSectionID++;//next section
             if (currentSectionID > tutorialSections.Count - 1)//if outside of list
-                currentSectionID = 0;
+                currentSectionID = 0;//loop back
+        }
+        if(tutorialSections.Count - 1 == currentSectionID)//if last section in list (empty)
+        {
+            ended = true;//end the tutorial
         }
 
-        SetSection(newSectionID: currentSectionID);
+        SetSection(newSectionID: currentSectionID);//set the proper section
     }
-    public void PreviousSection()
-    {
-        if(ended == false)//if not last section in list
-            currentSectionID--;
+    
 
-        SetSection(newSectionID: currentSectionID);
-    }
-
-    public void SetSection(int newSectionID = -1)//use id or string
+    public void SetSection(int newSectionID)//use id or string
     {
-        for (int i = 0; i < tutorialSections.Count; i++)//loop through all tutorial sections
+        if(ended == false)
         {
-            if (tutorialSections[i] != null)//if it is not empty
+            for (int i = 0; i < tutorialSections.Count; i++)//loop through all tutorial sections
             {
-                tutorialSections[i].SetActive(false);//set them to false
-            
-                if (i == newSectionID)//if current Section's ID
+                if (tutorialSections[i] != null)//if it is not empty
                 {
-                   
-                    tutorialSections[i].SetActive(true);//set it to true
+                    tutorialSections[i].SetActive(false);//set them to false
+
+                    if (i == newSectionID)//if current Section's ID
+                    {
+                        tutorialSections[i].SetActive(true);//set it to true
+                    }
                 }
             }
-        }
 
-        this.currentSectionID = newSectionID;
+            this.currentSectionID = newSectionID;
+        }
+    }
+
+    public void ResetTutorial(int newSectionID = 0)
+    {
+        hidden = false;
+        ended = false;
+        SetSection(newSectionID);
+    }
+
+    public void SetEnded(bool newEnded)
+    {
+        ended = newEnded;
+    }
+    public void SetHidden(bool newHidden)
+    {
+        hidden = newHidden;
     }
 }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4480
 --- !u!65 &3302550950366009622
 BoxCollider:
   m_ObjectHideFlags: 0
