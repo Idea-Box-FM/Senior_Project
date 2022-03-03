@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825108257b6030f4aa3057d338e67ab5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fd2d81073ddccc49bf92e45ba37ed1e, type: 3}
   m_Name: IBC
   m_EditorClassIdentifier: 
   prefab: {fileID: 4096825362514475676, guid: 6a5d381da8c617142811192f7cba71b6, type: 3}
@@ -18,3 +18,5 @@ MonoBehaviour:
   height: 0
   parent: {fileID: 0}
   soundEffect: {fileID: 7193267061644296242, guid: b156d03f78be1aa419d7a2046c78655e, type: 3}
+  diamondBase: {fileID: 0}
+  numberBase: {fileID: 0}
