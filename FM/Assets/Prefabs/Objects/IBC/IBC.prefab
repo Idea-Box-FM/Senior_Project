@@ -1067,7 +1067,6 @@ GameObject:
   - component: {fileID: 1630825178854997625}
   - component: {fileID: 5546061586711954348}
   - component: {fileID: 7064055473302201032}
-  - component: {fileID: 6331530025176719095}
   m_Layer: 6
   m_Name: IBCBase
   m_TagString: FMPrefab
@@ -1265,30 +1264,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &6331530025176719095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824003750047993952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f037218c67225044da889699f114a03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectMask:
-    serializedVersion: 2
-    m_Bits: 64
-  selfMat: {fileID: 0}
-  testMat: {fileID: 2100000, guid: bd2d742ee2ce7a740ae0cf992a38be74, type: 2}
-  mainCamera: {fileID: 0}
-  goMaterial: {fileID: 0}
-  moveButton: {fileID: 0}
-  cancelButton: {fileID: 0}
-  deleteButton: {fileID: 0}
-  isSelected: 0
-  selectedPrefab: {fileID: 394690355197419060, guid: 3d25175fdcbf50d449a5adea39fdadaf, type: 3}
 --- !u!1 &1059641318059752485
 GameObject:
   m_ObjectHideFlags: 0
@@ -3566,6 +3541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7026281088793971238}
+  - component: {fileID: 7606958103854023525}
   m_Layer: 6
   m_Name: IBC
   m_TagString: FMPrefab
@@ -3588,6 +3564,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7606958103854023525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4096825362514475676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2230a5e9c00df2c4fb24ae9d97a06f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePrefab: {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  selectedObject: {fileID: 0}
 --- !u!1 &4125714159846942729
 GameObject:
   m_ObjectHideFlags: 0
