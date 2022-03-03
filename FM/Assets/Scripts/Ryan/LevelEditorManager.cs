@@ -16,6 +16,7 @@ using UnityEngine.InputSystem;
  *   Added the save functionality 11/15/2021
  *   TEMP commented out Barrell because it was not being used for anything just causing an error
  *   Changed FMPrefabList to singleton pattern 2/2/2022
+ *   Added Deleting functionality 3/3/2022
  */
 
 public class LevelEditorManager : MonoBehaviour
