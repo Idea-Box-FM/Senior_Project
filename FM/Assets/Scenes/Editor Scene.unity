@@ -1597,11 +1597,11 @@ PrefabInstance:
     - target: {fileID: 1248906104310871804, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
       propertyPath: panels.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1332467244}
     - target: {fileID: 1766288320520508340, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
       propertyPath: panels.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1332467244}
     - target: {fileID: 1850891283498069664, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
       propertyPath: m_Name
       value: OptionsCanvas
@@ -1696,6 +1696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+--- !u!1 &600169637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1850891283498069664, guid: 2547d2e948808d0449d2f1e847f500dd, type: 3}
+  m_PrefabInstance: {fileID: 600169636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &625108390
 GameObject:
   m_ObjectHideFlags: 0
@@ -2674,7 +2679,7 @@ PrefabInstance:
     - target: {fileID: 6805239349453756859, guid: 661feaa173b70774499832b22a09b4f5, type: 3}
       propertyPath: panels.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 600169637}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661feaa173b70774499832b22a09b4f5, type: 3}
 --- !u!224 &860929218 stripped
@@ -4460,6 +4465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323101d530c93e84e9b8a6e03fa011eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedObjects: []
   objectMask:
     serializedVersion: 2
     m_Bits: 64
