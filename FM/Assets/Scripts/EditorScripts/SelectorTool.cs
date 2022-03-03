@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
  * Programmer: Patrick Naatz
  * Intention: an attempt at redoing the seelction script to work with the play and editor scene
  * How: This tool will be used to store all the selected objects in one persistant scripts and give functions that can be used in other script where selection is needed
+ * Usage: you can access the selected objects through static data/behaviors however selection functionality requires you to get the instance of the selector tool
  */
 public class SelectorTool : MonoBehaviour
 {

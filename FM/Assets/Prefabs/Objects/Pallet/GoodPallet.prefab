@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4658940176353983595}
+  - component: {fileID: 8440820728134411763}
   m_Layer: 6
   m_Name: GoodPallet
   m_TagString: GoodPrefab
@@ -31,6 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8440820728134411763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658940176353983594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61c48263d9ca3a4d98c68b9ba949042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 4224
 --- !u!1001 &4658940176661429072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0a95bf0d22c2f6246b53c3f3a8e87c68, type: 2}
     - target: {fileID: 7268248424483147699, guid: 316303ad71bd449469ef7d2c041bc42a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7268248424483147699, guid: 316303ad71bd449469ef7d2c041bc42a, type: 3}
       propertyPath: mask.m_Bits

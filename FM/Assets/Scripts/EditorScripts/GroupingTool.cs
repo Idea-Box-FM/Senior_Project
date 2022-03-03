@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
  * Edited: Pat Naatz
  *  Changed FMPrefabList to singleton pattern 2/2/2022
  *  Updated to work with new SelectorTool 3/3/2022
+ *  Fixed bug where you would still click when interacting with UI
  */
 
 public class GroupingTool : MonoBehaviour
@@ -34,7 +35,7 @@ public class GroupingTool : MonoBehaviour
         Copy,
         PreviewPaste,
         Paste,
-        Place
+        Place //for move functionality
     } public State currentState = State.Copy;
     #endregion
 
@@ -193,6 +194,7 @@ public class GroupingTool : MonoBehaviour
     #region Preview
     public void MovePreview()
     {
+        //TODO move centerPoint calculation to SelectorTool for better usage
         //calculate center point
         //variables for center point calculation
         HighAndLow X = new HighAndLow();
