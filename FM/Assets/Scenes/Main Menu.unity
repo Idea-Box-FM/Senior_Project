@@ -507,7 +507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: -115}
+  m_AnchoredPosition: {x: -246, y: -98}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137392892
@@ -598,14 +598,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
+  m_Color: {r: 0.35686275, g: 0.40392157, b: 0.4392157, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 86f924d5154fa314e93271801d6d8152, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2452,8 +2452,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 15}
-  m_SizeDelta: {x: 250, y: 325}
+  m_AnchoredPosition: {x: 46.000034, y: -14.7324}
+  m_SizeDelta: {x: 250, y: 394.4647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720919667
 MonoBehaviour:
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 850639893}
   m_HandleRect: {fileID: 850639891}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2591,8 +2591,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170, y: 16.999998}
-  m_SizeDelta: {x: 20, y: 250}
+  m_AnchoredPosition: {x: 181.00003, y: -16.076}
+  m_SizeDelta: {x: 20, y: 310.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781606354
 MonoBehaviour:
@@ -4666,7 +4666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -235, y: 82}
+  m_AnchoredPosition: {x: -242, y: 117.5}
   m_SizeDelta: {x: 280, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458795281
@@ -6572,7 +6572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971808, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -10
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971808, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6608,11 +6608,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971808, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 2.4999976
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971808, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971808, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6632,13 +6632,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971815, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_text
-      value: "Welcome to FM Creation kit! \nIf you are trying to create a new simulation
-        or upload a previously created one then enter your Login Information. Otherwise,
-        choose a simulation you would like to start or download one from your computer."
+      value: "Welcome to FM Creation kit! \nSelect 'New' to create a new simulation.
+        If you already have a simulation, select it from the list, then you can press
+        'Edit' to change it or 'Play' to view it."
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971815, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_fontSize
-      value: 19.15
+      value: 21.2
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971815, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_fontColor.b
@@ -6659,6 +6659,10 @@ PrefabInstance:
     - target: {fileID: 5097156126044971815, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097156126044971815, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5097156126044971815, guid: fdcc38aaf05c4694da1aca3f492e56cf, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -6958,7 +6962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 190.00002}
+  m_AnchoredPosition: {x: 46, y: 195}
   m_SizeDelta: {x: 250, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2103487008
