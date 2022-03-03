@@ -1,0 +1,35 @@
+<XML>
+	<Room RoomSize="(30.0, 10.0, 20.0)">
+		<Walls Material="Wall (Instance)"/>
+		<Roof Material="Floor (Instance)"/>
+		<Floor Material="Floor (Instance)"/>
+	</Room>
+	<BlackPlasticBarrel>
+		<BlackPlasticBarrel(Clone) Position="(-5.0, 0.1, 6.9)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</BlackPlasticBarrel>
+	<WarehouseRackLarge>
+		<WarehouseRackLarge(Clone) Position="(-1.2, 0.0, 7.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</WarehouseRackLarge>
+	<SmallWarehouseRack>
+		<SmallWarehouseRack(Clone) Position="(-8.0, 0.0, 4.4)" Rotation="(0.0, 0.7, 0.0, -0.7)"/>
+	</SmallWarehouseRack>
+	<DoubleStorageRack>
+		<DoubleStorageRack(Clone) Position="(3.9, 0.0, 2.9)" Rotation="(0.0, 0.7, 0.0, -0.7)"/>
+	</DoubleStorageRack>
+	<BarrelCart>
+		<BarrelCart(Clone) Position="(-7.0, 0.0, 0.6)" Rotation="(0.0, 0.7, 0.0, -0.7)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</BarrelCart>
+	<BluePlasticBarrel>
+		<BluePlasticBarrel(Clone) Position="(3.0, 1.1, 2.3)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</BluePlasticBarrel>
+	<Pallet>
+		<Pallet(Clone) Position="(2.7, 0.0, -1.6)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Pallet(Clone) Position="(1.2, 0.0, -1.6)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Pallet(Clone) Position="(-0.3, 0.0, -1.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Pallet(Clone) Position="(-2.4, 0.0, -1.5)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+		<Pallet(Clone) Position="(-4.7, 0.0, -1.6)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Pallet>
+	<55GallonGrime>
+		<55GallonGrime(Clone) Position="(0.3, 2.8, 6.7)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</55GallonGrime>
+</XML>

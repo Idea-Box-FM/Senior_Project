@@ -3577,7 +3577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2230a5e9c00df2c4fb24ae9d97a06f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basePrefab: {fileID: 11400000, guid: 8dd913b40b154bf45b09dad7793b6fe6, type: 2}
+  basePrefab: {fileID: 11400000, guid: 1b206a0041e65234e9bd77cb0ce43ae2, type: 2}
   selectedObject: {fileID: 0}
 --- !u!114 &356981737313058932
 MonoBehaviour:
