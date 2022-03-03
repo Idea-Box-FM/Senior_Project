@@ -19,6 +19,7 @@ using TMPro;
  *  replaced ObjectContents with SDSInfo 2/24/2022
  *  Fixed bug where SDSInfo was on parent 2/24/2022
  *  Updated this script to work with new SelectorTool 3/3/2022
+ *  Made slight optimizations 3/3/2022
  */
 
 public class LabelScript : MonoBehaviour
