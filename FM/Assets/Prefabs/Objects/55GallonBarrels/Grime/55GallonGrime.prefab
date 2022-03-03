@@ -152,6 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8305737317655676971}
   - component: {fileID: 4975479496046343134}
+  - component: {fileID: -8169283621679405411}
   m_Layer: 6
   m_Name: 55GallonGrime
   m_TagString: FMPrefab
@@ -188,3 +189,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePrefab: {fileID: 11400000, guid: e19029fde2a76784396bb2df8d04256d, type: 2}
   selectedObject: {fileID: 0}
+--- !u!114 &-8169283621679405411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649225452292067985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d36fbe117fd1740ba0583fa1c844ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentContent: 
+  flamability: 0
+  reactivity: 0
+  health: 0

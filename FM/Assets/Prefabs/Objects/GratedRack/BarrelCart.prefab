@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1797064465741206978}
   - component: {fileID: 886796039945686070}
+  - component: {fileID: 63417342755139701}
   m_Layer: 6
   m_Name: BarrelCart
   m_TagString: FMPrefab
@@ -46,6 +47,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePrefab: {fileID: 11400000, guid: c084cce3b16f41b4dae04bb254908851, type: 2}
   selectedObject: {fileID: 0}
+--- !u!114 &63417342755139701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797064465741206977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d36fbe117fd1740ba0583fa1c844ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentContent: 
+  flamability: 0
+  reactivity: 0
+  health: 0
 --- !u!114 &1797064466667889729
 MonoBehaviour:
   m_ObjectHideFlags: 0
