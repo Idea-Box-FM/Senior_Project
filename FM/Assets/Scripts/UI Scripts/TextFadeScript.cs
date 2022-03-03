@@ -15,8 +15,10 @@ public class TextFadeScript : MonoBehaviour
     [Tooltip("This variable set how many seconds will wait until it starts to fade out")]
     public float fadeOutStart;
 
-    public void FadeText()
+    public void FadeText(string text)
     {
+        GetComponent<TMP_Text>().text = text;
+
         StartCoroutine(FadeTextToFullAlpha(1f, GetComponent<TMP_Text>()));
 
         StartCoroutine(FadeTextToZeroAlpha(1f, GetComponent<TMP_Text>(), fadeOutStart));
