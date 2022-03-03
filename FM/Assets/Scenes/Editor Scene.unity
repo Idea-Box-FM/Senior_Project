@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502658, g: 0.37139305, b: 0.4960094, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1021,6 +1021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 338265371}
+  - component: {fileID: 338265372}
   m_Layer: 5
   m_Name: EditPanel
   m_TagString: Untagged
@@ -1048,6 +1049,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &338265372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338265370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c55c49398a73a4bba6f10641ae1814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects: []
+  sdsList: []
+  itemtemplate: {fileID: 3077537129957567049, guid: 19b388c25c08eb047bb1ea2b7c112cea, type: 3}
+  buttonList: {fileID: 1201198565}
 --- !u!1001 &348175363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1126,7 +1143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &359189908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3555,7 +3572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4224
 --- !u!4 &852190249
 Transform:
   m_ObjectHideFlags: 0
@@ -6093,12 +6110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323101d530c93e84e9b8a6e03fa011eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedObjects: []
-  mainCamera: {fileID: 0}
-  selectMask:
+  objectMask:
     serializedVersion: 2
     m_Bits: 64
-  maxSelectedObjects: 2147483647
 --- !u!1 &1290287319
 GameObject:
   m_ObjectHideFlags: 0
@@ -6687,7 +6701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1370658131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7292,7 +7306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1481430900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9130,7 +9144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1982372944
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9625,7 +9639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2146540256
 RectTransform:
   m_ObjectHideFlags: 0

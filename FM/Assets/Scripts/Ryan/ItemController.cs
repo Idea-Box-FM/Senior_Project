@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
  * Editor: Patrick Naatz
  *  Changed the order of ButtonClicked function for proper aliasing in LevelEditorManager 11/8/2021
  *  Fixed a bug where you would have 2 examples spawning at the same time 11/8/2021
+ *  Added Deselection when placing new object 3/3/2022
  */
 
 public class ItemController : MonoBehaviour
@@ -42,5 +43,7 @@ public class ItemController : MonoBehaviour
 
         //instantiate the example item(green) based on the id of the clicked button
         Instantiate(editor.CurrentPrefab.examplePrefab, new Vector3(0,2,0), Quaternion.identity);
+
+        SelectorTool.selectorTool.DeselectAll();
     }
 }

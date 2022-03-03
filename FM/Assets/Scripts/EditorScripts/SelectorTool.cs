@@ -14,19 +14,23 @@ using UnityEngine.EventSystems;
  */
 public class SelectorTool : MonoBehaviour
 {
+    #region Fields
     public static SelectorTool selectorTool;
 
-    List<FMInfo> selectedObjects = new List<FMInfo>(); //remove serialize field here
+    //selected objects
+    List<FMInfo> selectedObjects = new List<FMInfo>();
+    int maxSelectedObjects = int.MaxValue;//this value is set by default to editor value
+
+    //Raycast variables
     Camera mainCamera;
     [SerializeField] LayerMask objectMask;
-    int maxSelectedObjects = int.MaxValue;//remove serialize field here //this value is set by default to editor value
 
-    Transform groupingTool;
-
+    //controls
     Button[] relevantButtons;
-
     CameraControl cameraControl;
+    #endregion
 
+    #region Properties
     Button cancelButton;
     Button CancelButton
     {
@@ -48,6 +52,15 @@ public class SelectorTool : MonoBehaviour
         }
     }
 
+    public static FMInfo[] SelectedObjects
+    {
+        get
+        {
+            return selectorTool.selectedObjects.ToArray();
+        }
+    }
+    #endregion
+
     #region Start
     private void Awake()
     {
@@ -66,9 +79,6 @@ public class SelectorTool : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Game Scene")
         {
             maxSelectedObjects = 1;
-        } else
-        {
-            groupingTool = GameObject.Find("Group").GetComponent<Transform>();
         }
 
         CancelButton.onClick.AddListener(Cancel);
@@ -100,7 +110,7 @@ public class SelectorTool : MonoBehaviour
     private void Mouse_Click(InputAction.CallbackContext obj)
     {
         if (!EventSystem.current.IsPointerOverGameObject())
-        {
+        {//If not clicking on UI
             //raycast from camera to mouse location
             Ray selectRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit selectHit;
@@ -108,13 +118,9 @@ public class SelectorTool : MonoBehaviour
             //If the raycast hits an object under the selectMask
             if (Physics.Raycast(selectRay, out selectHit, Mathf.Infinity, objectMask))
             {
-                //Debug.Log("Selection tool hit " + selectHit.transform.name);
                 if (selectHit.collider.tag == "FMPrefab")
                 {
-                    //Debug.Log("It is an fmprefab");
                     Transform selectedObject = selectHit.transform;
-                    Debug.Log("select hit name " + selectHit.collider.name);
-                    Debug.Log("Selected object name " + selectedObject.name);
                     if (IsSelected(selectedObject))
                     {
                         Deselect(selectedObject);
@@ -123,15 +129,11 @@ public class SelectorTool : MonoBehaviour
                     {
                         Select(selectedObject);
                     }
-                }
-                else
+                } else
                 {
-                    Debug.Log("It is not an fmprefab");
+                    DeselectAll();
                 }
             }
-        } else
-        {
-            Debug.Log("did not enter");
         }
     }
 
@@ -199,6 +201,14 @@ public class SelectorTool : MonoBehaviour
         }
 
         Destroy(selectedInfo.selectedObject);
+    }
+
+    public void DeselectAll()
+    {
+        while(selectedObjects.Count > 0)
+        {
+            Deselect(selectedObjects[0]);
+        }
     }
     #endregion
 

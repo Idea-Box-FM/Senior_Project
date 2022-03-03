@@ -18,12 +18,13 @@ using TMPro;
  * Editor: Pat Naatz
  *  replaced ObjectContents with SDSInfo 2/24/2022
  *  Fixed bug where SDSInfo was on parent 2/24/2022
+ *  Updated this script to work with new SelectorTool 3/3/2022
  */
 
 public class LabelScript : MonoBehaviour
 {
     string SDS;
-    public Selector[] objects;
+    public FMInfo[] objects;
   
     int content;
 
@@ -52,7 +53,6 @@ public class LabelScript : MonoBehaviour
     void Update()
     {
         // objects = GameObject.FindGameObjectsWithTag("FMPrefab");
-        objects = GameObject.FindObjectsOfType<Selector>();
 
        
 
@@ -71,6 +71,7 @@ public class LabelScript : MonoBehaviour
             s.GetComponent<Button>().AddEventListener(i, ItemClicked);
         }
     }
+
     void ItemClicked(int itemIndex)
     {
        // Debug.Log("Button " + itemIndex + " was clicked");
@@ -83,26 +84,24 @@ public class LabelScript : MonoBehaviour
 
     void SelectObject()
     {
+        objects = SelectorTool.SelectedObjects;
+
         for (int i = 0; i < objects.Length; i++)
         {
-            if (objects[i].GetComponent<Selector>().isSelected == true)
-            {
+            if(objects[i].basePrefab is FMWithPrefab)
                //change sds
-                objects[i].GetComponentInParent<SDSInfo>().ChangeContents(content);
-            }
-
+                objects[i].GetComponent<SDSInfo>().ChangeContents(content);
         }
     }
 
-    public void DeselectObject()
-    {
-        for (int i = 0; i < objects.Length; i++)
-        {
-            objects[i].GetComponent<Selector>().Deselect();
+    //public void DeselectObject()
+    //{
+    //    for (int i = 0; i < objects.Length; i++)
+    //    {
+    //        objects[i].GetComponent<Selector>().Deselect();
 
-        }
-    }
-
+    //    }
+    //}
 
     public void ChangeOption(int m)
     {

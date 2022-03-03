@@ -11,7 +11,9 @@ using UnityEngine.InputSystem;
  * 
  * Edited: Pat Naatz
  *  Changed FMPrefabList to singleton pattern 2/2/2022
+ *  Updated to work with new SelectorTool 3/3/2022
  */
+
 
 public class GroupingTool : MonoBehaviour
 {
@@ -134,34 +136,30 @@ public class GroupingTool : MonoBehaviour
         HighAndLow Y = new HighAndLow();
         HighAndLow Z = new HighAndLow();
 
-        foreach(Selector selector in FindObjectsOfType<Selector>())
+        foreach (FMInfo selector in SelectorTool.SelectedObjects)
         {
-            if (selector.isSelected)
-            {
-                if(cleared == false)
-                {//only clear the inputs after we are sure something else is copied
-                    copiedObjects.Clear(); //forget about the old copied stuff
-                    CancelPreview();//incase they are a real programmer who goes ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C, ctrl+V
-                    cleared = true;
-                }
-
-                //save copied objects info
-                Transform transform = selector.transform;
-                GameObject parent = transform.parent.gameObject;
-                FMPrefab prefabType = prefabList.GetPrefabType(parent);
-                XML details = prefabType.ConvertToXML(parent);
-                CopyInfo copiedObject = new CopyInfo(prefabType, details);
-
-                copiedObjects.Add(copiedObject);
-
-                //center point variable update
-                Vector3 position = parent.transform.position;
-                X.Set(position.x);
-                Y.Set(position.y);
-                Z.Set(position.z);
-
-                selector.Deselect();
+            if (cleared == false)
+            {//only clear the inputs after we are sure something else is copied
+                copiedObjects.Clear(); //forget about the old copied stuff
+                CancelPreview();//incase they are a real programmer who goes ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C,ctrl+C, ctrl+V
+                cleared = true;
             }
+
+            //save copied objects info
+            Transform transform = selector.transform;
+            FMPrefab prefabType = selector.GetComponent<FMInfo>().basePrefab;
+            XML details = prefabType.ConvertToXML(selector.gameObject);
+            CopyInfo copiedObject = new CopyInfo(prefabType, details);
+
+            copiedObjects.Add(copiedObject);
+
+            //center point variable update
+            Vector3 position = selector.transform.position;
+            X.Set(position.x);
+            Y.Set(position.y);
+            Z.Set(position.z);
+
+            SelectorTool.selectorTool.Deselect(selector);
         }
 
         if (cleared)
