@@ -62,7 +62,7 @@ public class LabelScript : MonoBehaviour
         {
             s = Instantiate(itemtemplate, buttonList.transform);
             string buttonName = sdsList[i].TrimEnd(rtfTrim);
-            s.transform.GetChild(0).GetComponent<TMP_Text>().text = buttonName;
+            s.transform.GetChild(1).GetComponent<TMP_Text>().text = buttonName;
            // s.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.blue;
             s.GetComponent<Button>().AddEventListener(i, ItemClicked);
         }
