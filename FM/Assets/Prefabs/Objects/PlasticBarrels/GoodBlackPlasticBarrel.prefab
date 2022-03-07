@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1097805115643086015}
   - component: {fileID: 4111062809355120394}
   m_Layer: 6
-  m_Name: GoodPlasticBarrel
+  m_Name: GoodBlackPlasticBarrel
   m_TagString: GoodPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641223197585122205}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6489674, y: 0.93461144, z: 0.63520133}
