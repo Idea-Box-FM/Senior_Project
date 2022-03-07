@@ -51,11 +51,12 @@ public class FollowScript : MonoBehaviour
             {
                 transform.eulerAngles += new Vector3(0, 90, 0);
             }
+        }
 
-            if (Keyboard.current.deleteKey.wasPressedThisFrame)
-            {
-                LevelEditorManager.DestroyCurrentExample();
-            }
+
+        if (Keyboard.current.deleteKey.wasPressedThisFrame)
+        {
+            LevelEditorManager.DestroyCurrentExample();
         }
     }
 }
