@@ -3238,7 +3238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc5d47919d3c42428155c83ad94b318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 1332467247}
   panels:
   - {fileID: 1675875094}
   - {fileID: 1215339160}
@@ -4639,7 +4639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc5d47919d3c42428155c83ad94b318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 1332467247}
   panels:
   - {fileID: 1801902926}
   - {fileID: 1215339160}
