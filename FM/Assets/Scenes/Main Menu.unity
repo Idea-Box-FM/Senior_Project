@@ -7706,10 +7706,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 555249500}
     m_Modifications:
-    - target: {fileID: -3990565219041177653, guid: 661feaa173b70774499832b22a09b4f5, type: 3}
-      propertyPath: play
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4251871475700190244, guid: 661feaa173b70774499832b22a09b4f5, type: 3}
       propertyPath: m_Name
       value: SettingsButton

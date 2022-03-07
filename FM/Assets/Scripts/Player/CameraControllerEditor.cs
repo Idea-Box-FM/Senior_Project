@@ -91,7 +91,7 @@ public class CameraControllerEditor : MonoBehaviour
                 int index = GetOptionsStored.prefKeys.IndexOf(optionSliderName);//find index, will return -1 if not found
                 if (index < GetOptionsStored.prefValues.Count && index >= 0)//if is within amount of list and is found
                 {
-                    mouseSpeed = float.Parse((string)GetOptionsStored.prefValues[index]) / 100;//get volume from options and set the value
+                    mouseSpeed = float.Parse((string)GetOptionsStored.prefValues[index]) / 10;//get volume from options and set the value
                 }
                 else
                     Debug.Log("Unable to find " + optionSliderName + " in current list of keys");
