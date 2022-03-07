@@ -53,6 +53,7 @@ public class FollowScript : MonoBehaviour
             }
         }
 
+
         if (Keyboard.current.deleteKey.wasPressedThisFrame)
         {
             LevelEditorManager.DestroyCurrentExample();
