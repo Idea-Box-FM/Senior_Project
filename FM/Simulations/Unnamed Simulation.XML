@@ -1,9 +1,0 @@
-<XML>
-	<Unnamed Simulation>
-		<Room RoomSize="(30.0, 10.0, 20.0)">
-			<Walls Material="Wall"/>
-			<Roof Material="Ceiling"/>
-			<Floor Material="Floor"/>
-		</Room>
-	</Unnamed Simulation>
-</XML>
