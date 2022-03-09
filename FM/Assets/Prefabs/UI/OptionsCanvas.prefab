@@ -3342,14 +3342,8 @@ MonoBehaviour:
   - 10
   - 100
   - 100
-  prefKeys:
-  - ControlsMouseSensitivitySlider
-  - AudioMusicSlider
-  - AudioSoundEffectSlider
-  prefValues:
-  - 10
-  - 100
-  - 100
+  prefKeys: []
+  prefValues: []
   fileName: /preferencesCurrent.dat
 --- !u!223 &1850891283498069695
 Canvas:

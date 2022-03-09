@@ -1,0 +1,35 @@
+<XML>
+	<Room RoomSize="(12.0, 5.0, 10.0)">
+		<Walls Material="Wall (Instance)"/>
+		<Roof Material="Floor (Instance)"/>
+		<Floor Material="Floor (Instance)"/>
+	</Room>
+	<BlackPlasticBarrel>
+		<BlackPlasticBarrel(Clone) Position="(-4.5, 0.0, -0.1)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+		<BlackPlasticBarrel(Clone) Position="(-0.2, 1.5, -3.8)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Gasoline.rtf"/>
+	</BlackPlasticBarrel>
+	<WarehouseRackLarge>
+		<WarehouseRackLarge(Clone) Position="(0.6, 0.0, -3.8)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</WarehouseRackLarge>
+	<IBC>
+		<IBC(Clone) Position="(0.3, 0.0, -0.4)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</IBC>
+	<SmallWarehouseRack>
+		<SmallWarehouseRack(Clone) Position="(-4.1, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</SmallWarehouseRack>
+	<DoubleStorageRack>
+		<DoubleStorageRack(Clone) Position="(-1.4, 0.0, 3.3)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</DoubleStorageRack>
+	<BarrelCart>
+		<BarrelCart(Clone) Position="(1.1, 0.0, 3.1)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</BarrelCart>
+	<BluePlasticBarrel>
+		<BluePlasticBarrel(Clone) Position="(-3.1, 0.0, -0.2)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</BluePlasticBarrel>
+	<Pallet>
+		<Pallet(Clone) Position="(3.5, 0.0, 3.4)" Rotation="(0.0, 0.0, 0.0, 1.0)"/>
+	</Pallet>
+	<55GallonGrime>
+		<55GallonGrime(Clone) Position="(-1.6, 0.0, -0.3)" Rotation="(0.0, 0.0, 0.0, 1.0)" Health="0" Flamability="0" Reaction="0" SDSSheet="Acetone.pdf"/>
+	</55GallonGrime>
+</XML>

@@ -2569,7 +2569,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 850639893}
   m_HandleRect: {fileID: 850639891}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6463,7 +6463,7 @@ PrefabInstance:
       objectReference: {fileID: 1591360626}
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8000530472587595877, guid: 997602da6f221c74aa436b26cc588a0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
