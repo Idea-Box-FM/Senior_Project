@@ -488,6 +488,22 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Spawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c782372-3971-45a8-8518-267dfd5a1fa1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""11afb7d6-805d-41ef-a65e-a8d100679282"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -543,6 +559,28 @@ public class @CameraControl : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28a2fe0b-1cbb-4c28-a20d-695c16d3961f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d705fff-dcb1-46bd-b1dc-8139f30dd092"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -635,6 +673,8 @@ public class @CameraControl : IInputActionCollection, IDisposable
         m_Editor_Cancel = m_Editor.FindAction("Cancel", throwIfNotFound: true);
         m_Editor_Paste = m_Editor.FindAction("Paste", throwIfNotFound: true);
         m_Editor_Click = m_Editor.FindAction("Click", throwIfNotFound: true);
+        m_Editor_Spawn = m_Editor.FindAction("Spawn", throwIfNotFound: true);
+        m_Editor_Select = m_Editor.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -835,6 +875,8 @@ public class @CameraControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_Cancel;
     private readonly InputAction m_Editor_Paste;
     private readonly InputAction m_Editor_Click;
+    private readonly InputAction m_Editor_Spawn;
+    private readonly InputAction m_Editor_Select;
     public struct EditorActions
     {
         private @CameraControl m_Wrapper;
@@ -844,6 +886,8 @@ public class @CameraControl : IInputActionCollection, IDisposable
         public InputAction @Cancel => m_Wrapper.m_Editor_Cancel;
         public InputAction @Paste => m_Wrapper.m_Editor_Paste;
         public InputAction @Click => m_Wrapper.m_Editor_Click;
+        public InputAction @Spawn => m_Wrapper.m_Editor_Spawn;
+        public InputAction @Select => m_Wrapper.m_Editor_Select;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -868,6 +912,12 @@ public class @CameraControl : IInputActionCollection, IDisposable
                 @Click.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnClick;
+                @Spawn.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnSpawn;
+                @Spawn.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnSpawn;
+                @Spawn.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnSpawn;
+                @Select.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -887,6 +937,12 @@ public class @CameraControl : IInputActionCollection, IDisposable
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @Spawn.started += instance.OnSpawn;
+                @Spawn.performed += instance.OnSpawn;
+                @Spawn.canceled += instance.OnSpawn;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -961,5 +1017,7 @@ public class @CameraControl : IInputActionCollection, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnPaste(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnSpawn(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

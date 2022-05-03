@@ -21,11 +21,14 @@ public class FMWithPrefab : FMPrefab //TODO Rename this to FMWITHSDS instead of 
 
         SDSInfo sds = gameObject.GetComponent<SDSInfo>();
 
-        xml.AddAttribute("Health", sds.Health.ToString());
-        xml.AddAttribute("Flamability", sds.Flamability.ToString());
-        xml.AddAttribute("Reaction", sds.Reactivity.ToString());
+        if (sds != null) //sds is null when first creating an object
+        {
+            xml.AddAttribute("Health", sds.Health.ToString());
+            xml.AddAttribute("Flamability", sds.Flamability.ToString());
+            xml.AddAttribute("Reaction", sds.Reactivity.ToString());
 
-        xml.AddAttribute("SDSSheet", sds.currentContent);
+            xml.AddAttribute("SDSSheet", sds.currentContent);
+        }
 
         return xml;
     }
@@ -35,11 +38,18 @@ public class FMWithPrefab : FMPrefab //TODO Rename this to FMWITHSDS instead of 
         GameObject gameObject = base.InstanciatePrefab(xml);
 
         SDSInfo sds = gameObject.GetComponent<SDSInfo>();
-        sds.Health = int.Parse(xml.attributes["Health"]);
-        sds.Flamability = int.Parse(xml.attributes["Flamability"]);
-        sds.Reactivity = int.Parse(xml.attributes["Reaction"]);
 
-        sds.currentContent = xml.attributes["SDSSheet"];
+        try
+        {
+            sds.Health = int.Parse(xml.attributes["Health"]);
+            sds.Flamability = int.Parse(xml.attributes["Flamability"]);
+            sds.Reactivity = int.Parse(xml.attributes["Reaction"]);
+
+            sds.currentContent = xml.attributes["SDSSheet"];
+        } catch (KeyNotFoundException exception)
+        {
+            //this will happen when first creating and object
+        }
 
         return gameObject;
     }

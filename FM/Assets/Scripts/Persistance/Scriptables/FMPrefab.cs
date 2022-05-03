@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,7 +109,7 @@ public class FMPrefab : ScriptableObject
     /// <returns></returns>
     public virtual XML ConvertToXML(GameObject gameObject)
     {
-        if (!IsFMPrefab(gameObject) || !IsThisTypeOfPrefab(gameObject))
+        if ((!IsFMPrefab(gameObject) || !IsThisTypeOfPrefab(gameObject)) && !IsPreview(gameObject))
         {
             return null;
         }
@@ -132,6 +133,26 @@ public class FMPrefab : ScriptableObject
     public bool IsThisTypeOfPrefab(GameObject gameObject)
     {
         return gameObject.name.Contains(prefab.name);
+    }
+
+    bool IsPreview(GameObject gameObject)
+    {
+        return gameObject.GetComponent<Preview>() != null;
+    }
+
+    public XML CreateSpawnXML(Preview preview)
+    {
+        Transform parent = preview.transform.parent;
+        preview.transform.parent = null;
+
+        XML xml = ConvertToXML(preview.gameObject);
+        xml.name = this.parent.name + "(Clone)";
+
+        preview.transform.parent = parent;
+
+        Debug.Log("Spawn XML " + xml.ToLine());
+
+        return xml;
     }
     #endregion
 }

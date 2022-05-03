@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-/*FLowerBox
+/*FlowerBox
  * Programmer: Patrick Naatz
  * Intention: an attempt at redoing the seelction script to work with the play and editor scene
  * How: This tool will be used to store all the selected objects in one persistant scripts and give functions that can be used in other script where selection is needed

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7466910182599337053}
   - component: {fileID: 1097805115643086015}
   - component: {fileID: 4111062809355120394}
+  - component: {fileID: 2514678291164575675}
   m_Layer: 6
   m_Name: GoodBlackPlasticBarrel
   m_TagString: GoodPrefab
@@ -41,7 +42,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641223197585122205}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c61c48263d9ca3a4d98c68b9ba949042, type: 3}
   m_Name: 
@@ -103,6 +104,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2514678291164575675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641223197585122205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2596321d7e73fe947a2f1e82139e9aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 11400000, guid: e35132dfa2a4d0a40935aa48ef7ebb87, type: 2}
 --- !u!1001 &641223196602759749
 PrefabInstance:
   m_ObjectHideFlags: 0
